@@ -11,6 +11,9 @@ server.use(express.json());
 server.use(morgan("short"));
 
 const port = process.env.PORT || 4000;
+const authRouter = require("./routes/authRouter");
+
+server.use("/api/auth", authRouter);
 
 server.listen(port, () => {
   console.log(`\n\n SERVER IS RUNNING ON PORT:${port} \n\n`);
