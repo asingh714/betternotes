@@ -20,6 +20,7 @@
   "homepage": "https://github.com/asingh714/betternotes#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.27.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -27,6 +28,8 @@
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.95.13",
     "morgan": "^1.10.0",
+    "multer": "^1.4.3",
+    "multer-storage-cloudinary": "^4.0.0",
     "sqlite3": "^5.0.2",
     "validator": "^13.7.0"
   },

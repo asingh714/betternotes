@@ -1,8 +1,12 @@
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const multer = require("multer");
 
 const db = require("../db/dbConfig");
 const { generateToken } = require("../util/jwt.js");
+const { docStorage } = require("../util/cloudConfig.js");
+// const router = require("../routes/authRouter");
+const parser = multer({ storage: docStorage });
 
 const getAllUsers = (req, res) => {
   db("users").then((result) => res.status(200).send(result));
@@ -197,4 +201,6 @@ const getUserInfo = (req, res) => {
     });
 };
 
-module.exports = { getAllUsers, register, login, getUserInfo };
+const updateUserInfo = (req, res) => {};
+
+module.exports = { getAllUsers, register, login, getUserInfo, updateUserInfo };
