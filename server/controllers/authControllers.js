@@ -140,12 +140,12 @@ const login = (req, res) => {
             error: "The password is incorrect",
           });
         } else {
-          const token = generateToken(user)
+          const token = generateToken(user);
           res.status(200).json({
             id: user.id,
             username: user.username,
             // password: user.password,
-            token
+            token,
           });
         }
       })
@@ -157,4 +157,44 @@ const login = (req, res) => {
   }
 };
 
-module.exports = { getAllUsers, register, login };
+const getUserInfo = (req, res) => {
+  const { id } = req.params;
+  db("users")
+    .where({ id })
+    .first()
+    .then((user) => {
+      if (!user) {
+        res.status(404).json({
+          error: "You cannot access this user",
+        });
+      } else {
+        const {
+          id,
+          name,
+          email,
+          username,
+          profile_image,
+          school_name,
+          grade_level,
+          user_description,
+        } = user;
+        res.status(200).json({
+          id,
+          name,
+          email,
+          username,
+          profile_image,
+          school_name,
+          grade_level,
+          user_description,
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: "The user with this specified ID could not be retrieved.",
+      });
+    });
+};
+
+module.exports = { getAllUsers, register, login, getUserInfo };
