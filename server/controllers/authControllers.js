@@ -99,10 +99,58 @@ const register = (req, res) => {
       .catch((error) => {
         res.status(500).json({
           error,
-          message: "There was an error inserting the new user.",
+          message: "There was an error inserting the new user",
         });
       });
   }
 };
 
-module.exports = { getAllUsers, register };
+const login = (req, res) => {
+  const { username, password } = req.body;
+  const validationErrors = [];
+
+  if (!username) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "username",
+      message: "Please provide a username for the user",
+    });
+  }
+
+  if (!password) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "password",
+      message: "Please provide a password",
+    });
+  } else {
+    db("users")
+      .where({ username })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(401).json({
+            error: "This username does not exist",
+          });
+        } else if (user && !bcrypt.compareSync(password, user.password)) {
+          res.status(401).json({
+            error: "The password is incorrect",
+          });
+        } else {
+          res.status(200).json({
+            id: user.id,
+            username: user.username,
+            // password: user.password,
+            // TOKEN
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "There was an error while logging in",
+        });
+      });
+  }
+};
+
+module.exports = { getAllUsers, register, login };
