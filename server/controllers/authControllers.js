@@ -1,6 +1,8 @@
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+
 const db = require("../db/dbConfig");
+const { generateToken } = require("../util/jwt.js");
 
 const getAllUsers = (req, res) => {
   db("users").then((result) => res.status(200).send(result));
@@ -81,12 +83,13 @@ const register = (req, res) => {
           .where({ id })
           .first()
           .then(({ id, name, username, email }) => {
+            const token = generateToken({ id, name, username, email });
             res.status(201).json({
               id,
               name,
               username,
               email,
-              //TOKEN
+              token,
             });
           })
           .catch((error) => {
@@ -137,11 +140,12 @@ const login = (req, res) => {
             error: "The password is incorrect",
           });
         } else {
+          const token = generateToken(user)
           res.status(200).json({
             id: user.id,
             username: user.username,
             // password: user.password,
-            // TOKEN
+            token
           });
         }
       })
