@@ -1,5 +1,6 @@
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const { v4: uuidv4 } = require("uuid");
 // const multer = require("multer");
 
 const db = require("../db/dbConfig");
@@ -79,6 +80,7 @@ const register = (req, res) => {
       email: email.trim(),
       username: username.trim(),
       password: hashed_password,
+      unique_id: uuidv4(),
     };
     db("users")
       .insert(newUser)
@@ -94,6 +96,7 @@ const register = (req, res) => {
               name,
               username,
               email,
+              unique_id,
               token,
             });
           })
@@ -163,9 +166,9 @@ const login = (req, res) => {
 };
 
 const getUserInfo = (req, res) => {
-  const { id } = req.params;
+  const { unique_id } = req.params;
   db("users")
-    .where({ id })
+    .where({ unique_id })
     .first()
     .then((user) => {
       if (!user) {
@@ -175,6 +178,7 @@ const getUserInfo = (req, res) => {
       } else {
         const {
           id,
+          unique_id,
           name,
           email,
           username,
@@ -185,6 +189,7 @@ const getUserInfo = (req, res) => {
         } = user;
         res.status(200).json({
           id,
+          unique_id,
           name,
           email,
           username,
@@ -203,14 +208,14 @@ const getUserInfo = (req, res) => {
 };
 
 const updateUserInfo = async (req, res) => {
-  const { id } = req.params;
+  const { unique_id } = req.params;
   const changes = req.body;
 
   if (req.file) {
     const result = await cloudinary.uploader.upload(req.file.path);
     console.log(result);
     db("users")
-      .where({ id })
+      .where({ unique_id })
       .update({ ...changes, profile_image: result.url })
       .then((count) => {
         if (count > 0) {
@@ -228,7 +233,7 @@ const updateUserInfo = async (req, res) => {
       });
   } else {
     db("users")
-      .where({ id })
+      .where({ unique_id })
       .update({ ...changes })
       .then((count) => {
         if (count > 0) {
@@ -248,10 +253,10 @@ const updateUserInfo = async (req, res) => {
 };
 
 const deleteUserInfo = (req, res) => {
-  const { id } = req.params;
+  const { unique_id } = req.params;
 
   db("users")
-    .where({ id })
+    .where({ unique_id })
     .del()
     .then((count) => {
       if (count > 0) {
