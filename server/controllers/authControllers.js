@@ -1,12 +1,13 @@
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
-const multer = require("multer");
+// const multer = require("multer");
 
 const db = require("../db/dbConfig");
 const { generateToken } = require("../util/jwt.js");
-const { imageStorage, docStorage } = require("../util/cloudConfig.js");
+// const { imageStorage, docStorage } = require("../util/cloudConfig.js");
 // const router = require("../routes/authRouter");
-const parser = multer({ imageStorage, docStorage });
+const { cloudinary } = require("../util/cloudConfig");
+// const parser = multer({ imageStorage, docStorage });
 
 const getAllUsers = (req, res) => {
   db("users").then((result) => res.status(200).send(result));
@@ -201,11 +202,78 @@ const getUserInfo = (req, res) => {
     });
 };
 
-// const updateUserInfo = (req, res) => {
-//   // let test = parser.single("profile_image");
-//   // console.log(test);
-//   console.log(req.files);
-//   console.log(req.body);
-// };
+const updateUserInfo = async (req, res) => {
+  const { id } = req.params;
+  const changes = req.body;
 
-module.exports = { getAllUsers, register, login, getUserInfo }; //updateUserInfo };
+  if (req.file) {
+    const result = await cloudinary.uploader.upload(req.file.path);
+    console.log(result);
+    db("users")
+      .where({ id })
+      .update({ ...changes, profile_image: result.url })
+      .then((count) => {
+        if (count > 0) {
+          res.status(200).json(count);
+        } else {
+          res.status(404).json({
+            error: "You cannot access the user with this specific ID",
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "The user could not be modified REQ.FILE!!",
+        });
+      });
+  } else {
+    db("users")
+      .where({ id })
+      .update({ ...changes })
+      .then((count) => {
+        if (count > 0) {
+          res.status(200).json(count);
+        } else {
+          res.status(404).json({
+            error: "You cannot access the user with this specific ID",
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "The user could not be modified HERE",
+        });
+      });
+  }
+};
+
+const deleteUserInfo = (req, res) => {
+  const { id } = req.params;
+
+  db("users")
+    .where({ id })
+    .del()
+    .then((count) => {
+      if (count > 0) {
+        res.status(200).json(count);
+      } else {
+        res.status(404).json({
+          error: "You cannot access the user with this id.",
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: "The user could not be removed",
+      });
+    });
+};
+
+module.exports = {
+  getAllUsers,
+  register,
+  login,
+  getUserInfo,
+  updateUserInfo,
+  deleteUserInfo,
+};
