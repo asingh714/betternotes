@@ -4,9 +4,9 @@ const multer = require("multer");
 
 const db = require("../db/dbConfig");
 const { generateToken } = require("../util/jwt.js");
-const { docStorage } = require("../util/cloudConfig.js");
+const { imageStorage, docStorage } = require("../util/cloudConfig.js");
 // const router = require("../routes/authRouter");
-const parser = multer({ storage: docStorage });
+const parser = multer({ imageStorage, docStorage });
 
 const getAllUsers = (req, res) => {
   db("users").then((result) => res.status(200).send(result));
@@ -201,6 +201,11 @@ const getUserInfo = (req, res) => {
     });
 };
 
-const updateUserInfo = (req, res) => {};
+// const updateUserInfo = (req, res) => {
+//   // let test = parser.single("profile_image");
+//   // console.log(test);
+//   console.log(req.files);
+//   console.log(req.body);
+// };
 
-module.exports = { getAllUsers, register, login, getUserInfo, updateUserInfo };
+module.exports = { getAllUsers, register, login, getUserInfo }; //updateUserInfo };
