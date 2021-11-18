@@ -12,11 +12,15 @@ server.use(morgan("short"));
 
 const port = process.env.PORT || 4000;
 const authRouter = require("./routes/authRouter");
+const notFound = require("./middleware/notFound");
 
 server.use("/api/auth", authRouter);
 server.get("/", (req, res) => {
   res.send("<h1>TEST API</h1>");
 });
+
+server.use(notFound);
+
 server.listen(port, () => {
   console.log(`\n\n SERVER IS RUNNING ON PORT:${port} \n\n`);
 });
