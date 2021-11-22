@@ -13,11 +13,13 @@ server.use(morgan("tiny"));
 const port = process.env.PORT || 4000;
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
+const notesRouter = require("./routes/notesRouter");
 
 const notFound = require("./middleware/notFound");
 
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
+server.use("/api/products", notesRouter);
 
 server.get("/", (req, res) => {
   res.send("<h1>TEST API</h1>");

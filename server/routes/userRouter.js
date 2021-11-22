@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../util/multer");
-const restricted = require("../util/restricted");
+const authenticateUser = require("../util/authenticateUser");
 
 const {
   getAllUsers,
@@ -13,15 +13,15 @@ const {
 } = require("../controllers/userController");
 
 router.get("/test", getAllUsers);
-router.get("/profile", restricted, showCurrentUser);
+router.get("/profile", authenticateUser, showCurrentUser);
 router.get("/:unique_id", getUserInfo);
 router.put(
   "/:unique_id",
-  restricted,
+  authenticateUser,
   upload.single("profile_image"),
   updateUserInfo
 );
-router.delete("/:unique_id", restricted, deleteUserInfo);
-router.put("/:unique_id/update_password", restricted, updatePassword);
+router.delete("/:unique_id", authenticateUser, deleteUserInfo);
+router.put("/:unique_id/update_password", authenticateUser, updatePassword);
 
 module.exports = router;

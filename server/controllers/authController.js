@@ -132,7 +132,16 @@ const login = (req, res) => {
       field: "password",
       message: "Please provide a password",
     });
-  } else {
+  }
+  
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  }
+  else {
     db("users")
       .where({ username })
       .first()

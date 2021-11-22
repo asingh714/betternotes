@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const restricted = (req, res, next) => {
+const authenticateUser = (req, res, next) => {
   const token = req.headers.authorization;
 
   if (token) {
@@ -17,4 +17,4 @@ const restricted = (req, res, next) => {
   }
 };
 
-module.exports = restricted;
+module.exports = authenticateUser;

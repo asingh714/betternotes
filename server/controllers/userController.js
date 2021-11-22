@@ -1,5 +1,6 @@
 const db = require("../db/dbConfig");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const getAllUsers = (req, res) => {
   db("users").then((result) => res.status(200).send(result));
@@ -165,7 +166,7 @@ const updatePassword = (req, res) => {
   const { unique_id } = req.params;
   const validationErrors = [];
 
-  if (!new_password || new_password.length < 7) {
+  if (!password || !new_password || new_password.length < 7) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
       field: "password",
@@ -187,43 +188,53 @@ const updatePassword = (req, res) => {
       errors: validationErrors,
     };
     res.status(400).send(errorObject);
-  }
-  db("users")
-    .where({ unique_id })
-    .first()
-    .then((user) => {
-      if (!user) {
-        res.status(404).json({
-          error: "You cannot access this user",
-        });
-      } else if (!bcrypt.compareSync(password, user.password)) {
-        res.status(401).json({
-          error: "The password is incorrect",
-        });
-      } else {
-        const hashed_password = bcrypt.hashSync(new_password, 14);
-        console.log(hashed_password);
-        db("users")
-          .where({ unique_id })
-          .update({
-            password: hashed_password,
-          })
-          .then((count) => {
-            if (count > 0) {
-              res.status(200).json(count);
-            } else {
-              res.status(404).json({
-                error: "You cannot access the user with this specific ID",
-              });
-            }
+  } else {
+    const token = req.headers.authorization;
+    const profileData = jwt.verify(token, process.env.JWT_SECRET);
+    const username = profileData["username"];
+    db("users")
+      .where({ username })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            error: "You cannot access this user",
           });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: "Sorry there was an error.",
+        } else if (user && !bcrypt.compareSync(password, user.password)) {
+          res.status(401).json({
+            error: "The password is incorrect",
+          });
+        } else {
+          const hashed_password = bcrypt.hashSync(new_password, 14);
+          console.log(hashed_password);
+          db("users")
+            .where({ username })
+            .update({
+              password: hashed_password,
+            })
+            .then((count) => {
+              if (count > 0) {
+                res.status(200).json(count);
+              } else {
+                res.status(404).json({
+                  error: "You cannot access the user with this specific ID",
+                });
+              }
+            })
+            .catch((error) => {
+              res.status(500).json({
+                error: "Sorry there was an error making this upate.",
+              });
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).json({
+          error: "Sorry there was an error.",
+        });
       });
-    });
+  }
 };
 
 module.exports = {
