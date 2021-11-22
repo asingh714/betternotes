@@ -1,6 +1,7 @@
 const db = require("../db/dbConfig");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { cloudinary } = require("../util/cloudConfig");
 
 const getAllUsers = (req, res) => {
   db("users").then((result) => res.status(200).send(result));

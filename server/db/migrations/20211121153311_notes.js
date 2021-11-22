@@ -6,6 +6,15 @@ exports.up = function (knex) {
     table.string("class_name").notNullable();
     table.string("teacher").notNullable();
     table.string("note_key").notNullable();
+
+    table
+      .integer("user_id")
+      .unsigned()
+      .notNullable()
+      .references("id")
+      .inTable("users")
+      .onDelete("CASCADE")
+      .onUpdate("CASCADE");
   });
 };
 
