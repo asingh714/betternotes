@@ -136,11 +136,31 @@ const getAllNotes = (req, res) => {
 };
 
 const getSingleNote = (req, res) => {
+  const { note_key } = req.params;
 
-}
+  db("products")
+    .join("notes", "products.note_key", "notes.note_key")
+    .select("*")
+    .where({ "products.note_key": note_key })
+    .then((singleNote) => {
+      console.log(singleNote)
+      if (singleNote.length < 1 ) {
+        res.status(404).json({
+          error: "You cannot access the prison with this specific key",
+        });
+      } else {
+        res.status(200).json(singleNote);
+      }
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: "The note with this specific ID could not be retrieved."
+      })
+    })
+};
 
 module.exports = {
   createNote,
   getAllNotes,
-  getSingleNote
+  getSingleNote,
 };
