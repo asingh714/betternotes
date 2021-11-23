@@ -127,8 +127,90 @@ const getSingleSummary = (req, res) => {
     });
 };
 
+const updateSummary = (req, res) => {
+  const { summary_key } = req.params;
+
+  const {
+    product_name,
+    short_description,
+    long_description,
+    document,
+    language,
+    author,
+    title,
+    isbn,
+  } = req.body;
+
+  const validationErrors = [];
+  if (
+    !product_name ||
+    !short_description ||
+    !long_description ||
+    // !document ||
+    !language ||
+    !author ||
+    !title ||
+    !isbn
+  ) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "ALL",
+      message: "Some of these fields are missing.",
+    });
+  }
+  console.log(validationErrors);
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("products")
+      .where({ summary_key })
+      .update({
+        product_name,
+        short_description,
+        long_description,
+        document,
+        language,
+      })
+      .then((result) => {
+        db("summary")
+          .where({ summary_key })
+          .update({
+            author,
+            title,
+            isbn,
+          })
+          .then((result) => {
+            db("products")
+              .join("summary", "products.summary_key", "summary.summary_key")
+              .select("*")
+              .orderBy("id", "desc")
+              .limit(1)
+              .then((result) => {
+                console.log(result);
+                res.status(201).json(result);
+              })
+              .catch((error) => {
+                res.status(500).json({
+                  error: "This note could not be retrieved.",
+                });
+              });
+          });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "This product could not be retrieved.",
+        });
+      });
+  }
+};
+
 module.exports = {
   createSummary,
   getAllSummaries,
   getSingleSummary,
+  updateSummary,
 };
