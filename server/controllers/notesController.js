@@ -61,54 +61,21 @@ const createNote = async (req, res) => {
         note_key: newId,
         user_id: subject,
       };
-      let savedProduct = {};
+      // let savedProduct = {};
 
-      db("products")
-        .insert(newProduct)
-        .then((ids) => {
-          const id = ids[0];
-          console.log(id);
-          db("products")
-            .where({ id })
-            .first()
-            .then((product) => {
-              savedProduct = { ...savedProduct, ...product };
-            })
-            .catch((error) => {
-              res.status(404).json({
-                error: "There was trouble saving the product",
-              });
-            });
+      db("products").insert(newProduct).then(result => {
+        db("notes").insert(newNote).then(result => {
+                db("products")
+                .join("notes", "products.note_key", "notes.note_key")
+                .select("*")
+                .orderBy("id", "desc")
+                .limit(1)
+                .then(result => {
+                  console.log(result);
+                  res.status(201).json(result);
+                })
         })
-        .catch((error) => {
-          res.status(500).json({
-            error: "The new product could not be added ",
-          });
-        });
-
-      db("notes")
-        .insert(newNote)
-        .then((ids) => {
-          const id = ids[0];
-          db("notes")
-            .where({ id })
-            .first()
-            .then((note) => {
-              savedProduct = { ...savedProduct, ...note };
-              console.log(savedProduct);
-              res.status(201).json(savedProduct);
-            })
-            .catch((error) => {
-              res.status(404).json({
-                error: "There was trouble saving the note",
-              });
-            });
-        })
-        .catch((error) => {
-          res.status(500).json({
-            error: "The new note could not be added ",
-          });
-        });
+      })
     } else {
       res.status(500).json({
         message: "SOMETHING WENT WRONG",
@@ -146,7 +113,7 @@ const getSingleNote = (req, res) => {
       console.log(singleNote)
       if (singleNote.length < 1 ) {
         res.status(404).json({
-          error: "You cannot access the prison with this specific key",
+          error: "You cannot access the note with this specific key",
         });
       } else {
         res.status(200).json(singleNote);
