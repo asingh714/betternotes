@@ -117,6 +117,30 @@ const createNote = async (req, res) => {
   }
 };
 
+const getAllNotes = (req, res) => {
+  db("products")
+    .join("notes", "products.note_key", "notes.note_key")
+    .select("*")
+    .then((result) => {
+      if (result.length < 1) {
+        res.status(404).json({ error: "There are no notes" });
+      } else {
+        res.status(200).json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
+const getSingleNote = (req, res) => {
+
+}
+
 module.exports = {
   createNote,
+  getAllNotes,
+  getSingleNote
 };
