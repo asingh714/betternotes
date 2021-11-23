@@ -85,6 +85,25 @@ const createSummary = async (req, res) => {
   }
 };
 
+const getAllSummaries = (req, res) => {
+  db("products")
+    .join("summary", "products.summary_key", "summary.summary_key")
+    .select("*")
+    .then((result) => {
+      if (result.length < 1) {
+        res.status(404).json({ error: "There are no summaries" });
+      } else {
+        res.status(200).json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 module.exports = {
   createSummary,
+  getAllSummaries,
 };
