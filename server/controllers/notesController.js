@@ -41,6 +41,7 @@ const createNote = async (req, res) => {
     };
     res.status(400).send(errorObject);
   } else {
+    console.log(req.file);
     if (req.file) {
       const newId = uuidv4();
       const result = await cloudinary.uploader.upload(req.file.path);
