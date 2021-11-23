@@ -103,7 +103,32 @@ const getAllSummaries = (req, res) => {
     });
 };
 
+const getSingleSummary = (req, res) => {
+  const { summary_key } = req.params;
+
+  db("products")
+    .join("summary", "products.summary_key", "summary.summary_key")
+    .select("*")
+    .where({ "products.summary_key": summary_key })
+    .then((singleSummary) => {
+      console.log(singleSummary);
+      if (singleSummary.length < 1) {
+        res.status(404).json({
+          error: "You cannot access the summary with this specific key",
+        });
+      } else {
+        res.status(200).json(singleSummary);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: "The summary with this specific ID could not be retrieved.",
+      });
+    });
+};
+
 module.exports = {
   createSummary,
   getAllSummaries,
+  getSingleSummary,
 };
