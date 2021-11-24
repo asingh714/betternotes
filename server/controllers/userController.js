@@ -194,7 +194,7 @@ const updatePassword = (req, res) => {
     const profileData = jwt.verify(token, process.env.JWT_SECRET);
     const username = profileData["username"];
     db("users")
-      .where({ username })
+      .where({ username, unique_id })
       .first()
       .then((user) => {
         if (!user) {

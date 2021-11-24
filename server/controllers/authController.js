@@ -10,7 +10,6 @@ const { generateToken } = require("../util/jwt.js");
 const { cloudinary } = require("../util/cloudConfig");
 // const parser = multer({ imageStorage, docStorage });
 
-
 const register = (req, res) => {
   const { name, email, username, password, confirm_password } = req.body;
   const emailIsValid = email && validator.isEmail(email);
@@ -84,11 +83,19 @@ const register = (req, res) => {
       .insert(newUser)
       .then((ids) => {
         const id = ids[0];
+        console.log(id);
         db("users")
           .where({ id })
           .first()
           .then(({ id, name, username, email, unique_id }) => {
-            const token = generateToken({ id, name, username, email });
+            const token = generateToken({
+              id,
+              name,
+              username,
+              email,
+              unique_id,
+            });
+            console.log({ id, name, username, email, unique_id });
             res.status(201).json({
               id,
               name,
@@ -133,15 +140,14 @@ const login = (req, res) => {
       message: "Please provide a password",
     });
   }
-  
+
   if (validationErrors.length) {
     const errorObject = {
       error: true,
       errors: validationErrors,
     };
     res.status(400).send(errorObject);
-  }
-  else {
+  } else {
     db("users")
       .where({ username })
       .first()
@@ -171,8 +177,6 @@ const login = (req, res) => {
       });
   }
 };
-
-
 
 module.exports = {
   register,

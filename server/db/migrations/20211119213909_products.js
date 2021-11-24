@@ -1,6 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("products", (table) => {
     table.increments();
+    table.string("unique_id").notNullable();
     table.string("product_name").notNullable();
     table.text("short_description").notNullable();
     table.text("long_description").notNullable();
@@ -14,7 +15,7 @@ exports.up = function (knex) {
       .integer("user_id")
       .unsigned()
       .notNullable()
-      .references("id")
+      .references("unique_id") // was id
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");

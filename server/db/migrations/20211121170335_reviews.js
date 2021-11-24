@@ -10,7 +10,7 @@ exports.up = function (knex) {
       .integer("product_id")
       .unsigned()
       .notNullable()
-      .references("id")
+      .references("unique_id")
       .inTable("products")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");

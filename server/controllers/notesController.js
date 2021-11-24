@@ -14,7 +14,7 @@ const createNote = async (req, res) => {
     class_name,
     teacher,
   } = req.body;
-  const subject = req.decodedToken.subject;
+  const unique_id = req.decodedToken.unique_id;
   const validationErrors = [];
 
   if (
@@ -47,12 +47,13 @@ const createNote = async (req, res) => {
       const result = await cloudinary.uploader.upload(req.file.path);
       const newProduct = {
         product_name,
+        unique_id: newId,
         short_description,
         long_description,
         document: result.url,
         language,
         note_key: newId,
-        user_id: subject,
+        user_id: unique_id,
       };
       const newNote = {
         school,
@@ -60,7 +61,7 @@ const createNote = async (req, res) => {
         class_name,
         teacher,
         note_key: newId,
-        user_id: subject,
+        user_id: unique_id,
       };
       // let savedProduct = {};
 

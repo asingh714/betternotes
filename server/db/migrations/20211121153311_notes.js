@@ -1,6 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("notes", (table) => {
     table.increments();
+    table.string("unique_id").notNullable();
     table.string("school").notNullable();
     table.string("grade_level").notNullable();
     table.string("class_name").notNullable();
@@ -11,7 +12,7 @@ exports.up = function (knex) {
       .integer("user_id")
       .unsigned()
       .notNullable()
-      .references("id")
+      .references("unique_id") // was id
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
