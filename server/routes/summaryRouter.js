@@ -7,7 +7,7 @@ const {
   createSummary,
   getAllSummaries,
   getSingleSummary,
-  // deleteSummary,
+  deleteSummary,
   updateSummary,
 } = require("../controllers/summaryController");
 
@@ -20,6 +20,6 @@ router.put(
   upload.single("document"),
   updateSummary
 );
-// router.delete("/:summary_key", authenticateUser, deleteSummary);
+router.delete("/:summary_key", authenticateUser, deleteSummary);
 
 module.exports = router;

@@ -195,7 +195,7 @@ const updateSummary = (req, res) => {
               })
               .catch((error) => {
                 res.status(500).json({
-                  error: "This note could not be retrieved.",
+                  error: "This summary could not be retrieved.",
                 });
               });
           });
@@ -208,9 +208,34 @@ const updateSummary = (req, res) => {
   }
 };
 
+const deleteSummary = (req, res) => {
+  const { summary_key } = req.params;
+
+  db("products")
+    .where({ summary_key })
+    .first()
+    .then((product) => {
+      if (product) {
+        db("products").where({ summary_key }).del();
+        db("summary")
+          .where({ summary_key })
+          .del()
+          .then((count) => res.status(200).json(count));
+      } else {
+        res.status(404).json({
+          error: "You cannot access the summary with this specific id.",
+        });
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({ error: "This product could not be removed" });
+    });
+};
+
 module.exports = {
   createSummary,
   getAllSummaries,
   getSingleSummary,
   updateSummary,
+  deleteSummary,
 };
