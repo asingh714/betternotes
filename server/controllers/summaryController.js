@@ -9,6 +9,8 @@ const createSummary = async (req, res) => {
     long_description,
     document,
     language,
+    pages,
+    year,
     author,
     title,
     isbn,
@@ -22,6 +24,8 @@ const createSummary = async (req, res) => {
     !long_description ||
     // !document ||
     !language ||
+    !pages ||
+    !year ||
     !author ||
     !title ||
     !isbn
