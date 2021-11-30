@@ -124,6 +124,7 @@ const getSingleNote = (req, res) => {
     .join("notes", "products.note_key", "notes.note_key")
     .select("*")
     .where({ "products.note_key": note_key })
+    .first()
     .then((singleNote) => {
       console.log(singleNote);
       if (singleNote.length < 1) {

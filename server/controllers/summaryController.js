@@ -117,8 +117,9 @@ const getSingleSummary = (req, res) => {
     .join("summary", "products.summary_key", "summary.summary_key")
     .select("*")
     .where({ "products.summary_key": summary_key })
+    .first()
     .then((singleSummary) => {
-      console.log("singleSummary:", singleSummary);
+      console.log("singleSummary --> ", singleSummary);
       if (singleSummary.length < 1) {
         res.status(404).json({
           error: "You cannot access the summary with this specific key",
