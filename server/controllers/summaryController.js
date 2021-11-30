@@ -17,7 +17,6 @@ const createSummary = async (req, res) => {
   } = req.body;
   const subject = req.decodedToken.subject;
   const validationErrors = [];
-
   if (
     !product_name ||
     !short_description ||
@@ -43,25 +42,29 @@ const createSummary = async (req, res) => {
     };
     res.status(400).send(errorObject);
   } else {
-    console.log(req.file);
     if (req.file) {
-      const newId = uuidv4();
+      const uniqueId = uuidv4();
+      const product_id = uuidv4();
       const result = await cloudinary.uploader.upload(req.file.path);
       const newProduct = {
+        unique_id: uniqueId,
         product_name,
         short_description,
         long_description,
         document: result.url,
         language,
-        summary_key: newId,
+        summary_key: product_id,
         user_id: subject,
+        pages,
+        year,
       };
+      const summaryId = uuidv4();
       const newSummary = {
+        unique_id: summaryId,
         author,
         title,
         isbn,
-        summary_key: newId,
-        user_id: subject,
+        summary_key: product_id,
       };
 
       db("products")
@@ -115,7 +118,7 @@ const getSingleSummary = (req, res) => {
     .select("*")
     .where({ "products.summary_key": summary_key })
     .then((singleSummary) => {
-      console.log(singleSummary);
+      console.log("singleSummary:", singleSummary);
       if (singleSummary.length < 1) {
         res.status(404).json({
           error: "You cannot access the summary with this specific key",
