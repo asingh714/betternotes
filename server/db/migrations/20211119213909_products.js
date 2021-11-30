@@ -7,15 +7,17 @@ exports.up = function (knex) {
     table.text("long_description").notNullable();
     table.text("document").notNullable();
     table.float("rating");
+    table.string("pages").notNullable();
+    table.string("year").notNullable();
     table.string("language").notNullable();
     table.string("note_key");
     table.string("summary_key");
 
     table
-      .integer("user_id")
+      .string("user_id")
       .unsigned()
       .notNullable()
-      .references("unique_id") // was id
+      .references("id") // was id
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");

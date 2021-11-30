@@ -141,10 +141,13 @@ const updateUserInfo = async (req, res) => {
 };
 
 const deleteUserInfo = (req, res) => {
-  const { unique_id } = req.params;
+  // const { unique_id } = req.params;
+  const subject = req.decodedToken.subject;
+  // console.log(unique_id);
+  console.log(subject);
 
   db("users")
-    .where({ unique_id })
+    .where({ id: subject })
     .del()
     .then((count) => {
       if (count > 0) {

@@ -8,14 +8,14 @@ exports.up = function (knex) {
     table.string("teacher").notNullable();
     table.string("note_key").notNullable();
 
-    table
-      .integer("user_id")
-      .unsigned()
-      .notNullable()
-      .references("unique_id") // was id
-      .inTable("users")
-      .onDelete("CASCADE")
-      .onUpdate("CASCADE");
+    // table
+    //   .string("product_id")
+    //   .unsigned()
+    //   .notNullable()
+    //   .references("id")
+    //   .inTable("product")
+    //   .onDelete("CASCADE")
+    //   .onUpdate("CASCADE");
   });
 };
 

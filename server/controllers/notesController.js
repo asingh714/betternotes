@@ -9,12 +9,14 @@ const createNote = async (req, res) => {
     long_description,
     document,
     language,
+    pages,
+    year,
     school,
     grade_level,
     class_name,
     teacher,
   } = req.body;
-  const unique_id = req.decodedToken.unique_id;
+  const subject = req.decodedToken.subject;
   const validationErrors = [];
 
   if (
@@ -23,11 +25,14 @@ const createNote = async (req, res) => {
     !long_description ||
     // !document ||
     !language ||
+    !pages ||
+    !year ||
     !school ||
     !grade_level ||
     !class_name ||
     !teacher
   ) {
+    console.log(req.body);
     validationErrors.push({
       code: "VALIDATION_ERROR",
       field: "ALL",
@@ -41,30 +46,34 @@ const createNote = async (req, res) => {
     };
     res.status(400).send(errorObject);
   } else {
-    console.log(req.file);
     if (req.file) {
-      const newId = uuidv4();
+      const uniqueId = uuidv4();
+      const product_id = uuidv4();
       const result = await cloudinary.uploader.upload(req.file.path);
       const newProduct = {
+        unique_id: uniqueId,
         product_name,
-        unique_id: newId,
         short_description,
         long_description,
         document: result.url,
         language,
-        note_key: newId,
-        user_id: unique_id,
+        note_key: product_id,
+        user_id: subject,
+        pages,
+        year,
       };
+      // console.log(newProduct);
+      const noteId = uuidv4();
       const newNote = {
+        unique_id: noteId,
         school,
         grade_level,
         class_name,
         teacher,
-        note_key: newId,
-        user_id: unique_id,
+        note_key: product_id,
+        // product_id: subject,
       };
-      // let savedProduct = {};
-
+      // console.log(newNote);
       db("products")
         .insert(newProduct)
         .then((result) => {
@@ -141,18 +150,24 @@ const updateNote = (req, res) => {
     long_description,
     document,
     language,
+    pages,
+    year,
     school,
     grade_level,
     class_name,
     teacher,
   } = req.body;
-
+  const subject = req.decodedToken.subject;
   const validationErrors = [];
+
   if (
     !product_name ||
     !short_description ||
     !long_description ||
+    // !document ||
     !language ||
+    !pages ||
+    !year ||
     !school ||
     !grade_level ||
     !class_name ||
@@ -164,7 +179,7 @@ const updateNote = (req, res) => {
       message: "Some of these fields are missing.",
     });
   }
-  console.log(validationErrors);
+
   if (validationErrors.length) {
     const errorObject = {
       error: true,
@@ -174,38 +189,42 @@ const updateNote = (req, res) => {
   } else {
     db("products")
       .where({ note_key })
-      .update({
-        product_name,
-        short_description,
-        long_description,
-        document,
-        language,
-      })
+      .first()
       .then((result) => {
-        db("notes")
-          .where({ note_key })
-          .update({
-            school,
-            grade_level,
-            class_name,
-            teacher,
-          })
-          .then((result) => {
-            db("products")
-              .join("notes", "products.note_key", "notes.note_key")
-              .select("*")
-              .orderBy("id", "desc")
-              .limit(1)
-              .then((result) => {
-                console.log(result);
-                res.status(201).json(result);
-              })
-              .catch((error) => {
-                res.status(500).json({
-                  error: "This note could not be retrieved.",
-                });
-              });
+        if (!result) {
+          res.status(404).json({
+            error: "You cannot access the note with this specific key",
           });
+        } else {
+          db("products")
+            .where({ note_key })
+            .first()
+            .update({
+              product_name,
+              short_description,
+              long_description,
+              document,
+              language,
+              pages,
+              year,
+            })
+            .then((result) => {
+              db("products")
+                .join("notes", "products.note_key", "notes.note_key")
+                .select("*")
+                .orderBy("id", "desc")
+                .limit(1)
+                .then((result) => {
+                  console.log(result);
+                  res.status(201).json(result);
+                })
+                .catch((error) => {
+                  res.status(500).json({
+                    error: "This note could not be retrieved.",
+                  });
+                });
+            });
+        }
       })
       .catch((error) => {
         res.status(500).json({

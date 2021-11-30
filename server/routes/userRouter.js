@@ -21,7 +21,7 @@ router.put(
   upload.single("profile_image"),
   updateUserInfo
 );
-router.delete("/:unique_id", authenticateUser, deleteUserInfo);
 router.put("/:unique_id/update_password", authenticateUser, updatePassword);
+router.delete("/profile", authenticateUser, deleteUserInfo);
 
 module.exports = router;
