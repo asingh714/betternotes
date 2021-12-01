@@ -197,17 +197,23 @@ const updateNote = (req, res) => {
             error: "You cannot access the note with this specific key",
           });
         } else {
-          db("products")
+          db("products").where({ note_key }).first().update({
+            product_name,
+            short_description,
+            long_description,
+            document,
+            language,
+            pages,
+            year,
+          });
+          db("notes")
             .where({ note_key })
             .first()
             .update({
-              product_name,
-              short_description,
-              long_description,
-              document,
-              language,
-              pages,
-              year,
+              school,
+              grade_level,
+              class_name,
+              teacher,
             })
             .then((result) => {
               db("products")

@@ -143,6 +143,8 @@ const updateSummary = (req, res) => {
     short_description,
     long_description,
     document,
+    pages,
+    year,
     language,
     author,
     title,
@@ -156,6 +158,8 @@ const updateSummary = (req, res) => {
     !long_description ||
     // !document ||
     !language ||
+    !pages ||
+    !year ||
     !author ||
     !title ||
     !isbn
@@ -166,7 +170,6 @@ const updateSummary = (req, res) => {
       message: "Some of these fields are missing.",
     });
   }
-  console.log(validationErrors);
   if (validationErrors.length) {
     const errorObject = {
       error: true,
@@ -176,37 +179,50 @@ const updateSummary = (req, res) => {
   } else {
     db("products")
       .where({ summary_key })
-      .update({
-        product_name,
-        short_description,
-        long_description,
-        document,
-        language,
-      })
+      .first()
       .then((result) => {
-        db("summary")
-          .where({ summary_key })
-          .update({
-            author,
-            title,
-            isbn,
-          })
-          .then((result) => {
-            db("products")
-              .join("summary", "products.summary_key", "summary.summary_key")
-              .select("*")
-              .orderBy("id", "desc")
-              .limit(1)
-              .then((result) => {
-                console.log(result);
-                res.status(201).json(result);
-              })
-              .catch((error) => {
-                res.status(500).json({
-                  error: "This summary could not be retrieved.",
-                });
-              });
+        if (!result) {
+          res.status(404).json({
+            error: "You cannot access the note with this specific key",
           });
+        } else {
+          db("products")
+            .where({ summary_key })
+            .first()
+            .update({
+              product_name,
+              short_description,
+              long_description,
+              document,
+              language,
+              pages,
+              year,
+            })
+            db("summary")
+            .where({ summary_key })
+            .first()
+            .update({
+              author,
+              title,
+              isbn
+            })
+            .then((result) => {
+              db("products")
+                .join("summary", "products.summary_key", "summary.summary_key")
+                .select("*")
+                .orderBy("id", "desc")
+                .limit(1)
+                .then((result) => {
+                  console.log(result);
+                  res.status(201).json(result);
+                })
+                .catch((error) => {
+                  res.status(500).json({
+                    error: "This summary could not be retrieved.",
+                  });
+                });
+            });
+        }
       })
       .catch((error) => {
         res.status(500).json({
