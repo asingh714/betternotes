@@ -83,7 +83,6 @@ const register = (req, res) => {
       .insert(newUser)
       .then((ids) => {
         const id = ids[0];
-        console.log(id);
         db("users")
           .where({ id })
           .first()
@@ -95,7 +94,7 @@ const register = (req, res) => {
               email,
               unique_id,
             });
-            console.log({ id, name, username, email, unique_id });
+            // console.log({ id, name, username, email, unique_id });
             res.status(201).json({
               id,
               name,
@@ -160,6 +159,10 @@ const login = (req, res) => {
           res.status(401).json({
             error: "The password is incorrect",
           });
+        } else if (!user.isVerified) {
+          res
+            .status(401)
+            .json({ error: "This user has not yet been verified" });
         } else {
           const token = generateToken(user);
           res.status(200).json({
