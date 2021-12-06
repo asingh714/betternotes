@@ -1,6 +1,7 @@
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const { v4: uuidv4 } = require("uuid");
+const crypto = require("crypto");
 // const multer = require("multer");
 
 const db = require("../db/dbConfig");
@@ -9,6 +10,76 @@ const { generateToken } = require("../util/jwt.js");
 // const router = require("../routes/authRouter");
 const { cloudinary } = require("../util/cloudConfig");
 // const parser = multer({ imageStorage, docStorage });
+
+const verifyEmail = (req, res) => {
+  const { verification_token, email } = req.body;
+
+  const emailIsValid = email && validator.isEmail(email);
+
+  const validationErrors = [];
+
+  if (!email || emailIsValid === false) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "email",
+      message: "Please provide a valid email address.",
+    });
+  }
+
+  if (!verification_token) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "email",
+      message: "Please provide a valid token",
+    });
+  }
+
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("users")
+      .where({ email })
+      .first()
+      .then((user) => {
+        console.log(user);
+        if (!user) {
+          res.status(404).json({
+            error: "You cannot access this user",
+          });
+        } else if (user.verification_token !== verification_token) {
+          res.status(401).json({
+            error: "Verification failed",
+          });
+        } else {
+          db("users")
+            .where({ email })
+            .update({
+              isVerified: true,
+              verification_date: Date.now(),
+              verification_token: "",
+            })
+            .then((count) => {
+              if (count > 0) {
+                res.status(200).json(count);
+              } else {
+                res.status(404).json({
+                  error: "You cannot access this user",
+                });
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "Sorry there was an error verifying this email.",
+        });
+      });
+  }
+};
 
 const register = (req, res) => {
   const { name, email, username, password, confirm_password } = req.body;
@@ -72,12 +143,14 @@ const register = (req, res) => {
   } else {
     const hashed_password = bcrypt.hashSync(password, 14);
     const newId = uuidv4();
+    const verification_token = crypto.randomBytes(40).toString("hex");
     const newUser = {
       name: name.trim(),
       email: email.trim(),
       username: username.trim(),
       password: hashed_password,
       unique_id: newId,
+      verification_token,
     };
     db("users")
       .insert(newUser)
@@ -87,13 +160,13 @@ const register = (req, res) => {
           .where({ id })
           .first()
           .then(({ id, name, username, email, unique_id }) => {
-            const token = generateToken({
-              id,
-              name,
-              username,
-              email,
-              unique_id,
-            });
+            // const token = generateToken({
+            //   id,
+            //   name,
+            //   username,
+            //   email,
+            //   unique_id,
+            // });
             // console.log({ id, name, username, email, unique_id });
             res.status(201).json({
               id,
@@ -101,7 +174,8 @@ const register = (req, res) => {
               username,
               email,
               unique_id,
-              token,
+              verification_token,
+              // token,
             });
           })
           .catch((error) => {
@@ -182,6 +256,7 @@ const login = (req, res) => {
 };
 
 module.exports = {
+  verifyEmail,
   register,
   login,
 };

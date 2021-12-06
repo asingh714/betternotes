@@ -3,8 +3,13 @@ const router = express.Router();
 
 // const db = require("../db/dbConfig");
 
-const { register, login } = require("../controllers/authController");
+const {
+  register,
+  login,
+  verifyEmail,
+} = require("../controllers/authController");
 
+router.post("/verify-email", verifyEmail);
 router.post("/register", register);
 router.post("/login", login);
 
