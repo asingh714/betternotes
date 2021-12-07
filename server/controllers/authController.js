@@ -11,6 +11,8 @@ const { generateToken } = require("../util/jwt.js");
 const { cloudinary } = require("../util/cloudConfig");
 // const parser = multer({ imageStorage, docStorage });
 
+const sendEmail = require("../util/sendEmail");
+
 const verifyEmail = (req, res) => {
   const { verification_token, email } = req.body;
 
@@ -64,7 +66,7 @@ const verifyEmail = (req, res) => {
             })
             .then((count) => {
               if (count > 0) {
-                res.status(200).json(count);
+                res.status(200).json({ message: "Email is verified" });
               } else {
                 res.status(404).json({
                   error: "You cannot access this user",
@@ -168,13 +170,18 @@ const register = (req, res) => {
             //   unique_id,
             // });
             // console.log({ id, name, username, email, unique_id });
+            sendEmail(
+              "cf3xehritu4hltf6@ethereal.email",
+              "Hello",
+              "<p>HI!!!!!!!</p>"
+            );
             res.status(201).json({
               id,
               name,
               username,
               email,
               unique_id,
-              verification_token,
+              // verification_token, // We dont want to send the token?
               // token,
             });
           })
