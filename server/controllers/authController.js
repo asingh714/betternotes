@@ -11,6 +11,7 @@ const { generateToken } = require("../util/jwt.js");
 const { cloudinary } = require("../util/cloudConfig");
 // const parser = multer({ imageStorage, docStorage });
 
+const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendEmail = require("../util/sendEmail");
 
 const verifyEmail = (req, res) => {
@@ -170,11 +171,12 @@ const register = (req, res) => {
             //   unique_id,
             // });
             // console.log({ id, name, username, email, unique_id });
-            sendEmail(
-              "cf3xehritu4hltf6@ethereal.email",
-              "Hello",
-              "<p>HI!!!!!!!</p>"
-            );
+            sendVerificationEmail({
+              name,
+              email,
+              verification_token,
+              origin: "http://localhost:3000", // we will need to change this eventually
+            });
             res.status(201).json({
               id,
               name,
