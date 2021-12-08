@@ -227,7 +227,7 @@ const updatePassword = (req, res) => {
             })
             .catch((error) => {
               res.status(500).json({
-                error: "Sorry there was an error making this upate.",
+                error: "Sorry there was an error making this update.",
               });
             });
         }

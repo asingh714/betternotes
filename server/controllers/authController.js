@@ -61,7 +61,6 @@ const verifyEmail = (req, res) => {
             .update({
               isVerified: true,
               verification_date: Date.now(),
-              verification_token: "",
             })
             .then((count) => {
               if (count > 0) {
@@ -291,11 +290,11 @@ const sendResetPasswordLink = (req, res) => {
             error: "You cannot access this user",
           });
         } else {
-          const verification_token = crypto.randomBytes(40).toString("hex");
+          // const verification_token = crypto.randomBytes(40).toString("hex");
           sendResetPasswordEmail({
             name: user.name,
-            email,
-            verification_token,
+            email: user.email,
+            verification_token: user.verification_token,
             origin: "http://localhost:5000", // we will need to change this eventually
           });
           res.status(200).json({ message: "Reset email has been sent" });
@@ -305,12 +304,96 @@ const sendResetPasswordLink = (req, res) => {
 };
 
 const resetForgottenPassword = (req, res) => {
-  
-}
+  const { token, email } = req.query;
+  const { new_password, confirm_new_password } = req.body;
+
+  const emailIsValid = email && validator.isEmail(email);
+
+  const validationErrors = [];
+
+  if (!email || emailIsValid === false) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "email",
+      message: "Please provide a valid email address.",
+    });
+  }
+
+  if (!token) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "email",
+      message: "Please provide a valid token",
+    });
+  }
+
+  if (!new_password || !confirm_new_password || new_password.length < 7) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "password",
+      message: "Please provide a password longer than 6 characters",
+    });
+  }
+
+  if (new_password !== confirm_new_password) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "password",
+      message: "Your passwords do not match",
+    });
+  }
+
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("users")
+      .where({ email, verification_token: token })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            error: "You cannot access this user",
+          });
+        } else {
+          const hashed_password = bcrypt.hashSync(new_password, 14);
+          db("users")
+            .where({ email, verification_token: token })
+            .update({
+              password: hashed_password,
+            })
+            .then((count) => {
+              if (count > 0) {
+                res.status(200).json(count);
+              } else {
+                res.status(404).json({
+                  error: "You cannot access the user with this specific ID",
+                });
+              }
+            })
+            .catch((error) => {
+              res.status(500).json({
+                error: "Sorry there was an error making this update.",
+              });
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).json({
+          error: "Sorry there was an error.",
+        });
+      });
+  }
+};
 
 module.exports = {
   verifyEmail,
   register,
   login,
   sendResetPasswordLink,
+  resetForgottenPassword,
 };

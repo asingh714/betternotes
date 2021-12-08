@@ -6,7 +6,7 @@ const sendResetPasswordEmail = ({
   verification_token,
   origin,
 }) => {
-  const verifyEmail = `${origin}/api/auth/verify-email?token=${verification_token}&email=${email}`;
+  const verifyEmail = `${origin}/api/auth/reset-password?token=${verification_token}&email=${email}`;
 
   const message = `<p>Please reset your password by clicking the following link : 
   <a href="${verifyEmail}">Reset Password</a> </p>`;
