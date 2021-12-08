@@ -14,76 +14,6 @@ const { cloudinary } = require("../util/cloudConfig");
 const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendEmail = require("../util/sendEmail");
 
-const verifyEmail = (req, res) => {
-  const { verification_token, email } = req.body;
-
-  const emailIsValid = email && validator.isEmail(email);
-
-  const validationErrors = [];
-
-  if (!email || emailIsValid === false) {
-    validationErrors.push({
-      code: "VALIDATION_ERROR",
-      field: "email",
-      message: "Please provide a valid email address.",
-    });
-  }
-
-  if (!verification_token) {
-    validationErrors.push({
-      code: "VALIDATION_ERROR",
-      field: "email",
-      message: "Please provide a valid token",
-    });
-  }
-
-  if (validationErrors.length) {
-    const errorObject = {
-      error: true,
-      errors: validationErrors,
-    };
-    res.status(400).send(errorObject);
-  } else {
-    db("users")
-      .where({ email })
-      .first()
-      .then((user) => {
-        console.log(user);
-        if (!user) {
-          res.status(404).json({
-            error: "You cannot access this user",
-          });
-        } else if (user.verification_token !== verification_token) {
-          res.status(401).json({
-            error: "Verification failed",
-          });
-        } else {
-          db("users")
-            .where({ email })
-            .update({
-              isVerified: true,
-              verification_date: Date.now(),
-              verification_token: "",
-            })
-            .then((count) => {
-              if (count > 0) {
-                res.status(200).json({ message: "Email is verified" });
-              } else {
-                res.status(404).json({
-                  error: "You cannot access this user",
-                });
-              }
-            });
-        }
-      })
-      .catch((error) => {
-        res.status(500).json({
-          error: "Sorry there was an error verifying this email.",
-        });
-      });
-  }
-};
-
 const register = (req, res) => {
   const { name, email, username, password, confirm_password } = req.body;
   const emailIsValid = email && validator.isEmail(email);
@@ -175,7 +105,7 @@ const register = (req, res) => {
               name,
               email,
               verification_token,
-              origin: "http://localhost:3000", // we will need to change this eventually
+              origin: "http://localhost:5000", // we will need to change this eventually
             });
             res.status(201).json({
               id,
@@ -263,6 +193,78 @@ const login = (req, res) => {
       });
   }
 };
+
+const verifyEmail = (req, res) => {
+  const { token, email } = req.query;
+  const emailIsValid = email && validator.isEmail(email);
+
+  const validationErrors = [];
+
+  if (!email || emailIsValid === false) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "email",
+      message: "Please provide a valid email address.",
+    });
+  }
+
+  if (!token) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "email",
+      message: "Please provide a valid token",
+    });
+  }
+
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("users")
+      .where({ email })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            error: "You cannot access this user",
+          });
+        } else if (user.verification_token !== token) {
+          res.status(401).json({
+            error: "Verification failed",
+          });
+        } else {
+          db("users")
+            .where({ email })
+            .update({
+              isVerified: true,
+              verification_date: Date.now(),
+              verification_token: "",
+            })
+            .then((count) => {
+              if (count > 0) {
+                res.status(200).json({ message: "Email is verified" });
+              } else {
+                res.status(404).json({
+                  error: "You cannot access this user",
+                });
+              }
+            });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "Sorry there was an error verifying this email.",
+        });
+      });
+  }
+};
+
+const resetPassword = (req, res) => {
+  
+}
 
 module.exports = {
   verifyEmail,
