@@ -15,6 +15,7 @@ const createNote = async (req, res) => {
     grade_level,
     class_name,
     teacher,
+    price,
   } = req.body;
   const subject = req.decodedToken.subject;
   const validationErrors = [];
@@ -30,7 +31,8 @@ const createNote = async (req, res) => {
     !school ||
     !grade_level ||
     !class_name ||
-    !teacher
+    !teacher ||
+    !price
   ) {
     console.log(req.body);
     validationErrors.push({
@@ -61,6 +63,7 @@ const createNote = async (req, res) => {
         user_id: subject,
         pages,
         year,
+        price,
       };
       // console.log(newProduct);
       const noteId = uuidv4();

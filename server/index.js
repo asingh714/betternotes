@@ -15,7 +15,7 @@ const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const notesRouter = require("./routes/notesRouter");
 const summaryRouter = require("./routes/summaryRouter");
-// const reviewRouter = require("./routes/reviewRouter");
+const orderRouter = require("./routes/orderRouter");
 
 const notFound = require("./middleware/notFound");
 
@@ -23,7 +23,7 @@ server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
 server.use("/api/products/notes", notesRouter);
 server.use("/api/products/summary", summaryRouter);
-// server.use("/api/products", reviewRouter);
+server.use("/api/orders", orderRouter);
 
 server.get("/", (req, res) => {
   res.send("<h1>TEST API</h1>");

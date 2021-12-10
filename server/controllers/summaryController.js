@@ -14,6 +14,7 @@ const createSummary = async (req, res) => {
     author,
     title,
     isbn,
+    price,
   } = req.body;
   const subject = req.decodedToken.subject;
   const validationErrors = [];
@@ -27,7 +28,8 @@ const createSummary = async (req, res) => {
     !year ||
     !author ||
     !title ||
-    !isbn
+    !isbn ||
+    !price
   ) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
@@ -57,6 +59,7 @@ const createSummary = async (req, res) => {
         user_id: subject,
         pages,
         year,
+        price,
       };
       const summaryId = uuidv4();
       const newSummary = {
@@ -186,25 +189,22 @@ const updateSummary = (req, res) => {
             error: "You cannot access the note with this specific key",
           });
         } else {
-          db("products")
-            .where({ summary_key })
-            .first()
-            .update({
-              product_name,
-              short_description,
-              long_description,
-              document,
-              language,
-              pages,
-              year,
-            })
-            db("summary")
+          db("products").where({ summary_key }).first().update({
+            product_name,
+            short_description,
+            long_description,
+            document,
+            language,
+            pages,
+            year,
+          });
+          db("summary")
             .where({ summary_key })
             .first()
             .update({
               author,
               title,
-              isbn
+              isbn,
             })
             .then((result) => {
               db("products")
