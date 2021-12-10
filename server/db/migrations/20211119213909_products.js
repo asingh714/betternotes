@@ -6,7 +6,8 @@ exports.up = function (knex) {
     table.text("short_description").notNullable();
     table.text("long_description").notNullable();
     table.text("document").notNullable();
-    table.float("rating");
+    table.float("price").notNullable();
+    // table.float("rating");
     table.string("pages").notNullable();
     table.string("year").notNullable();
     table.string("language").notNullable();
@@ -22,23 +23,6 @@ exports.up = function (knex) {
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
 
-    // table
-    //   .string("user_name")
-    //   .unsigned()
-    //   .notNullable()
-    //   .references("name")
-    //   .inTable("users")
-    //   .onDelete("CASCADE")
-    //   .onUpdate("CASCADE");
-
-    // table
-    //   .string("user_username")
-    //   .unsigned()
-    //   .notNullable()
-    //   .references("username")
-    //   .inTable("users")
-    //   .onDelete("CASCADE")
-    //   .onUpdate("CASCADE");
   });
 };
 

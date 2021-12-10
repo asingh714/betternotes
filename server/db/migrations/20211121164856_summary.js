@@ -7,14 +7,6 @@ exports.up = function (knex) {
     table.string("isbn").notNullable();
     table.string("summary_key").notNullable();
 
-    //   table
-    //     .string("product_id")
-    //     .unsigned()
-    //     .notNullable()
-    //     .references("id")
-    //     .inTable("product")
-    //     .onDelete("CASCADE")
-    //     .onUpdate("CASCADE");
   });
 };
 
