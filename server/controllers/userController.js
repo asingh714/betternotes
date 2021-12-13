@@ -54,11 +54,12 @@ const showCurrentUser = (req, res) => {
   // Since this is a restricted route, we know for sure we can verify this token
   const profileData = jwt.verify(token, process.env.JWT_SECRET);
   const username = profileData["username"];
-
+  console.log(username);
   db("users")
     .where({ username })
     .first()
     .then((user) => {
+      console.log(user);
       if (!user) {
         res.status(404).json({
           error: "You cannot access this user",
