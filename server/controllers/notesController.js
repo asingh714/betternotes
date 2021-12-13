@@ -151,21 +151,23 @@ const getSingleNote = (req, res) => {
 };
 
 const updateNote = (req, res) => {
-  const { note_key } = req.params;
+  const { unique_id } = req.params;
 
   const {
     product_name,
     short_description,
     long_description,
     document,
-    language,
+    price,
     pages,
     year,
+    language,
     school,
     grade_level,
     class_name,
     teacher,
   } = req.body;
+
   const subject = req.decodedToken.subject;
   const validationErrors = [];
 
@@ -180,7 +182,8 @@ const updateNote = (req, res) => {
     !school ||
     !grade_level ||
     !class_name ||
-    !teacher
+    !teacher ||
+    !price
   ) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
@@ -196,8 +199,8 @@ const updateNote = (req, res) => {
     };
     res.status(400).send(errorObject);
   } else {
-    db("products")
-      .where({ note_key })
+    db("notes")
+      .where({ unique_id })
       .first()
       .then((result) => {
         if (!result) {
@@ -205,39 +208,31 @@ const updateNote = (req, res) => {
             error: "You cannot access the note with this specific key",
           });
         } else {
-          db("products").where({ note_key }).first().update({
-            product_name,
-            short_description,
-            long_description,
-            document,
-            language,
-            pages,
-            year,
-          });
           db("notes")
-            .where({ note_key })
+            .where({ unique_id })
             .first()
             .update({
+              product_name,
+              short_description,
+              long_description,
+              document,
+              price,
+              pages,
+              year,
+              language,
               school,
               grade_level,
               class_name,
               teacher,
             })
             .then((result) => {
-              db("products")
-                .join("notes", "products.note_key", "notes.note_key")
-                .select("*")
-                .orderBy("id", "desc")
-                .limit(1)
-                .then((result) => {
-                  console.log(result);
-                  res.status(201).json(result);
-                })
-                .catch((error) => {
-                  res.status(500).json({
-                    error: "This note could not be retrieved.",
-                  });
-                });
+              console.log(result);
+              res.status(201).json(result);
+            })
+            .catch((error) => {
+              res.status(500).json({
+                error: "This note could not be retrieved.",
+              });
             });
         }
       })
@@ -250,17 +245,19 @@ const updateNote = (req, res) => {
 };
 
 const deleteNote = (req, res) => {
-  const { note_key } = req.params;
+  const { unique_id } = req.params;
 
-  db("products")
-    .where({ note_key })
+  db("notes")
+    .where({ unique_id })
     .first()
     .then((product) => {
       if (product) {
-        db("products").where({ note_key }).del();
         db("notes")
-          .where({ note_key })
+          .where({ unique_id })
           .del()
+          // db("notes")
+          //   .where({ note_key })
+          //   .del()
           .then((count) => res.status(200).json(count));
       } else {
         res.status(404).json({
