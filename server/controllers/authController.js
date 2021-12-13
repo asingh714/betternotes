@@ -13,7 +13,7 @@ const { cloudinary } = require("../util/cloudConfig");
 
 const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendResetPasswordEmail = require("../util/sendResetPasswordEmail");
-
+ 
 const verifyEmail = (req, res) => {
   const { token, email } = req.query;
   const emailIsValid = email && validator.isEmail(email);
