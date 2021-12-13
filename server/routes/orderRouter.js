@@ -4,6 +4,6 @@ const authenticateUser = require("../util/authenticateUser");
 
 const { createOrder } = require("../controllers/orderController");
 
-router.post("/", createOrder);
+router.get("/", createOrder);
 
 module.exports = router;
