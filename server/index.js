@@ -14,15 +14,15 @@ const port = process.env.PORT || 4000;
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const notesRouter = require("./routes/notesRouter");
-const summaryRouter = require("./routes/summaryRouter");
 const orderRouter = require("./routes/orderRouter");
+// const summaryRouter = require("./routes/summaryRouter");
 
 const notFound = require("./middleware/notFound");
 
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
-server.use("/api/products/notes", notesRouter);
-server.use("/api/products/summary", summaryRouter);
+server.use("/api/notes", notesRouter);
+// server.use("/api/products/summary", summaryRouter);
 server.use("/api/orders", orderRouter);
 
 server.get("/", (req, res) => {

@@ -16,9 +16,6 @@ exports.up = function (knex) {
     table.boolean("isVerified").defaultTo("false");
     table.date("verification_date");
 
-    // table.date("activation_token_sent_at");
-    // table.string("reset_password_token");
-    // table.date("reset_password_token_sent_at");
   });
 };
 

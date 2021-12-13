@@ -12,14 +12,14 @@ const {
 } = require("../controllers/notesController");
 
 router.get("/", getAllNotes);
-router.get("/:note_key", getSingleNote);
+router.get("/:unique_id", getSingleNote);
 router.post("/", authenticateUser, upload.single("document"), createNote);
 router.put(
-  "/:note_key",
+  "/:unique_id",
   authenticateUser,
   upload.single("document"),
   updateNote
 );
-router.delete("/:note_key", authenticateUser, deleteNote);
+router.delete("/:unique_id", authenticateUser, deleteNote);
 
 module.exports = router;

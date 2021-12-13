@@ -8,14 +8,14 @@ const createNote = async (req, res) => {
     short_description,
     long_description,
     document,
-    language,
+    price,
     pages,
     year,
+    language,
     school,
     grade_level,
     class_name,
     teacher,
-    price,
   } = req.body;
   const subject = req.decodedToken.subject;
   const validationErrors = [];
@@ -34,7 +34,6 @@ const createNote = async (req, res) => {
     !teacher ||
     !price
   ) {
-    console.log(req.body);
     validationErrors.push({
       code: "VALIDATION_ERROR",
       field: "ALL",
@@ -50,7 +49,7 @@ const createNote = async (req, res) => {
   } else {
     if (req.file) {
       const uniqueId = uuidv4();
-      const product_id = uuidv4();
+      // const product_id = uuidv4();
       const result = await cloudinary.uploader.upload(req.file.path);
       const newProduct = {
         unique_id: uniqueId,
@@ -58,54 +57,60 @@ const createNote = async (req, res) => {
         short_description,
         long_description,
         document: result.url,
-        language,
-        note_key: product_id,
-        user_id: subject,
+        price,
+        // note_key: product_id,
         pages,
         year,
-        price,
-      };
-      // console.log(newProduct);
-      const noteId = uuidv4();
-      const newNote = {
-        unique_id: noteId,
+        language,
         school,
         grade_level,
         class_name,
         teacher,
-        note_key: product_id,
-        // product_id: subject,
+        user_id: subject,
       };
+      // console.log(newProduct);
+      // const noteId = uuidv4();
+      // const newNote = {
+      //   unique_id: noteId,
+      //   note_key: product_id,
+      // product_id: subject,
+      // };
       // console.log(newNote);
-      db("products")
+      db("notes")
         .insert(newProduct)
         .then((result) => {
-          db("notes")
-            .insert(newNote)
-            .then((result) => {
-              db("products")
-                .join("notes", "products.note_key", "notes.note_key")
-                .select("*")
-                .orderBy("id", "desc")
-                .limit(1)
-                .then((result) => {
-                  console.log(result);
-                  res.status(201).json(result);
-                });
-            });
+          console.log(result);
+          res.status(201).json({
+            result,
+            message: "New note has been created.",
+          });
+        })
+        .catch((error) => {
+          res.status(400).json(error);
         });
+      // db("notes")
+      // .insert(newNote)
+      // .then((result) => {
+      // db("products")
+      //   .join("notes", "products.note_key", "notes.note_key")
+      //   .select("*")
+      //   .orderBy("id", "desc")
+      //   .limit(1)
+      //   .then((result) => {
+      //   });
+      // });
     } else {
       res.status(500).json({
-        message: "SOMETHING WENT WRONG",
+        message: "We had an error creating your note.",
       });
     }
   }
 };
 
 const getAllNotes = (req, res) => {
-  db("products")
-    .join("notes", "products.note_key", "notes.note_key")
-    .select("*")
+  db("notes")
+    // .join("notes", "products.note_key", "notes.note_key")
+    // .select("*")
     .then((result) => {
       if (result.length < 1) {
         res.status(404).json({ error: "There are no notes" });
@@ -121,15 +126,15 @@ const getAllNotes = (req, res) => {
 };
 
 const getSingleNote = (req, res) => {
-  const { note_key } = req.params;
+  const { unique_id } = req.params;
 
-  db("products")
-    .join("notes", "products.note_key", "notes.note_key")
-    .select("*")
-    .where({ "products.note_key": note_key })
+  db("notes")
+    // .join("notes", "products.note_key", "notes.note_key")
+    // .select("*")
+    .where({ unique_id })
     .first()
     .then((singleNote) => {
-      console.log(singleNote);
+      // console.log(singleNote);
       if (singleNote.length < 1) {
         res.status(404).json({
           error: "You cannot access the note with this specific key",
