@@ -116,8 +116,6 @@ const getAllSingleOrderNotes = (req, res) => {
     });
 };
 
-// Create order, update orders, read all my orders, get all orders
-
 module.exports = {
   createOrder,
   getAllOrders,

@@ -9,9 +9,11 @@ const {
   getSingleNote,
   deleteNote,
   updateNote,
+  getAllUserNotes,
 } = require("../controllers/notesController");
 
 router.get("/", getAllNotes);
+router.get("/myNotes", authenticateUser, getAllUserNotes);
 router.get("/:unique_id", getSingleNote);
 router.post("/", authenticateUser, upload.single("document"), createNote);
 router.put(

@@ -125,6 +125,24 @@ const getAllNotes = (req, res) => {
     });
 };
 
+const getAllUserNotes = (req, res) => {
+  const subject = req.decodedToken.subject;
+  db("notes")
+    .where({ user_id: subject })
+    .then((result) => {
+      if (result.length < 1) {
+        res.status(404).json({ error: "There are no notes" });
+      } else {
+        res.status(200).json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 const getSingleNote = (req, res) => {
   const { unique_id } = req.params;
 
@@ -276,4 +294,5 @@ module.exports = {
   getSingleNote,
   updateNote,
   deleteNote,
+  getAllUserNotes,
 };
