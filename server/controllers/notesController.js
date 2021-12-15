@@ -79,7 +79,7 @@ const createNote = async (req, res) => {
       db("notes")
         .insert(newProduct)
         .then((result) => {
-          console.log(result);
+          // console.log(result);
           res.status(201).json({
             result,
             message: "New note has been created.",

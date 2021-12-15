@@ -2,14 +2,14 @@ exports.up = function (knex) {
   return knex.schema.createTable("singleOrderItem", (table) => {
     table.increments();
     table.string("unique_id").notNullable();
-    table.string("product_id");
+    table.string("note_id");
 
     table
       .string("order_id")
       .unsigned()
       .notNullable()
       .references("id")
-      .inTable("order")
+      .inTable("orders")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
   });
