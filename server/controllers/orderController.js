@@ -98,23 +98,23 @@ const getAllSingleOrderItems = (req, res) => {
     });
 };
 
-// const getAllSingleOrderNotes = (req, res) => {
-//   db("singleOrderItem")
-//     .join("notes", "singleOrderItem.note_id", "notes.unique_id")
-//     .select("*")
-//     .then((result) => {
-//       if (result.length < 1) {
-//         res.status(404).json({ error: "There are no order items" });
-//       } else {
-//         res.status(200).json(result);
-//       }
-//     })
-//     .catch((error) => {
-//       res.status(500).json({
-//         error: error,
-//       });
-//     });
-// };
+const getAllSingleOrderNotes = (req, res) => {
+  db("singleOrderItem")
+    .join("notes", "singleOrderItem.note_id", "notes.unique_id")
+    .select("*")
+    .then((result) => {
+      if (result.length < 1) {
+        res.status(404).json({ error: "There are no order items" });
+      } else {
+        res.status(200).json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
 
 // Create order, update orders, read all my orders, get all orders
 
