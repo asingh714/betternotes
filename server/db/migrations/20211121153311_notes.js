@@ -2,7 +2,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("notes", (table) => {
     table.increments();
     table.string("unique_id").notNullable();
-    table.string("product_name").notNullable();
+    table.string("name").notNullable();
     table.text("short_description").notNullable();
     table.text("long_description").notNullable();
     table.text("document").notNullable();

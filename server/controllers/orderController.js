@@ -1,10 +1,14 @@
 const db = require("../db/dbConfig");
 const { v4: uuidv4 } = require("uuid");
 
+const sendOrderEmail = require("../util/sendOrderEmail");
+const sendEmail = require("../util/sendEmail");
+
 const createOrder = (req, res) => {
   const { items } = req.body;
   const validationErrors = [];
   const subject = req.decodedToken.subject;
+  const email = req.decodedToken.email;
 
   // if (!items || items.length < 1) {
   //   validationErrors.push({
@@ -42,6 +46,7 @@ const createOrder = (req, res) => {
     .then((result) => {
       order_id = result[0];
       createOrderItems(items, order_id);
+      verifyOrderEmail(order_id, email);
       res.status(201).json({
         message: "The order has been created.",
       });
@@ -61,11 +66,27 @@ const createOrderItems = (items, order_id) => {
       order_id: order_id.toString(),
     };
 
-    db("singleOrderItem")
-      .insert(singleOrderItem)
-      .then((result) => console.log("HERE!!: ", result));
+    db("singleOrderItem").insert(singleOrderItem);
   }
 };
+
+const verifyOrderEmail = (order_id, email) => {
+  db("singleOrderItem")
+    .join("notes", "singleOrderItem.note_id", "notes.unique_id")
+    .select("*")
+    .where({ "singleOrderItem.order_id": order_id })
+    .then((result) => {
+      console.log(result);
+      result.forEach((order) => {
+        // console.log(order);
+        //   sendOrderEmail(email, order.document);
+      });
+    });
+  // .catch((error) => {
+  //   res.status(500).json(error);
+  // });
+};
+
 const getAllOrders = (req, res) => {
   db("orders")
     .then((result) => {
@@ -76,9 +97,7 @@ const getAllOrders = (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(500).json({
-        error: error,
-      });
+      res.status(500).json(error);
     });
 };
 
@@ -92,9 +111,7 @@ const getAllSingleOrderItems = (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(500).json({
-        error: error,
-      });
+      res.status(500).json(error);
     });
 };
 
@@ -110,9 +127,7 @@ const getAllSingleOrderNotes = (req, res) => {
       }
     })
     .catch((error) => {
-      res.status(500).json({
-        error: error,
-      });
+      res.status(500).json(error);
     });
 };
 
@@ -121,4 +136,5 @@ module.exports = {
   getAllOrders,
   getAllSingleOrderItems,
   getAllSingleOrderNotes,
+  verifyOrderEmail,
 };

@@ -4,7 +4,7 @@ const { cloudinary } = require("../util/cloudConfig");
 
 const createNote = async (req, res) => {
   const {
-    product_name,
+    name,
     short_description,
     long_description,
     document,
@@ -21,7 +21,7 @@ const createNote = async (req, res) => {
   const validationErrors = [];
 
   if (
-    !product_name ||
+    !name ||
     !short_description ||
     !long_description ||
     // !document ||
@@ -53,7 +53,7 @@ const createNote = async (req, res) => {
       const result = await cloudinary.uploader.upload(req.file.path);
       const newProduct = {
         unique_id: uniqueId,
-        product_name,
+        name,
         short_description,
         long_description,
         document: result.url,
@@ -172,7 +172,7 @@ const updateNote = (req, res) => {
   const { unique_id } = req.params;
 
   const {
-    product_name,
+    name,
     short_description,
     long_description,
     document,
@@ -190,7 +190,7 @@ const updateNote = (req, res) => {
   const validationErrors = [];
 
   if (
-    !product_name ||
+    !name ||
     !short_description ||
     !long_description ||
     // !document ||
@@ -230,7 +230,7 @@ const updateNote = (req, res) => {
             .where({ unique_id })
             .first()
             .update({
-              product_name,
+              name,
               short_description,
               long_description,
               document,
