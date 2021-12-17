@@ -140,9 +140,7 @@ const verifyOrderEmail = (order_id, email, name) => {
     .select("*")
     .where({ "singleOrderItem.order_id": order_id })
     .then((result) => {
-      console.log("HERE: ", result);
       result.forEach((order) => {
-        //   // console.log(order);
         sendOrderEmail({ email, document: order.document, name });
       });
     })
