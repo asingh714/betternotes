@@ -59,7 +59,7 @@ const createOrder = (req, res) => {
           .catch((error) => console.log(error));
       }
 
-      // verifyOrderEmail(order_id, email, name);
+      verifyOrderEmail(orderId.toString(), email, name);
 
       res.status(201).json({
         message: "The order has been created.",
@@ -134,21 +134,21 @@ const getAllUserOrders = (req, res) => {
     });
 };
 
-const verifyOrderEmail = (order_id, email) => {
+const verifyOrderEmail = (order_id, email, name) => {
   db("singleOrderItem")
     .join("notes", "singleOrderItem.note_id", "notes.unique_id")
     .select("*")
     .where({ "singleOrderItem.order_id": order_id })
     .then((result) => {
-      console.log(result);
+      console.log("HERE: ", result);
       result.forEach((order) => {
-        // console.log(order);
-        //   sendOrderEmail(email, order.document);
+        //   // console.log(order);
+        sendOrderEmail({ email, document: order.document, name });
       });
+    })
+    .catch((error) => {
+      res.status(500).json(error);
     });
-  // .catch((error) => {
-  //   res.status(500).json(error);
-  // });
 };
 
 module.exports = {
