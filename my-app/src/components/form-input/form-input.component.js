@@ -1,9 +1,7 @@
-import React from "react";
-
 export default function FormInput({
   name,
   handleChange,
-  placeHolder,
+  placeholder,
   type,
   value,
 }) {
@@ -11,7 +9,7 @@ export default function FormInput({
     <input
       name={name}
       onChange={handleChange}
-      placeHolder={placeHolder}
+      placeholder={placeholder}
       type={type}
       value={value}
     />

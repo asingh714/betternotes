@@ -1,8 +1,12 @@
 import { Component } from "react";
+import { connect } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
+import Button from "../button/button.component";
 
-export default class RegisterForm extends Component {
+import { registerUser } from "../../redux/actions/user.actions";
+
+class RegisterForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,45 +24,58 @@ export default class RegisterForm extends Component {
     });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.registerUser(this.state);
+  };
+
   render() {
     return (
-      <div>
+      <form>
         <FormInput
           name="name"
           handleChange={this.handleChange}
-          placeHolder="Name"
+          placeholder="Name"
           type="text"
           value={this.state.name}
         />
         <FormInput
           name="email"
           handleChange={this.handleChange}
-          placeHolder="Email"
+          placeholder="Email"
           type="email"
           value={this.state.email}
         />
         <FormInput
           name="username"
           handleChange={this.handleChange}
-          placeHolder="Username"
+          placeholder="Username"
           type="text"
           value={this.state.username}
         />
         <FormInput
           name="password"
           handleChange={this.handleChange}
-          placeHolder="Password"
+          placeholder="Password"
           type="password"
           value={this.state.password}
         />
         <FormInput
           name="confirm_password"
           handleChange={this.handleChange}
-          placeHolder="Confirm Password"
+          placeholder="Confirm Password"
           type="password"
           value={this.state.confirm_password}
         />
-      </div>
+        <Button type="submit" handleSubmit={this.handleSubmit}>
+          Register
+        </Button>
+      </form>
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {};
+};
+
+export default connect(mapStateToProps, { registerUser })(RegisterForm);
