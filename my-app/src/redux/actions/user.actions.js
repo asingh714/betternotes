@@ -41,19 +41,19 @@ export const USER_LOGIN_START = "USER_LOGIN_START";
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
 export const USER_LOGIN_FAILURE = "USER_VERIFY_FAILURE";
 
-// export const loginUser = (credentials) => (dispatch) => {
-//   dispatch({ type: USER_LOGIN_START });
+export const loginUser = (credentials) => (dispatch) => {
+  dispatch({ type: USER_LOGIN_START });
 
-//   axiosWithAuth()
-//     .post("/auth/login", credentials)
-//     .then((result) => {
-//       console.log(result);
-//       localStorage.setItem("token", result.data.token);
-//       localStorage.setItem("username", result.data.username);
-//       dispatch({ type: USER_LOGIN_SUCCESS, payload: result.data });
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       dispatch({ type: USER_LOGIN_FAILURE });
-//     });
-// };
+  axiosWithAuth()
+    .post("/auth/login", credentials)
+    .then((result) => {
+      console.log(result);
+      localStorage.setItem("token", result.data.token);
+      localStorage.setItem("username", result.data.username);
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: result.data });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: USER_LOGIN_FAILURE });
+    });
+};
