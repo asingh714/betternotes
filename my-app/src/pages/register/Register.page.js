@@ -1,7 +1,14 @@
-import React from "react";
-
 import RegisterForm from "../../components/register-form/register-form.component";
+import Modal from "../../components/modal/modal.component";
 
 export default function Register() {
-  return <RegisterForm />;
+  return (
+    <>
+      <RegisterForm />
+      <Modal>
+        <span>Your account has been created!</span>
+        <span>Please check your email for a verification link.</span>
+      </Modal>
+    </>
+  );
 }

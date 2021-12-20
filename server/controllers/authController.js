@@ -13,7 +13,7 @@ const { cloudinary } = require("../util/cloudConfig");
 
 const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendResetPasswordEmail = require("../util/sendResetPasswordEmail");
- 
+
 const verifyEmail = (req, res) => {
   const { token, email } = req.query;
   const emailIsValid = email && validator.isEmail(email);
@@ -171,7 +171,7 @@ const register = (req, res) => {
               name,
               email,
               verification_token,
-              origin: "http://localhost:5000", // we will need to change this eventually
+              origin: "http://localhost:3000", // we will need to change this eventually
             });
             res.status(201).json({
               id,
