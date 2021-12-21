@@ -81,11 +81,11 @@ const verifyEmail = (req, res) => {
   }
 };
 const register = (req, res) => {
-  const { name, email, username, password, confirm_password } = req.body;
+  const { user_name, email, username, password, confirm_password } = req.body;
   const emailIsValid = email && validator.isEmail(email);
 
   const validationErrors = [];
-  if (!name) {
+  if (!user_name) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
       field: "name",
@@ -144,7 +144,7 @@ const register = (req, res) => {
     const newId = uuidv4();
     const verification_token = crypto.randomBytes(40).toString("hex");
     const newUser = {
-      name: name.trim(),
+      user_name: user_name.trim(),
       email: email.trim(),
       username: username.trim(),
       password: hashed_password,
@@ -158,7 +158,7 @@ const register = (req, res) => {
         db("users")
           .where({ id })
           .first()
-          .then(({ id, name, username, email, unique_id }) => {
+          .then(({ id, user_name, username, email, unique_id }) => {
             // const token = generateToken({
             //   id,
             //   name,
@@ -168,14 +168,14 @@ const register = (req, res) => {
             // });
             // console.log({ id, name, username, email, unique_id });
             sendVerificationEmail({
-              name,
+              user_name,
               email,
               verification_token,
               origin: "http://localhost:3000", // we will need to change this eventually
             });
             res.status(201).json({
               id,
-              name,
+              user_name,
               username,
               email,
               unique_id,

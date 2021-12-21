@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("singleOrderItem", (table) => {
     table.increments();
-    table.string("unique_id").notNullable();
+    table.string("unique_single_id").notNullable();
     table.string("note_id");
 
     table

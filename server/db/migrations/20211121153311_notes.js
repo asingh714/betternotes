@@ -1,8 +1,8 @@
 exports.up = function (knex) {
   return knex.schema.createTable("notes", (table) => {
     table.increments();
-    table.string("unique_id").notNullable();
-    table.string("name").notNullable();
+    table.string("unique_note_id").notNullable();
+    table.string("note_name").notNullable();
     table.text("short_description").notNullable();
     table.text("long_description").notNullable();
     table.text("document").notNullable();

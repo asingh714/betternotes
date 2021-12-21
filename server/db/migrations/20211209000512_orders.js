@@ -1,7 +1,7 @@
 exports.up = function (knex) {
   return knex.schema.createTable("orders", (table) => {
     table.increments();
-    table.string("unique_id").notNullable();
+    table.string("unique_order_id").notNullable();
     table.float("total");
 
     table

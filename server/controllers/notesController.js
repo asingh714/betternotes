@@ -93,7 +93,7 @@ const getAllNotes = (req, res) => {
     .join("users", "notes.user_id", "users.id")
     .select(
       "notes.id",
-      "unique_id",
+      "notes.unique_id",
       "notes.name",
       "short_description",
       "long_description",
@@ -102,17 +102,14 @@ const getAllNotes = (req, res) => {
       "pages",
       "year",
       "language",
-      "school",
-      "grade_level",
-      "class_name",
-      "teacher",
-      "user.name",
-      "email",
-      "username",
-      "profile_image",
-      "school_name",
-      "grade_level",
-      "user_description"
+      "notes.school",
+      "notes.grade_level",
+      "notes.class_name",
+      "notes.teacher"
+      // "user.name"
+      // "user.email"
+      // "user.username",
+      // "user.profile_image"
     )
     .then((result) => {
       if (result.length < 1) {
