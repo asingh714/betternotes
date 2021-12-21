@@ -11,6 +11,9 @@ import {
   FORGOT_PASSWORD_REQUEST_START,
   FORGOT_PASSWORD_REQUEST_SUCCESS,
   FORGOT_PASSWORD_REQUEST_FAILURE,
+  RESET_PASSWORD_REQUEST_START,
+  RESET_PASSWORD_REQUEST_SUCCESS,
+  RESET_PASSWORD_REQUEST_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -28,6 +31,9 @@ const initialState = {
   isRequestingNewPassword: false,
   hasRequestedNewPassword: false,
   requestedNewPasswordError: "",
+  isResettingPassword: false,
+  hasResetPassword: false,
+  resetPasswordError: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -121,6 +127,27 @@ const userReducer = (state = initialState, action) => {
         isRequestingNewPassword: false,
         hasRequestedNewPassword: false,
         requestedNewPasswordError: "There was an error.",
+      };
+    case RESET_PASSWORD_REQUEST_START:
+      return {
+        ...state,
+        isResettingPassword: true,
+        hasResetPassword: false,
+        resetPasswordError: "",
+      };
+    case RESET_PASSWORD_REQUEST_SUCCESS:
+      return {
+        ...state,
+        isResettingPassword: false,
+        hasResetPassword: true,
+        resetPasswordError: "",
+      };
+    case RESET_PASSWORD_REQUEST_FAILURE:
+      return {
+        ...state,
+        isResettingPassword: false,
+        hasResetPassword: false,
+        resetPasswordError: "There was an error resetting your password.",
       };
     default:
       return state;

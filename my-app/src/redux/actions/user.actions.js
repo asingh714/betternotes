@@ -78,3 +78,22 @@ export const forgottenPasswordRequest = (email) => (dispatch) => {
       dispatch({ type: FORGOT_PASSWORD_REQUEST_FAILURE });
     });
 };
+
+export const RESET_PASSWORD_REQUEST_START = "RESET_PASSWORD_REQUEST_START";
+export const RESET_PASSWORD_REQUEST_SUCCESS = "RESET_PASSWORD_REQUEST_SUCCESS";
+export const RESET_PASSWORD_REQUEST_FAILURE = "RESET_PASSWORD_REQUEST_FAILURE ";
+
+export const resetForgottenPassword =
+  (token, email, passwords) => (dispatch) => {
+    dispatch({ type: RESET_PASSWORD_REQUEST_START });
+    axiosWithAuth()
+      .post(`/auth/reset-password?token=${token}&email=${email}`, passwords)
+      .then((result) => {
+        console.log(result);
+        dispatch({ type: USER_VERIFY_SUCCESS });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch({ type: USER_VERIFY_FAILURE });
+      });
+  };
