@@ -263,7 +263,6 @@ const login = (req, res) => {
 const sendResetPasswordLink = (req, res) => {
   const { email } = req.body;
   const emailIsValid = email && validator.isEmail(email);
-
   const validationErrors = [];
 
   if (!email || emailIsValid === false) {

@@ -39,7 +39,7 @@ export const verifyUser = (email, token) => (dispatch) => {
 
 export const USER_LOGIN_START = "USER_LOGIN_START";
 export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
-export const USER_LOGIN_FAILURE = "USER_VERIFY_FAILURE";
+export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE";
 
 export const loginUser = (credentials) => (dispatch) => {
   dispatch({ type: USER_LOGIN_START });
@@ -55,5 +55,26 @@ export const loginUser = (credentials) => (dispatch) => {
     .catch((error) => {
       console.log(error);
       dispatch({ type: USER_LOGIN_FAILURE });
+    });
+};
+
+export const FORGOT_PASSWORD_REQUEST_START = "FORGOT_PASSWORD_REQUEST_START";
+export const FORGOT_PASSWORD_REQUEST_SUCCESS =
+  "FORGOT_PASSWORD_REQUEST_SUCCESS";
+export const FORGOT_PASSWORD_REQUEST_FAILURE =
+  "FORGOT_PASSWORD_REQUEST_FAILURE ";
+
+export const forgottenPasswordRequest = (email) => (dispatch) => {
+  dispatch({ type: FORGOT_PASSWORD_REQUEST_START });
+  console.log(email);
+  axiosWithAuth()
+    .post("/auth/request-new-password", { email })
+    .then((result) => {
+      console.log(result);
+      dispatch({ type: FORGOT_PASSWORD_REQUEST_SUCCESS });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: FORGOT_PASSWORD_REQUEST_FAILURE });
     });
 };

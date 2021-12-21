@@ -8,6 +8,9 @@ import {
   USER_LOGIN_START,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
+  FORGOT_PASSWORD_REQUEST_START,
+  FORGOT_PASSWORD_REQUEST_SUCCESS,
+  FORGOT_PASSWORD_REQUEST_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -22,6 +25,9 @@ const initialState = {
   loggingError: "",
   token: "",
   username: "",
+  isRequestingNewPassword: false,
+  hasRequestedNewPassword: false,
+  requestedNewPasswordError: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -94,6 +100,27 @@ const userReducer = (state = initialState, action) => {
         loggingError: "There was an error while logging in.",
         token: "",
         username: "",
+      };
+    case FORGOT_PASSWORD_REQUEST_START:
+      return {
+        ...state,
+        isRequestingNewPassword: true,
+        hasRequestedNewPassword: false,
+        requestedNewPasswordError: "",
+      };
+    case FORGOT_PASSWORD_REQUEST_SUCCESS:
+      return {
+        ...state,
+        isRequestingNewPassword: false,
+        hasRequestedNewPassword: true,
+        requestedNewPasswordError: "",
+      };
+    case FORGOT_PASSWORD_REQUEST_FAILURE:
+      return {
+        ...state,
+        isRequestingNewPassword: false,
+        hasRequestedNewPassword: false,
+        requestedNewPasswordError: "There was an error.",
       };
     default:
       return state;
