@@ -148,7 +148,7 @@ const register = (req, res) => {
       email: email.trim(),
       username: username.trim(),
       password: hashed_password,
-      unique_id: newId,
+      unique_user_id: newId,
       verification_token,
     };
     db("users")
@@ -158,15 +158,7 @@ const register = (req, res) => {
         db("users")
           .where({ id })
           .first()
-          .then(({ id, user_name, username, email, unique_id }) => {
-            // const token = generateToken({
-            //   id,
-            //   name,
-            //   username,
-            //   email,
-            //   unique_id,
-            // });
-            // console.log({ id, name, username, email, unique_id });
+          .then(({ id, user_name, username, email, unique_user_id }) => {
             sendVerificationEmail({
               user_name,
               email,
@@ -178,9 +170,7 @@ const register = (req, res) => {
               user_name,
               username,
               email,
-              unique_id,
-              // verification_token, // We dont want to send the token?
-              // token,
+              unique_user_id,
             });
           })
           .catch((error) => {
@@ -294,7 +284,7 @@ const sendResetPasswordLink = (req, res) => {
             name: user.name,
             email: user.email,
             verification_token: user.verification_token,
-            origin: "http://localhost:5000", // we will need to change this eventually
+            origin: "http://localhost:3000", // we will need to change this eventually
           });
           res.status(200).json({ message: "Reset email has been sent" });
         }
