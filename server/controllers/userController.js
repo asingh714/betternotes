@@ -8,9 +8,9 @@ const getAllUsers = (req, res) => {
 };
 
 const getUserInfo = (req, res) => {
-  const { unique_id } = req.params;
+  const { unique_user_id } = req.params;
   db("users")
-    .where({ unique_id })
+    .where({ unique_user_id })
     .first()
     .then((user) => {
       if (!user) {
@@ -20,24 +20,24 @@ const getUserInfo = (req, res) => {
       } else {
         const {
           id,
-          unique_id,
-          name,
+          unique_user_id,
+          user_name,
           email,
           username,
           profile_image,
           school_name,
-          grade_level,
+          user_grade_level,
           user_description,
         } = user;
         res.status(200).json({
           id,
-          unique_id,
-          name,
+          unique_user_id,
+          namuser_namee,
           email,
           username,
           profile_image,
           school_name,
-          grade_level,
+          user_grade_level,
           user_description,
         });
       }
@@ -67,24 +67,24 @@ const showCurrentUser = (req, res) => {
       } else {
         const {
           id,
-          unique_id,
-          name,
+          unique_user_id,
+          user_name,
           email,
           username,
           profile_image,
           school_name,
-          grade_level,
+          user_grade_level,
           user_description,
         } = user;
         res.status(200).json({
           id,
-          unique_id,
-          name,
+          unique_user_id,
+          user_name,
           email,
           username,
           profile_image,
           school_name,
-          grade_level,
+          user_grade_level,
           user_description,
         });
       }
@@ -97,14 +97,14 @@ const showCurrentUser = (req, res) => {
 };
 
 const updateUserInfo = async (req, res) => {
-  const { unique_id } = req.params;
+  const { unique_user_id } = req.params;
   const changes = req.body;
 
   if (req.file) {
     const result = await cloudinary.uploader.upload(req.file.path);
     console.log(result);
     db("users")
-      .where({ unique_id })
+      .where({ unique_user_id })
       .update({ ...changes, profile_image: result.url })
       .then((count) => {
         if (count > 0) {
@@ -122,7 +122,7 @@ const updateUserInfo = async (req, res) => {
       });
   } else {
     db("users")
-      .where({ unique_id })
+      .where({ unique_user_id })
       .update({ ...changes })
       .then((count) => {
         if (count > 0) {
@@ -142,9 +142,9 @@ const updateUserInfo = async (req, res) => {
 };
 
 const deleteUserInfo = (req, res) => {
-  // const { unique_id } = req.params;
+  // const { unique_user_id } = req.params;
   const subject = req.decodedToken.subject;
-  // console.log(unique_id);
+  // console.log(unique_user_id);
   console.log(subject);
 
   db("users")
@@ -168,7 +168,7 @@ const deleteUserInfo = (req, res) => {
 
 const updatePassword = (req, res) => {
   const { password, new_password, confirm_new_password } = req.body;
-  const { unique_id } = req.params;
+  const { unique_user_id } = req.params;
   const validationErrors = [];
 
   if (!password || !new_password || new_password.length < 7) {
@@ -198,7 +198,7 @@ const updatePassword = (req, res) => {
     const profileData = jwt.verify(token, process.env.JWT_SECRET);
     const username = profileData["username"];
     db("users")
-      .where({ username, unique_id })
+      .where({ username, unique_user_id })
       .first()
       .then((user) => {
         if (!user) {

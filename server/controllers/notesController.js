@@ -4,7 +4,7 @@ const { cloudinary } = require("../util/cloudConfig");
 
 const createNote = async (req, res) => {
   const {
-    name,
+    note_name,
     short_description,
     long_description,
     document,
@@ -21,7 +21,7 @@ const createNote = async (req, res) => {
   const validationErrors = [];
 
   if (
-    !name ||
+    !note_name ||
     !short_description ||
     !long_description ||
     // !document ||
@@ -52,8 +52,8 @@ const createNote = async (req, res) => {
       // const product_id = uuidv4();
       const result = await cloudinary.uploader.upload(req.file.path);
       const newProduct = {
-        unique_id: uniqueId,
-        name,
+        unique_note_id: uniqueId,
+        note_name,
         short_description,
         long_description,
         document: result.url,
@@ -92,20 +92,20 @@ const getAllNotes = (req, res) => {
   db("notes")
     .join("users", "notes.user_id", "users.id")
     .select(
-      "notes.id",
-      "notes.unique_id",
-      "notes.name",
-      "short_description",
-      "long_description",
-      "document",
-      "price",
-      "pages",
-      "year",
-      "language",
-      "notes.school",
-      "notes.grade_level",
-      "notes.class_name",
-      "notes.teacher"
+      "notes.id"
+      // "notes.unique_note_id",
+      // "notes.note_name",
+      // "short_description",
+      // "long_description",
+      // "document",
+      // "price",
+      // "pages",
+      // "year",
+      // "language",
+      // "notes.school",
+      // "notes.grade_level",
+      // "notes.class_name",
+      // "notes.teacher"
       // "user.name"
       // "user.email"
       // "user.username",
@@ -144,12 +144,12 @@ const getAllUserNotes = (req, res) => {
 };
 
 const getSingleNote = (req, res) => {
-  const { unique_id } = req.params;
+  const { unique_note_id } = req.params;
 
   db("notes")
     // .join("notes", "products.note_key", "notes.note_key")
     // .select("*")
-    .where({ unique_id })
+    .where({ unique_note_id })
     .first()
     .then((singleNote) => {
       // console.log(singleNote);
@@ -169,10 +169,10 @@ const getSingleNote = (req, res) => {
 };
 
 const updateNote = (req, res) => {
-  const { unique_id } = req.params;
+  const { unique_note_id } = req.params;
 
   const {
-    name,
+    note_name,
     short_description,
     long_description,
     document,
@@ -190,7 +190,7 @@ const updateNote = (req, res) => {
   const validationErrors = [];
 
   if (
-    !name ||
+    !note_name ||
     !short_description ||
     !long_description ||
     // !document ||
@@ -218,7 +218,7 @@ const updateNote = (req, res) => {
     res.status(400).send(errorObject);
   } else {
     db("notes")
-      .where({ unique_id })
+      .where({ unique_note_id })
       .first()
       .then((result) => {
         if (!result) {
@@ -227,10 +227,10 @@ const updateNote = (req, res) => {
           });
         } else {
           db("notes")
-            .where({ unique_id })
+            .where({ unique_note_id })
             .first()
             .update({
-              name,
+              note_name,
               short_description,
               long_description,
               document,
@@ -263,15 +263,15 @@ const updateNote = (req, res) => {
 };
 
 const deleteNote = (req, res) => {
-  const { unique_id } = req.params;
+  const { unique_note_id } = req.params;
 
   db("notes")
-    .where({ unique_id })
+    .where({ unique_note_id })
     .first()
     .then((product) => {
       if (product) {
         db("notes")
-          .where({ unique_id })
+          .where({ unique_note_id })
           .del()
           // db("notes")
           //   .where({ note_key })

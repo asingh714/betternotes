@@ -7,7 +7,7 @@ const sendEmail = require("../util/sendEmail");
 const createOrder = (req, res) => {
   const { items } = req.body;
   const validationErrors = [];
-  const { subject, email, name } = req.decodedToken; // id
+  const { subject, email, user_name } = req.decodedToken; // id
 
   // if (!items || items.length < 1) {
   //   validationErrors.push({
@@ -32,10 +32,10 @@ const createOrder = (req, res) => {
   }
   const orderId = uuidv4();
   const order = {
-    unique_id: orderId,
+    unique_order_id: orderId,
     total: totalFromCart,
     purchase_date: Date.now(),
-    user_id: subject,
+    unique_user_id: subject,
   };
   // console.log(order);
 
@@ -48,8 +48,8 @@ const createOrder = (req, res) => {
         const singleOrderItemId = uuidv4();
 
         const singleOrderItem = {
-          unique_id: singleOrderItemId,
-          note_id: item.unique_id,
+          unique_order_id: singleOrderItemId,
+          note_id: item.unique_note_id,
           order_id: orderId.toString(),
         };
 
@@ -59,7 +59,7 @@ const createOrder = (req, res) => {
           .catch((error) => console.log(error));
       }
 
-      verifyOrderEmail(orderId.toString(), email, name);
+      verifyOrderEmail(orderId.toString(), email, user_name);
 
       res.status(201).json({
         message: "The order has been created.",
@@ -103,7 +103,7 @@ const getAllSingleOrderItems = (req, res) => {
 // All single notes in an order
 const getAllSingleOrderNotes = (req, res) => {
   db("singleOrderItem")
-    .join("notes", "singleOrderItem.note_id", "notes.unique_id")
+    .join("notes", "singleOrderItem.note_id", "notes.unique_order_id")
     .select("*")
     .then((result) => {
       if (result.length < 1) {
@@ -121,7 +121,7 @@ const getAllSingleOrderNotes = (req, res) => {
 const getAllUserOrders = (req, res) => {
   const subject = req.decodedToken.subject;
   db("orders")
-    .where({ user_id: subject.toString() })
+    .where({ unique_user_id: subject.toString() })
     .then((result) => {
       if (result.length < 1) {
         res.status(404).json({ error: "There are no orders" });
@@ -136,7 +136,7 @@ const getAllUserOrders = (req, res) => {
 
 const verifyOrderEmail = (order_id, email, name) => {
   db("singleOrderItem")
-    .join("notes", "singleOrderItem.note_id", "notes.unique_id")
+    .join("notes", "singleOrderItem.note_id", "notes.unique_order_id")
     .select("*")
     .where({ "singleOrderItem.order_id": order_id })
     .then((result) => {
