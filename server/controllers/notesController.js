@@ -68,18 +68,10 @@ const createNote = async (req, res) => {
         teacher,
         user_id: subject,
       };
-      // console.log(newProduct);
-      // const noteId = uuidv4();
-      // const newNote = {
-      //   unique_id: noteId,
-      //   note_key: product_id,
-      // product_id: subject,
-      // };
-      // console.log(newNote);
+
       db("notes")
         .insert(newProduct)
         .then((result) => {
-          // console.log(result);
           res.status(201).json({
             result,
             message: "New note has been created.",
@@ -88,17 +80,6 @@ const createNote = async (req, res) => {
         .catch((error) => {
           res.status(400).json(error);
         });
-      // db("notes")
-      // .insert(newNote)
-      // .then((result) => {
-      // db("products")
-      //   .join("notes", "products.note_key", "notes.note_key")
-      //   .select("*")
-      //   .orderBy("id", "desc")
-      //   .limit(1)
-      //   .then((result) => {
-      //   });
-      // });
     } else {
       res.status(500).json({
         message: "We had an error creating your note.",
@@ -109,8 +90,30 @@ const createNote = async (req, res) => {
 
 const getAllNotes = (req, res) => {
   db("notes")
-    // .join("notes", "products.note_key", "notes.note_key")
-    // .select("*")
+    .join("users", "notes.user_id", "users.id")
+    .select(
+      "notes.id",
+      "unique_id",
+      "notes.name",
+      "short_description",
+      "long_description",
+      "document",
+      "price",
+      "pages",
+      "year",
+      "language",
+      "school",
+      "grade_level",
+      "class_name",
+      "teacher",
+      "user.name",
+      "email",
+      "username",
+      "profile_image",
+      "school_name",
+      "grade_level",
+      "user_description"
+    )
     .then((result) => {
       if (result.length < 1) {
         res.status(404).json({ error: "There are no notes" });
