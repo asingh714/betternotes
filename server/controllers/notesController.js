@@ -7,7 +7,8 @@ const createNote = async (req, res) => {
     note_name,
     short_description,
     long_description,
-    document,
+    // document,
+    // note_image,
     price,
     pages,
     year,
@@ -25,6 +26,7 @@ const createNote = async (req, res) => {
     !short_description ||
     !long_description ||
     // !document ||
+    // !note_image ||
     !language ||
     !pages ||
     !year ||
@@ -47,6 +49,7 @@ const createNote = async (req, res) => {
     };
     res.status(400).send(errorObject);
   } else {
+    console.log(req.file);
     if (req.file) {
       const uniqueId = uuidv4();
       // const product_id = uuidv4();
