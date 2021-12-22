@@ -92,24 +92,24 @@ const getAllNotes = (req, res) => {
   db("notes")
     .join("users", "notes.user_id", "users.id")
     .select(
-      "notes.id"
-      // "notes.unique_note_id",
-      // "notes.note_name",
-      // "short_description",
-      // "long_description",
-      // "document",
-      // "price",
-      // "pages",
-      // "year",
-      // "language",
-      // "notes.school",
-      // "notes.grade_level",
-      // "notes.class_name",
-      // "notes.teacher"
-      // "user.name"
-      // "user.email"
-      // "user.username",
-      // "user.profile_image"
+      "notes.id",
+      "unique_note_id",
+      "note_name",
+      "short_description",
+      "long_description",
+      "document",
+      "price",
+      "pages",
+      "year",
+      "language",
+      "school",
+      "user_grade_level",
+      "class_name",
+      "teacher",
+      "user_name",
+      "email",
+      "username",
+      "profile_image"
     )
     .then((result) => {
       if (result.length < 1) {
@@ -147,9 +147,30 @@ const getSingleNote = (req, res) => {
   const { unique_note_id } = req.params;
 
   db("notes")
-    // .join("notes", "products.note_key", "notes.note_key")
-    // .select("*")
     .where({ unique_note_id })
+    .join("users", "notes.user_id", "users.id")
+    .select(
+      "notes.id",
+      "unique_note_id",
+      "note_name",
+      "short_description",
+      "long_description",
+      "document",
+      "price",
+      "pages",
+      "year",
+      "language",
+      "school",
+      "user_grade_level",
+      "class_name",
+      "teacher",
+      "user_name",
+      "email",
+      "username",
+      "profile_image",
+      "school_name",
+      "user_description"
+    )
     .first()
     .then((singleNote) => {
       // console.log(singleNote);

@@ -9,6 +9,7 @@ const getAllUsers = (req, res) => {
 
 const getUserInfo = (req, res) => {
   const { unique_user_id } = req.params;
+  console.log(unique_user_id);
   db("users")
     .where({ unique_user_id })
     .first()
@@ -32,7 +33,7 @@ const getUserInfo = (req, res) => {
         res.status(200).json({
           id,
           unique_user_id,
-          namuser_namee,
+          user_name,
           email,
           username,
           profile_image,
@@ -54,7 +55,7 @@ const showCurrentUser = (req, res) => {
   // Since this is a restricted route, we know for sure we can verify this token
   const profileData = jwt.verify(token, process.env.JWT_SECRET);
   const username = profileData["username"];
-  console.log(username);
+
   db("users")
     .where({ username })
     .first()
