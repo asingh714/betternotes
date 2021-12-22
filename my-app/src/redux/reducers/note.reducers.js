@@ -2,6 +2,9 @@ import {
   NOTE_FETCH_START,
   NOTE_FETCH_SUCCESS,
   NOTE_FETCH_FAILURE,
+  SINGLE_NOTE_FETCH_START,
+  SINGLE_NOTE_FETCH_SUCCESS,
+  SINGLE_NOTE_FETCH_FAILURE,
 } from "../actions/note.actions";
 
 const initialState = {
@@ -9,6 +12,10 @@ const initialState = {
   isFetchingNotes: false,
   hasFetchedNotes: false,
   errorFetchingNotes: "",
+  singleNote: {},
+  isFetchingSingleNote: false,
+  hasFetchedSingleNote: false,
+  singleNoteError: "",
 };
 
 const notesReducer = (state = initialState, action) => {
@@ -16,6 +23,7 @@ const notesReducer = (state = initialState, action) => {
     case NOTE_FETCH_START:
       return {
         ...state,
+        notes: [],
         isFetchingNotes: true,
         hasFetchedNotes: false,
         errorFetchingNotes: "",
@@ -31,9 +39,34 @@ const notesReducer = (state = initialState, action) => {
     case NOTE_FETCH_FAILURE:
       return {
         ...state,
+        notes: [],
         isFetchingNotes: false,
         hasFetchedNotes: false,
         errorFetchingNotes: "There was an error fetching the notes.",
+      };
+    case SINGLE_NOTE_FETCH_START:
+      return {
+        ...state,
+        singleNote: {},
+        isFetchingSingleNote: true,
+        hasFetchedSingleNote: false,
+        singleNoteError: "",
+      };
+    case SINGLE_NOTE_FETCH_SUCCESS:
+      return {
+        ...state,
+        singleNote: action.payload,
+        isFetchingSingleNote: false,
+        hasFetchedSingleNote: true,
+        singleNoteError: "",
+      };
+    case SINGLE_NOTE_FETCH_FAILURE:
+      return {
+        ...state,
+        singleNote: {},
+        isFetchingSingleNote: false,
+        hasFetchedSingleNote: false,
+        singleNoteError: "There was an error while fetching this note.",
       };
     default:
       return state;

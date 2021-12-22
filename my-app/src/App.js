@@ -7,6 +7,7 @@ import Login from "./pages/login/Login.page";
 import ForgotPassword from "./pages/forgot-password/Forgot-Password.page";
 import ResetPassword from "./pages/reset-password/Reset-Password.page";
 import NotesDashboard from "./pages/notes-dashboard/Notes-Dashboard.page";
+import SingleNoteInfo from "./pages/single-note-info/Single-Note-Info.page";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/api/auth/reset-password" element={<ResetPassword />} />
       <Route path="/notes" element={<NotesDashboard />} />
+      <Route path="/notes/:unique_note_id" element={<SingleNoteInfo />} />
     </Routes>
   );
 }
