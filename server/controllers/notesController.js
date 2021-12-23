@@ -106,7 +106,8 @@ const getAllNotes = (req, res) => {
       "user_name",
       "email",
       "username",
-      "profile_image"
+      "profile_image",
+      "user_id"
     )
     .then((result) => {
       if (result.length < 1) {
@@ -306,6 +307,26 @@ const deleteNote = (req, res) => {
     });
 };
 
+const getAllNotesByOneUser = (req, res) => {
+  const { user_id } = req.params;
+  console.log(user_id);
+  db("notes")
+    .where({ user_id })
+    .then((result) => {
+      console.log(result);
+      if (result.length < 1) {
+        res.status(404).json({ error: "There are no notes" });
+      } else {
+        res.status(200).json(result);
+      }
+    })
+    .catch((error) => {
+      res.status(500).json({
+        error: error,
+      });
+    });
+};
+
 module.exports = {
   createNote,
   getAllNotes,
@@ -313,4 +334,5 @@ module.exports = {
   updateNote,
   deleteNote,
   getAllUserNotes,
+  getAllNotesByOneUser,
 };
