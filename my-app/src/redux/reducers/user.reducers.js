@@ -14,6 +14,9 @@ import {
   RESET_PASSWORD_REQUEST_START,
   RESET_PASSWORD_REQUEST_SUCCESS,
   RESET_PASSWORD_REQUEST_FAILURE,
+  GET_AUTHOR_INFO_START,
+  GET_AUTHOR_INFO_SUCCESS,
+  GET_AUTHOR_INFO_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -34,6 +37,10 @@ const initialState = {
   isResettingPassword: false,
   hasResetPassword: false,
   resetPasswordError: "",
+  userInfo: {},
+  isFetchingUser: false,
+  hasFetchedUser: false,
+  fetchUserError: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -148,6 +155,30 @@ const userReducer = (state = initialState, action) => {
         isResettingPassword: false,
         hasResetPassword: false,
         resetPasswordError: "There was an error resetting your password.",
+      };
+    case GET_AUTHOR_INFO_START:
+      return {
+        ...state,
+        userInfo: {},
+        isFetchingUser: true,
+        hasFetchedUser: false,
+        fetchUserError: "",
+      };
+    case GET_AUTHOR_INFO_SUCCESS:
+      return {
+        ...state,
+        userInfo: action.payload,
+        isFetchingUser: false,
+        hasFetchedUser: true,
+        fetchUserError: "",
+      };
+    case GET_AUTHOR_INFO_FAILURE:
+      return {
+        ...state,
+        userInfo: {},
+        isFetchingUser: false,
+        hasFetchedUser: false,
+        fetchUserError: "There was an error fetching the author's information.",
       };
     default:
       return state;

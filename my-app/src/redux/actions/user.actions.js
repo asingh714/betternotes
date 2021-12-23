@@ -108,7 +108,9 @@ export const getAuthorProfile = (unique_user_id) => (dispatch) => {
   axiosWithAuth()
     .get(`/user/${unique_user_id}`)
     .then((result) => {
-      console.log(result);
+      dispatch({ type: GET_AUTHOR_INFO_SUCCESS, payload: result.data });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      dispatch({ type: GET_AUTHOR_INFO_FAILURE });
+    });
 };
