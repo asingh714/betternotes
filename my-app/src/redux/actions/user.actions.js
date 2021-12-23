@@ -97,3 +97,18 @@ export const resetForgottenPassword =
         dispatch({ type: USER_VERIFY_FAILURE });
       });
   };
+
+export const GET_AUTHOR_INFO_START = "GET_AUTHOR_INFO_START";
+export const GET_AUTHOR_INFO_SUCCESS = "GET_AUTHOR_INFO_SUCCESS";
+export const GET_AUTHOR_INFO_FAILURE = "GET_AUTHOR_INFO_FAILURE";
+
+export const getAuthorProfile = (unique_user_id) => (dispatch) => {
+  dispatch({ type: GET_AUTHOR_INFO_START });
+
+  axiosWithAuth()
+    .get(`/user/${unique_user_id}`)
+    .then((result) => {
+      console.log(result);
+    })
+    .catch((error) => console.log(error));
+};

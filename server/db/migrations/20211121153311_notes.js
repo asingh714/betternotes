@@ -6,7 +6,7 @@ exports.up = function (knex) {
     table.text("short_description").notNullable();
     table.text("long_description").notNullable();
     table.text("document").notNullable();
-    table.text("note_image").notNullable();
+    // table.text("note_image").notNullable();
     table.float("price").notNullable();
     table.string("pages").notNullable();
     table.string("year").notNullable();
