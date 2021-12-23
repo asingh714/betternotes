@@ -17,6 +17,9 @@ import {
   GET_AUTHOR_INFO_START,
   GET_AUTHOR_INFO_SUCCESS,
   GET_AUTHOR_INFO_FAILURE,
+  GET_ALL_NOTES_BY_SINGLE_START,
+  GET_ALL_NOTES_BY_SINGLE_SUCCESS,
+  GET_ALL_NOTES_BY_SINGLE_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -41,6 +44,10 @@ const initialState = {
   isFetchingUser: false,
   hasFetchedUser: false,
   fetchUserError: "",
+  userNotes: [],
+  isFetchingNotesBySingleUser: false,
+  hasFetchedNotesBySingleUser: false,
+  fetchNotesBySingleUser: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -179,6 +186,30 @@ const userReducer = (state = initialState, action) => {
         isFetchingUser: false,
         hasFetchedUser: false,
         fetchUserError: "There was an error fetching the author's information.",
+      };
+    case GET_ALL_NOTES_BY_SINGLE_START:
+      return {
+        ...state,
+        userNotes: [],
+        isFetchingNotesBySingleUser: true,
+        hasFetchedNotesBySingleUser: false,
+        fetchNotesBySingleUser: "",
+      };
+    case GET_ALL_NOTES_BY_SINGLE_SUCCESS:
+      return {
+        ...state,
+        userNotes: action.payload,
+        isFetchingNotesBySingleUser: false,
+        hasFetchedNotesBySingleUser: true,
+        fetchNotesBySingleUser: "",
+      };
+    case GET_ALL_NOTES_BY_SINGLE_FAILURE:
+      return {
+        ...state,
+        userNotes: [],
+        isFetchingNotesBySingleUser: false,
+        hasFetchedNotesBySingleUser: false,
+        fetchNotesBySingleUser: "There was an error while fetching the notes",
       };
     default:
       return state;

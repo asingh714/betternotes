@@ -10,6 +10,7 @@ const {
   deleteUserInfo,
   updatePassword,
   showCurrentUser,
+  getAllNotesByOneUser,
 } = require("../controllers/userController");
 
 router.get("/test", getAllUsers);
@@ -27,5 +28,6 @@ router.put(
   updatePassword
 );
 router.delete("/profile", authenticateUser, deleteUserInfo);
+router.get("/:unique_user_id/notes/:user_id", getAllNotesByOneUser);
 
 module.exports = router;

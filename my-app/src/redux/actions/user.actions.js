@@ -114,3 +114,26 @@ export const getAuthorProfile = (unique_user_id) => (dispatch) => {
       dispatch({ type: GET_AUTHOR_INFO_FAILURE });
     });
 };
+
+export const GET_ALL_NOTES_BY_SINGLE_START = "GET_ALL_NOTES_BY_SINGLE_START";
+export const GET_ALL_NOTES_BY_SINGLE_SUCCESS =
+  "GET_ALL_NOTES_BY_SINGLE_SUCCESS";
+export const GET_ALL_NOTES_BY_SINGLE_FAILURE =
+  "GET_ALL_NOTES_BY_SINGLE_FAILURE";
+
+export const fetchNotesBySingleUser =
+  (unique_user_id, user_id) => (dispatch) => {
+    dispatch({ type: GET_ALL_NOTES_BY_SINGLE_START });
+
+    axiosWithAuth()
+      .get(`/user/${unique_user_id}/notes/${user_id}`)
+      .then((result) => {
+        dispatch({
+          type: GET_ALL_NOTES_BY_SINGLE_SUCCESS,
+          payload: result.data,
+        });
+      })
+      .catch((error) => {
+        dispatch({ type: GET_ALL_NOTES_BY_SINGLE_FAILURE });
+      });
+  };

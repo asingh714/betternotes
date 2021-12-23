@@ -2,13 +2,22 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { getAuthorProfile } from "../../redux/actions/user.actions";
+import {
+  getAuthorProfile,
+  fetchNotesBySingleUser,
+} from "../../redux/actions/user.actions";
 
-function Author({ getAuthorProfile, user }) {
-  const { unique_user_id } = useParams();
+function Author({
+  getAuthorProfile,
+  userInfo,
+  userNotes,
+  fetchNotesBySingleUser,
+}) {
+  const { unique_user_id, user_id } = useParams();
 
   useEffect(() => {
     getAuthorProfile(unique_user_id);
+    fetchNotesBySingleUser(unique_user_id, user_id);
   }, []);
 
   const {
@@ -17,7 +26,7 @@ function Author({ getAuthorProfile, user }) {
     user_grade_level,
     profile_image,
     user_description,
-  } = user;
+  } = userInfo;
 
   return (
     <>
@@ -26,14 +35,23 @@ function Author({ getAuthorProfile, user }) {
       <span>{user_grade_level}</span>
       <span>{user_description}</span>
       <span>{profile_image}</span>
+
+      {userNotes.map((note) => (
+        <div key={note.id}>
+          <span>{note.class_name}</span>
+        </div>
+      ))}
     </>
   );
 }
 
 const mapStateToProps = (state) => {
-  console.log(state.user.userInfo);
   return {
-    user: state.user.userInfo,
+    userInfo: state.user.userInfo,
+    userNotes: state.user.userNotes,
   };
 };
-export default connect(mapStateToProps, { getAuthorProfile })(Author);
+export default connect(mapStateToProps, {
+  getAuthorProfile,
+  fetchNotesBySingleUser,
+})(Author);

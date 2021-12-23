@@ -9,6 +9,7 @@ import ResetPassword from "./pages/reset-password/Reset-Password.page";
 import NotesDashboard from "./pages/notes-dashboard/Notes-Dashboard.page";
 import SingleNoteInfo from "./pages/single-note-info/Single-Note-Info.page";
 import Author from "./pages/author/Author.page";
+import Profile from "./pages/profile/Profile.page";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
       <Route path="/api/auth/reset-password" element={<ResetPassword />} />
       <Route path="/notes" element={<NotesDashboard />} />
       <Route path="/notes/:unique_note_id" element={<SingleNoteInfo />} />
-      <Route path="/user/:unique_user_id" element={<Author />} />
+      <Route path="/user/:unique_user_id/notes/:user_id" element={<Author />} />
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   );
 }

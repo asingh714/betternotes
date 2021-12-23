@@ -36,3 +36,4 @@ export const fetchSingleNote = (unique_note_id) => (dispatch) => {
       dispatch({ type: SINGLE_NOTE_FETCH_FAILURE });
     });
 };
+

@@ -10,7 +10,6 @@ const {
   deleteNote,
   updateNote,
   getAllUserNotes,
-  getAllNotesByOneUser,
 } = require("../controllers/notesController");
 
 router.get("/", getAllNotes);
@@ -24,6 +23,5 @@ router.put(
   updateNote
 );
 router.delete("/:unique_note_id", authenticateUser, deleteNote);
-router.get("/user/:user_id", getAllNotesByOneUser);
 
 module.exports = router;
