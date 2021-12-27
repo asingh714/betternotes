@@ -20,6 +20,9 @@ import {
   GET_ALL_NOTES_BY_SINGLE_START,
   GET_ALL_NOTES_BY_SINGLE_SUCCESS,
   GET_ALL_NOTES_BY_SINGLE_FAILURE,
+  GET_OWN_USER_PROFILE_START,
+  GET_OWN_USER_PROFILE_SUCCESS,
+  GET_OWN_USER_PROFILE_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -48,6 +51,10 @@ const initialState = {
   isFetchingNotesBySingleUser: false,
   hasFetchedNotesBySingleUser: false,
   fetchNotesBySingleUser: "",
+  profileData: {},
+  isFetchingProfileData: false,
+  hasFetchedProfileData: false,
+  fetchingProfileDataError: "",
 };
 
 const userReducer = (state = initialState, action) => {
@@ -210,6 +217,31 @@ const userReducer = (state = initialState, action) => {
         isFetchingNotesBySingleUser: false,
         hasFetchedNotesBySingleUser: false,
         fetchNotesBySingleUser: "There was an error while fetching the notes",
+      };
+    case GET_OWN_USER_PROFILE_START:
+      return {
+        ...state,
+        profileData: {},
+        isFetchingProfileData: true,
+        hasFetchedProfileData: false,
+        fetchingProfileDataError: "",
+      };
+    case GET_OWN_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        profileData: action.payload,
+        isFetchingProfileData: false,
+        hasFetchedProfileData: true,
+        fetchingProfileDataError: "",
+      };
+    case GET_OWN_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        profileData: {},
+        isFetchingProfileData: false,
+        hasFetchedProfileData: false,
+        fetchingProfileDataError:
+          "There was an error while fetching your profile.",
       };
     default:
       return state;
