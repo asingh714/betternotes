@@ -137,3 +137,22 @@ export const fetchNotesBySingleUser =
         dispatch({ type: GET_ALL_NOTES_BY_SINGLE_FAILURE });
       });
   };
+
+export const GET_OWN_USER_PROFILE_START = "GET_OWN_USER_PROFILE_START";
+export const GET_OWN_USER_PROFILE_SUCCESS = "GET_OWN_USER_PROFILE_SUCCESS";
+export const GET_OWN_USER_PROFILE_FAILURE = "GET_OWN_USER_PROFILE_FAILURE";
+
+export const fetchOwnProfileData = () => (dispatch) => {
+  dispatch({ type: GET_OWN_USER_PROFILE_START });
+  axiosWithAuth()
+    .get("/user/profile")
+    .then((result) => {
+      dispatch({
+        type: GET_OWN_USER_PROFILE_SUCCESS,
+        payload: result.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({ type: GET_OWN_USER_PROFILE_FAILURE });
+    });
+};

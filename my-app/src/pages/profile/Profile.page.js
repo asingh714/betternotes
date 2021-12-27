@@ -1,8 +1,23 @@
 import { Component } from "react";
-import { Route, Routes } from "react-router-dom";
+import { connect } from "react-redux";
 
-export default class Profile extends Component {
+import ProfileMenu from "../../components/profile-menu/ProfileMenu.component";
+import ProfilePageForm from "../../components/profile-page-form/ProfilePageForm.component";
+
+import { fetchOwnProfileData } from "../../redux/actions/user.actions";
+
+class Profile extends Component {
+  componentDidMount() {
+    this.props.fetchOwnProfileData();
+  }
   render() {
-    return <div>PROFILE</div>;
+    return (
+      <>
+        <ProfileMenu />
+        <ProfilePageForm />
+      </>
+    );
   }
 }
+
+export default connect(null, { fetchOwnProfileData })(Profile);

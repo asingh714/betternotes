@@ -52,6 +52,7 @@ const getUserInfo = (req, res) => {
 
 const showCurrentUser = (req, res) => {
   const token = req.headers.authorization;
+  console.log(token);
   // Since this is a restricted route, we know for sure we can verify this token
   const profileData = jwt.verify(token, process.env.JWT_SECRET);
   const username = profileData["username"];
