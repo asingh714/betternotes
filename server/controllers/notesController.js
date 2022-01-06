@@ -55,6 +55,7 @@ const createNote = async (req, res) => {
         short_description,
         long_description,
         document: result.url,
+        created_date: Date.now(),
         price,
         pages,
         year,
@@ -95,6 +96,7 @@ const getAllNotes = (req, res) => {
       "short_description",
       "long_description",
       "document",
+      "created_date",
       "price",
       "pages",
       "year",
@@ -154,6 +156,7 @@ const getSingleNote = (req, res) => {
       "short_description",
       "long_description",
       "document",
+      "created_date",
       "price",
       "pages",
       "year",
@@ -306,8 +309,6 @@ const deleteNote = (req, res) => {
       res.status(500).json({ error: "This product could not be removed" });
     });
 };
-
-
 
 module.exports = {
   createNote,
