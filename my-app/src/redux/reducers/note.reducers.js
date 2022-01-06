@@ -5,6 +5,9 @@ import {
   SINGLE_NOTE_FETCH_START,
   SINGLE_NOTE_FETCH_SUCCESS,
   SINGLE_NOTE_FETCH_FAILURE,
+  FETCH_USER_PROFILE_NOTES_START,
+  FETCH_USER_PROFILE_NOTES_SUCCESS,
+  FETCH_USER_PROFILE_NOTES_FAILURE,
 } from "../actions/note.actions";
 
 const initialState = {
@@ -16,6 +19,10 @@ const initialState = {
   isFetchingSingleNote: false,
   hasFetchedSingleNote: false,
   singleNoteError: "",
+  userProfileNotes: {},
+  isFetchingUserProfileNotes: false,
+  hasFetchedUserProfileNotes: false,
+  fetchingUserProfileNotesError: "",
 };
 
 const notesReducer = (state = initialState, action) => {
@@ -67,6 +74,31 @@ const notesReducer = (state = initialState, action) => {
         isFetchingSingleNote: false,
         hasFetchedSingleNote: false,
         singleNoteError: "There was an error while fetching this note.",
+      };
+    case FETCH_USER_PROFILE_NOTES_START:
+      return {
+        ...state,
+        userProfileNotes: {},
+        isFetchingUserProfileNotes: true,
+        hasFetchedUserProfileNotes: false,
+        fetchingUserProfileNotesError: "",
+      };
+    case FETCH_USER_PROFILE_NOTES_SUCCESS:
+      return {
+        ...state,
+        userProfileNotes: action.payload,
+        isFetchingUserProfileNotes: false,
+        hasFetchedUserProfileNotes: true,
+        fetchingUserProfileNotesError: "",
+      };
+    case FETCH_USER_PROFILE_NOTES_FAILURE:
+      return {
+        ...state,
+        userProfileNotes: {},
+        isFetchingUserProfileNotes: false,
+        hasFetchedUserProfileNotes: false,
+        fetchingUserProfileNotesError:
+          "There was an error while fetching your notes.",
       };
     default:
       return state;

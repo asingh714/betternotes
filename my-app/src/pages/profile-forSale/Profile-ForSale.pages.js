@@ -1,6 +1,17 @@
+import { useEffect } from "react";
+import { connect } from "react-redux";
+
+import { fetchUserProfileNotes } from "../../redux/actions/note.actions";
+
 import ProfileMenu from "../../components/profile-menu/ProfileMenu.component";
 
-export default function ProfileForSale() {
+function ProfileForSale({ fetchUserProfileNotes }) {
+  useEffect(() => {
+    fetchUserProfileNotes();
+    // return () => {
+    //   cleanup
+    // }
+  }, [fetchUserProfileNotes]);
   return (
     <>
       <ProfileMenu />
@@ -8,3 +19,5 @@ export default function ProfileForSale() {
     </>
   );
 }
+
+export default connect(null, { fetchUserProfileNotes })(ProfileForSale);

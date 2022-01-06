@@ -37,3 +37,23 @@ export const fetchSingleNote = (unique_note_id) => (dispatch) => {
     });
 };
 
+export const FETCH_USER_PROFILE_NOTES_START = "FETCH_USER_PROFILE_NOTES_START";
+export const FETCH_USER_PROFILE_NOTES_SUCCESS =
+  "FETCH_USER_PROFILE_NOTES_SUCCESS";
+export const FETCH_USER_PROFILE_NOTES_FAILURE =
+  "FETCH_USER_PROFILE_NOTES_FAILURE";
+
+export const fetchUserProfileNotes = () => (dispatch) => {
+  dispatch({ type: FETCH_USER_PROFILE_NOTES_START });
+  axiosWithAuth()
+    .get("/notes/myNotes")
+    .then((result) => {
+      dispatch({
+        type: FETCH_USER_PROFILE_NOTES_SUCCESS,
+        payload: result.data,
+      });
+    })
+    .catch((error) => {
+      dispatch({ type: FETCH_USER_PROFILE_NOTES_FAILURE });
+    });
+};
