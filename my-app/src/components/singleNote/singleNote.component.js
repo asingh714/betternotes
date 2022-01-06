@@ -47,13 +47,13 @@ export default function SingleNote(props) {
           <span>${price}</span>
         </div>
 
-        <span>{short_description}</span>
+        <p className="note-desc">{short_description}</p>
 
-        <span>{user_name}</span>
+        <span className="user-name">{user_name}</span>
+
         <div className="note-bottom-line">
           <div className="note-info-line">
-            <span>{pages}</span>
-            <span>{year}</span>
+            <span>{pages} Pages </span> | <span>{year}</span> |{" "}
             <span>{school}</span>
           </div>
           <Button type="submit">Add to Cart</Button>
