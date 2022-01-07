@@ -6,7 +6,9 @@ export default function Dropdown(props) {
       <label htmlFor="dropdown">{props.label}</label>
       <select id="dropdown" value={props.value} onChange={props.onChange}>
         {props.options.map((option) => (
-          <option value={option}>{option}</option>
+          <option key={option} value={option}>
+            {option}
+          </option>
         ))}
       </select>
     </>

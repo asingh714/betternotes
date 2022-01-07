@@ -17,7 +17,7 @@ const createNote = async (req, res) => {
     class_name,
     teacher,
   } = req.body;
-  const subject = req.decodedToken.subject;
+  const subject_token = req.decodedToken.subject;
   const validationErrors = [];
 
   if (
@@ -67,7 +67,7 @@ const createNote = async (req, res) => {
         grade_level,
         class_name,
         teacher,
-        user_id: subject,
+        user_id: subject_token,
       };
 
       db("notes")
@@ -106,6 +106,7 @@ const getAllNotes = (req, res) => {
       "language",
       "subject",
       "school",
+      "grade_level",
       "user_grade_level",
       "class_name",
       "teacher",
@@ -130,9 +131,9 @@ const getAllNotes = (req, res) => {
 };
 
 const getAllUserNotes = (req, res) => {
-  const subject = req.decodedToken.subject;
+  const subject_token = req.decodedToken.subject;
   db("notes")
-    .where({ user_id: subject })
+    .where({ user_id: subject_token })
     .then((result) => {
       if (result.length < 1) {
         res.status(404).json({ error: "There are no notes" });
@@ -214,7 +215,7 @@ const updateNote = (req, res) => {
     teacher,
   } = req.body;
 
-  const subject = req.decodedToken.subject;
+  // const subject_token = req.decodedToken.subject;
   const validationErrors = [];
 
   if (

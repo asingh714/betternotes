@@ -45,7 +45,11 @@ class NotesDashboard extends Component {
   render() {
     return (
       <>
-        <FilterMenu schools={this.props.schools} subjects={this.props.school} />
+        <FilterMenu
+          schools={this.props.schools}
+          subjects={this.props.subjects}
+          gradeLevels={this.props.gradeLevels}
+        />
         <Dropdown
           label="Sort by"
           onChange={this.sortByChange}
@@ -63,6 +67,9 @@ const mapStateToProps = (state) => {
     notes: state.notes.notes,
     schools: [...new Set(state.notes.notes.map((note) => note.school))],
     subjects: [...new Set(state.notes.notes.map((note) => note.subject))],
+    gradeLevels: [
+      ...new Set(state.notes.notes.map((note) => note.grade_level)),
+    ],
   };
 };
 

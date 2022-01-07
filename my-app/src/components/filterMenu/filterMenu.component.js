@@ -1,11 +1,12 @@
 import React from "react";
 import Dropdown from "../dropdown/dropdown.component";
 
-export default function FilterMenu({ schools, subjects }) {
+export default function FilterMenu({ schools, subjects, gradeLevels }) {
   return (
-    <div>
-      <Dropdown label="School" options={schools} />
-      <Dropdown label="Subjects" options={subjects} />
-    </div>
+    <>
+      {schools && <Dropdown label="School" options={schools} />}
+      {subjects && <Dropdown label="Subjects" options={subjects} />}
+      {gradeLevels && <Dropdown label="Grade Levels" options={gradeLevels} />}
+    </>
   );
 }
