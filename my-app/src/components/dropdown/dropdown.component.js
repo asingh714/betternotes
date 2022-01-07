@@ -5,8 +5,9 @@ export default function Dropdown(props) {
     <>
       <label htmlFor="dropdown">Sort by</label>
       <select id="dropdown" value={props.value} onChange={props.onChange}>
-        <option value="newest">Newest</option>
-        <option value="oldest">Oldest</option>
+        {props.options.map((option) => (
+          <option value={option}>{option}</option>
+        ))}
       </select>
     </>
   );

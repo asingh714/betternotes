@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import Notes from "../../components/notes/notes.component";
 import Dropdown from "../../components/dropdown/dropdown.component";
+import FilterMenu from "../../components/filterMenu/filterMenu.component";
 
 import { fetchNotes } from "../../redux/actions/note.actions";
 
@@ -11,7 +12,7 @@ class NotesDashboard extends Component {
     super(props);
     this.state = {
       notes: [],
-      sortBy: "newest",
+      sortBy: "Newest",
     };
   }
 
@@ -21,33 +22,35 @@ class NotesDashboard extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.sortBy !== this.state.sortBy) {
-        if (this.state.sortBy === "newest") {
-          this.setState({
-            notes: this.props.notes.sort(
-              (a, b) => a["created_date"] - b["created_date"]
-            ),
-          });
-        } else if (this.state.sortBy === "oldest") {
-          this.setState({
-            notes: this.props.notes.sort(
-              (a, b) => b["created_date"] - a["created_date"]
-            ),
-          });
-        }
+      if (this.state.sortBy === "Newest") {
+        this.setState({
+          notes: this.props.notes.sort(
+            (a, b) => a["created_date"] - b["created_date"]
+          ),
+        });
+      } else if (this.state.sortBy === "Oldest") {
+        this.setState({
+          notes: this.props.notes.sort(
+            (a, b) => b["created_date"] - a["created_date"]
+          ),
+        });
+      }
     }
+    console.log(this.props.schools);
   }
 
-  handleChange = (event) => {
+  sortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
   };
 
   render() {
     return (
       <>
+        <FilterMenu />
         <Dropdown
-          notes={this.props.notes}
-          onChange={this.handleChange}
+          onChange={this.sortByChange}
           value={this.state.sortBy}
+          options={["Newest", "Oldest"]}
         />
         <Notes notes={this.props.notes} />
       </>
@@ -58,6 +61,7 @@ class NotesDashboard extends Component {
 const mapStateToProps = (state) => {
   return {
     notes: state.notes.notes,
+    schools: [...new Set(state.notes.notes.map((note) => note.school))],
   };
 };
 
