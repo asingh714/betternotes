@@ -49,12 +49,14 @@ class NotesDashboard extends Component {
           schools={this.props.schools}
           subjects={this.props.subjects}
           gradeLevels={this.props.gradeLevels}
+          years={this.props.years}
         />
         <Dropdown
           label="Sort by"
           onChange={this.sortByChange}
           value={this.state.sortBy}
           options={["Newest", "Oldest"]}
+          hasLabel={true}
         />
         <Notes notes={this.props.notes} />
       </>
@@ -70,6 +72,7 @@ const mapStateToProps = (state) => {
     gradeLevels: [
       ...new Set(state.notes.notes.map((note) => note.grade_level)),
     ],
+    years: [...new Set(state.notes.notes.map((note) => note.year))],
   };
 };
 

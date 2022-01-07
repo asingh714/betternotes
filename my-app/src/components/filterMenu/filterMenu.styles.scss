@@ -1,0 +1,11 @@
+@import "../../globalStyles/variables.scss";
+
+.filter-menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $grey-nine;
+  padding: 5rem 4.5rem;
+  border: 1px solid $grey-seven;
+  max-width: 30rem;
+}
