@@ -11,6 +11,7 @@ const createNote = async (req, res) => {
     pages,
     year,
     language,
+    subject,
     school,
     grade_level,
     class_name,
@@ -26,6 +27,7 @@ const createNote = async (req, res) => {
     !language ||
     !pages ||
     !year ||
+    !subject ||
     !school ||
     !grade_level ||
     !class_name ||
@@ -60,6 +62,7 @@ const createNote = async (req, res) => {
         pages,
         year,
         language,
+        subject,
         school,
         grade_level,
         class_name,
@@ -101,6 +104,7 @@ const getAllNotes = (req, res) => {
       "pages",
       "year",
       "language",
+      "subject",
       "school",
       "user_grade_level",
       "class_name",
@@ -161,6 +165,7 @@ const getSingleNote = (req, res) => {
       "pages",
       "year",
       "language",
+      "subject",
       "school",
       "user_grade_level",
       "class_name",
@@ -202,6 +207,7 @@ const updateNote = (req, res) => {
     pages,
     year,
     language,
+    subject,
     school,
     grade_level,
     class_name,
@@ -219,6 +225,7 @@ const updateNote = (req, res) => {
     !language ||
     !pages ||
     !year ||
+    !subject ||
     !school ||
     !grade_level ||
     !class_name ||
@@ -260,6 +267,7 @@ const updateNote = (req, res) => {
               pages,
               year,
               language,
+              subject,
               school,
               grade_level,
               class_name,

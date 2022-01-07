@@ -36,7 +36,6 @@ class NotesDashboard extends Component {
         });
       }
     }
-    console.log(this.props.schools);
   }
 
   sortByChange = (event) => {
@@ -46,8 +45,9 @@ class NotesDashboard extends Component {
   render() {
     return (
       <>
-        <FilterMenu />
+        <FilterMenu schools={this.props.schools} subjects={this.props.school} />
         <Dropdown
+          label="Sort by"
           onChange={this.sortByChange}
           value={this.state.sortBy}
           options={["Newest", "Oldest"]}
@@ -62,6 +62,7 @@ const mapStateToProps = (state) => {
   return {
     notes: state.notes.notes,
     schools: [...new Set(state.notes.notes.map((note) => note.school))],
+    subjects: [...new Set(state.notes.notes.map((note) => note.subject))],
   };
 };
 

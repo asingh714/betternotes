@@ -15,7 +15,7 @@ exports.up = function (knex) {
     // table.float("rating");
     // table.string("note_key");
     // table.string("summary_key");
-
+    table.string("subject").notNullable();
     table.string("school").notNullable();
     table.string("grade_level").notNullable();
     table.string("class_name").notNullable();
