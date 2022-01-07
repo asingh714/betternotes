@@ -9,8 +9,12 @@ export const fetchNotes = () => (dispatch) => {
   axiosWithAuth()
     .get("/notes")
     .then((result) => {
-      console.log(result);
-      dispatch({ type: NOTE_FETCH_SUCCESS, payload: result.data });
+      dispatch({
+        type: NOTE_FETCH_SUCCESS,
+        payload: result.data.sort(
+          (a, b) => a["created_date"] - b["created_date"]
+        ),
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -28,7 +32,6 @@ export const fetchSingleNote = (unique_note_id) => (dispatch) => {
   axiosWithAuth()
     .get(`/notes/${unique_note_id}`)
     .then((result) => {
-      console.log(result);
       dispatch({ type: SINGLE_NOTE_FETCH_SUCCESS, payload: result.data });
     })
     .catch((error) => {
