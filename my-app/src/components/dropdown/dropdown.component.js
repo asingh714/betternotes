@@ -7,9 +7,9 @@ export default function Dropdown(props) {
       {props.hasLabel && <label htmlFor="dropdown">{props.label}</label>}
       <select
         id="dropdown"
-        value={props.value}
-        onChange={props.onChange}
         className={props.dropdown}
+        onChange={props.onChange}
+        name={props.name}
       >
         {!props.hasLabel && (
           <option value="" disabled selected>
@@ -17,7 +17,7 @@ export default function Dropdown(props) {
           </option>
         )}
         {props.options.map((option) => (
-          <option key={option} value={option}>
+          <option key={option} value={props.option}>
             {option}
           </option>
         ))}

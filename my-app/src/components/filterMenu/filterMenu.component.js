@@ -7,11 +7,25 @@ import Line from "../line/line.component";
 
 import "./filterMenu.styles.scss";
 
-export default function FilterMenu({ schools, subjects, gradeLevels, years }) {
+export default function FilterMenu({
+  schools,
+  subjects,
+  gradeLevels,
+  years,
+  school,
+  filterNotes,
+  name,
+}) {
   return (
-    <div className="filter-menu-container">
+    <form className="filter-menu-container">
       {schools && (
-        <Dropdown label="School" options={schools} dropdown="filterMenu" />
+        <Dropdown
+          label="School"
+          options={schools}
+          dropdown="filterMenu"
+          onChange={filterNotes}
+          name={name}
+        />
       )}
 
       {subjects && (
@@ -35,7 +49,9 @@ export default function FilterMenu({ schools, subjects, gradeLevels, years }) {
         />
       )}
       <Line classname="filter-line" />
-      <Button type="Submit" buttonStyle="filter-button">Search</Button>
-    </div>
+      <Button type="Submit" buttonStyle="filter-button">
+        Search
+      </Button>
+    </form>
   );
 }

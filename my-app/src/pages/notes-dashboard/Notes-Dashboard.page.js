@@ -16,12 +16,12 @@ class NotesDashboard extends Component {
     this.state = {
       notes: [],
       sortBy: "Newest",
+      school: "",
     };
   }
 
   componentDidMount() {
     this.props.fetchNotes();
-    console.log("History:", this.props.history);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -29,18 +29,24 @@ class NotesDashboard extends Component {
       if (this.state.sortBy === "Newest") {
         this.setState({
           notes: this.props.notes.sort(
-            (a, b) => a["created_date"] - b["created_date"]
+            (a, b) => b["created_date"] - a["created_date"]
           ),
         });
       } else if (this.state.sortBy === "Oldest") {
         this.setState({
           notes: this.props.notes.sort(
-            (a, b) => b["created_date"] - a["created_date"]
+            (a, b) => a["created_date"] - b["created_date"]
           ),
         });
       }
     }
   }
+
+  filterNotes = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
 
   sortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
@@ -54,6 +60,8 @@ class NotesDashboard extends Component {
           subjects={this.props.subjects}
           gradeLevels={this.props.gradeLevels}
           years={this.props.years}
+          name="school"
+          onChange={this.filterNotes}
         />
         <div>
           <Dropdown

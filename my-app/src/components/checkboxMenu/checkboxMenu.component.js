@@ -10,7 +10,7 @@ export default function CheckboxMenu({
   labelStyle,
 }) {
   return (
-    <form>
+    <div>
       <legend className={legendStyle}>{label}</legend>
       {options.map((option) => (
         <div key={option}>
@@ -26,6 +26,6 @@ export default function CheckboxMenu({
           </label>
         </div>
       ))}
-    </form>
+    </div>
   );
 }
