@@ -1,0 +1,12 @@
+@import "../../globalStyles/variables.scss";
+
+.filter-button {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: $blue-six;
+  color: $white;
+  border: none;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+}

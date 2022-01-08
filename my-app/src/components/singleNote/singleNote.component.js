@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import image from "../../logo512.png";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "../button/button.component";
+
 import "./singleNote.styles.scss";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -22,13 +25,17 @@ export default function SingleNote(props) {
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  let navigate = useNavigate();
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
 
   return (
-    <div className="single-note-container">
+    <div
+      className="single-note-container"
+      onClick={(event) => navigate(`/notes/${props.id}`)}
+    >
       {/* <Document
         file={document}
         loading="Loading IMAGE...."

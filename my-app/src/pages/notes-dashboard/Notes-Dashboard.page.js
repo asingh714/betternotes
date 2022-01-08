@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import { connect } from "react-redux";
 
 import Notes from "../../components/notes/notes.component";
@@ -6,6 +7,8 @@ import Dropdown from "../../components/dropdown/dropdown.component";
 import FilterMenu from "../../components/filterMenu/filterMenu.component";
 
 import { fetchNotes } from "../../redux/actions/note.actions";
+
+import "./NotesDashboard.styles.scss";
 
 class NotesDashboard extends Component {
   constructor(props) {
@@ -18,6 +21,7 @@ class NotesDashboard extends Component {
 
   componentDidMount() {
     this.props.fetchNotes();
+    console.log("History:", this.props.history);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -44,22 +48,24 @@ class NotesDashboard extends Component {
 
   render() {
     return (
-      <>
+      <div className="notesDashboardContainer">
         <FilterMenu
           schools={this.props.schools}
           subjects={this.props.subjects}
           gradeLevels={this.props.gradeLevels}
           years={this.props.years}
         />
-        <Dropdown
-          label="Sort by"
-          onChange={this.sortByChange}
-          value={this.state.sortBy}
-          options={["Newest", "Oldest"]}
-          hasLabel={true}
-        />
-        <Notes notes={this.props.notes} />
-      </>
+        <div>
+          <Dropdown
+            label="Sort by"
+            onChange={this.sortByChange}
+            value={this.state.sortBy}
+            options={["Newest", "Oldest"]}
+            hasLabel={true}
+          />
+          <Notes notes={this.props.notes} />
+        </div>
+      </div>
     );
   }
 }

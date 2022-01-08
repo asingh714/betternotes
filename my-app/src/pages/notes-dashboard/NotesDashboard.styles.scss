@@ -1,0 +1,8 @@
+@import "../../globalStyles/variables.scss";
+
+.notesDashboardContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5.4rem 3.6rem;
+}
