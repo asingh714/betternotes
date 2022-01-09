@@ -20,6 +20,7 @@ class NotesDashboard extends Component {
       school: "",
       subject: "",
       grade_level: "",
+      error: "",
     };
   }
 
@@ -63,13 +64,21 @@ class NotesDashboard extends Component {
     let notes = this.state.notes;
 
     if (this.state.school !== "") {
-      this.setState({
-        filteredNotes: notes.filter(
-          (note) => note.school === this.state.school
-        ),
-      });
+      notes = notes.filter((note) => note.school === this.state.school);
     }
-    // this.setState({ notes });
+    if (this.state.subject !== "") {
+      notes = notes.filter((note) => note.subject === this.state.subject);
+    }
+    if (this.state.grade_level !== "") {
+      notes = notes.filter(
+        (note) => note.grade_level === this.state.grade_level
+      );
+    }
+    if (notes.length <= 0) {
+      this.setState({ error: "There are 0 results", filteredNotes: [] });
+    } else {
+      this.setState({ filteredNotes: notes, error: "" });
+    }
   };
 
   render() {
@@ -95,9 +104,11 @@ class NotesDashboard extends Component {
             options={["Newest", "Oldest"]}
             value={this.state.sortBy}
           />
-          {this.state.filteredNotes.length > 0 ? (
+          {this.state.error && <span>No data</span>}
+          {this.state.filteredNotes.length > 0 && this.state.error === "" && (
             <Notes notes={this.state.filteredNotes} />
-          ) : (
+          )}
+          {this.state.error === "" && this.state.filteredNotes <= 0 && (
             <Notes notes={this.state.notes} />
           )}
         </div>
