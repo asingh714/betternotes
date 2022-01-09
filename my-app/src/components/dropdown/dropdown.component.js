@@ -7,7 +7,7 @@ export default function Dropdown(props) {
       {props.hasLabel && <label htmlFor="dropdown">{props.label}</label>}
       <select
         id="dropdown"
-        className={props.dropdown}
+        className={props.dropdownStyle}
         onChange={props.onChange}
         name={props.name}
       >

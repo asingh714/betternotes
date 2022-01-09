@@ -12,30 +12,40 @@ export default function FilterMenu({
   subjects,
   gradeLevels,
   years,
-  school,
-  filterNotes,
-  name,
+  schoolName,
+  subjectName,
+  gradeLevelName,
+  filterNoteChanges,
+  filterMenuSubmit,
 }) {
   return (
     <form className="filter-menu-container">
       {schools && (
         <Dropdown
+          dropdownStyle="filterMenu"
           label="School"
+          onChange={filterNoteChanges}
           options={schools}
-          dropdown="filterMenu"
-          onChange={filterNotes}
-          name={name}
+          name={schoolName}
         />
       )}
 
       {subjects && (
-        <Dropdown label="Subjects" options={subjects} dropdown="filterMenu" />
+        <Dropdown
+          dropdownStyle="filterMenu"
+          label="Subjects"
+          onChange={filterNoteChanges}
+          options={subjects}
+          name={subjectName}
+        />
       )}
       {gradeLevels && (
         <Dropdown
+          dropdownStyle="filterMenu"
           label="Grade Levels"
+          onChange={filterNoteChanges}
           options={gradeLevels}
-          dropdown="filterMenu"
+          name={gradeLevelName}
         />
       )}
       <Line classname="filter-line" />
@@ -49,7 +59,11 @@ export default function FilterMenu({
         />
       )}
       <Line classname="filter-line" />
-      <Button type="Submit" buttonStyle="filter-button">
+      <Button
+        type="Submit"
+        buttonStyle="filter-button"
+        handleSubmit={filterMenuSubmit}
+      >
         Search
       </Button>
     </form>

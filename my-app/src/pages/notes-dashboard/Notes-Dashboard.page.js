@@ -15,8 +15,11 @@ class NotesDashboard extends Component {
     super(props);
     this.state = {
       notes: [],
+      filteredNotes: [],
       sortBy: "Newest",
       school: "",
+      subject: "",
+      grade_level: "",
     };
   }
 
@@ -25,6 +28,9 @@ class NotesDashboard extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
+    if (prevProps.notes !== this.props.notes) {
+      this.setState({ notes: this.props.notes });
+    }
     if (prevState.sortBy !== this.state.sortBy) {
       if (this.state.sortBy === "Newest") {
         this.setState({
@@ -42,7 +48,7 @@ class NotesDashboard extends Component {
     }
   }
 
-  filterNotes = (event) => {
+  filterNoteChanges = (event) => {
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -50,6 +56,20 @@ class NotesDashboard extends Component {
 
   sortByChange = (event) => {
     this.setState({ sortBy: event.target.value });
+  };
+
+  filterMenuSubmit = (event) => {
+    event.preventDefault();
+    let notes = this.state.notes;
+
+    if (this.state.school !== "") {
+      this.setState({
+        filteredNotes: notes.filter(
+          (note) => note.school === this.state.school
+        ),
+      });
+    }
+    // this.setState({ notes });
   };
 
   render() {
@@ -60,18 +80,26 @@ class NotesDashboard extends Component {
           subjects={this.props.subjects}
           gradeLevels={this.props.gradeLevels}
           years={this.props.years}
-          name="school"
-          onChange={this.filterNotes}
+          schoolName="school"
+          subjectName="subject"
+          gradeLevelName="grade_level"
+          filterNoteChanges={this.filterNoteChanges}
+          filterMenuSubmit={this.filterMenuSubmit}
         />
         <div>
           <Dropdown
+            dropdownStyle=""
+            hasLabel={true}
             label="Sort by"
             onChange={this.sortByChange}
-            value={this.state.sortBy}
             options={["Newest", "Oldest"]}
-            hasLabel={true}
+            value={this.state.sortBy}
           />
-          <Notes notes={this.props.notes} />
+          {this.state.filteredNotes.length > 0 ? (
+            <Notes notes={this.state.filteredNotes} />
+          ) : (
+            <Notes notes={this.state.notes} />
+          )}
         </div>
       </div>
     );
