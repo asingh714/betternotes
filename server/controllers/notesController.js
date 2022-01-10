@@ -178,6 +178,7 @@ const getSingleNote = (req, res) => {
       "school_name",
       "user_description",
       "unique_user_id",
+      "users.id as user_id"
     )
     .first()
     .then((singleNote) => {

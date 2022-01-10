@@ -22,10 +22,10 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/api/auth/reset-password" element={<ResetPassword />} />
-
+      
       <Route exact path="/notes" element={<NotesDashboard />} />
       <Route path="/notes/:unique_note_id" element={<SingleNoteInfo />} />
-      <Route path="/user/:unique_user_id/author" element={<Author />} />
+      <Route path="/user/:unique_user_id/notes/:user_id" element={<Author />} />
       <Route exact path="/profile" element={<Profile />} />
       <Route path="/profile/forSale" element={<ProfileForSale />} />
       <Route path="/profile/purchased" element={<ProfilePurchasedItems />} />

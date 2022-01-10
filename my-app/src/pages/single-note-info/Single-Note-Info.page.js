@@ -38,10 +38,11 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
     user_description,
     school_name,
     unique_user_id,
+    user_id,
   } = note;
   return (
     <div className="single-note-info-container">
-            <div className="top-note-info-container">
+      <div className="top-note-info-container">
         <div className="general-info-container">
           <h1>{note_name}</h1>
           <p>{short_description}</p>
@@ -79,7 +80,11 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
         <div className="author-container">
           <img src={profile_image || image} alt="Note Creator" />
           <div className="written-author-container">
-            <h3 onClick={(event) => navigate(`/user/${unique_user_id}/author`)}>
+            <h3
+              onClick={(event) =>
+                navigate(`/user/${unique_user_id}/notes/${user_id}`)
+              }
+            >
               {user_name}
             </h3>
             <p>{user_description}</p>
