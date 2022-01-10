@@ -115,10 +115,10 @@ class NotesDashboard extends Component {
           />
           {this.state.error && <span>No data</span>}
           {this.state.filteredNotes.length > 0 && this.state.error === "" && (
-            <Notes notes={this.state.filteredNotes} />
+            <Notes notes={this.state.filteredNotes} noteStyle="wide" />
           )}
           {this.state.error === "" && this.state.filteredNotes <= 0 && (
-            <Notes notes={this.state.notes} />
+            <Notes notes={this.state.notes} noteStyle="wide" />
           )}
         </div>
       </div>

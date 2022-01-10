@@ -34,14 +34,18 @@ function Author({
 
   return (
     <div className="author-page-container">
-      <h2>{user_name}</h2>
-      <span>
-        <span>{school_name}</span> |<span>{user_grade_level}</span>
-      </span>
-      <img src={profile_image} alt="" className="authorImage" />
+      <div className="author-info-container">
+        <div className="author-text-container">
+          <h2>{user_name}</h2>
+          <span>
+            {school_name} | {user_grade_level}
+          </span>
+        </div>
+        <img src={profile_image} alt="" className="authorImage" />
+      </div>
       <p>{user_description}</p>
       <h4>My Work</h4>
-      <Notes notes={userNotes} />
+      <Notes notes={userNotes} noteStyle="narrow" />
     </div>
   );
 }

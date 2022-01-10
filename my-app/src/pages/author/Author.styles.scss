@@ -1,9 +1,35 @@
 @import "../../globalStyles/variables.scss";
 
 .author-page-container {
-  .authorImage {
-    width: 25rem;
-    height: 25rem;
-    border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  padding: 10rem 12rem;
+  .author-info-container {
+    display: flex;
+    justify-content: space-between;
+    h2 {
+      font-size: 3.2rem;
+      color: $grey-two;
+      font-weight: 500;
+      margin-bottom: 4rem;
+    }
+    span {
+      color: $grey-five;
+    }
+    .authorImage {
+      width: 20rem;
+      height: 20rem;
+      border-radius: 50%;
+    }
+  }
+  p {
+    margin: 10rem 0 6rem 0;
+    color: $grey-three;
+    font-weight: 500;
+  }
+  h4 {
+    font-size: 2rem;
+    color: $grey-two;
+    margin-bottom: 4rem;
   }
 }

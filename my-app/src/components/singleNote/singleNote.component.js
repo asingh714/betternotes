@@ -33,7 +33,11 @@ export default function SingleNote(props) {
 
   return (
     <div
-      className="single-note-container"
+      className={
+        props.noteStyle === "wide"
+          ? "wide-note-info-container"
+          : "narrow-note-info-container"
+      }
       onClick={(event) => navigate(`/notes/${props.id}`)}
     >
       {/* <Document
@@ -63,7 +67,9 @@ export default function SingleNote(props) {
             <span>{pages} Pages </span> | <span>{year}</span> |{" "}
             <span>{school}</span>
           </div>
-          <Button type="submit">Add to Cart</Button>
+          <Button type="submit" buttonStyle="note-button">
+            Add to Cart
+          </Button>
         </div>
       </div>
     </div>
