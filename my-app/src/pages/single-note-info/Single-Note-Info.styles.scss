@@ -3,7 +3,6 @@
 .single-note-info-container {
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   padding: 10rem 12rem;
   // justify-content: center;
   .top-note-info-container {
@@ -11,6 +10,7 @@
     flex-direction: row;
 
     .general-info-container {
+      margin-right: 5.6rem;
       h1 {
         font-size: 4rem;
         color: $grey-two;
@@ -41,8 +41,61 @@
     }
 
     .image-cta-container {
+      display: flex;
+      flex-direction: column;
       .noteImage {
         max-width: 20rem;
+        margin-bottom: 3.2rem;
+      }
+      span {
+        font-size: 3.2rem;
+        color: $grey-two;
+        margin-bottom: 2.4rem;
+      }
+    }
+  }
+  .long-note-info {
+    margin: 10rem 0 6rem 0;
+    color: $grey-three;
+    font-weight: 500;
+  }
+
+  .about-container {
+    h2 {
+      font-size: 3.2rem;
+      color: $grey-two;
+      font-weight: 500;
+      margin-bottom: 4rem;
+    }
+    .author-container {
+      display: flex;
+      flex-direction: row;
+      img {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        margin-right: 5rem;
+      }
+      .written-author-container {
+        display: flex;
+        flex-direction: column;
+
+        h3 {
+          cursor: pointer;
+          font-size: 2.4rem;
+          color: $blue-three;
+          text-decoration: underline;
+          font-weight: 600;
+          margin-bottom: 2rem;
+        }
+        p {
+          font-size: 1.8rem;
+          font-weight: 500;
+          margin-bottom: 2rem;
+        }
+        span {
+          color: $grey-five;
+        }
       }
     }
   }

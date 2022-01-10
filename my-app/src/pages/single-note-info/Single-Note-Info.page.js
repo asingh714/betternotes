@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 
 import { fetchSingleNote } from "../../redux/actions/note.actions";
@@ -13,6 +13,7 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
   const { unique_note_id } = useParams();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  let navigate = useNavigate();
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -36,10 +37,11 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
     profile_image,
     user_description,
     school_name,
+    unique_user_id,
   } = note;
   return (
     <div className="single-note-info-container">
-      <div className="top-note-info-container">
+            <div className="top-note-info-container">
         <div className="general-info-container">
           <h1>{note_name}</h1>
           <p>{short_description}</p>
@@ -62,20 +64,27 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
       </Document> */}
         <div className="image-cta-container">
           <img src={image} alt="" className="noteImage" />
-          <span>{price}</span>
-          <Button>Add to Cart</Button>
+          <span>$ {price}</span>
+          <Button buttonStyle="cta-button" type="submit">
+            Add to Cart
+          </Button>
         </div>
       </div>
-      <p>{long_description}</p>
+      <p className="long-note-info">{long_description}</p>
 
-      <Line />
+      <Line classname="long-line" />
+
       <div className="about-container">
-        <span>About the creator</span>
-        <div>
-          <img src={profile_image} alt="Note Creator" />
-          <span>{user_name}</span>
-          <span>{user_description}</span>
-          <span>Student at {school_name}</span>
+        <h2>About the creator</h2>
+        <div className="author-container">
+          <img src={profile_image || image} alt="Note Creator" />
+          <div className="written-author-container">
+            <h3 onClick={(event) => navigate(`/user/${unique_user_id}/author`)}>
+              {user_name}
+            </h3>
+            <p>{user_description}</p>
+            <span>Student at {school_name}</span>
+          </div>
         </div>
       </div>
     </div>

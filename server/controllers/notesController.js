@@ -176,7 +176,8 @@ const getSingleNote = (req, res) => {
       "username",
       "profile_image",
       "school_name",
-      "user_description"
+      "user_description",
+      "unique_user_id",
     )
     .first()
     .then((singleNote) => {
