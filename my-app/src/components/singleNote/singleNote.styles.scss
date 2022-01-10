@@ -56,7 +56,7 @@
 
     .user-name {
       display: inline-block;
-      margin-bottom: auto;
+      margin-bottom: 2rem;
       font-weight: 400;
       color: $grey-three;
     }
@@ -77,11 +77,11 @@
 .narrow-note-info-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  border: 1px solid $grey-five;
+  border: 1px solid $grey-seven;
   cursor: pointer;
   max-width: 30rem;
-  // padding: 4rem 3.2rem;
+  margin-bottom: 3.2rem;
+
   transition: all 0.3s;
 
   &:hover {
@@ -89,18 +89,38 @@
     box-shadow: 0 1rem 2rem rgba(black, 0.2);
   }
 
-  // .img-container {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   overflow: hidden;
-  // }
+  .img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid $grey-nine;
+  }
   .noteImage {
     width: 100%;
-    height: auto;
     max-height: 20rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+  }
+  .note-info-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1.6rem;
+    .note-info-class {
+      font-size: 2rem;
+      font-weight: 600;
+      color: $grey-two;
+      margin-bottom: 2rem;
+    }
+    .note-info-user {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: $grey-one;
+      margin-bottom: 2rem;
+    }
+
+    .note-info-price {
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: $grey-one;
+    }
   }
 }

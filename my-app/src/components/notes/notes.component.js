@@ -11,6 +11,7 @@ export default function Notes(props) {
           key={note.id}
           id={note.unique_note_id}
           noteStyle={props.noteStyle}
+          {...props}
         />
       ))}
     </>

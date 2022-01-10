@@ -30,48 +30,60 @@ export default function SingleNote(props) {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
-
-  return (
-    <div
-      className={
-        props.noteStyle === "wide"
-          ? "wide-note-info-container"
-          : "narrow-note-info-container"
-      }
-      onClick={(event) => navigate(`/notes/${props.id}`)}
-    >
-      {/* <Document
-        file={document}
+  if (props.noteStyle === "wide") {
+    return (
+      <div
+        className="wide-note-info-container"
+        onClick={(event) => navigate(`/notes/${props.id}`)}
+      >
+        {/* <Document
+          file={document}
         loading="Loading IMAGE...."
         onLoadSuccess={onDocumentLoadSuccess}
         className="noteImage"
-      >
+        >
         <Page pageNumber={pageNumber} />
       </Document> */}
-      <div className="img-container">
-        <img src={image} alt="" className="noteImage" />
-      </div>
-
-      <div className="note-info-container">
-        <div className="note-top-line">
-          <span>{class_name}</span>
-          <span>${price}</span>
+        <div className="img-container">
+          <img src={image} alt="" className="noteImage" />
         </div>
 
-        <p className="note-desc">{short_description}</p>
-
-        <span className="user-name">{user_name}</span>
-
-        <div className="note-bottom-line">
-          <div className="note-info-line">
-            <span>{pages} Pages </span> | <span>{year}</span> |{" "}
-            <span>{school}</span>
+        <div className="note-info-container">
+          <div className="note-top-line">
+            <span>{class_name}</span>
+            <span>${price}</span>
           </div>
-          <Button type="submit" buttonStyle="note-button">
-            Add to Cart
-          </Button>
+
+          <p className="note-desc">{short_description}</p>
+
+          <span className="user-name">{user_name}</span>
+          <div className="note-bottom-line">
+            <div className="note-info-line">
+              <span>{pages} Pages </span> | <span>{year}</span> |{" "}
+              <span>{school}</span>
+            </div>
+            <Button type="submit" buttonStyle="note-button">
+              Add to Cart
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        className="narrow-note-info-container"
+        onClick={(event) => navigate(`/notes/${props.id}`)}
+      >
+        <div className="img-container">
+          <img src={image} alt="" className="noteImage" />
+        </div>
+        <div className="note-info-container">
+          <span className="note-info-class">{class_name}</span>
+          <span className="note-info-user">{props.user_name}</span>
+          <span className="note-info-price">${price}</span>
+        </div>
+      </div>
+    );
+  }
 }
