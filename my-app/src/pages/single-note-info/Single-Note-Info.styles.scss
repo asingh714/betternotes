@@ -1,0 +1,49 @@
+@import "../../globalStyles/variables.scss";
+
+.single-note-info-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+  padding: 10rem 12rem;
+  // justify-content: center;
+  .top-note-info-container {
+    display: flex;
+    flex-direction: row;
+
+    .general-info-container {
+      h1 {
+        font-size: 4rem;
+        color: $grey-two;
+        font-weight: 500;
+        margin-bottom: 4rem;
+      }
+      p {
+        font-size: 2.4rem;
+        color: $grey-three;
+        margin-bottom: 7.2rem;
+      }
+      .username-info,
+      .school-info,
+      .teacher-info {
+        display: block;
+        margin-bottom: 1rem;
+      }
+      .username-info {
+        color: $grey-three;
+        span {
+          font-weight: 600;
+        }
+      }
+      .school-info,
+      .teacher-info {
+        color: $grey-five;
+      }
+    }
+
+    .image-cta-container {
+      .noteImage {
+        max-width: 20rem;
+      }
+    }
+  }
+}

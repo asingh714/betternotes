@@ -15,6 +15,7 @@ export default function FilterMenu({
   schoolName,
   subjectName,
   gradeLevelName,
+  yearName,
   filterNoteChanges,
   filterMenuSubmit,
 }) {
@@ -52,10 +53,12 @@ export default function FilterMenu({
       {years && (
         <CheckboxMenu
           label="Written In"
-          options={years}
           legendStyle="legend-checkbox"
           inputStyle="input-checkbox"
           labelStyle="label-checkbox"
+          onChange={filterNoteChanges}
+          options={years}
+          name={yearName}
         />
       )}
       <Line classname="filter-line" />

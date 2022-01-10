@@ -21,6 +21,7 @@ class NotesDashboard extends Component {
       subject: "",
       grade_level: "",
       error: "",
+      year: "",
     };
   }
 
@@ -50,6 +51,9 @@ class NotesDashboard extends Component {
   }
 
   filterNoteChanges = (event) => {
+    console.log(event.target.name);
+    console.log(event.target.value);
+
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -74,6 +78,10 @@ class NotesDashboard extends Component {
         (note) => note.grade_level === this.state.grade_level
       );
     }
+
+    if (this.state.year !== "") {
+      notes = notes.filter((note) => note.year === this.state.year);
+    }
     if (notes.length <= 0) {
       this.setState({ error: "There are 0 results", filteredNotes: [] });
     } else {
@@ -92,6 +100,7 @@ class NotesDashboard extends Component {
           schoolName="school"
           subjectName="subject"
           gradeLevelName="grade_level"
+          yearName="year"
           filterNoteChanges={this.filterNoteChanges}
           filterMenuSubmit={this.filterMenuSubmit}
         />

@@ -8,6 +8,8 @@ export default function CheckboxMenu({
   legendStyle,
   inputStyle,
   labelStyle,
+  onChange,
+  name,
 }) {
   return (
     <div>
@@ -16,7 +18,8 @@ export default function CheckboxMenu({
         <div key={option}>
           <input
             type="checkbox"
-            name={option}
+            name={name}
+            onChange={onChange}
             id={option}
             value={option}
             className={inputStyle}

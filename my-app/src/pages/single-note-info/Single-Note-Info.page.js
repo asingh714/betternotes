@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 
 import { fetchSingleNote } from "../../redux/actions/note.actions";
-
+import image from "../../logo512.png";
 import Button from "../../components/button/button.component";
+import Line from "../../components/line/line.component";
+import "./Single-Note-Info.styles.scss";
 
 function SingleNoteInfo({ fetchSingleNote, note }) {
   const { unique_note_id } = useParams();
@@ -36,32 +38,47 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
     school_name,
   } = note;
   return (
-    <>
-      <span>{note_name}</span>
-      <span>{short_description}</span>
-      <span>Created by {user_name}</span>
-      <span>
-        {school} | {class_name}
-      </span>
-      <span>
-        {teacher} | {year}
-      </span>
-      <Document
+    <div className="single-note-info-container">
+      <div className="top-note-info-container">
+        <div className="general-info-container">
+          <h1>{note_name}</h1>
+          <p>{short_description}</p>
+          <span className="username-info">
+            Created by <span>{user_name}</span>
+          </span>
+          <span className="school-info">
+            {school} | {class_name}
+          </span>
+          <span className="teacher-info">
+            {teacher} | {year}
+          </span>
+        </div>
+        {/* <Document
         file={document}
         loading="Loading IMAGE...."
         onLoadSuccess={onDocumentLoadSuccess}
       >
         <Page pageNumber={pageNumber} />
-      </Document>
-      <span>{price}</span>
-      <Button>Add to Cart</Button>
-      <span>{long_description}</span>
-      <span>About the creator</span>
+      </Document> */}
+        <div className="image-cta-container">
+          <img src={image} alt="" className="noteImage" />
+          <span>{price}</span>
+          <Button>Add to Cart</Button>
+        </div>
+      </div>
+      <p>{long_description}</p>
 
-      <img src={profile_image} alt="Note Creator" />
-      <span>{user_description}</span>
-      <span>Student at {school_name}</span>
-    </>
+      <Line />
+      <div className="about-container">
+        <span>About the creator</span>
+        <div>
+          <img src={profile_image} alt="Note Creator" />
+          <span>{user_name}</span>
+          <span>{user_description}</span>
+          <span>Student at {school_name}</span>
+        </div>
+      </div>
+    </div>
   );
 }
 const mapStateToProps = (state) => {
