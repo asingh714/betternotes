@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import Header from "./components/header/header.component";
+import Footer from "./components/footer/footer.component";
 import Home from "./pages/home/Home.page";
 import RegisterPage from "./pages/register/Register.page";
 import Verify from "./pages/verify/Verify.page";
@@ -41,6 +42,7 @@ function App() {
           />
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 }
