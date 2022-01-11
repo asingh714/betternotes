@@ -27,7 +27,7 @@ function LoginForm({ loginUser }) {
   };
 
   return (
-    <form>
+    <form className="login-form-container">
       <FormInput
         name="username"
         handleChange={handleChange}
@@ -43,7 +43,7 @@ function LoginForm({ loginUser }) {
         value={user.password}
       />
       <Button type="submit" handleSubmit={handleSubmit}>
-        Login
+        Submit
       </Button>
     </form>
   );

@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 
+import Header from "./components/header/header.component";
 import Home from "./pages/home/Home.page";
 import RegisterPage from "./pages/register/Register.page";
 import Verify from "./pages/verify/Verify.page";
@@ -15,21 +16,32 @@ import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.p
 
 function App() {
   return (
-    <Routes>
-      <Route exact path="/" element={<Home />} />
-      <Route path="/register" element={<RegisterPage />} />
-      <Route path="/api/auth/verify-email" element={<Verify />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/api/auth/reset-password" element={<ResetPassword />} />
-      
-      <Route exact path="/notes" element={<NotesDashboard />} />
-      <Route path="/notes/:unique_note_id" element={<SingleNoteInfo />} />
-      <Route path="/user/:unique_user_id/notes/:user_id" element={<Author />} />
-      <Route exact path="/profile" element={<Profile />} />
-      <Route path="/profile/forSale" element={<ProfileForSale />} />
-      <Route path="/profile/purchased" element={<ProfilePurchasedItems />} />
-    </Routes>
+    <div className="page-container">
+      <Header />
+      <div className="content-container">
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/api/auth/verify-email" element={<Verify />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/api/auth/reset-password" element={<ResetPassword />} />
+
+          <Route exact path="/notes" element={<NotesDashboard />} />
+          <Route path="/notes/:unique_note_id" element={<SingleNoteInfo />} />
+          <Route
+            path="/user/:unique_user_id/notes/:user_id"
+            element={<Author />}
+          />
+          <Route exact path="/profile" element={<Profile />} />
+          <Route path="/profile/forSale" element={<ProfileForSale />} />
+          <Route
+            path="/profile/purchased"
+            element={<ProfilePurchasedItems />}
+          />
+        </Routes>
+      </div>
+    </div>
   );
 }
 
