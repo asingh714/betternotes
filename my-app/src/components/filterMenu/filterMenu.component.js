@@ -64,7 +64,7 @@ export default function FilterMenu({
       <Line classname="filter-line" />
       <Button
         type="Submit"
-        buttonStyle="filter-button"
+        buttonStyle="medium-bluesix-btn"
         handleSubmit={filterMenuSubmit}
       >
         Search

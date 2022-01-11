@@ -66,7 +66,7 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
         <div className="image-cta-container">
           <img src={image} alt="" className="noteImage" />
           <span>$ {price}</span>
-          <Button buttonStyle="cta-button" type="submit">
+          <Button buttonStyle="short-ctagreen-button" type="submit">
             Add to Cart
           </Button>
         </div>

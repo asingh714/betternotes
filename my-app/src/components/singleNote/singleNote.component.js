@@ -62,7 +62,7 @@ export default function SingleNote(props) {
               <span>{pages} Pages </span> | <span>{year}</span> |{" "}
               <span>{school}</span>
             </div>
-            <Button type="submit" buttonStyle="note-button">
+            <Button type="submit" buttonStyle="large-ctagreen-button">
               Add to Cart
             </Button>
           </div>

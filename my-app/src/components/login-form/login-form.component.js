@@ -5,6 +5,8 @@ import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { loginUser } from "../../redux/actions/user.actions";
 
+import "./login-form.styles.scss";
+
 function LoginForm({ loginUser }) {
   const initialState = {
     username: "",
@@ -34,6 +36,7 @@ function LoginForm({ loginUser }) {
         placeholder="Username"
         type="text"
         value={user.username}
+        inputStyle="user-log-reg"
       />
       <FormInput
         name="password"
@@ -41,8 +44,13 @@ function LoginForm({ loginUser }) {
         placeholder="Password"
         type="password"
         value={user.password}
+        inputStyle="user-log-reg"
       />
-      <Button type="submit" handleSubmit={handleSubmit}>
+      <Button
+        type="submit"
+        handleSubmit={handleSubmit}
+        buttonStyle="large-bluefour-btn"
+      >
         Submit
       </Button>
     </form>

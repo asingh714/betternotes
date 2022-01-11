@@ -1,6 +1,7 @@
 @import "../../globalStyles/variables.scss";
 
-.filter-button {
+// filterMenu
+.medium-bluesix-btn {
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: $blue-six;
@@ -11,7 +12,8 @@
   letter-spacing: 1px;
 }
 
-.cta-button {
+// notes
+.short-ctagreen-button {
   padding: 1.2rem 0;
   border-radius: 0.5rem;
   background-color: $cta-green;
@@ -20,7 +22,8 @@
   letter-spacing: 1px;
 }
 
-.note-button {
+// single note info
+.large-ctagreen-button {
   min-width: 10rem;
   padding: 1.2rem 0;
   border-radius: 0.5rem;
@@ -28,4 +31,15 @@
   color: $white;
   border: none;
   letter-spacing: 1px;
+}
+
+.large-bluefour-btn {
+  min-width: 10rem;
+  padding: 1.2rem 0;
+  border-radius: 0.5rem;
+  background-color: $blue-four;
+  color: $white;
+  border: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
