@@ -1,0 +1,27 @@
+@import "../../globalStyles/variables.scss";
+
+.large-text {
+  margin: 1.6rem auto;
+  color: $blue-six;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+    transform: translateX(3px);
+  }
+}
+
+.small-text {
+  margin: 0 auto;
+  color: $blue-seven;
+  font-size: 1.4rem;
+  // font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+    transform: translateX(3px);
+  }
+}

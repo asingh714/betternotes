@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import ImpText from "../imp-text/impText.component";
 import { loginUser } from "../../redux/actions/user.actions";
 
 import "./login-form.styles.scss";
@@ -53,8 +54,8 @@ function LoginForm({ loginUser }) {
       >
         Submit
       </Button>
-      <span className="large-text">Don't have an account?</span>
-      <span className="small-text">Forgot Password?</span>
+      <ImpText textStyle="large-text">Don't have an account?</ImpText>
+      <ImpText textStyle="small-text">Forgot Password?</ImpText>
     </form>
   );
 }
