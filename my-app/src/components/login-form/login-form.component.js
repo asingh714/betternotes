@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -54,8 +55,12 @@ function LoginForm({ loginUser }) {
       >
         Submit
       </Button>
-      <ImpText textStyle="large-text">Don't have an account?</ImpText>
-      <ImpText textStyle="small-text">Forgot Password?</ImpText>
+      <ImpText textStyle="large-text">
+        <Link to="/register">Don't have an account?</Link>
+      </ImpText>
+      <ImpText textStyle="small-text">
+        <Link to="/forgot-password">Forgot Password?</Link>
+      </ImpText>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -82,7 +83,9 @@ class RegisterForm extends Component {
         >
           Register
         </Button>
-        <ImpText textStyle="large-text">Already have an account?</ImpText>
+        <ImpText textStyle="large-text">
+          <Link to="/login">Already have an account?</Link>
+        </ImpText>
       </form>
     );
   }
