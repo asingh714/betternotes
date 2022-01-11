@@ -1,4 +1,17 @@
 @import "../../globalStyles/variables.scss";
 
 .user-log-reg {
+  padding: 1rem 1.2rem;
+  border-radius: 5px;
+  border: 1px solid $grey-seven;
+  margin-bottom: 2.4rem;
+  color: $blue-three;
+  font-weight: 500;
+}
+
+.user-log-reg::placeholder {
+  color: $blue-four;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  font-weight: 300;
 }

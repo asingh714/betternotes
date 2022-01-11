@@ -53,6 +53,8 @@ function LoginForm({ loginUser }) {
       >
         Submit
       </Button>
+      <span className="large-text">Don't have an account?</span>
+      <span className="small-text">Forgot Password?</span>
     </form>
   );
 }
