@@ -1,5 +1,11 @@
 @import "../../globalStyles/variables.scss";
-
+.large-plain-text {
+  margin: 0 auto 2rem;
+  color: $blue-six;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
 .large-text {
   margin: 1.6rem auto 0;
   color: $blue-six;

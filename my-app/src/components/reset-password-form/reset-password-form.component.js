@@ -6,6 +6,7 @@ import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import { resetForgottenPassword } from "../../redux/actions/user.actions";
 
+
 function ResetPasswordForm({ resetForgottenPassword }) {
   const initialState = {
     new_password: "",
@@ -32,7 +33,7 @@ function ResetPasswordForm({ resetForgottenPassword }) {
   };
 
   return (
-    <form>
+    <form className="rest-password-form-container">
       <FormInput
         name="new_password"
         handleChange={handleChange}

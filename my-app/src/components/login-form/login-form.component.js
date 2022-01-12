@@ -9,7 +9,7 @@ import { loginUser } from "../../redux/actions/user.actions";
 
 import "./login-form.styles.scss";
 
-function LoginForm({ loginUser }) {
+function LoginForm({ loginUser, isLoggedIn }) {
   const initialState = {
     username: "",
     password: "",
@@ -66,7 +66,11 @@ function LoginForm({ loginUser }) {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    isLoggingIn: state.user.isLoggingIn,
+    isLoggedIn: state.user.isLoggedIn,
+    loggingError: state.user.loggingError,
+  };
 };
 
 export default connect(mapStateToProps, { loginUser })(LoginForm);
