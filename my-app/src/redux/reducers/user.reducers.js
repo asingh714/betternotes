@@ -23,6 +23,9 @@ import {
   GET_OWN_USER_PROFILE_START,
   GET_OWN_USER_PROFILE_SUCCESS,
   GET_OWN_USER_PROFILE_FAILURE,
+  CHECK_USER_LOGGED_IN_START,
+  CHECK_USER_LOGGED_IN_SUCCESS,
+  CHECK_USER_LOGGED_IN_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -59,6 +62,33 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CHECK_USER_LOGGED_IN_START:
+      return {
+        ...state,
+        isLoggingIn: true,
+        isLoggedIn: false,
+        loggingError: "",
+        token: "",
+        username: "",
+      };
+    case CHECK_USER_LOGGED_IN_SUCCESS:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isLoggedIn: true,
+        loggingError: "",
+        token: action.payload.token,
+        username: action.payload.username,
+      };
+    case CHECK_USER_LOGGED_IN_FAILURE:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isLoggedIn: false,
+        loggingError: "There was an error while logging in.",
+        token: "",
+        username: "",
+      };
     case USER_REGISTER_START:
       return {
         ...state,

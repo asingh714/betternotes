@@ -1,5 +1,24 @@
 import { axiosWithAuth } from "../../utils/axiosWithAuth";
 
+export const CHECK_USER_LOGGED_IN_START = "CHECK_USER_LOGGED_IN_START";
+export const CHECK_USER_LOGGED_IN_SUCCESS = "CHECK_USER_LOGGED_IN_SUCCESS";
+export const CHECK_USER_LOGGED_IN_FAILURE = "CHECK_USER_LOGGED_IN_FAILURE";
+
+export const userLoggedIn = () => (dispatch) => {
+  dispatch({ type: CHECK_USER_LOGGED_IN_START });
+
+  const token = localStorage.getItem("token");
+  const username = localStorage.getItem("username");
+  if (token !== null) {
+    dispatch({
+      type: CHECK_USER_LOGGED_IN_SUCCESS,
+      payload: { token: token, username: username },
+    });
+  } else {
+    dispatch({ type: CHECK_USER_LOGGED_IN_FAILURE });
+  }
+};
+
 export const USER_REGISTER_START = "USER_REGISTER_START";
 export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
 export const USER_REGISTER_FAILURE = "USER_REGISTER_FAILURE";
@@ -66,7 +85,7 @@ export const FORGOT_PASSWORD_REQUEST_FAILURE =
 
 export const forgottenPasswordRequest = (email) => (dispatch) => {
   dispatch({ type: FORGOT_PASSWORD_REQUEST_START });
-  console.log(email);
+
   axiosWithAuth()
     .post("/auth/request-new-password", { email })
     .then((result) => {

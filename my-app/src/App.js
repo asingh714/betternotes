@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { connect } from "react-redux";
 
 import Header from "./components/header/header.component";
 import Footer from "./components/footer/footer.component";
@@ -15,7 +17,12 @@ import Profile from "./pages/profile/Profile.page";
 import ProfileForSale from "./pages/profile-forSale/Profile-ForSale.pages";
 import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.pages";
 
-function App() {
+import { userLoggedIn } from "./redux/actions/user.actions";
+
+function App({ userLoggedIn }) {
+  useEffect(() => {
+    userLoggedIn();
+  }, [userLoggedIn]);
   return (
     <div className="page-container">
       <Header />
@@ -47,4 +54,4 @@ function App() {
   );
 }
 
-export default App;
+export default connect(null, { userLoggedIn })(App);
