@@ -38,3 +38,10 @@ a:visited {
     transform: translateX(3px);
   }
 }
+
+.error-text {
+  margin-bottom: 1.6rem;
+  color: $red-four;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}

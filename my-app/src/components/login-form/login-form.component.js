@@ -8,16 +8,19 @@ import Button from "../button/button.component";
 import ImpText from "../imp-text/impText.component";
 import { loginUser } from "../../redux/actions/user.actions";
 
+import { validateLogin } from "../../utils/validateForm";
+
 import "./login-form.styles.scss";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-function LoginForm({ loginUser, isLoggedIn, isLoggingIn }) {
+function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
   const initialState = {
     username: "",
     password: "",
   };
   const navigate = useNavigate();
   const [user, setUser] = useState(initialState);
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -34,12 +37,21 @@ function LoginForm({ loginUser, isLoggedIn, isLoggingIn }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    loginUser(user);
-    setUser(initialState);
+    const errors = validateLogin(user.username, user.password, loggingError);
+    if (Object.keys(errors).length === 0) {
+      loginUser(user);
+      setUser(initialState);
+    } else {
+      setErrors(errors);
+    }
   };
 
   return (
     <form className="login-form-container">
+      {loggingError && <ImpText textStyle="error-text">{loggingError}</ImpText>}
+      {errors.username && (
+        <ImpText textStyle="error-text">{errors.username}</ImpText>
+      )}
       <FormInput
         name="username"
         handleChange={handleChange}
@@ -48,6 +60,9 @@ function LoginForm({ loginUser, isLoggedIn, isLoggingIn }) {
         value={user.username}
         inputStyle="user-log-reg"
       />
+      {errors.password && (
+        <ImpText textStyle="error-text">{errors.password}</ImpText>
+      )}
       <FormInput
         name="password"
         handleChange={handleChange}

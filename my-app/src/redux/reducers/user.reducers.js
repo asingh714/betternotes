@@ -85,7 +85,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         isLoggingIn: false,
         isLoggedIn: false,
-        loggingError: "There was an error while logging in.",
+        loggingError: "",
         token: "",
         username: "",
       };
