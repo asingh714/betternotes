@@ -13,7 +13,7 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
   const { unique_note_id } = useParams();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);

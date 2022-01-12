@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import Loader from "react-loader-spinner";
+import { Link, useNavigate } from "react-router-dom";
+import { Bars } from "react-loader-spinner";
 
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
@@ -9,14 +9,21 @@ import ImpText from "../imp-text/impText.component";
 import { loginUser } from "../../redux/actions/user.actions";
 
 import "./login-form.styles.scss";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-function LoginForm({ loginUser, isLoggedIn }) {
+function LoginForm({ loginUser, isLoggedIn, isLoggingIn }) {
   const initialState = {
     username: "",
     password: "",
   };
-
+  const navigate = useNavigate();
   const [user, setUser] = useState(initialState);
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      navigate("/profile");
+    }
+  }, [isLoggedIn, navigate]);
 
   const handleChange = (event) => {
     setUser((prevState) => ({
@@ -49,14 +56,25 @@ function LoginForm({ loginUser, isLoggedIn }) {
         value={user.password}
         inputStyle="user-log-reg"
       />
-      
-      <Button
-        type="submit"
-        handleSubmit={handleSubmit}
-        buttonStyle="large-bluefour-btn"
-      >
-        Submit
-      </Button>
+
+      {isLoggingIn ? (
+        <Bars
+          height="25"
+          width="25"
+          color="#2186eb"
+          arialLabel="loading-indicator"
+          wrapperClass="loading-bars"
+        />
+      ) : (
+        <Button
+          type="submit"
+          handleSubmit={handleSubmit}
+          buttonStyle="large-bluefour-btn"
+        >
+          Submit
+        </Button>
+      )}
+
       <ImpText textStyle="large-text">
         <Link to="/register">Don't have an account?</Link>
       </ImpText>

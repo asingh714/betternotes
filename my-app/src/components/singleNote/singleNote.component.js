@@ -25,7 +25,7 @@ export default function SingleNote(props) {
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
