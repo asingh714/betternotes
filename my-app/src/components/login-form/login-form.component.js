@@ -11,7 +11,6 @@ import { loginUser } from "../../redux/actions/user.actions";
 import { validateLogin } from "../../utils/validateForm";
 
 import "./login-form.styles.scss";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
   const initialState = {

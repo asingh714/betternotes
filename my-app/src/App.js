@@ -19,7 +19,7 @@ import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.p
 
 import { userLoggedIn } from "./redux/actions/user.actions";
 
-function App({ userLoggedIn }) {
+function App({ userLoggedIn, ...props }) {
   useEffect(() => {
     userLoggedIn();
   }, [userLoggedIn]);
@@ -31,7 +31,7 @@ function App({ userLoggedIn }) {
           <Route exact path="/" element={<Home />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/api/auth/verify-email" element={<Verify />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login {...props} />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/api/auth/reset-password" element={<ResetPassword />} />
 
