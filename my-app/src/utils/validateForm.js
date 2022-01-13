@@ -37,5 +37,24 @@ export const validateRegistration = (
     errors["confirm_password"] = "Please provide a password confirmation";
   }
 
+  if (password !== confirm_password) {
+    errors["password"] = "Please make sure both passwords match";
+  }
+
+  return errors;
+};
+
+export const validateForgotPassword = (password, confirm_password) => {
+  const errors = {};
+  if (!password) {
+    errors["password"] = "Please provide a password";
+  }
+  if (!confirm_password) {
+    errors["confirm_password"] = "Please provide a password confirmation";
+  }
+
+  if (password !== confirm_password) {
+    errors["password"] = "Please make sure both passwords match";
+  }
   return errors;
 };

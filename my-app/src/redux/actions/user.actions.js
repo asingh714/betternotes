@@ -108,11 +108,11 @@ export const resetForgottenPassword =
       .post(`/auth/reset-password?token=${token}&email=${email}`, passwords)
       .then((result) => {
         console.log(result);
-        dispatch({ type: USER_VERIFY_SUCCESS });
+        dispatch({ type: RESET_PASSWORD_REQUEST_SUCCESS });
       })
       .catch((error) => {
         console.log(error);
-        dispatch({ type: USER_VERIFY_FAILURE });
+        dispatch({ type: RESET_PASSWORD_REQUEST_FAILURE });
       });
   };
 

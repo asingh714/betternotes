@@ -36,7 +36,7 @@ function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const errors = validateLogin(user.username, user.password, loggingError);
+    const errors = validateLogin(user.username, user.password);
     if (Object.keys(errors).length === 0) {
       loginUser(user);
       setUser(initialState);
