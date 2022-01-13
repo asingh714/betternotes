@@ -17,9 +17,9 @@ function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
     username: "",
     password: "",
   };
-  const navigate = useNavigate();
   const [user, setUser] = useState(initialState);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isLoggedIn) {

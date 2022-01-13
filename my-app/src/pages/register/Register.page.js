@@ -5,7 +5,6 @@ import Modal from "../../components/modal/modal.component";
 import ImpText from "../../components/imp-text/impText.component";
 
 function Register({ isRegistered }) {
-  // SHOW MODAL!
   return (
     <div className="register-page-container">
       {isRegistered ? (

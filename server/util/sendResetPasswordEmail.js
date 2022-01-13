@@ -13,7 +13,7 @@ const sendResetPasswordEmail = ({
 
   return sendEmail({
     to: email,
-    subject: "Email Confirmation",
+    subject: "Password Reset",
     html: `<h4> Hello, ${name}</h4>
     ${message}
     `,
