@@ -13,7 +13,7 @@ function ResetPassword({ hasResetPassword }) {
   useEffect(() => {
     if (hasResetPassword) {
       const timer = setInterval(() => {
-        navigate("/profile");
+        navigate("/login");
       }, 3000);
       return () => clearInterval(timer);
     }

@@ -1,10 +1,9 @@
-import React from "react";
-
+import "./footer.styles.scss";
 export default function Footer() {
   return (
-    <div>
-      <span>LOGO</span>
-      <span>Copyright © 2022 Better Notes</span>
-    </div>
+    <footer className="footer-container">
+      <span className="logo">LOGO</span>
+      <span className="copyright">Copyright © 2022 Better Notes</span>
+    </footer>
   );
 }

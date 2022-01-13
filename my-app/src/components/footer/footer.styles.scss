@@ -1,0 +1,12 @@
+@import "../../globalStyles/variables.scss";
+
+.footer-container {
+  background-color: $blue-four;
+  color: white;
+  padding: 4rem 6rem;
+
+  .copyright {
+    display: block;
+    text-align: center;
+  }
+}
