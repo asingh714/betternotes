@@ -6,12 +6,21 @@
   border-radius: 0.5rem;
   background-color: $blue-four;
   color: $white;
-  border: none;
+  border: 1px solid $blue-four;
   text-transform: uppercase;
   letter-spacing: 1px;
   cursor: pointer;
   margin-left: 1rem;
   font-weight: 500;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $white;
+    color: $blue-four;
+    border: 1px solid $blue-four;
+    box-shadow: 1px 3px 7px rgba(black, 0.25);
+    letter-spacing: 2px;
+  }
 }
 
 .small-plain-btn {
@@ -25,6 +34,15 @@
   cursor: pointer;
   margin-left: 1rem;
   font-weight: 500;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $blue-four;
+    color: $white;
+    border: 1px solid $blue-four;
+    box-shadow: 1px 3px 7px rgba(black, 0.25);
+    letter-spacing: 2px;
+  }
 }
 
 .medium-bluesix-btn {

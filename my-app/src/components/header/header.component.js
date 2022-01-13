@@ -13,8 +13,18 @@ export default function Header() {
       </span>
       <div className="right-header-container">
         <span>Cart</span>
-        <Button buttonStyle="small-plain-btn">Log In</Button>
-        <Button buttonStyle="small-bluesix-btn">Sign Up</Button>
+        <Button
+          handleSubmit={() => navigate("/login")}
+          buttonStyle="small-plain-btn"
+        >
+          Log In
+        </Button>
+        <Button
+          handleSubmit={() => navigate("/register")}
+          buttonStyle="small-bluesix-btn"
+        >
+          Sign Up
+        </Button>
         {/* <span>Profile</span> */}
       </div>
     </header>
