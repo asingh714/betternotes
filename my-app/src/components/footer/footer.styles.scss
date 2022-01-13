@@ -5,8 +5,15 @@
   color: white;
   padding: 4rem 6rem;
 
+  .logo {
+    color: $white;
+    font-weight: 600;
+    font-size: 2.4;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+  }
+
   .copyright {
-    display: block;
     text-align: center;
   }
 }

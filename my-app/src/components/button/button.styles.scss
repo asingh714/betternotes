@@ -1,6 +1,32 @@
 @import "../../globalStyles/variables.scss";
 
 // filterMenu
+.small-bluesix-btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  background-color: $blue-four;
+  color: $white;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-left: 1rem;
+  font-weight: 500;
+}
+
+.small-plain-btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  background-color: $white;
+  color: $blue-four;
+  border: 1px solid $blue-four;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-left: 1rem;
+  font-weight: 500;
+}
+
 .medium-bluesix-btn {
   padding: 1rem;
   border-radius: 0.5rem;
@@ -10,6 +36,7 @@
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 // notes
@@ -20,6 +47,7 @@
   color: $white;
   border: none;
   letter-spacing: 1px;
+  cursor: pointer;
 }
 
 // single note info
@@ -42,6 +70,7 @@
   border: none;
   letter-spacing: 1px;
   text-transform: uppercase;
+  cursor: pointer;
   transition: all 0.3s;
   &:hover {
     transform: translateY(-1px);
