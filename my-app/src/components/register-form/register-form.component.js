@@ -26,17 +26,13 @@ class RegisterForm extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.isRegistered !== this.props.isRegistered) {
-      // setTimeout(() => {
-        this.props.navigate("/profile");
-      // }, 2000);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevProps.isRegistered !== this.props.isRegistered) {
+  // setTimeout(() => {
+  // this.props.navigate("/profile");
+  // }, 2000);
+  //   }
+  // }
 
   handleChange = (event) => {
     this.setState({
@@ -79,17 +75,12 @@ class RegisterForm extends Component {
   };
 
   render() {
-    const { registrationError, isRegistering, isRegistered } = this.props;
+    const { registrationError, isRegistering } = this.props;
     const { errors } = this.state;
     return (
       <form className="register-form-container">
         {registrationError && (
           <ImpText textStyle="error-text">{registrationError}</ImpText>
-        )}
-        {isRegistered && (
-          <ImpText textStyle="large-plain-text">
-            Your account has been created!
-          </ImpText>
         )}
         {errors.user_name && (
           <ImpText textStyle="error-text">{errors.user_name}</ImpText>

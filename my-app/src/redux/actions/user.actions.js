@@ -28,7 +28,6 @@ export const registerUser = (credentials) => (dispatch) => {
   axiosWithAuth()
     .post("/auth/register", credentials)
     .then((result) => {
-      console.log(result);
       dispatch({ type: USER_REGISTER_SUCCESS });
     })
     .catch((error) => {

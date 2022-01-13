@@ -1,3 +1,5 @@
+import validator from "validator";
+
 export const validateLogin = (username, password) => {
   const errors = {};
   if (!username) {
@@ -18,10 +20,11 @@ export const validateRegistration = (
   confirm_password
 ) => {
   const errors = {};
+  const emailIsValid = validator.isEmail(email);
   if (!user_name) {
     errors["user_name"] = "Please provide a name";
   }
-  if (!email) {
+  if (!email || !emailIsValid) {
     errors["email"] = "Please provide a email";
   }
   if (!username) {
