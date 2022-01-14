@@ -1,4 +1,8 @@
 @import "../../globalStyles/variables.scss";
 
 .profile-page-container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  border: 1px solid red;
 }

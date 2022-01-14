@@ -41,6 +41,7 @@ function App({ userLoggedIn, ...props }) {
             path="/user/:unique_user_id/notes/:user_id"
             element={<Author />}
           />
+          
           <Route exact path="/profile" element={<Profile />} />
           <Route path="/profile/forSale" element={<ProfileForSale />} />
           <Route

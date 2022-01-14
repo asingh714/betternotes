@@ -7,12 +7,14 @@ import ProfileData from "../../components/profile-data/ProfileData.component";
 import "./Profile.styles.scss";
 
 class Profile extends Component {
+  state = {
+    showModal: false,
+  };
   render() {
     return (
       <div className="profile-page-container">
         <ProfileMenu />
-        <ProfileData />
-        <ProfilePageForm />
+        {this.state.showModal ? <ProfilePageForm /> : <ProfileData />}
       </div>
     );
   }

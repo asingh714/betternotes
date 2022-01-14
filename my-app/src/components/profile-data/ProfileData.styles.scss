@@ -1,0 +1,62 @@
+@import "../../globalStyles/variables.scss";
+
+.profile-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding: 10rem 5rem;
+  border: 1px solid springgreen;
+  // justify-content: center;
+  .profile-image {
+    border-radius: 50%;
+    height: 20rem;
+    width: 20rem;
+    margin-bottom: 8rem;
+  }
+
+  .profile-written-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    align-self: stretch;
+
+    color: $blue-three;
+    font-size: 1.8rem;
+    // border: 1px solid blueviolet;
+
+    .profile-top-written-container {
+      display: flex;
+      flex-direction: column;
+
+      span:not(:last-child) {
+        margin-bottom: 3rem;
+      }
+    }
+
+    p {
+      text-align: center;
+      padding: 5rem 0;
+    }
+  }
+
+  .button-container {
+    // border: 1px solid blueviolet;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+    // flex: 1;
+    span {
+      color: $blue-seven;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: all 0.3s;
+
+      &:hover {
+        color: $blue-six;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}
