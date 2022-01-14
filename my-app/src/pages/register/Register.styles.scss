@@ -3,5 +3,6 @@
 .register-page-container {
   display: flex;
   justify-content: center;
-  align-self: center;
+  align-items: center;
+  flex: 1;
 }

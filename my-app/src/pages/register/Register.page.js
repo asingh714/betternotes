@@ -4,6 +4,7 @@ import RegisterForm from "../../components/register-form/register-form.component
 import Modal from "../../components/modal/modal.component";
 import ImpText from "../../components/imp-text/impText.component";
 
+import "./Register.styles.scss";
 function Register({ isRegistered }) {
   return (
     <div className="register-page-container">
