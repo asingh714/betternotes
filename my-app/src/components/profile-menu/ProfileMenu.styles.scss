@@ -1,0 +1,25 @@
+@import "../../globalStyles/variables.scss";
+
+.profile-nav-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  padding: 2rem 1.6rem;
+  background-color: $grey-nine;
+
+  .profile-nav-link {
+    transition: all 0.3s;
+    &:hover {
+      text-decoration: underline;
+      transform: translateX(3px);
+    }
+  }
+
+  .profile-nav-link:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  .active {
+    font-weight: 600;
+  }
+}

@@ -7,11 +7,11 @@ import ProfileData from "../../components/profile-data/ProfileData.component";
 class Profile extends Component {
   render() {
     return (
-      <>
+      <div className="profile-page-container">
         <ProfileMenu />
         <ProfileData />
         <ProfilePageForm />
-      </>
+      </div>
     );
   }
 }

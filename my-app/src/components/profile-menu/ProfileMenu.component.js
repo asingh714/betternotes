@@ -1,12 +1,23 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
+import Line from "../line/line.component";
+
+import "./ProfileMenu.styles.scss";
 
 export default function ProfileMenu() {
   return (
-    <>
-      <Link to="/profile/">Profile</Link>
-      <Link to="/profile/forSale">Items for Sale</Link>
-      <Link to="/profile/purchased">Items Purchased</Link>
-    </>
+    <nav className="profile-nav-container">
+      <NavLink to="/profile/" className="profile-nav-link">
+        Profile
+      </NavLink>
+      <Line classname="short-line" />
+      <NavLink to="/profile/forSale" className="profile-nav-link">
+        Items for Sale
+      </NavLink>
+      <Line classname="short-line" />
+      <NavLink to="/profile/purchased" className="profile-nav-link">
+        Items Purchased
+      </NavLink>
+    </nav>
   );
 }

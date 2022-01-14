@@ -11,7 +11,8 @@ export default function Header() {
       <span onClick={() => navigate("/home")} className="logo">
         BETTER NOTE
       </span>
-      <div className="right-header-container">
+      <nav className="right-header-container">
+        <span onClick={() => navigate("/notes")}>Notes</span>
         <span>Cart</span>
         <Button
           handleSubmit={() => navigate("/login")}
@@ -26,7 +27,7 @@ export default function Header() {
           Sign Up
         </Button>
         {/* <span>Profile</span> */}
-      </div>
+      </nav>
     </header>
   );
 }
