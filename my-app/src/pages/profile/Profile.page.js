@@ -1,35 +1,29 @@
-import { Component } from "react";
+import { useNavigate } from "react-router-dom";
 
 import ProfileMenu from "../../components/profile-menu/ProfileMenu.component";
-import ProfilePageForm from "../../components/profile-page-form/ProfilePageForm.component";
+import ProfilePageForm from "../edit-profile/EditProfilePageForm.component";
 import ProfileData from "../../components/profile-data/ProfileData.component";
 
 import "./Profile.styles.scss";
 
-class Profile extends Component {
-  state = {
-    showEditProfile: false,
-  };
+function Profile() {
+  // state = {
+  //   showEditProfile: false,
+  // };
 
-  showProfilePageForm = (event) => {
-    this.setState({
-      showEditProfile: !this.state.showEditProfile,
-    });
-  };
+  // showProfilePageForm = (event) => {
+  //   this.setState({
+  //     showEditProfile: !this.state.showEditProfile,
+  //   });
+  // };
+  const navigate = useNavigate();
 
-  render() {
-    return (
-      <div className="profile-page-container">
-        <ProfileMenu />
-
-        {this.state.showEditProfile ? (
-          <ProfilePageForm />
-        ) : (
-          <ProfileData showProfilePageForm={this.showProfilePageForm} />
-        )}
-      </div>
-    );
-  }
+  return (
+    <div className="profile-page-container">
+      <ProfileMenu />
+      <ProfileData showProfilePageForm={() => navigate("/profile/edit")} />
+    </div>
+  );
 }
 
 export default Profile;

@@ -14,6 +14,7 @@ import NotesDashboard from "./pages/notes-dashboard/Notes-Dashboard.page";
 import SingleNoteInfo from "./pages/single-note-info/Single-Note-Info.page";
 import Author from "./pages/author/Author.page";
 import Profile from "./pages/profile/Profile.page";
+import EditProfilePageFrom from "./pages/edit-profile/EditProfilePageForm.component";
 import ProfileForSale from "./pages/profile-forSale/Profile-ForSale.pages";
 import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.pages";
 
@@ -41,8 +42,10 @@ function App({ userLoggedIn, ...props }) {
             path="/user/:unique_user_id/notes/:user_id"
             element={<Author />}
           />
-          
+
           <Route exact path="/profile" element={<Profile />} />
+          <Route path="/profile/edit" element={<EditProfilePageFrom />} />
+
           <Route path="/profile/forSale" element={<ProfileForSale />} />
           <Route
             path="/profile/purchased"

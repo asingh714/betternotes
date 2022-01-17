@@ -39,6 +39,21 @@ a:visited {
   }
 }
 
+.small-back-text {
+  // margin: 1.6rem auto 0;
+  color: $blue-seven;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  vertical-align: middle;
+  transition: all 0.3s;
+  &:hover {
+    // text-decoration: underline;
+    letter-spacing: 2px;
+    // transform: translateX(3px);
+  }
+}
+
 .error-text {
   margin-bottom: 1.6rem;
   color: $red-four;
