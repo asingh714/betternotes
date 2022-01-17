@@ -47,16 +47,29 @@
     justify-content: space-between;
     align-self: stretch;
     // flex: 1;
-    span {
-      color: $blue-seven;
-      text-decoration: underline;
-      cursor: pointer;
-      transition: all 0.3s;
+  }
 
-      &:hover {
-        color: $blue-six;
-        letter-spacing: 1px;
-      }
+  .new-password-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -150px;
+    margin-top: -150px;
+  }
+  .change-pw-link {
+    color: $blue-seven;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      color: $blue-six;
+      // letter-spacing: 1px;
     }
+  }
+
+  .align-text {
+    margin-top: 2rem;
+    text-align: center;
   }
 }

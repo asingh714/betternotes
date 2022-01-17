@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
-import image from "../../logo512.png";
+import image from "../../new_user.png";
 
 import { useNavigate } from "react-router-dom";
 

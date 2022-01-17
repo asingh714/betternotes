@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 
 import { fetchSingleNote } from "../../redux/actions/note.actions";
-import image from "../../logo512.png";
+import image from "../../new_user.png";
 import Button from "../../components/button/button.component";
 import Line from "../../components/line/line.component";
 import "./Single-Note-Info.styles.scss";

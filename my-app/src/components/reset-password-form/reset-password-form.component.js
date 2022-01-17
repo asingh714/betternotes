@@ -70,7 +70,7 @@ function ResetPasswordForm({
       <FormInput
         name="confirm_new_password"
         handleChange={handleChange}
-        placeholder="Confirm Password"
+        placeholder="Confirm New Password"
         type="password"
         value={passwords.confirm_new_password}
         inputStyle="user-log-reg"

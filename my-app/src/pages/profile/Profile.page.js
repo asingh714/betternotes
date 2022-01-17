@@ -8,13 +8,25 @@ import "./Profile.styles.scss";
 
 class Profile extends Component {
   state = {
-    showModal: false,
+    showEditProfile: false,
   };
+
+  showProfilePageForm = (event) => {
+    this.setState({
+      showEditProfile: !this.state.showEditProfile,
+    });
+  };
+
   render() {
     return (
       <div className="profile-page-container">
         <ProfileMenu />
-        {this.state.showModal ? <ProfilePageForm /> : <ProfileData />}
+
+        {this.state.showEditProfile ? (
+          <ProfilePageForm />
+        ) : (
+          <ProfileData showProfilePageForm={this.showProfilePageForm} />
+        )}
       </div>
     );
   }
