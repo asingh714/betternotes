@@ -15,3 +15,25 @@
   letter-spacing: 1px;
   font-weight: 300;
 }
+
+input[type="file"] {
+  display: none;
+}
+
+.user-edit {
+  color: $blue-five;
+  background-color: $grey-nine;
+  border: 1px solid $blue-five;
+  padding: 1rem;
+  margin-bottom: 2.4rem;
+  width: 30rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  font-family: "Open Sans", sans-serif;
+}
+
+.user-edit::placeholder {
+  color: $blue-four;
+  font-size: 1.6rem;
+  font-weight: 500;
+}

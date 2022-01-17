@@ -1,21 +1,12 @@
 import { useNavigate } from "react-router-dom";
 
 import ProfileMenu from "../../components/profile-menu/ProfileMenu.component";
-import ProfilePageForm from "../edit-profile/EditProfilePageForm.component";
+// import ProfilePageForm from "../edit-profile/EditProfilePageForm.component";
 import ProfileData from "../../components/profile-data/ProfileData.component";
 
 import "./Profile.styles.scss";
 
 function Profile() {
-  // state = {
-  //   showEditProfile: false,
-  // };
-
-  // showProfilePageForm = (event) => {
-  //   this.setState({
-  //     showEditProfile: !this.state.showEditProfile,
-  //   });
-  // };
   const navigate = useNavigate();
 
   return (

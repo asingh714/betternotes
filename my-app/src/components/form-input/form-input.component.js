@@ -7,6 +7,7 @@ export default function FormInput({
   type,
   value,
   inputStyle,
+  accept,
 }) {
   return (
     <input
@@ -16,6 +17,7 @@ export default function FormInput({
       type={type}
       value={value}
       className={inputStyle}
+      accept={accept}
     />
   );
 }
