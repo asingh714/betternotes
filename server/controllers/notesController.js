@@ -118,7 +118,7 @@ const getAllNotes = (req, res) => {
     )
     .then((result) => {
       if (result.length < 1) {
-        res.status(404).json({ error: "There are no notes" });
+        res.status(204).json([]);
       } else {
         res.status(200).json(result);
       }
@@ -136,7 +136,7 @@ const getAllUserNotes = (req, res) => {
     .where({ user_id: subject_token })
     .then((result) => {
       if (result.length < 1) {
-        res.status(404).json({ error: "There are no notes" });
+        res.status(204).json([]);
       } else {
         res.status(200).json(result);
       }

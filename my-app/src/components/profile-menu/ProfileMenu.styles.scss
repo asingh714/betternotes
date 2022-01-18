@@ -3,7 +3,8 @@
 .profile-nav-container {
   display: flex;
   flex-direction: column;
-  max-width: 20rem;
+  min-width: 20rem;
+  max-width: 25rem;
   padding: 2rem 1.6rem;
   background-color: $grey-nine;
 

@@ -1,0 +1,16 @@
+@import "../../globalStyles/variables.scss";
+
+.notes-dashboard {
+  // display: flex;
+  // flex-direction: row;
+  // flex: 1;
+  // border: 1px solid red;
+  // padding: 1rem;
+  margin: 2rem 0 0 2rem;
+}
+
+.notes-author {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

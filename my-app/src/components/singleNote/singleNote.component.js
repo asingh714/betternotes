@@ -69,7 +69,7 @@ export default function SingleNote(props) {
         </div>
       </div>
     );
-  } else {
+  } else if (props.noteStyle === "narrow") {
     return (
       <div
         className="narrow-note-info-container"
@@ -82,6 +82,23 @@ export default function SingleNote(props) {
           <span className="note-info-class">{class_name}</span>
           <span className="note-info-user">{props.user_name}</span>
           <span className="note-info-price">${price}</span>
+        </div>
+      </div>
+    );
+  } else if (props.noteStyle === "forSale") {
+    return (
+      <div className="forSale-note-info-container">
+        <div className="img-container">
+          <img src={image} alt="" className="noteImage" />
+        </div>
+        <div className="note-info-container">
+          <span className="note-info-class">{class_name}</span>
+          <span className="note-info-user">{props.user_name}</span>
+          <span className="note-info-price">${price}</span>
+        </div>
+        <div className="button-row-container">
+          <Button>Edit</Button>
+          <Button>Delete</Button>
         </div>
       </div>
     );

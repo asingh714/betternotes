@@ -11,9 +11,9 @@ export const fetchNotes = () => (dispatch) => {
     .then((result) => {
       dispatch({
         type: NOTE_FETCH_SUCCESS,
-        payload: result.data.sort(
-          (a, b) => a["created_date"] - b["created_date"]
-        ),
+        payload: result.data
+          ? result.data.sort((a, b) => a["created_date"] - b["created_date"])
+          : [],
       });
     })
     .catch((error) => {
@@ -51,9 +51,11 @@ export const fetchUserProfileNotes = () => (dispatch) => {
   axiosWithAuth()
     .get("/notes/myNotes")
     .then((result) => {
+      const notes = result.data;
+      console.log(notes);
       dispatch({
         type: FETCH_USER_PROFILE_NOTES_SUCCESS,
-        payload: result.data,
+        payload: result.data ? result.data : [],
       });
     })
     .catch((error) => {

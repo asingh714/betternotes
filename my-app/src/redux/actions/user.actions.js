@@ -166,7 +166,6 @@ export const fetchOwnProfileData = () => (dispatch) => {
   axiosWithAuth()
     .get("/user/profile")
     .then((result) => {
-      localStorage.setItem("profileData", result.data);
       dispatch({
         type: GET_OWN_USER_PROFILE_SUCCESS,
         payload: result.data,

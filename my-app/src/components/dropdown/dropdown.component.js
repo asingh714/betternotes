@@ -4,7 +4,7 @@ import "./dropdown.styles.scss";
 export default function Dropdown(props) {
   return (
     <>
-      {props.hasLabel && <label htmlFor="dropdown">{props.label}</label>}
+      {props.hasLabel && <label htmlFor="dropdown" className="label-style">{props.label}</label>}
       <select
         id="dropdown"
         className={props.dropdownStyle}

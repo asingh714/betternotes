@@ -19,7 +19,7 @@ const initialState = {
   isFetchingSingleNote: false,
   hasFetchedSingleNote: false,
   singleNoteError: "",
-  userProfileNotes: {},
+  userProfileNotes: [],
   isFetchingUserProfileNotes: false,
   hasFetchedUserProfileNotes: false,
   fetchingUserProfileNotesError: "",
@@ -78,7 +78,7 @@ const notesReducer = (state = initialState, action) => {
     case FETCH_USER_PROFILE_NOTES_START:
       return {
         ...state,
-        userProfileNotes: {},
+        userProfileNotes: [],
         isFetchingUserProfileNotes: true,
         hasFetchedUserProfileNotes: false,
         fetchingUserProfileNotesError: "",
@@ -94,7 +94,7 @@ const notesReducer = (state = initialState, action) => {
     case FETCH_USER_PROFILE_NOTES_FAILURE:
       return {
         ...state,
-        userProfileNotes: {},
+        userProfileNotes: [],
         isFetchingUserProfileNotes: false,
         hasFetchedUserProfileNotes: false,
         fetchingUserProfileNotesError:

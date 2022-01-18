@@ -1,10 +1,11 @@
 import React from "react";
 
 import SingleNote from "../singleNote/singleNote.component";
+import "./notes.styles.scss";
 
 export default function Notes(props) {
   return (
-    <>
+    <div className={props.notesStyle}>
       {props.notes.map((note) => (
         <SingleNote
           note={note}
@@ -14,6 +15,6 @@ export default function Notes(props) {
           {...props}
         />
       ))}
-    </>
+    </div>
   );
 }

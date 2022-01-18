@@ -104,9 +104,9 @@ class NotesDashboard extends Component {
           filterNoteChanges={this.filterNoteChanges}
           filterMenuSubmit={this.filterMenuSubmit}
         />
-        <div>
+        <div className="right-notesDashboardContainer">
           <Dropdown
-            dropdownStyle=""
+            dropdownStyle="filterMenu"
             hasLabel={true}
             label="Sort by"
             onChange={this.sortByChange}
@@ -115,10 +115,18 @@ class NotesDashboard extends Component {
           />
           {this.state.error && <span>No data</span>}
           {this.state.filteredNotes.length > 0 && this.state.error === "" && (
-            <Notes notes={this.state.filteredNotes} noteStyle="wide" />
+            <Notes
+              notes={this.state.filteredNotes}
+              notesStyle="notes-dashboard"
+              noteStyle="wide"
+            />
           )}
           {this.state.error === "" && this.state.filteredNotes <= 0 && (
-            <Notes notes={this.state.notes} noteStyle="wide" />
+            <Notes
+              notes={this.state.notes}
+              notesStyle="notes-dashboard"
+              noteStyle="wide"
+            />
           )}
         </div>
       </div>

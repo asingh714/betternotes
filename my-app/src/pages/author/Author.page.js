@@ -45,7 +45,7 @@ function Author({
       </div>
       <p>{user_description}</p>
       <h4>My Work</h4>
-      <Notes notes={userNotes} noteStyle="narrow" user_name={user_name} />
+      <Notes notes={userNotes} notesStyle="notes-author" noteStyle="narrow" user_name={user_name} />
     </div>
   );
 }
