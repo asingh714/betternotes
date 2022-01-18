@@ -9,6 +9,7 @@ import Dropdown from "../../components/dropdown/dropdown.component";
 import Button from "../../components/button/button.component";
 import ImpText from "../../components/imp-text/impText.component";
 import { withRouter } from "../../utils/withRouter";
+import { updateUserProfile } from "../../redux/actions/user.actions";
 
 import "./EditProfilePageForm.styles.scss";
 
@@ -35,6 +36,11 @@ class EditProfilePageForm extends Component {
       }
     };
     reader.readAsDataURL(event.target.files[0]);
+  };
+
+  handleUpdateUser = (event) => {
+    event.preventDefault();
+    this.props.updateUserProfile(this.state, this.props.user["unique_user_id"]);
   };
 
   navigateToProfile = () => {
@@ -100,7 +106,13 @@ class EditProfilePageForm extends Component {
             value={this.state.user_description}
             className="user-edit"
           ></textarea>
-          <Button type="submit">Submit</Button>
+          <Button
+            handleSubmit={this.handleUpdateUser}
+            type="submit"
+            buttonStyle="large-bluefour-btn"
+          >
+            Submit
+          </Button>
         </form>
       </div>
     );
@@ -108,7 +120,11 @@ class EditProfilePageForm extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    user: state.user.profileData,
+  };
 };
 
-export default connect(mapStateToProps, {})(withRouter(EditProfilePageForm));
+export default connect(mapStateToProps, { updateUserProfile })(
+  withRouter(EditProfilePageForm)
+);

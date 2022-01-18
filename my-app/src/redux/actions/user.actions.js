@@ -65,9 +65,10 @@ export const loginUser = (credentials) => (dispatch) => {
   axiosWithAuth()
     .post("/auth/login", credentials)
     .then((result) => {
-      console.log(result);
+      console.log(result.data);
       localStorage.setItem("token", result.data.token);
       localStorage.setItem("username", result.data.username);
+      // localStorage.setItem("profileData);
       dispatch({ type: USER_LOGIN_SUCCESS, payload: result.data });
     })
     .catch((error) => {
@@ -165,6 +166,7 @@ export const fetchOwnProfileData = () => (dispatch) => {
   axiosWithAuth()
     .get("/user/profile")
     .then((result) => {
+      localStorage.setItem("profileData", result.data);
       dispatch({
         type: GET_OWN_USER_PROFILE_SUCCESS,
         payload: result.data,
@@ -172,5 +174,22 @@ export const fetchOwnProfileData = () => (dispatch) => {
     })
     .catch((error) => {
       dispatch({ type: GET_OWN_USER_PROFILE_FAILURE });
+    });
+};
+
+export const UPDATE_USER_PROFILE_START = "UPDATE_USER_PROFILE_START";
+export const UPDATE_USER_PROFILE_SUCCESS = "UPDATE_USER_PROFILE_SUCCESS";
+export const UPDATE_USER_PROFILE_FAILURE = "UPDATE_USER_PROFILE_FAILURE";
+
+export const updateUserProfile = (credentials, id) => (dispatch) => {
+  dispatch({ type: UPDATE_USER_PROFILE_START });
+  axiosWithAuth()
+    .put(`/user/${id}`, credentials)
+    .then((result) => {
+      console.log(result);
+      dispatch({ type: UPDATE_USER_PROFILE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({ type: UPDATE_USER_PROFILE_FAILURE });
     });
 };
