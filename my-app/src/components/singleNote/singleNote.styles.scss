@@ -74,7 +74,8 @@
   }
 }
 
-.narrow-note-info-container {
+.narrow-note-info-container,
+.forSale-note-info-container {
   display: flex;
   flex-direction: column;
   border: 1px solid $grey-seven;
@@ -123,11 +124,6 @@
     }
   }
 }
-
 .forSale-note-info-container {
-  // display: flex;
-  // flex-direction: column;
-  // border: 1px solid $grey-seven;
-  // cursor: pointer;
-  // max-width: 30rem;
+  align-self: flex-start;
 }

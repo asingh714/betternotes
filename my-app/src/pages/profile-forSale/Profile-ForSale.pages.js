@@ -6,6 +6,7 @@ import ProfileMenu from "../../components/profile-menu/ProfileMenu.component";
 import Notes from "../../components/notes/notes.component";
 
 import "./Profile-ForSale.styles.scss";
+import AddNoteForm from "../../components/add-note-form/addNoteForm";
 
 function ProfileForSale({ fetchUserProfileNotes, userProfileNotes, userInfo }) {
   useEffect(() => {
@@ -18,13 +19,15 @@ function ProfileForSale({ fetchUserProfileNotes, userProfileNotes, userInfo }) {
   return (
     <div className="profile-forsale-page-container">
       <ProfileMenu />
-      <Notes
-        notes={userProfileNotes}
-        notesStyle="notes-author"
-        noteStyle="forSale"
-        user_name={username}
-      />
-      {/*  <Notes notes={userNotes} notesStyle="notes-author" noteStyle="narrow" user_name={user_name} /> */}
+      <div className="profile-notes-form-container">
+        <Notes
+          notes={userProfileNotes}
+          notesStyle="notes-forSale"
+          noteStyle="forSale"
+          user_name={username}
+        />
+        <AddNoteForm />
+      </div>
     </div>
   );
 }
