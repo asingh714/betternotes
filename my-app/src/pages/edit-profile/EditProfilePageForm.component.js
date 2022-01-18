@@ -16,11 +16,12 @@ import "./EditProfilePageForm.styles.scss";
 class EditProfilePageForm extends Component {
   constructor(props) {
     super(props);
+    console.log(this.props.user);
     this.state = {
-      profile_image: image,
-      school_name: "",
-      user_grade_level: "",
-      user_description: "",
+      profile_image: this.props.user.profile_image || image,
+      school_name: this.props.user.school_name || "",
+      user_grade_level: this.props.user.user_grade_level || "",
+      user_description: this.props.user.user_description || "",
     };
   }
   handleInputChange = (event) => {
@@ -41,10 +42,11 @@ class EditProfilePageForm extends Component {
   handleUpdateUser = (event) => {
     event.preventDefault();
     this.props.updateUserProfile(this.state, this.props.user["unique_user_id"]);
+    this.props.navigate("/profile");
   };
 
   navigateToProfile = () => {
-    this.props.navigate("/home");
+    this.props.navigate("/profile");
   };
   render() {
     return (
