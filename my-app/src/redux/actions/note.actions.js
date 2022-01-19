@@ -51,8 +51,6 @@ export const fetchUserProfileNotes = () => (dispatch) => {
   axiosWithAuth()
     .get("/notes/myNotes")
     .then((result) => {
-      const notes = result.data;
-      console.log(notes);
       dispatch({
         type: FETCH_USER_PROFILE_NOTES_SUCCESS,
         payload: result.data ? result.data : [],
@@ -60,5 +58,24 @@ export const fetchUserProfileNotes = () => (dispatch) => {
     })
     .catch((error) => {
       dispatch({ type: FETCH_USER_PROFILE_NOTES_FAILURE });
+    });
+};
+
+export const ADD_NOTE_START = "ADD_NOTE_START";
+export const ADD_NOTE_SUCCESS = "ADD_NOTE_SUCCESS";
+export const ADD_NOTE_FAILURE = "ADD_NOTE_FAILURE";
+
+// THIS IS NOT WORKING.
+export const createNote = (note) => (dispatch) => {
+  dispatch({ type: ADD_NOTE_START });
+  axiosWithAuth()
+    .post("/notes", note)
+    .then((result) => {
+      console.log(result);
+      dispatch({ type: ADD_NOTE_SUCCESS });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: ADD_NOTE_FAILURE });
     });
 };

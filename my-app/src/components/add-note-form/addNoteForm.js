@@ -1,12 +1,15 @@
+import { connect } from "react-redux";
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import image from "../../new_user.png";
 
+import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import Dropdown from "../dropdown/dropdown.component";
+import { createNote } from "../../redux/actions/note.actions";
 
 import "./addNoteForm.styles.scss";
-export default function AddNoteForm({}) {
+function AddNoteForm({ createNote }) {
   const initialState = {
     document: document.length > 0 ? "" : image,
     note_name: "",
@@ -27,10 +30,17 @@ export default function AddNoteForm({}) {
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
-    setNote((prevState) => ({
-      ...prevState,
-      [event.target.name]: event.target.value,
-    }));
+    if (event.target.name === "price") {
+      setNote((prevState) => ({
+        ...prevState,
+        price: parseInt(event.target.value),
+      }));
+    } else {
+      setNote((prevState) => ({
+        ...prevState,
+        [event.target.name]: event.target.value,
+      }));
+    }
   };
   const fileSelectedHandler = (event) => {
     const reader = new FileReader();
@@ -44,6 +54,12 @@ export default function AddNoteForm({}) {
     };
     reader.readAsDataURL(event.target.files[0]);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    createNote(note);
+  };
+
   return (
     <form className="add-note-form-container">
       <div className="img-container">
@@ -76,9 +92,98 @@ export default function AddNoteForm({}) {
         label="Grade Level"
         onChange={handleInputChange}
         options={["Grade 9", "Grade 10", "Grade 11", "Grade 12", "College"]}
-        name="user_grade_level"
+        name="grade_level"
         value={note.grade_level}
       />
+      <FormInput
+        name="class_name"
+        handleChange={handleInputChange}
+        placeholder="Class Name"
+        type="text"
+        value={note.class_name}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="teacher"
+        handleChange={handleInputChange}
+        placeholder="Teacher"
+        type="text"
+        value={note.teacher}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="subject"
+        handleChange={handleInputChange}
+        placeholder="Subject"
+        type="text"
+        value={note.subject}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="school"
+        handleChange={handleInputChange}
+        placeholder="School"
+        type="text"
+        value={note.school}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="year"
+        handleChange={handleInputChange}
+        placeholder="Year"
+        type="text"
+        value={note.year}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="language"
+        handleChange={handleInputChange}
+        placeholder="Language"
+        type="text"
+        value={note.language}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="price"
+        handleChange={handleInputChange}
+        placeholder="Price"
+        type="number"
+        value={note.price}
+        inputStyle="user-edit"
+      />
+      <FormInput
+        name="pages"
+        handleChange={handleInputChange}
+        placeholder="Pages"
+        type="text"
+        value={note.pages}
+        inputStyle="user-edit"
+      />
+      <textarea
+        name="short_description"
+        onChange={handleInputChange}
+        placeholder="Short Description"
+        type="text"
+        value={note.short_description}
+        className="user-edit"
+      ></textarea>
+      <textarea
+        name="long_description"
+        onChange={handleInputChange}
+        placeholder="Long Description"
+        type="text"
+        value={note.long_description}
+        className="user-edit"
+      ></textarea>
+      <Button
+        handleSubmit={handleSubmit}
+        type="submit"
+        buttonStyle="large-bluefour-btn"
+      >
+        Submit
+      </Button>
     </form>
   );
 }
+
+export default connect(null, { createNote })(AddNoteForm);

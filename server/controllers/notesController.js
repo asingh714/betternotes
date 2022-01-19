@@ -69,7 +69,6 @@ const createNote = async (req, res) => {
         teacher,
         user_id: subject_token,
       };
-
       db("notes")
         .insert(newProduct)
         .then((result) => {
