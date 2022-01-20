@@ -11,7 +11,8 @@ import { createNote } from "../../redux/actions/note.actions";
 import "./addNoteForm.styles.scss";
 function AddNoteForm({ createNote }) {
   const initialState = {
-    document: document.length > 0 ? "" : image,
+    displayDoc: "" || image,
+    document: "" || image,
     note_name: "",
     grade_level: "",
     class_name: "",
@@ -48,7 +49,8 @@ function AddNoteForm({ createNote }) {
       if (reader.readyState === 2) {
         setNote((prevState) => ({
           ...prevState,
-          document: reader.result,
+          displayDoc: reader.result,
+          document: event.target.files[0],
         }));
       }
     };
@@ -57,7 +59,21 @@ function AddNoteForm({ createNote }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    createNote(note);
+    let formData = new FormData();
+    formData.append("document", note.document);
+    formData.append("note_name", note.note_name);
+    formData.append("grade_level", note.grade_level);
+    formData.append("class_name", note.class_name);
+    formData.append("teacher", note.teacher);
+    formData.append("subject", note.subject);
+    formData.append("school", note.school);
+    formData.append("year", note.year);
+    formData.append("language", note.language);
+    formData.append("price", note.price);
+    formData.append("pages", note.pages);
+    formData.append("short_description", note.short_description);
+    formData.append("long_description", note.long_description);
+    createNote(formData);
   };
 
   return (
@@ -66,16 +82,16 @@ function AddNoteForm({ createNote }) {
         <label className="file-label">
           <span>Add Note Document</span>
           <img
-            src={note.document}
+            src={note.displayDoc}
             alt="note"
             // className="edit-image"
           />
           <FormInput
-            name="profile_image"
+            name="document"
             handleChange={fileSelectedHandler}
             type="file"
             // inputStyle="user-edit"
-            // accept="image/*"
+            accept="image/*"
           />
         </label>
       </div>

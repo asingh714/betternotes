@@ -16,8 +16,8 @@ import "./EditProfilePageForm.styles.scss";
 class EditProfilePageForm extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props.user);
     this.state = {
+      display_image: this.props.user.profile_image || image,
       profile_image: this.props.user.profile_image || image,
       school_name: this.props.user.school_name || "",
       user_grade_level: this.props.user.user_grade_level || "",
@@ -33,7 +33,10 @@ class EditProfilePageForm extends Component {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        this.setState({ profile_image: reader.result });
+        this.setState({
+          display_image: reader.result,
+          profile_image: event.target.files[0],
+        });
       }
     };
     reader.readAsDataURL(event.target.files[0]);
@@ -41,7 +44,16 @@ class EditProfilePageForm extends Component {
 
   handleUpdateUser = (event) => {
     event.preventDefault();
-    this.props.updateUserProfile(this.state, this.props.user["unique_user_id"]);
+    let formData = new FormData();
+    const { profile_image, school_name, user_grade_level, user_description } =
+      this.state;
+
+    formData.append("profile_image", profile_image);
+    formData.append("school_name", school_name);
+    formData.append("user_grade_level", user_grade_level);
+    formData.append("user_description", user_description);
+
+    this.props.updateUserProfile(formData, this.props.user["unique_user_id"]);
     this.props.navigate("/profile");
   };
 
@@ -70,7 +82,7 @@ class EditProfilePageForm extends Component {
             <label className="file-label">
               <span>Update Image</span>
               <img
-                src={this.state.profile_image}
+                src={this.state.display_image}
                 alt="profile"
                 className="edit-image"
               />

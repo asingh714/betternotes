@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -7,7 +8,14 @@ const cors = require("cors");
 const server = express();
 server.use(helmet());
 server.use(cors());
-server.use(express.json());
+// server.use(express.json());
+server.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 50000,
+  })
+);
 server.use(morgan("tiny"));
 
 const port = process.env.PORT || 4000;

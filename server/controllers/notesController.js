@@ -19,7 +19,7 @@ const createNote = async (req, res) => {
   } = req.body;
   const subject_token = req.decodedToken.subject;
   const validationErrors = [];
-
+  console.log("createNote", req.file);
   if (
     !note_name ||
     !short_description ||
@@ -40,6 +40,7 @@ const createNote = async (req, res) => {
       message: "Some of these fields are missing.",
     });
   }
+
   if (validationErrors.length) {
     const errorObject = {
       error: true,

@@ -67,11 +67,12 @@ export const ADD_NOTE_FAILURE = "ADD_NOTE_FAILURE";
 
 // THIS IS NOT WORKING.
 export const createNote = (note) => (dispatch) => {
+  console.log("note", note);
   dispatch({ type: ADD_NOTE_START });
   axiosWithAuth()
     .post("/notes", note)
     .then((result) => {
-      console.log(result);
+      console.log("result", result);
       dispatch({ type: ADD_NOTE_SUCCESS });
     })
     .catch((error) => {

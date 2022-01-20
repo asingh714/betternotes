@@ -9,7 +9,7 @@ const getAllUsers = (req, res) => {
 
 const getUserInfo = (req, res) => {
   const { unique_user_id } = req.params;
-  console.log(unique_user_id);
+  // console.log(unique_user_id);
   db("users")
     .where({ unique_user_id })
     .first()
@@ -52,7 +52,7 @@ const getUserInfo = (req, res) => {
 
 const showCurrentUser = (req, res) => {
   const token = req.headers.authorization;
-  console.log(token);
+  // console.log(token);
   // Since this is a restricted route, we know for sure we can verify this token
   const profileData = jwt.verify(token, process.env.JWT_SECRET);
   const username = profileData["username"];
@@ -61,7 +61,7 @@ const showCurrentUser = (req, res) => {
     .where({ username })
     .first()
     .then((user) => {
-      console.log(user);
+      // console.log(user);
       if (!user) {
         res.status(404).json({
           error: "You cannot access this user",
@@ -101,10 +101,8 @@ const showCurrentUser = (req, res) => {
 const updateUserInfo = async (req, res) => {
   const { unique_user_id } = req.params;
   const changes = req.body;
-
   if (req.file) {
     const result = await cloudinary.uploader.upload(req.file.path);
-    console.log(result);
     db("users")
       .where({ unique_user_id })
       .update({ ...changes, profile_image: result.url })
@@ -147,7 +145,7 @@ const deleteUserInfo = (req, res) => {
   // const { unique_user_id } = req.params;
   const subject = req.decodedToken.subject;
   // console.log(unique_user_id);
-  console.log(subject);
+  // console.log(subject);
 
   db("users")
     .where({ id: subject })
@@ -213,7 +211,7 @@ const updatePassword = (req, res) => {
           });
         } else {
           const hashed_password = bcrypt.hashSync(new_password, 14);
-          console.log(hashed_password);
+          // console.log(hashed_password);
           db("users")
             .where({ username })
             .update({
@@ -236,7 +234,7 @@ const updatePassword = (req, res) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({
           error: "Sorry there was an error.",
         });
