@@ -81,100 +81,107 @@ function AddNoteForm({ createNote }) {
       <div className="img-container">
         <label className="file-label">
           <span>Add Note Document</span>
-          <img
-            src={note.displayDoc}
-            alt="note"
-            // className="edit-image"
-          />
+          <img src={note.displayDoc} alt="note" className="edit-image" />
           <FormInput
             name="document"
             handleChange={fileSelectedHandler}
             type="file"
-            // inputStyle="user-edit"
+            inputStyle="user-edit"
             accept="image/*"
           />
         </label>
       </div>
-      <FormInput
-        name="note_name"
-        handleChange={handleInputChange}
-        placeholder="Note Name"
-        type="text"
-        value={note.note_name}
-        inputStyle="user-edit"
-      />
-      <Dropdown
-        dropdownStyle="user-edit"
-        label="Grade Level"
-        onChange={handleInputChange}
-        options={["Grade 9", "Grade 10", "Grade 11", "Grade 12", "College"]}
-        name="grade_level"
-        value={note.grade_level}
-      />
-      <FormInput
-        name="class_name"
-        handleChange={handleInputChange}
-        placeholder="Class Name"
-        type="text"
-        value={note.class_name}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="teacher"
-        handleChange={handleInputChange}
-        placeholder="Teacher"
-        type="text"
-        value={note.teacher}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="subject"
-        handleChange={handleInputChange}
-        placeholder="Subject"
-        type="text"
-        value={note.subject}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="school"
-        handleChange={handleInputChange}
-        placeholder="School"
-        type="text"
-        value={note.school}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="year"
-        handleChange={handleInputChange}
-        placeholder="Year"
-        type="text"
-        value={note.year}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="language"
-        handleChange={handleInputChange}
-        placeholder="Language"
-        type="text"
-        value={note.language}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="price"
-        handleChange={handleInputChange}
-        placeholder="Price"
-        type="number"
-        value={note.price}
-        inputStyle="user-edit"
-      />
-      <FormInput
-        name="pages"
-        handleChange={handleInputChange}
-        placeholder="Pages"
-        type="text"
-        value={note.pages}
-        inputStyle="user-edit"
-      />
+
+      <div className="form-row">
+        <FormInput
+          name="note_name"
+          handleChange={handleInputChange}
+          placeholder="Note Name"
+          type="text"
+          value={note.note_name}
+          inputStyle="user-edit"
+        />
+        <Dropdown
+          dropdownStyle="user-edit"
+          label="Grade Level"
+          onChange={handleInputChange}
+          options={["Grade 9", "Grade 10", "Grade 11", "Grade 12", "College"]}
+          name="grade_level"
+          value={note.grade_level}
+        />
+      </div>
+      <div className="form-row">
+        <FormInput
+          name="class_name"
+          handleChange={handleInputChange}
+          placeholder="Class Name"
+          type="text"
+          value={note.class_name}
+          inputStyle="user-edit"
+        />
+        <FormInput
+          name="teacher"
+          handleChange={handleInputChange}
+          placeholder="Teacher"
+          type="text"
+          value={note.teacher}
+          inputStyle="user-edit"
+        />
+      </div>
+      <div className="form-row">
+        <FormInput
+          name="subject"
+          handleChange={handleInputChange}
+          placeholder="Subject"
+          type="text"
+          value={note.subject}
+          inputStyle="user-edit"
+        />
+        <FormInput
+          name="school"
+          handleChange={handleInputChange}
+          placeholder="School"
+          type="text"
+          value={note.school}
+          inputStyle="user-edit"
+        />
+      </div>
+      <div className="form-row">
+        <FormInput
+          name="year"
+          handleChange={handleInputChange}
+          placeholder="Year"
+          type="text"
+          value={note.year}
+          inputStyle="user-edit"
+        />
+        <FormInput
+          name="language"
+          handleChange={handleInputChange}
+          placeholder="Language"
+          type="text"
+          value={note.language}
+          inputStyle="user-edit"
+        />
+      </div>
+      <div className="form-row">
+        <FormInput
+          name="price"
+          handleChange={handleInputChange}
+          placeholder="Price"
+          type="number"
+          value={note.price}
+          inputStyle="user-edit"
+        />
+        <FormInput
+          name="pages"
+          handleChange={handleInputChange}
+          placeholder="Pages"
+          type="text"
+          value={note.pages}
+          inputStyle="user-edit"
+        />
+      </div>
       <textarea
         name="short_description"
         onChange={handleInputChange}

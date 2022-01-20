@@ -1,5 +1,40 @@
 @import "../../globalStyles/variables.scss";
 
 .add-note-form-container {
-  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10rem 0;
+
+  .img-container {
+    .file-label {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 5px;
+      margin-bottom: 5rem;
+      cursor: pointer;
+      background-color: $grey-nine;
+      border: 1px solid $blue-five;
+      padding: 2rem;
+      max-width: 50rem;
+
+      span {
+        font-weight: 500;
+        color: $blue-five;
+      }
+    }
+
+    .edit-image {
+      margin: 2rem;
+      height: 20rem;
+      width: 20rem;
+    }
+  }
+
+  textarea {
+    width: 60rem;
+  }
 }
