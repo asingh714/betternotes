@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Document, Page, pdfjs } from "react-pdf";
 import image from "../../new_user.png";
+import { deleteNote } from "../../redux/actions/note.actions";
 
 import { useNavigate } from "react-router-dom";
 
@@ -10,7 +12,7 @@ import "./singleNote.styles.scss";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-export default function SingleNote(props) {
+function SingleNote(props) {
   const {
     document,
     class_name,
@@ -30,6 +32,13 @@ export default function SingleNote(props) {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
+
+  function handleDelete(event) {
+    event.preventDefault();
+    props.deleteNote(unique_note_id);
+    // console.log(unique_note_id);
+  }
+
   if (props.noteStyle === "wide") {
     return (
       <div
@@ -98,9 +107,11 @@ export default function SingleNote(props) {
         </div>
         <div className="button-row-container">
           <Button>Edit</Button>
-          <Button>Delete</Button>
+          <Button handleSubmit={handleDelete}>Delete</Button>
         </div>
       </div>
     );
   }
 }
+
+export default connect(null, { deleteNote })(SingleNote);

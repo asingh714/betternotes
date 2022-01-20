@@ -8,6 +8,9 @@ import {
   FETCH_USER_PROFILE_NOTES_START,
   FETCH_USER_PROFILE_NOTES_SUCCESS,
   FETCH_USER_PROFILE_NOTES_FAILURE,
+  ADD_NOTE_START,
+  ADD_NOTE_SUCCESS,
+  ADD_NOTE_FAILURE,
 } from "../actions/note.actions";
 
 const initialState = {
@@ -23,6 +26,9 @@ const initialState = {
   isFetchingUserProfileNotes: false,
   hasFetchedUserProfileNotes: false,
   fetchingUserProfileNotesError: "",
+  isAddingNote: false,
+  hasAddedNote: false,
+  addingNoteError: "",
 };
 
 const notesReducer = (state = initialState, action) => {
@@ -99,6 +105,24 @@ const notesReducer = (state = initialState, action) => {
         hasFetchedUserProfileNotes: false,
         fetchingUserProfileNotesError:
           "There was an error while fetching your notes.",
+      };
+    case ADD_NOTE_START:
+      return {
+        isAddingNote: true,
+        hasAddedNote: false,
+        addingNoteError: "",
+      };
+    case ADD_NOTE_SUCCESS:
+      return {
+        isAddingNote: false,
+        hasAddedNote: true,
+        addingNoteError: "",
+      };
+    case ADD_NOTE_FAILURE:
+      return {
+        isAddingNote: false,
+        hasAddedNote: false,
+        addingNoteError: "There was an error while adding this note.",
       };
     default:
       return state;

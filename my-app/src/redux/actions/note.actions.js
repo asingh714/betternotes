@@ -65,18 +65,31 @@ export const ADD_NOTE_START = "ADD_NOTE_START";
 export const ADD_NOTE_SUCCESS = "ADD_NOTE_SUCCESS";
 export const ADD_NOTE_FAILURE = "ADD_NOTE_FAILURE";
 
-// THIS IS NOT WORKING.
 export const createNote = (note) => (dispatch) => {
   console.log("note", note);
   dispatch({ type: ADD_NOTE_START });
   axiosWithAuth()
     .post("/notes", note)
     .then((result) => {
-      console.log("result", result);
       dispatch({ type: ADD_NOTE_SUCCESS });
     })
     .catch((error) => {
-      console.log(error);
       dispatch({ type: ADD_NOTE_FAILURE });
+    });
+};
+
+export const DELETE_NOTE_START = "DELETE_NOTE_START";
+export const DELETE_NOTE_SUCCESS = "DELETE_NOTE_SUCCESS";
+export const DELETE_NOTE_FAILURE = "DELETE_NOTE_FAILURE";
+
+export const deleteNote = (unique_note_id) => (dispatch) => {
+  dispatch({ type: DELETE_NOTE_START });
+  axiosWithAuth()
+    .delete(`/notes/${unique_note_id}`)
+    .then((result) => {
+      dispatch({ type: DELETE_NOTE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({ type: DELETE_NOTE_FAILURE });
     });
 };
