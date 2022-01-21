@@ -60,3 +60,25 @@ a:visited {
   font-size: 1.4rem;
   letter-spacing: 1px;
 }
+
+.edit-text {
+  color: $blue-seven;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+    transform: translateX(1px);
+  }
+}
+
+.delete-text {
+  color: $red-five;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: all 0.3s;
+  &:hover {
+    text-decoration: underline;
+    transform: translateX(1px);
+  }
+}

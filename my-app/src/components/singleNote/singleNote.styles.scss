@@ -128,4 +128,12 @@
 }
 .forSale-note-info-container {
   align-self: flex-start;
+
+  .button-row-container {
+    display: flex;
+    padding: 0 1.5rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    // border: 1px solid red;
+  }
 }

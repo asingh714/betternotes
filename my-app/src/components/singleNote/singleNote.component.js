@@ -7,6 +7,7 @@ import { deleteNote } from "../../redux/actions/note.actions";
 import { useNavigate } from "react-router-dom";
 
 import Button from "../button/button.component";
+import ImpText from "../imp-text/impText.component";
 
 import "./singleNote.styles.scss";
 
@@ -96,7 +97,10 @@ function SingleNote(props) {
     );
   } else if (props.noteStyle === "forSale") {
     return (
-      <div className="forSale-note-info-container">
+      <div
+        className="forSale-note-info-container"
+        onClick={(event) => navigate(`/notes/${props.id}`)}
+      >
         <div className="img-container">
           <img src={document} alt="" className="noteImage" />
         </div>
@@ -106,8 +110,10 @@ function SingleNote(props) {
           <span className="note-info-price">${price}</span>
         </div>
         <div className="button-row-container">
-          <Button>Edit</Button>
-          <Button handleSubmit={handleDelete}>Delete</Button>
+          <ImpText textStyle="edit-text">Edit</ImpText>
+          <ImpText textStyle="delete-text" handleClick={handleDelete}>
+            Delete
+          </ImpText>
         </div>
       </div>
     );

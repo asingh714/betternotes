@@ -9,13 +9,14 @@
   margin: 2rem 0 0 2rem;
 }
 
-.notes-author {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+// .notes-author {
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: center;
+// }
 
-.notes-forSale {
+.notes-forSale,
+.notes-author {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
