@@ -77,6 +77,8 @@ a:visited {
   font-size: 1.6rem;
   font-weight: 500;
   transition: all 0.3s;
+  padding: 0.5rem;
+  border: 1px solid $red-five;
   &:hover {
     text-decoration: underline;
     transform: translateX(1px);

@@ -23,6 +23,28 @@
   }
 }
 
+.small-blueseven-btn {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  background-color: $blue-seven;
+  color: $white;
+  border: 1px solid $blue-seven;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  margin-left: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: $white;
+    color: $blue-seven;
+    border: 1px solid $blue-seven;
+    box-shadow: 1px 3px 7px rgba(black, 0.25);
+    letter-spacing: 2px;
+  }
+}
+
 .small-plain-btn {
   padding: 1rem 2rem;
   border-radius: 0.5rem;

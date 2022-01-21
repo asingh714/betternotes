@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Document, Page, pdfjs } from "react-pdf";
 import image from "../../new_user.png";
-import { deleteNote } from "../../redux/actions/note.actions";
 
 import { useNavigate } from "react-router-dom";
 
@@ -34,11 +33,10 @@ function SingleNote(props) {
     setNumPages(numPages);
   }
 
-  function handleDelete(event) {
-    event.preventDefault();
-    props.deleteNote(unique_note_id);
-    // console.log(unique_note_id);
-  }
+  const handleDeleteFuncs = (event) => {
+    props.setUserIdToDelete(unique_note_id);
+    props.handleDeleteModal();
+  };
 
   if (props.noteStyle === "wide") {
     return (
@@ -99,7 +97,7 @@ function SingleNote(props) {
     return (
       <div
         className="forSale-note-info-container"
-        onClick={(event) => navigate(`/notes/${props.id}`)}
+        // onClick={(event) => navigate(`/notes/${props.id}`)}
       >
         <div className="img-container">
           <img src={document} alt="" className="noteImage" />
@@ -111,7 +109,7 @@ function SingleNote(props) {
         </div>
         <div className="button-row-container">
           <ImpText textStyle="edit-text">Edit</ImpText>
-          <ImpText textStyle="delete-text" handleClick={handleDelete}>
+          <ImpText textStyle="delete-text" handleClick={handleDeleteFuncs}>
             Delete
           </ImpText>
         </div>
@@ -120,4 +118,4 @@ function SingleNote(props) {
   }
 }
 
-export default connect(null, { deleteNote })(SingleNote);
+export default connect(null, {})(SingleNote);
