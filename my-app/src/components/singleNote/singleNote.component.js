@@ -54,7 +54,7 @@ function SingleNote(props) {
         <Page pageNumber={pageNumber} />
       </Document> */}
         <div className="img-container">
-          <img src={image} alt="" className="noteImage" />
+          <img src={document} alt="note" className="noteImage" />
         </div>
 
         <div className="note-info-container">
@@ -85,7 +85,7 @@ function SingleNote(props) {
         onClick={(event) => navigate(`/notes/${props.id}`)}
       >
         <div className="img-container">
-          <img src={image} alt="" className="noteImage" />
+          <img src={document} alt="" className="noteImage" />
         </div>
         <div className="note-info-container">
           <span className="note-info-class">{class_name}</span>
@@ -98,7 +98,7 @@ function SingleNote(props) {
     return (
       <div className="forSale-note-info-container">
         <div className="img-container">
-          <img src={image} alt="" className="noteImage" />
+          <img src={document} alt="" className="noteImage" />
         </div>
         <div className="note-info-container">
           <span className="note-info-class">{class_name}</span>

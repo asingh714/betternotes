@@ -11,8 +11,8 @@ import { createNote } from "../../redux/actions/note.actions";
 import "./addNoteForm.styles.scss";
 function AddNoteForm({ createNote }) {
   const initialState = {
-    displayDoc: "" || image,
-    document: "" || image,
+    displayDoc: image,
+    document: image,
     note_name: "",
     grade_level: "",
     class_name: "",
@@ -74,6 +74,7 @@ function AddNoteForm({ createNote }) {
     formData.append("short_description", note.short_description);
     formData.append("long_description", note.long_description);
     createNote(formData);
+    setNote(initialState);
   };
 
   return (

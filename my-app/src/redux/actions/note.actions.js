@@ -66,7 +66,6 @@ export const ADD_NOTE_SUCCESS = "ADD_NOTE_SUCCESS";
 export const ADD_NOTE_FAILURE = "ADD_NOTE_FAILURE";
 
 export const createNote = (note) => (dispatch) => {
-  console.log("note", note);
   dispatch({ type: ADD_NOTE_START });
   axiosWithAuth()
     .post("/notes", note)

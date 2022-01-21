@@ -11,6 +11,9 @@ import {
   ADD_NOTE_START,
   ADD_NOTE_SUCCESS,
   ADD_NOTE_FAILURE,
+  DELETE_NOTE_START,
+  DELETE_NOTE_SUCCESS,
+  DELETE_NOTE_FAILURE,
 } from "../actions/note.actions";
 
 const initialState = {
@@ -29,6 +32,9 @@ const initialState = {
   isAddingNote: false,
   hasAddedNote: false,
   addingNoteError: "",
+  isDeletingNote: false,
+  hasDeletedNote: false,
+  deletingNoteError: "",
 };
 
 const notesReducer = (state = initialState, action) => {
@@ -123,6 +129,24 @@ const notesReducer = (state = initialState, action) => {
         isAddingNote: false,
         hasAddedNote: false,
         addingNoteError: "There was an error while adding this note.",
+      };
+    case DELETE_NOTE_START:
+      return {
+        isDeletingNote: true,
+        hasDeletedNote: false,
+        deletingNoteError: "",
+      };
+    case DELETE_NOTE_SUCCESS:
+      return {
+        isDeletingNote: false,
+        hasDeletedNote: true,
+        deletingNoteError: "",
+      };
+    case DELETE_NOTE_FAILURE:
+      return {
+        isDeletingNote: false,
+        hasDeletedNote: false,
+        deletingNoteError: "There was an error while adding this note.",
       };
     default:
       return state;
