@@ -21,7 +21,7 @@ function ProfileForSale({
   useEffect(() => {
     fetchUserProfileNotes();
     // return () => {
-    //   cleanupgit add
+    //   cleanup
     // }
   }, [fetchUserProfileNotes, isFetchingNotes, isAddingNote, isDeletingNote]);
   const username = localStorage.getItem("username");

@@ -76,7 +76,9 @@
 
 .narrow-note-info-container,
 .forSale-note-info-container {
+  // flex: 1 0 21%;
   display: flex;
+  // justify-content: space-around;
   flex-direction: column;
   border: 1px solid $grey-seven;
   cursor: pointer;
