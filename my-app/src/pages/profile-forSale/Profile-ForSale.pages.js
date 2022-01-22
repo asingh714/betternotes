@@ -70,23 +70,29 @@ function ProfileForSale({
         )}
         <AddNoteForm />
         {showDelete && (
-          <Modal modalStyle="modal-container">
-            <ImpText textStyle="large-plain-text">
-              Are you sure you want to delete this item?
-            </ImpText>
-            <Button
-              handleSubmit={handleDeleteModal}
-              buttonStyle="small-bluesix-btn"
-            >
-              No
-            </Button>
-            <Button
-              handleSubmit={handleDeleteNote}
-              buttonStyle="small-blueseven-btn"
-            >
-              Yes
-            </Button>
-          </Modal>
+          <div className="bg-container" onClick={handleDeleteModal}>
+            {showDelete && (
+              <Modal modalStyle="modal-container">
+                <ImpText textStyle="large-plain-text">
+                  Are you sure you want to delete this item?
+                </ImpText>
+                <div className="button-container">
+                  <Button
+                    handleSubmit={handleDeleteModal}
+                    buttonStyle="small-bluesix-btn"
+                  >
+                    No
+                  </Button>
+                  <Button
+                    handleSubmit={handleDeleteNote}
+                    buttonStyle="small-blueseven-btn"
+                  >
+                    Yes
+                  </Button>
+                </div>
+              </Modal>
+            )}
+          </div>
         )}
       </div>
     </div>
