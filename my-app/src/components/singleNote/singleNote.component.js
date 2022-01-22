@@ -34,8 +34,14 @@ function SingleNote(props) {
   }
 
   const handleDeleteFuncs = (event) => {
-    props.setUserIdToDelete(unique_note_id);
+    event.stopPropagation();
+    props.setNoteIdToDelete(unique_note_id);
     props.handleDeleteModal();
+  };
+
+  const handleEdit = (event) => {
+    event.stopPropagation();
+    props.setNoteIdToEdit(unique_note_id);
   };
 
   if (props.noteStyle === "wide") {
@@ -97,7 +103,7 @@ function SingleNote(props) {
     return (
       <div
         className="forSale-note-info-container"
-        // onClick={(event) => navigate(`/notes/${props.id}`)}
+        onClick={(event) => navigate(`/notes/${props.id}`)}
       >
         <div className="img-container">
           <img src={document} alt="" className="noteImage" />
@@ -108,8 +114,16 @@ function SingleNote(props) {
           <span className="note-info-price">${price}</span>
         </div>
         <div className="button-row-container">
-          <ImpText textStyle="edit-text">Edit</ImpText>
-          <ImpText textStyle="delete-text" handleClick={handleDeleteFuncs}>
+          <ImpText
+            textStyle="edit-text"
+            handleClick={(event) => handleEdit(event)}
+          >
+            Edit
+          </ImpText>
+          <ImpText
+            textStyle="delete-text"
+            handleClick={(event) => handleDeleteFuncs(event)}
+          >
             Delete
           </ImpText>
         </div>

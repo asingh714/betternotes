@@ -24,14 +24,28 @@ function ProfileForSale({
   deleteNote,
 }) {
   const [showDelete, setShowDelete] = useState(false);
-  const [userIdToDelete, setUserIdToDelete] = useState(null);
+  const [noteIdToDelete, setNoteIdToDelete] = useState(null);
+  const [noteIdToEdit, setNoteIdToEdit] = useState(null);
+  const [noteToEdit, setNoteToEdit] = useState({});
 
   useEffect(() => {
     fetchUserProfileNotes();
+    if (noteIdToEdit !== "") {
+      const note = userProfileNotes.find(
+        (note) => note.unique_note_id === noteIdToEdit
+      );
+      setNoteToEdit(note);
+    }
     // return () => {
     //   cleanup
     // }
-  }, [fetchUserProfileNotes, isFetchingNotes, isAddingNote, isDeletingNote]);
+  }, [
+    fetchUserProfileNotes,
+    isFetchingNotes,
+    isAddingNote,
+    isDeletingNote,
+    noteIdToEdit,
+  ]);
   const username = localStorage.getItem("username");
 
   const handleDeleteModal = () => {
@@ -39,7 +53,7 @@ function ProfileForSale({
   };
 
   const handleDeleteNote = () => {
-    deleteNote(userIdToDelete);
+    deleteNote(noteIdToDelete);
     setShowDelete(!showDelete);
   };
 
@@ -65,10 +79,12 @@ function ProfileForSale({
             noteStyle="forSale"
             user_name={username}
             handleDeleteModal={handleDeleteModal}
-            setUserIdToDelete={setUserIdToDelete}
+            setNoteIdToDelete={setNoteIdToDelete}
+            setNoteIdToEdit={setNoteIdToEdit}
+            // setNoteToEdit={setNoteToEdit}
           />
         )}
-        <AddNoteForm />
+        <AddNoteForm noteToEdit={noteToEdit} />
         {showDelete && (
           <div className="bg-container" onClick={handleDeleteModal}>
             {showDelete && (

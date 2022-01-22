@@ -9,7 +9,7 @@ import Dropdown from "../dropdown/dropdown.component";
 import { createNote } from "../../redux/actions/note.actions";
 
 import "./addNoteForm.styles.scss";
-function AddNoteForm({ createNote }) {
+function AddNoteForm({ noteToEdit, createNote }) {
   const initialState = {
     displayDoc: image,
     document: image,
@@ -26,9 +26,16 @@ function AddNoteForm({ createNote }) {
     short_description: "",
     long_description: "",
   };
+
   const [note, setNote] = useState(initialState);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (noteToEdit) {
+      setNote(noteToEdit);
+    }
+  }, [noteToEdit]);
 
   const handleInputChange = (event) => {
     if (event.target.name === "price") {
@@ -82,7 +89,11 @@ function AddNoteForm({ createNote }) {
       <div className="img-container">
         <label className="file-label">
           <span>Add Note Document</span>
-          <img src={note.displayDoc} alt="note" className="edit-image" />
+          <img
+            src={noteToEdit ? noteToEdit.document : image}
+            alt="note"
+            className="edit-image"
+          />
           <FormInput
             name="document"
             handleChange={fileSelectedHandler}
@@ -204,7 +215,7 @@ function AddNoteForm({ createNote }) {
         type="submit"
         buttonStyle="large-bluefour-btn"
       >
-        Submit
+        {noteToEdit ? "Edit" : "Submit"}
       </Button>
     </form>
   );
