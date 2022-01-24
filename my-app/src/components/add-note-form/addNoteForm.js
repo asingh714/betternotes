@@ -1,15 +1,15 @@
 import { connect } from "react-redux";
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import image from "../../new_user.png";
 
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import Dropdown from "../dropdown/dropdown.component";
-import { createNote } from "../../redux/actions/note.actions";
+import { createNote, editNote } from "../../redux/actions/note.actions";
 
 import "./addNoteForm.styles.scss";
-function AddNoteForm({ noteToEdit, createNote }) {
+function AddNoteForm({ createNote, editNote, noteToEdit }) {
   const initialState = {
     displayDoc: image,
     document: image,
@@ -32,7 +32,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (noteToEdit) {
+    if (noteToEdit != null) {
       setNote(noteToEdit);
     }
   }, [noteToEdit]);
@@ -80,7 +80,11 @@ function AddNoteForm({ noteToEdit, createNote }) {
     formData.append("pages", note.pages);
     formData.append("short_description", note.short_description);
     formData.append("long_description", note.long_description);
-    createNote(formData);
+    if (noteToEdit) {
+      editNote(note.unique_note_id, formData);
+    } else {
+      createNote(formData);
+    }
     setNote(initialState);
   };
 
@@ -89,11 +93,16 @@ function AddNoteForm({ noteToEdit, createNote }) {
       <div className="img-container">
         <label className="file-label">
           <span>Add Note Document</span>
-          <img
-            src={noteToEdit ? noteToEdit.document : image}
-            alt="note"
-            className="edit-image"
-          />
+          {noteToEdit ? (
+            <img src={note.document} alt="note" className="edit-image" />
+          ) : (
+            <img
+              src={note.displayDoc || image}
+              alt="note"
+              className="edit-image"
+            />
+          )}
+
           <FormInput
             name="document"
             handleChange={fileSelectedHandler}
@@ -110,7 +119,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Note Name"
           type="text"
-          value={note.note_name}
+          value={note.note_name || ""}
           inputStyle="user-edit"
         />
         <Dropdown
@@ -119,7 +128,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           onChange={handleInputChange}
           options={["Grade 9", "Grade 10", "Grade 11", "Grade 12", "College"]}
           name="grade_level"
-          value={note.grade_level}
+          value={note.grade_level || ""}
         />
       </div>
       <div className="form-row">
@@ -128,7 +137,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Class Name"
           type="text"
-          value={note.class_name}
+          value={note.class_name || ""}
           inputStyle="user-edit"
         />
         <FormInput
@@ -136,7 +145,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Teacher"
           type="text"
-          value={note.teacher}
+          value={note.teacher || ""}
           inputStyle="user-edit"
         />
       </div>
@@ -146,7 +155,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Subject"
           type="text"
-          value={note.subject}
+          value={note.subject || ""}
           inputStyle="user-edit"
         />
         <FormInput
@@ -154,7 +163,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="School"
           type="text"
-          value={note.school}
+          value={note.school || ""}
           inputStyle="user-edit"
         />
       </div>
@@ -164,7 +173,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Year"
           type="text"
-          value={note.year}
+          value={note.year || ""}
           inputStyle="user-edit"
         />
         <FormInput
@@ -172,7 +181,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Language"
           type="text"
-          value={note.language}
+          value={note.language || ""}
           inputStyle="user-edit"
         />
       </div>
@@ -182,7 +191,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Price"
           type="number"
-          value={note.price}
+          value={note.price || ""}
           inputStyle="user-edit"
         />
         <FormInput
@@ -190,7 +199,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
           handleChange={handleInputChange}
           placeholder="Pages"
           type="text"
-          value={note.pages}
+          value={note.pages || ""}
           inputStyle="user-edit"
         />
       </div>
@@ -199,7 +208,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
         onChange={handleInputChange}
         placeholder="Short Description"
         type="text"
-        value={note.short_description}
+        value={note.short_description || ""}
         className="user-edit"
       ></textarea>
       <textarea
@@ -207,7 +216,7 @@ function AddNoteForm({ noteToEdit, createNote }) {
         onChange={handleInputChange}
         placeholder="Long Description"
         type="text"
-        value={note.long_description}
+        value={note.long_description || ""}
         className="user-edit"
       ></textarea>
       <Button
@@ -215,10 +224,10 @@ function AddNoteForm({ noteToEdit, createNote }) {
         type="submit"
         buttonStyle="large-bluefour-btn"
       >
-        {noteToEdit ? "Edit" : "Submit"}
+        Submit
       </Button>
     </form>
   );
 }
 
-export default connect(null, { createNote })(AddNoteForm);
+export default connect(null, { createNote, editNote })(AddNoteForm);

@@ -14,6 +14,9 @@ import {
   DELETE_NOTE_START,
   DELETE_NOTE_SUCCESS,
   DELETE_NOTE_FAILURE,
+  EDIT_NOTE_START,
+  EDIT_NOTE_SUCCESS,
+  EDIT_NOTE_FAILURE,
 } from "../actions/note.actions";
 
 const initialState = {
@@ -35,6 +38,9 @@ const initialState = {
   isDeletingNote: false,
   hasDeletedNote: false,
   deletingNoteError: "",
+  isEditingNote: false,
+  hasEditedNote: false,
+  editingNoteError: "",
 };
 
 const notesReducer = (state = initialState, action) => {

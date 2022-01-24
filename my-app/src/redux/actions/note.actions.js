@@ -92,3 +92,19 @@ export const deleteNote = (unique_note_id) => (dispatch) => {
       dispatch({ type: DELETE_NOTE_FAILURE });
     });
 };
+
+export const EDIT_NOTE_START = "EDIT_NOTE_START";
+export const EDIT_NOTE_SUCCESS = "EDIT_NOTE_SUCCESS";
+export const EDIT_NOTE_FAILURE = "EDIT_NOTE_FAILURE";
+
+export const editNote = (unique_note_id, note) => (dispatch) => {
+  dispatch({ type: EDIT_NOTE_START });
+  axiosWithAuth()
+    .put(`/notes/${unique_note_id}`, note)
+    .then((result) => {
+      dispatch({ type: EDIT_NOTE_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({ type: EDIT_NOTE_FAILURE });
+    });
+};

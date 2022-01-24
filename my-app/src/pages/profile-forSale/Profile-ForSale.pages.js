@@ -81,7 +81,6 @@ function ProfileForSale({
             handleDeleteModal={handleDeleteModal}
             setNoteIdToDelete={setNoteIdToDelete}
             setNoteIdToEdit={setNoteIdToEdit}
-            // setNoteToEdit={setNoteToEdit}
           />
         )}
         <AddNoteForm noteToEdit={noteToEdit} />

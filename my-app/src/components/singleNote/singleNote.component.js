@@ -41,6 +41,7 @@ function SingleNote(props) {
 
   const handleEdit = (event) => {
     event.stopPropagation();
+    event.preventDefault();
     props.setNoteIdToEdit(unique_note_id);
   };
 
