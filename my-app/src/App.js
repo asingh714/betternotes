@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -24,14 +24,16 @@ import {
 } from "./redux/actions/user.actions";
 
 function App({ userLoggedIn, fetchOwnProfileData, ...props }) {
+  const [dropdown, setDropdown] = useState(false);
+
   useEffect(() => {
     userLoggedIn();
     fetchOwnProfileData();
   }, [userLoggedIn, fetchOwnProfileData]);
   return (
     <div className="page-container">
-      <Header />
-      <div className="content-container">
+      <Header dropdown={dropdown} setDropdown={setDropdown} />
+      <div className="content-container" onClick={() => setDropdown(false)}>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/register" element={<RegisterPage />} />

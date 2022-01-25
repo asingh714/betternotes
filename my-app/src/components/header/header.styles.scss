@@ -28,10 +28,11 @@
   }
 
   .right-header-container {
-    width: 33%;
+    width: 45%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 2rem;
 
     .nav-profile-img {
       height: 5rem;
@@ -44,12 +45,16 @@
     }
 
     .nav-profile-dropdown {
-      color: $grey-nine;
-      border: 1px solid $grey-five;
+      position: absolute;
+      top: 9rem;
+      right: 2rem;
+      z-index: 10;
       display: flex;
       flex-direction: column;
       gap: 1rem;
       padding: 2rem;
+      background-color: $grey-nine;
+      border: 1px solid $grey-seven;
 
       a {
         transition: all 0.3s;
@@ -59,6 +64,11 @@
           transform: translateX(3px);
         }
       }
+    }
+
+    .nav-button-container {
+      // border: 1px solid red;
+      display: flex;
     }
   }
 }

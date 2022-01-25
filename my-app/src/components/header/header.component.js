@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
@@ -8,11 +9,18 @@ import { logoutUser } from "../../redux/actions/user.actions";
 import Button from "../button/button.component";
 import "./header.styles.scss";
 
-function Header({ isLoggedIn, logoutUser, profileData }) {
+function Header({
+  isLoggedIn,
+  logoutUser,
+  profileData,
+  dropdown,
+  setDropdown,
+}) {
   const navigate = useNavigate();
 
   function handleLogout() {
     logoutUser();
+    setDropdown(false);
     // navigate("/");
   }
 
@@ -46,19 +54,26 @@ function Header({ isLoggedIn, logoutUser, profileData }) {
               src={profileData.profile_image}
               alt="profile"
               className="nav-profile-img"
+              onClick={() => setDropdown(!dropdown)}
             />
-            <div className="nav-profile-dropdown">
-              <NavLink to="/profile" className="profile-nav-link">
-                Profile
-              </NavLink>
-              <NavLink
-                onClick={handleLogout}
-                to="/"
-                // buttonStyle="small-bluesix-btn"
-              >
-                Logout
-              </NavLink>
-            </div>
+            {dropdown && (
+              <div className="nav-profile-dropdown">
+                <NavLink
+                  to="/profile"
+                  className="profile-nav-link"
+                  onClick={() => setDropdown(false)}
+                >
+                  Profile
+                </NavLink>
+                <NavLink
+                  onClick={handleLogout}
+                  to="/"
+                  // buttonStyle="small-bluesix-btn"
+                >
+                  Logout
+                </NavLink>
+              </div>
+            )}
           </>
         ) : (
           <div className="nav-button-container">
