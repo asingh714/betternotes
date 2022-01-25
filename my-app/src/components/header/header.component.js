@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { BsCart3 } from "react-icons/bs";
@@ -12,7 +13,7 @@ function Header({ isLoggedIn, logoutUser, profileData }) {
 
   function handleLogout() {
     logoutUser();
-    navigate("/");
+    // navigate("/");
   }
 
   return (
@@ -40,11 +41,25 @@ function Header({ isLoggedIn, logoutUser, profileData }) {
           // <Button handleSubmit={handleLogout} buttonStyle="small-bluesix-btn">
           //   Logout
           // </Button>
-          <img
-            src={profileData.profile_image}
-            alt="profile"
-            className="nav-profile-img"
-          />
+          <>
+            <img
+              src={profileData.profile_image}
+              alt="profile"
+              className="nav-profile-img"
+            />
+            <div className="nav-profile-dropdown">
+              <NavLink to="/profile" className="profile-nav-link">
+                Profile
+              </NavLink>
+              <NavLink
+                onClick={handleLogout}
+                to="/"
+                // buttonStyle="small-bluesix-btn"
+              >
+                Logout
+              </NavLink>
+            </div>
+          </>
         ) : (
           <div className="nav-button-container">
             <Button

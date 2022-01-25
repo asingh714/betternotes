@@ -7,7 +7,7 @@ import "./ProfileMenu.styles.scss";
 export default function ProfileMenu() {
   return (
     <nav className="profile-nav-container">
-      <NavLink to="/profile/" className="profile-nav-link">
+      <NavLink to="/profile" className="profile-nav-link">
         Profile
       </NavLink>
       <Line classname="short-line" />
