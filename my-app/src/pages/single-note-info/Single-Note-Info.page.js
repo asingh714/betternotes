@@ -64,7 +64,7 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
         <Page pageNumber={pageNumber} />
       </Document> */}
         <div className="image-cta-container">
-          <img src={image} alt="" className="noteImage" />
+          <img src={document || image} alt="" className="noteImage" />
           <span>$ {price}</span>
           <Button buttonStyle="short-ctagreen-button" type="submit">
             Add to Cart

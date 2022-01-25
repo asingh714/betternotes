@@ -192,3 +192,17 @@ export const updateUserProfile = (credentials, id) => (dispatch) => {
       dispatch({ type: UPDATE_USER_PROFILE_FAILURE });
     });
 };
+
+export const USER_LOGOUT_START = "USER_LOGOUT_START";
+export const USER_LOGOUT_SUCCESS = "USER_LOGOUT_SUCCESS";
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: USER_LOGOUT_START });
+
+  let token = localStorage.getItem("token");
+
+  if (token) {
+    localStorage.removeItem("token");
+    dispatch({ type: USER_LOGOUT_SUCCESS });
+  }
+};

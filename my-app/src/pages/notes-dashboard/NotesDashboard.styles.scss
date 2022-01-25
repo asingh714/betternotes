@@ -2,8 +2,10 @@
 
 .notesDashboardContainer {
   display: flex;
+  flex: 1;
   flex-direction: row;
-  justify-content: space-around;
+  gap: 10rem;
+  // justify-content: space-around;
   padding: 5.4rem 3.6rem;
 
   .right-notesDashboardContainer {

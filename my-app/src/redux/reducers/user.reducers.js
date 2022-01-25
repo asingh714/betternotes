@@ -26,6 +26,8 @@ import {
   CHECK_USER_LOGGED_IN_START,
   CHECK_USER_LOGGED_IN_SUCCESS,
   CHECK_USER_LOGGED_IN_FAILURE,
+  USER_LOGOUT_START,
+  USER_LOGOUT_SUCCESS,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -272,6 +274,14 @@ const userReducer = (state = initialState, action) => {
         hasFetchedProfileData: false,
         fetchingProfileDataError:
           "There was an error while fetching your profile.",
+      };
+    case USER_LOGOUT_START:
+      return {
+        ...state,
+      };
+    case USER_LOGOUT_SUCCESS:
+      return {
+        ...initialState,
       };
     default:
       return state;

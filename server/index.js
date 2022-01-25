@@ -8,7 +8,7 @@ const cors = require("cors");
 const server = express();
 server.use(helmet());
 server.use(cors());
-// server.use(express.json());
+server.use(express.json());
 server.use(
   bodyParser.urlencoded({
     limit: "50mb",

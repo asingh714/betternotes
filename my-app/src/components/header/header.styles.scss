@@ -13,4 +13,34 @@
     letter-spacing: 1.5px;
     cursor: pointer;
   }
+
+  .nav-notes {
+    padding: 1rem;
+    cursor: pointer;
+    color: $blue-five;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    letter-spacing: 1px;
+    font-weight: 600;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .right-header-container {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .nav-profile-img {
+      height: 5rem;
+      width: 5rem;
+      border-radius: 50%;
+      transition: all 0.3s;
+      &:hover {
+        box-shadow: 1px 3px 7px rgba(black, 0.25);
+      }
+    }
+  }
 }

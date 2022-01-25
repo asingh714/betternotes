@@ -18,12 +18,16 @@ import EditProfilePageFrom from "./pages/edit-profile/EditProfilePageForm.compon
 import ProfileForSale from "./pages/profile-forSale/Profile-ForSale.pages";
 import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.pages";
 
-import { userLoggedIn } from "./redux/actions/user.actions";
+import {
+  userLoggedIn,
+  fetchOwnProfileData,
+} from "./redux/actions/user.actions";
 
-function App({ userLoggedIn, ...props }) {
+function App({ userLoggedIn, fetchOwnProfileData, ...props }) {
   useEffect(() => {
     userLoggedIn();
-  }, [userLoggedIn]);
+    fetchOwnProfileData();
+  }, [userLoggedIn, fetchOwnProfileData]);
   return (
     <div className="page-container">
       <Header />
@@ -58,4 +62,4 @@ function App({ userLoggedIn, ...props }) {
   );
 }
 
-export default connect(null, { userLoggedIn })(App);
+export default connect(null, { userLoggedIn, fetchOwnProfileData })(App);
