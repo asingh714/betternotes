@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 
 import { logoutUser } from "../../redux/actions/user.actions";
 import Button from "../button/button.component";
+import SearchBar from "../search-bar/SearchBar.component";
 import "./header.styles.scss";
 
 function Header({
@@ -15,6 +16,10 @@ function Header({
   profileData,
   dropdown,
   setDropdown,
+  name,
+  handleChange,
+  value,
+  searchBarFilter,
 }) {
   const navigate = useNavigate();
 
@@ -24,11 +29,26 @@ function Header({
     // navigate("/");
   }
 
+  function handleSearch() {
+    searchBarFilter();
+    navigate("/notes");
+  }
+
   return (
     <header className="full-header-container">
       <span onClick={() => navigate("/")} className="logo">
         BETTER NOTE
       </span>
+      <SearchBar
+        name={name}
+        handleChange={handleChange}
+        placeholder="Search our notes"
+        type="text"
+        className="search-input"
+        value={value}
+        // handleSubmit={() => navigate("/notes")}
+      />
+      <button onClick={handleSearch}>Submit</button>
       <nav className="right-header-container">
         <span onClick={() => navigate("/notes")} className="nav-notes">
           Notes

@@ -15,7 +15,7 @@ class NotesDashboard extends Component {
     super(props);
     this.state = {
       notes: [],
-      filteredNotes: [],
+      filteredNotes: this.props.filteredNotes || [],
       sortBy: "Newest",
       school: "",
       subject: "",
@@ -51,9 +51,6 @@ class NotesDashboard extends Component {
   }
 
   filterNoteChanges = (event) => {
-    console.log(event.target.name);
-    console.log(event.target.value);
-
     this.setState({
       [event.target.name]: event.target.value,
     });

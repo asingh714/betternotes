@@ -23,16 +23,42 @@ import {
   fetchOwnProfileData,
 } from "./redux/actions/user.actions";
 
-function App({ userLoggedIn, fetchOwnProfileData, ...props }) {
+import { fetchNotes } from "./redux/actions/note.actions";
+
+function App({
+  notes,
+  userLoggedIn,
+  fetchOwnProfileData,
+  fetchNotes,
+  ...props
+}) {
   const [dropdown, setDropdown] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
     userLoggedIn();
     fetchOwnProfileData();
-  }, [userLoggedIn, fetchOwnProfileData]);
+    fetchNotes();
+  }, [userLoggedIn, fetchOwnProfileData, fetchNotes]);
+
+  function searchBarFilter(event) {
+    let filtered = notes.filter((note) => note.subject.includes(search));
+    setFilteredNotes(filtered);
+  }
+  function handleChange(event) {
+    setSearch(event.target.value);
+  }
   return (
     <div className="page-container">
-      <Header dropdown={dropdown} setDropdown={setDropdown} />
+      <Header
+        dropdown={dropdown}
+        handleChange={handleChange}
+        name="search"
+        setDropdown={setDropdown}
+        value={search}
+        searchBarFilter={searchBarFilter}
+      />
       <div className="content-container" onClick={() => setDropdown(false)}>
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -42,7 +68,11 @@ function App({ userLoggedIn, fetchOwnProfileData, ...props }) {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/api/auth/reset-password" element={<ResetPassword />} />
 
-          <Route exact path="/notes" element={<NotesDashboard />} />
+          <Route
+            exact
+            path="/notes"
+            element={<NotesDashboard filteredNotes={filteredNotes} />}
+          />
           <Route path="/notes/:unique_note_id" element={<SingleNoteInfo />} />
           <Route
             path="/user/:unique_user_id/notes/:user_id"
@@ -64,4 +94,14 @@ function App({ userLoggedIn, fetchOwnProfileData, ...props }) {
   );
 }
 
-export default connect(null, { userLoggedIn, fetchOwnProfileData })(App);
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes.notes,
+  };
+};
+
+export default connect(mapStateToProps, {
+  userLoggedIn,
+  fetchOwnProfileData,
+  fetchNotes,
+})(App);
