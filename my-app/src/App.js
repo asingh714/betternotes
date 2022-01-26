@@ -17,6 +17,7 @@ import Profile from "./pages/profile/Profile.page";
 import EditProfilePageFrom from "./pages/edit-profile/EditProfilePageForm.component";
 import ProfileForSale from "./pages/profile-forSale/Profile-ForSale.pages";
 import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.pages";
+import Cart from "./pages/cart/Cart.page";
 
 import {
   userLoggedIn,
@@ -91,6 +92,7 @@ function App({
             path="/profile/purchased"
             element={<ProfilePurchasedItems />}
           />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
       <Footer />

@@ -64,7 +64,7 @@ function Header({
             },
           }}
         >
-          <BsCart3 onClick={() => navigate("/")} />
+          <BsCart3 onClick={() => navigate("/cart")} />
         </IconContext.Provider>
         {isLoggedIn ? (
           // <Button handleSubmit={handleLogout} buttonStyle="small-bluesix-btn">
