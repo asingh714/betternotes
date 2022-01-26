@@ -43,8 +43,12 @@ function App({
   }, [userLoggedIn, fetchOwnProfileData, fetchNotes]);
 
   function searchBarFilter(event) {
-    let filtered = notes.filter((note) => note.subject.includes(search));
+    let filtered = notes.filter((note) => {
+      let subject = note.subject.toLowerCase();
+      return subject.includes(search.toLowerCase());
+    });
     setFilteredNotes(filtered);
+    setSearch("");
   }
   function handleChange(event) {
     setSearch(event.target.value);

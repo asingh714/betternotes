@@ -1,0 +1,10 @@
+@import "../../globalStyles/variables.scss";
+
+.long-search-input {
+  width: 35rem;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+  border: 1px solid $grey-five;
+  background-color: $grey-nine;
+  color: $grey-five;
+}

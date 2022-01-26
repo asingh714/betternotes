@@ -2,7 +2,7 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
-import { BsCart3 } from "react-icons/bs";
+import { BsCart3, BsSearch } from "react-icons/bs";
 import { connect } from "react-redux";
 
 import { logoutUser } from "../../redux/actions/user.actions";
@@ -29,7 +29,8 @@ function Header({
     // navigate("/");
   }
 
-  function handleSearch() {
+  function handleSearch(e) {
+    e.preventDefault();
     searchBarFilter();
     navigate("/notes");
   }
@@ -39,16 +40,16 @@ function Header({
       <span onClick={() => navigate("/")} className="logo">
         BETTER NOTE
       </span>
-      <SearchBar
-        name={name}
-        handleChange={handleChange}
-        placeholder="Search our notes"
-        type="text"
-        className="search-input"
-        value={value}
-        // handleSubmit={() => navigate("/notes")}
-      />
-      <button onClick={handleSearch}>Submit</button>
+      <form action="submit" onSubmit={(e) => handleSearch(e)}>
+        <SearchBar
+          name={name}
+          handleChange={handleChange}
+          placeholder="&#x1F50D; Search by class subject"
+          type="text"
+          inputStyle="long-search-input"
+          value={value}
+        />
+      </form>
       <nav className="right-header-container">
         <span onClick={() => navigate("/notes")} className="nav-notes">
           Notes

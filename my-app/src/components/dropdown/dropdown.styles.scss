@@ -1,5 +1,23 @@
 @import "../../globalStyles/variables.scss";
 
+.dropdown-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  // flex: 1;
+
+  .dashboard-menu {
+    color: $blue-five;
+    background-color: $grey-nine;
+    border: 1px solid $blue-five;
+    padding: 1rem;
+    // margin-bottom: 2.4rem;
+    font-size: 1.6rem;
+    max-width: 15rem;
+  }
+}
+
+// .filterMenuContainer {
 .filterMenu {
   color: $blue-five;
   background-color: $grey-nine;
@@ -23,3 +41,4 @@ option::after {
   background-color: $blue-five;
   color: red;
 }
+// }

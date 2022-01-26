@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Notes from "../../components/notes/notes.component";
 import Dropdown from "../../components/dropdown/dropdown.component";
 import FilterMenu from "../../components/filterMenu/filterMenu.component";
+import Button from "../../components/button/button.component";
 
 import { fetchNotes } from "../../redux/actions/note.actions";
 
@@ -48,7 +49,17 @@ class NotesDashboard extends Component {
         });
       }
     }
+
+    if (prevProps.filteredNotes !== this.props.filteredNotes) {
+      this.setState({ filteredNotes: this.props.filteredNotes });
+    }
   }
+
+  resetFilteredData = (event) => {
+    this.setState({
+      filteredNotes: [],
+    });
+  };
 
   filterNoteChanges = (event) => {
     this.setState({
@@ -102,14 +113,23 @@ class NotesDashboard extends Component {
           filterMenuSubmit={this.filterMenuSubmit}
         />
         <div className="right-notesDashboardContainer">
-          <Dropdown
-            dropdownStyle="filterMenu"
-            hasLabel={true}
-            label="Sort by"
-            onChange={this.sortByChange}
-            options={["Newest", "Oldest"]}
-            value={this.state.sortBy}
-          />
+          <div className="button-container">
+            <Button
+              buttonStyle="small-plain-btn"
+              handleSubmit={this.resetFilteredData}
+            >
+              &#x2716; Clear Results
+            </Button>
+            <Dropdown
+              dropdownContainerStyle="dropdown-container"
+              dropdownStyle="dashboard-menu"
+              hasLabel={true}
+              label="Sort by"
+              onChange={this.sortByChange}
+              options={["Newest", "Oldest"]}
+              value={this.state.sortBy}
+            />
+          </div>
           {this.state.error && <span>No data</span>}
           {this.state.filteredNotes.length > 0 && this.state.error === "" && (
             <Notes

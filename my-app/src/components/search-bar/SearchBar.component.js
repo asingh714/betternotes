@@ -1,3 +1,5 @@
+import { BsSearch } from "react-icons/bs";
+
 import "./SearchBar.styles.scss";
 
 function Searchbar({
@@ -8,7 +10,7 @@ function Searchbar({
   value,
   inputStyle,
   accept,
-  handleSubmit
+  handleSubmit,
 }) {
   return (
     <input
