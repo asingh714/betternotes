@@ -3,13 +3,14 @@ import { connect } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
 
+import { addCartItem } from "../../redux/actions/cart.actions";
 import { fetchSingleNote } from "../../redux/actions/note.actions";
 import image from "../../new_user.png";
 import Button from "../../components/button/button.component";
 import Line from "../../components/line/line.component";
 import "./Single-Note-Info.styles.scss";
 
-function SingleNoteInfo({ fetchSingleNote, note }) {
+function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
   const { unique_note_id } = useParams();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -22,6 +23,10 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
   useEffect(() => {
     fetchSingleNote(unique_note_id);
   }, []);
+
+  const addToCart = (note) => {
+    addCartItem(note);
+  };
 
   const {
     note_name,
@@ -66,7 +71,11 @@ function SingleNoteInfo({ fetchSingleNote, note }) {
         <div className="image-cta-container">
           <img src={document || image} alt="" className="noteImage" />
           <span>$ {price}</span>
-          <Button buttonStyle="short-ctagreen-button" type="submit">
+          <Button
+            buttonStyle="short-ctagreen-button"
+            type="submit"
+            handleSubmit={(e) => addToCart(note)}
+          >
             Add to Cart
           </Button>
         </div>
@@ -100,4 +109,6 @@ const mapStateToProps = (state) => {
     note: state.notes.singleNote,
   };
 };
-export default connect(mapStateToProps, { fetchSingleNote })(SingleNoteInfo);
+export default connect(mapStateToProps, { fetchSingleNote, addCartItem })(
+  SingleNoteInfo
+);
