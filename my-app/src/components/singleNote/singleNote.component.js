@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../button/button.component";
 import ImpText from "../imp-text/impText.component";
+import { addCartItem } from "../../redux/actions/cart.actions";
 
 import "./singleNote.styles.scss";
 
@@ -45,6 +46,12 @@ function SingleNote(props) {
     props.setNoteIdToEdit(unique_note_id);
   };
 
+  const addToCart = (event, note) => {
+    event.stopPropagation();
+
+    props.addCartItem(note);
+  };
+
   if (props.noteStyle === "wide") {
     return (
       <div
@@ -77,7 +84,11 @@ function SingleNote(props) {
               <span>{pages} Pages </span> | <span>{year}</span> |{" "}
               <span>{school}</span>
             </div>
-            <Button type="submit" buttonStyle="large-ctagreen-button">
+            <Button
+              type="submit"
+              buttonStyle="large-ctagreen-button"
+              handleSubmit={(e) => addToCart(e, props.note)}
+            >
               Add to Cart
             </Button>
           </div>
@@ -133,4 +144,4 @@ function SingleNote(props) {
   }
 }
 
-export default connect(null, {})(SingleNote);
+export default connect(null, { addCartItem })(SingleNote);
