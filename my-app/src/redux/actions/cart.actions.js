@@ -11,6 +11,7 @@ export const addCartItem = (item) => (dispatch) => {
       localStorage.setItem("cart", "[]");
     }
     let old_cart = JSON.parse(localStorage.getItem("cart"));
+    // ADD LOGIC FOR NO REPEATS
     old_cart.push(item);
     localStorage.setItem("cart", JSON.stringify(old_cart));
     dispatch({ type: ADD_CART_ITEM_SUCCESS });
@@ -29,7 +30,6 @@ export const getCartItems = () => (dispatch) => {
   try {
     if (localStorage.getItem("cart") !== null) {
       const cart = JSON.parse(localStorage.getItem("cart"));
-
       dispatch({ type: GET_CART_ITEMS_SUCCESS, payload: cart });
     } else {
       dispatch({ type: GET_CART_ITEMS_SUCCESS, payload: [] });
@@ -39,5 +39,23 @@ export const getCartItems = () => (dispatch) => {
   }
 };
 
+export const REMOVE_CART_ITEMS_START = "REMOVE_CART_ITEMS_START";
+export const REMOVE_CART_ITEMS_SUCCESS = "REMOVE_CART_ITEMS_SUCCESS";
+export const REMOVE_CART_ITEMS_FAILURE = "REMOVE_CART_ITEMS_FAILURE";
+
 // remove cart item
+export const removeCartItems = (id) => (dispatch) => {
+  dispatch({ type: REMOVE_CART_ITEMS_START });
+
+  try {
+    if (localStorage.getItem("cart") !== null) {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      const new_cart = cart.filter((item) => item.unique_note_id !== id);
+      localStorage.setItem("cart", JSON.stringify(new_cart));
+    }
+  } catch (error) {
+    dispatch({ type: REMOVE_CART_ITEMS_FAILURE });
+  }
+};
+
 // purchase
