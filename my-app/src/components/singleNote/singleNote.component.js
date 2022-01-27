@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "../button/button.component";
 import ImpText from "../imp-text/impText.component";
-import { addCartItem } from "../../redux/actions/cart.actions";
+import { addCartItem, removeCartItems } from "../../redux/actions/cart.actions";
 
 import "./singleNote.styles.scss";
 
@@ -48,8 +48,12 @@ function SingleNote(props) {
 
   const addToCart = (event, note) => {
     event.stopPropagation();
-
     props.addCartItem(note);
+  };
+
+  const handleRemoveCartItem = (event, id) => {
+    event.stopPropagation();
+    props.removeCartItems(id);
   };
 
   if (props.noteStyle === "wide") {
@@ -141,7 +145,56 @@ function SingleNote(props) {
         </div>
       </div>
     );
+  } else if (props.noteStyle === "wide-cart") {
+    return (
+      <div
+        className="wide-note-info-container"
+        onClick={(event) => navigate(`/notes/${props.id}`)}
+      >
+        {/* <Document
+          file={document}
+        loading="Loading IMAGE...."
+        onLoadSuccess={onDocumentLoadSuccess}
+        className="noteImage"
+        >
+        <Page pageNumber={pageNumber} />
+      </Document> */}
+        <div className="img-container">
+          <img src={document} alt="note" className="noteImage" />
+        </div>
+
+        <div className="note-info-container">
+          <div className="note-top-line">
+            <span>{class_name}</span>
+            <span>${price}</span>
+          </div>
+
+          <p className="note-desc">{short_description}</p>
+
+          <span className="user-name">{user_name}</span>
+          <div className="note-bottom-line">
+            <div className="note-info-line">
+              <span>{pages} Pages </span> | <span>{year}</span> |{" "}
+              <span>{school}</span>
+            </div>
+            <ImpText
+              textStyle="small-remove-text"
+              handleClick={(e) => handleRemoveCartItem(e, unique_note_id)}
+            >
+              Remove
+            </ImpText>
+            {/* <Button
+              type="submit"
+              buttonStyle="large-ctagreen-button"
+              handleSubmit={(e) => addToCart(e, props.note)}
+            >
+              Add to Cart
+            </Button> */}
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 
-export default connect(null, { addCartItem })(SingleNote);
+export default connect(null, { addCartItem, removeCartItems })(SingleNote);

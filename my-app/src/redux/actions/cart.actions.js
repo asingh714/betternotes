@@ -11,8 +11,12 @@ export const addCartItem = (item) => (dispatch) => {
       localStorage.setItem("cart", "[]");
     }
     let old_cart = JSON.parse(localStorage.getItem("cart"));
-    // ADD LOGIC FOR NO REPEATS
-    old_cart.push(item);
+    const itemExists = old_cart.some(
+      (cartItem) => cartItem.unique_note_id === item.unique_note_id
+    );
+    if (!itemExists) {
+      old_cart.push(item);
+    }
     localStorage.setItem("cart", JSON.stringify(old_cart));
     dispatch({ type: ADD_CART_ITEM_SUCCESS });
   } catch (error) {

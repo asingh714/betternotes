@@ -13,8 +13,13 @@ function Cart({ getCartItems, cart }) {
   }, [getCartItems]);
   return (
     <div className="cart-container">
+      <h2>Shopping Cart</h2>
       {cart && (
-        <Notes notes={cart} notesStyle="notes-forSale" noteStyle="forSale" />
+        <Notes
+          notes={cart}
+          notesStyle="notes-dashboard"
+          noteStyle="wide-cart"
+        />
       )}
     </div>
   );
