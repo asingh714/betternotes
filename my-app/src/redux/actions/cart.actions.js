@@ -16,9 +16,9 @@ export const addCartItem = (item) => (dispatch) => {
     );
     if (!itemExists) {
       old_cart.push(item);
+      localStorage.setItem("cart", JSON.stringify(old_cart));
+      dispatch({ type: ADD_CART_ITEM_SUCCESS, payload: old_cart });
     }
-    localStorage.setItem("cart", JSON.stringify(old_cart));
-    dispatch({ type: ADD_CART_ITEM_SUCCESS });
   } catch (error) {
     dispatch({ type: ADD_CART_ITEM_FAILURE });
   }
@@ -56,6 +56,7 @@ export const removeCartItems = (id) => (dispatch) => {
       const cart = JSON.parse(localStorage.getItem("cart"));
       const new_cart = cart.filter((item) => item.unique_note_id !== id);
       localStorage.setItem("cart", JSON.stringify(new_cart));
+      dispatch({ type: REMOVE_CART_ITEMS_SUCCESS, payload: new_cart });
     }
   } catch (error) {
     dispatch({ type: REMOVE_CART_ITEMS_FAILURE });

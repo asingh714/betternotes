@@ -15,10 +15,16 @@ const initialState = {
   hasReceivedCartItems: false,
   errorGettingItems: "",
   cart: [],
+  total: 0,
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
+    case ADD_CART_ITEM_SUCCESS:
+      return {
+        ...state,
+        cart: action.payload,
+      };
     case GET_CART_ITEMS_START:
       return {
         ...state,
@@ -42,6 +48,11 @@ const cartReducer = (state = initialState, action) => {
         isGettingCartItems: false,
         hasReceivedCartItems: false,
         errorGettingItems: "There was an error while getting the cart items",
+      };
+      case REMOVE_CART_ITEMS_SUCCESS:
+      return {
+        ...state,
+        cart: action.payload,
       };
     default:
       return state;

@@ -6,6 +6,7 @@ import Notes from "../../components/notes/notes.component";
 import Dropdown from "../../components/dropdown/dropdown.component";
 import FilterMenu from "../../components/filterMenu/filterMenu.component";
 import Button from "../../components/button/button.component";
+import Modal from "../../components/modal/modal.component";
 
 import { fetchNotes } from "../../redux/actions/note.actions";
 
@@ -146,6 +147,9 @@ class NotesDashboard extends Component {
             />
           )}
         </div>
+        {/* <Modal modalStyle="modal-container">
+          <span>Added to Cart</span>
+        </Modal> */}
       </div>
     );
   }
