@@ -10,7 +10,7 @@ import "./Cart.styles.scss";
 function Cart({ getCartItems, cart }) {
   useEffect(() => {
     getCartItems();
-  }, [getCartItems]);
+  }, [getCartItems, cart]);
   return (
     <div className="cart-container">
       <h2>Shopping Cart</h2>
