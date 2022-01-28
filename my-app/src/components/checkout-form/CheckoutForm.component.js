@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import {
   PaymentElement,
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import axios from "axios"
+
+import { clearCart } from "../../redux/actions/cart.actions";
 
 import "./CheckoutForm.styles.scss";
 
-export default function CheckoutForm() {
+function CheckoutForm({ clearCart }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -56,7 +58,7 @@ export default function CheckoutForm() {
     }
 
     setIsLoading(true);
-
+    clearCart();
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
@@ -92,3 +94,5 @@ export default function CheckoutForm() {
     </form>
   );
 }
+
+export default connect(null, { clearCart })(CheckoutForm);

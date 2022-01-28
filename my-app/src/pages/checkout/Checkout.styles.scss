@@ -4,5 +4,13 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  padding: 8rem;
+  justify-content: center;
+  align-items: center;
+  // padding: 8rem;
+  // gap: 5rem;
+  margin-bottom: 10rem;
+
+  p {
+    margin-bottom: 5rem;
+  }
 }

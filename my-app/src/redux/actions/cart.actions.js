@@ -63,4 +63,19 @@ export const removeCartItems = (id) => (dispatch) => {
   }
 };
 
-// purchase
+export const CLEAR_CART_START = "CLEAR_CART_START";
+export const CLEAR_CART_SUCCESS = "CLEAR_CART_SUCCESS";
+export const CLEAR_CART_FAILURE = "CLEAR_CART_FAILURE";
+
+// Clear cart
+export const clearCart = () => (dispatch) => {
+  dispatch({ type: CLEAR_CART_START });
+  try {
+    if (localStorage.getItem("cart") !== null) {
+      localStorage.setItem("cart", "[]");
+    }
+    dispatch({ type: CLEAR_CART_SUCCESS });
+  } catch (error) {
+    dispatch({ type: CLEAR_CART_FAILURE });
+  }
+};

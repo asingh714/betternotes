@@ -8,7 +8,7 @@ import { getCartItems } from "../../redux/actions/cart.actions";
 
 import "./Cart.styles.scss";
 
-function Cart({ getCartItems, cart, total }) {
+function Cart({ getCartItems, cart, total, isCheckout }) {
   const intialCount = Number(cart.length) || 0;
   const [count, setCount] = useState(intialCount);
   const [cartTotal, setCartTotal] = useState(total);
@@ -21,7 +21,7 @@ function Cart({ getCartItems, cart, total }) {
 
   return (
     <div className="cart-container">
-      <h2>Shopping Cart</h2>
+      {isCheckout ? <h2>Checkout</h2> : <h2>Shopping Cart</h2>}
       {cart && (
         <div className="notes-subtotal-container">
           <Notes
@@ -32,12 +32,14 @@ function Cart({ getCartItems, cart, total }) {
           {cartTotal > 0 ? (
             <div className="notes-right-container">
               <h3>Subtotal: ${cartTotal}</h3>
-              <Button
-                buttonStyle="xlarge-bluefour-btn"
-                handleSubmit={() => navigate("/checkout")}
-              >
-                Checkout
-              </Button>
+              {!isCheckout && (
+                <Button
+                  buttonStyle="xlarge-bluefour-btn"
+                  handleSubmit={() => navigate("/checkout")}
+                >
+                  Checkout
+                </Button>
+              )}
             </div>
           ) : (
             <span>Cart is empty </span>

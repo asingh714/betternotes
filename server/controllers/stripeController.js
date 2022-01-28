@@ -15,6 +15,7 @@ const stripeController = async (req, res) => {
   });
 
   res.json({ clientSecret: paymentIntent.client_secret });
+  // EMAIL LOGIC HERE
 };
 
 module.exports = { stripeController };
