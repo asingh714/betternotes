@@ -1,0 +1,8 @@
+@import "../../globalStyles/variables.scss";
+
+.checkout-page-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 8rem;
+}

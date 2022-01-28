@@ -1,7 +1,54 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import axios from "axios";
 
+import CheckoutForm from "../../components/checkout-form/CheckoutForm.component";
+import "./Checkout.styles.scss";
+// Make sure to call loadStripe outside of a component’s render to avoid
+// recreating the Stripe object on every render.
+// This is a public sample test API key.
+// Don’t submit any personally identifiable information in requests made with this key.
+// Sign in to see your own test API key embedded in code samples.
+const stripePromise = loadStripe("pk_test_ovW0suqglpC5YsUqv63hpO2G00EdpO8cfF");
 function Checkout() {
-  return <div>Checkout</div>;
+  const [clientSecret, setClientSecret] = useState("");
+
+  useEffect(() => {
+    // Create PaymentIntent as soon as the page loads
+
+    fetch("http://localhost:5000/create-payment-intent/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+    })
+    // axios
+    //   .post("http://localhost:5000/create-payment-intent/", {
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ items: [{ id: "xl-tshirt" }] }),
+    //   })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+  }, []);
+
+  const appearance = {
+    theme: "stripe",
+  };
+  const options = {
+    clientSecret,
+    appearance,
+  };
+
+  return (
+    <div className="checkout-page-container">
+      <p>Test Card Number: 4242 4242 4242 4242</p>
+      {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </div>
+  );
 }
 
 export default Checkout;
