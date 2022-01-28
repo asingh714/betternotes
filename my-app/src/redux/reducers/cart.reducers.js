@@ -15,15 +15,17 @@ const initialState = {
   hasReceivedCartItems: false,
   errorGettingItems: "",
   cart: [],
-  total: 0,
+  total: 0.0,
 };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CART_ITEM_SUCCESS:
+      // console.log(action.payload.reduce((sum, item) => item.price + sum, 0));
       return {
         ...state,
         cart: action.payload,
+        total: action.payload.reduce((sum, item) => item.price + sum, 0),
       };
     case GET_CART_ITEMS_START:
       return {
@@ -37,6 +39,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: action.payload,
+        total: action.payload.reduce((sum, item) => item.price + sum, 0),
         isGettingCartItems: false,
         hasReceivedCartItems: true,
         errorGettingItems: "",
@@ -49,10 +52,11 @@ const cartReducer = (state = initialState, action) => {
         hasReceivedCartItems: false,
         errorGettingItems: "There was an error while getting the cart items",
       };
-      case REMOVE_CART_ITEMS_SUCCESS:
+    case REMOVE_CART_ITEMS_SUCCESS:
       return {
         ...state,
         cart: action.payload,
+        total: action.payload.reduce((sum, item) => item.price + sum, 0),
       };
     default:
       return state;

@@ -1,6 +1,30 @@
 @import "../../globalStyles/variables.scss";
 
 .cart-container {
+  display: flex;
   flex: 1;
-  border: 1px solid red;
+  flex-direction: column;
+  padding: 8rem;
+
+  h2 {
+    font-size: 3.2rem;
+    color: $grey-two;
+    font-weight: 500;
+    margin-bottom: 4rem;
+  }
+
+  .notes-subtotal-container {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    // border: 1px solid red;
+    .notes-right-container {
+      margin-top: 2rem;
+      h3 {
+        font-size: 2.4rem;
+        color: $grey-two;
+        margin-bottom: 4rem;
+      }
+    }
+  }
 }

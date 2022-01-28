@@ -148,7 +148,7 @@ function SingleNote(props) {
   } else if (props.noteStyle === "wide-cart") {
     return (
       <div
-        className="wide-note-info-container"
+        className="wide-note-info-container-cart"
         onClick={(event) => navigate(`/notes/${props.id}`)}
       >
         {/* <Document
