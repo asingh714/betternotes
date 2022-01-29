@@ -1,5 +1,4 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
-const sendOrderEmail = require("../util/sendOrderEmail");
 
 const stripeController = async (req, res) => {
   console.log(req.body);
@@ -14,9 +13,6 @@ const stripeController = async (req, res) => {
       enabled: true,
     },
   });
-
-  // EMAIL LOGIC HERE
-  sendOrderEmail(email, document, user_name);
 
   res.json({ clientSecret: paymentIntent.client_secret });
 };

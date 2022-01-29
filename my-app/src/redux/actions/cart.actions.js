@@ -86,10 +86,10 @@ export const CREATE_ORDER_START = "CREATE_ORDER_START";
 export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
 export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE";
 
-export const createOrder = (items) => (dispatch) => {
+export const createOrder = (cart) => (dispatch) => {
   dispatch({ type: CREATE_ORDER_START });
   axiosWithAuth()
-    .post("/orders", items)
+    .post("/orders", { cart: cart })
     .then((result) => {
       console.log(result);
       dispatch({ type: CREATE_ORDER_SUCCESS });

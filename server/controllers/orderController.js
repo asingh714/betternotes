@@ -123,7 +123,7 @@ const getAllSingleOrderNotes = (req, res) => {
 const getAllUserOrders = (req, res) => {
   const subject = req.decodedToken.subject;
   db("orders")
-    .where({ unique_user_id: subject.toString() })
+    .where({ user_id: subject.toString() })
     .then((result) => {
       if (result.length < 1) {
         res.status(404).json({ error: "There are no orders" });
