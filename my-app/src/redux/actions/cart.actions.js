@@ -1,3 +1,5 @@
+import { axiosWithAuth } from "../../utils/axiosWithAuth";
+
 export const ADD_CART_ITEM_START = "ADD_CART_ITEM_START";
 export const ADD_CART_ITEM_SUCCESS = "ADD_CART_ITEM_SUCCESS";
 export const ADD_CART_ITEM_FAILURE = "ADD_CART_ITEM_FAILURE";
@@ -78,4 +80,21 @@ export const clearCart = () => (dispatch) => {
   } catch (error) {
     dispatch({ type: CLEAR_CART_FAILURE });
   }
+};
+
+export const CREATE_ORDER_START = "CREATE_ORDER_START";
+export const CREATE_ORDER_SUCCESS = "CREATE_ORDER_SUCCESS";
+export const CREATE_ORDER_FAILURE = "CREATE_ORDER_FAILURE";
+
+export const createOrder = (items) => (dispatch) => {
+  dispatch({ type: CREATE_ORDER_START });
+  axiosWithAuth()
+    .post("/orders", items)
+    .then((result) => {
+      console.log(result);
+      dispatch({ type: CREATE_ORDER_SUCCESS });
+    })
+    .catch((error) => {
+      dispatch({ type: CREATE_ORDER_FAILURE });
+    });
 };

@@ -6,11 +6,11 @@ import {
   useElements,
 } from "@stripe/react-stripe-js";
 
-import { clearCart } from "../../redux/actions/cart.actions";
+import { clearCart, createOrder } from "../../redux/actions/cart.actions";
 
 import "./CheckoutForm.styles.scss";
 
-function CheckoutForm({ clearCart }) {
+function CheckoutForm({ cart, clearCart, createOrder }) {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -58,6 +58,7 @@ function CheckoutForm({ clearCart }) {
     }
 
     setIsLoading(true);
+    createOrder(cart);
     clearCart();
     const { error } = await stripe.confirmPayment({
       elements,
@@ -95,4 +96,13 @@ function CheckoutForm({ clearCart }) {
   );
 }
 
-export default connect(null, { clearCart })(CheckoutForm);
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart.cart,
+    total: state.cart.total,
+  };
+};
+
+export default connect(mapStateToProps, { clearCart, createOrder })(
+  CheckoutForm
+);

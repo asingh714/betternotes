@@ -5,9 +5,11 @@ const sendOrderEmail = require("../util/sendOrderEmail");
 const sendEmail = require("../util/sendEmail");
 
 const createOrder = (req, res) => {
-  const { items } = req.body;
+  const { cart } = req.body;
+
   const validationErrors = [];
   const { subject, email, user_name } = req.decodedToken; // id
+  console.log("user_name", [subject, email, user_name]);
 
   // if (!items || items.length < 1) {
   //   validationErrors.push({
@@ -27,7 +29,7 @@ const createOrder = (req, res) => {
   // }
   let totalFromCart = 0;
 
-  for (const item of items) {
+  for (const item of cart) {
     totalFromCart += item.price;
   }
   const orderId = uuidv4();
@@ -35,7 +37,7 @@ const createOrder = (req, res) => {
     unique_order_id: orderId,
     total: totalFromCart,
     purchase_date: Date.now(),
-    unique_user_id: subject,
+    user_id: subject,
   };
   // console.log(order);
 
@@ -43,16 +45,16 @@ const createOrder = (req, res) => {
     .insert(order)
     .then((result) => {
       let orderId = result[0];
-
-      for (const item of items) {
+      // console.log("Result:", result);
+      // console.log("Order ID:", orderId);
+      for (const item of cart) {
         const singleOrderItemId = uuidv4();
-
+        // console.log(item);
         const singleOrderItem = {
-          unique_order_id: singleOrderItemId,
+          unique_single_id: singleOrderItemId,
           note_id: item.unique_note_id,
           order_id: orderId.toString(),
         };
-
         db("singleOrderItem")
           .insert(singleOrderItem)
           .then((result) => console.log(result))
@@ -70,7 +72,7 @@ const createOrder = (req, res) => {
     });
 };
 
-// ALL ORDERS
+// ALL ORDERS --> works
 const getAllOrders = (req, res) => {
   db("orders")
     .then((result) => {
@@ -134,14 +136,14 @@ const getAllUserOrders = (req, res) => {
     });
 };
 
-const verifyOrderEmail = (order_id, email, name) => {
+const verifyOrderEmail = (order_id, email, user_name) => {
   db("singleOrderItem")
-    .join("notes", "singleOrderItem.note_id", "notes.unique_order_id")
+    .join("notes", "singleOrderItem.note_id", "notes.unique_note_id")
     .select("*")
     .where({ "singleOrderItem.order_id": order_id })
     .then((result) => {
       result.forEach((order) => {
-        sendOrderEmail({ email, document: order.document, name });
+        sendOrderEmail({ email, document: order.document, user_name });
       });
     })
     .catch((error) => {
