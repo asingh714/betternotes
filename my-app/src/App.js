@@ -19,6 +19,7 @@ import ProfileForSale from "./pages/profile-forSale/Profile-ForSale.pages";
 import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.pages";
 import Cart from "./pages/cart/Cart.page";
 import Checkout from "./pages/checkout/Checkout.page";
+import Successful from "./pages/successful/Successful.pages";
 
 import {
   userLoggedIn,
@@ -95,6 +96,7 @@ function App({
           />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/successful" element={<Successful />} />
         </Routes>
       </div>
       <Footer />
