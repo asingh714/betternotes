@@ -1,0 +1,29 @@
+@import "../../globalStyles/variables.scss";
+
+.home-page-container {
+  flex: 1;
+  .hero-section {
+    display: flex;
+    .hero-image {
+      max-height: 40rem;
+    }
+    .right-hero-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6.4rem;
+      padding: 0 7.2rem;
+
+      h1 {
+        font-size: 4rem;
+        color: $grey-four;
+      }
+
+      p {
+        color: $grey-five;
+        line-height: 2;
+      }
+    }
+  }
+}
