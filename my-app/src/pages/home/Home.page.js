@@ -1,8 +1,11 @@
+import { connect } from "react-redux";
+
 import "./Home.styles.scss";
 
+import Notes from "../../components/notes/notes.component";
 import Searchbar from "../../components/search-bar/SearchBar.component";
 
-export default function Home() {
+function Home({ notes }) {
   return (
     <div className="home-page-container">
       <main className="hero-section">
@@ -42,6 +45,52 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section className="home-section-two">
+        <h2>Most Popular Notes</h2>
+        <Notes notes={notes} notesStyle="notes-author" noteStyle="narrow" />
+      </section>
+      <section className="home-section-three">
+        <h2>What Students Selling Notes Have To Say</h2>
+        <div className="student-reviews-container">
+          <div className="student-reviews">
+            <img
+              src="https://res.cloudinary.com/asingh/image/upload/v1643657945/jeswin-thomas-wRdYnqXtyYk-unsplash_zxb7lp.jpg"
+              alt="Happy Student"
+            />
+            <p>
+              “Better Note has allowed me to turn my notes and old assignments
+              into cash. All I have to do is upload my documents and Better Note
+              does the rest”
+            </p>
+            <span className="student-author">Jen Waters</span>
+            <span className="student-school">
+              Student at Devinhold High School
+            </span>
+          </div>
+          <div className="student-reviews">
+            <img
+              src="https://res.cloudinary.com/asingh/image/upload/v1643657945/jeswin-thomas-oBz1K0YAq8Q-unsplash_xhpn2j.jpg"
+              alt="Happy Student"
+            />
+            <p>
+              “I am glad there is a platform like Better Note that allows
+              hardworking students like me to sell my notes for cash. It's so
+              simple and it's helping me save up for college! I highly recommend
+              it!”
+            </p>
+            <span className="student-author">Tommy Smith</span>
+            <span className="student-school">Student at Duke University</span>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes.notes.slice(0, 4),
+  };
+};
+
+export default connect(mapStateToProps, {})(Home);

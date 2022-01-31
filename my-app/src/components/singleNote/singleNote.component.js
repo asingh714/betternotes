@@ -110,7 +110,7 @@ function SingleNote(props) {
         </div>
         <div className="note-info-container">
           <span className="note-info-class">{class_name}</span>
-          <span className="note-info-user">{props.user_name}</span>
+          <span className="note-info-user">{props.user_name || user_name}</span>
           <span className="note-info-price">${price}</span>
         </div>
       </div>
