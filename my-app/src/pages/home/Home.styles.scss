@@ -2,6 +2,14 @@
 
 .home-page-container {
   flex: 1;
+
+  h2 {
+    font-size: 3.2rem;
+    color: $grey-one;
+    // font-weight: 500;
+    margin-bottom: 4rem;
+  }
+
   .hero-section {
     display: flex;
     .hero-image {
@@ -23,6 +31,38 @@
       p {
         color: $grey-five;
         line-height: 2;
+      }
+    }
+  }
+
+  .home-section-one {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6.4rem 0;
+
+    .home-section-two-cols {
+      display: flex;
+      gap: 20rem;
+
+      .home-section-one-left,
+      .home-section-one-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h4 {
+          font-size: 2rem;
+          color: $grey-one;
+          font-weight: 300;
+          margin-bottom: 2rem;
+        }
+
+        li {
+          margin-bottom: 2rem;
+          color: $grey-three;
+          text-align: center;
+        }
       }
     }
   }

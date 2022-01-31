@@ -21,6 +21,27 @@ export default function Home() {
           <Searchbar inputStyle="long-search-input" />
         </div>
       </main>
+      <section className="home-section-one">
+        <h2>How does it work?</h2>
+        <div className="home-section-two-cols">
+          <div className="home-section-one-left">
+            <h4>For Students Looking To Sell Notes:</h4>
+            <ol>
+              <li>1. Create an account</li>
+              <li>2. Upload your notes</li>
+              <li>3. Earn money</li>
+            </ol>
+          </div>
+          <div className="home-section-one-right">
+            <h4>For Students Looking To Buy Notes:</h4>
+            <ol>
+              <li>1. Create an account</li>
+              <li>2. Find the notes your need</li>
+              <li>3. Notes show up in your email</li>
+            </ol>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
