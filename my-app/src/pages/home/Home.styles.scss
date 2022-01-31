@@ -13,8 +13,11 @@
 
   .hero-section {
     display: flex;
+
     .hero-image {
-      max-height: 40rem;
+      width: 50%;
+      object-fit: cover;
+      object-position: bottom;
     }
     .right-hero-section {
       display: flex;
@@ -22,7 +25,7 @@
       justify-content: center;
       align-items: center;
       gap: 3rem;
-      padding: 3rem 7.2rem;
+      padding: 3rem 4rem;
       text-align: center;
 
       h1 {
@@ -70,11 +73,13 @@
   }
   .home-section-two {
     margin-bottom: 6.4rem;
+    padding: 0 2rem;
   }
   .home-section-three {
     display: flex;
     flex-direction: column;
     margin-bottom: 6.4rem;
+    padding: 0 2rem;
 
     .student-reviews-container {
       display: flex;

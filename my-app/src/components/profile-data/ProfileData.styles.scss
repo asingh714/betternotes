@@ -6,7 +6,7 @@
   align-items: center;
   flex: 1;
   padding: 10rem 5rem;
-  // border: 1px solid springgreen;
+
   // justify-content: center;
   .profile-image {
     border-radius: 50%;
@@ -23,7 +23,6 @@
 
     color: $blue-three;
     font-size: 1.8rem;
-    // border: 1px solid blueviolet;
 
     .profile-top-written-container {
       display: flex;
@@ -41,7 +40,6 @@
   }
 
   .button-container {
-    // border: 1px solid blueviolet;
     display: flex;
     align-items: center;
     justify-content: space-between;
