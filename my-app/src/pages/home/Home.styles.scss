@@ -2,6 +2,7 @@
 
 .home-page-container {
   flex: 1;
+  max-width: 120rem;
 
   h2 {
     font-size: 3.2rem;
@@ -20,8 +21,9 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 6.4rem;
-      padding: 0 7.2rem;
+      gap: 3rem;
+      padding: 3rem 7.2rem;
+      text-align: center;
 
       h1 {
         font-size: 4rem;
