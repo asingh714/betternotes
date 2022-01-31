@@ -2,10 +2,18 @@
 
 .full-header-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 3rem;
   border-bottom: 2px solid $grey-nine;
+
+  .full-header-content-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 120rem;
+  }
   .logo {
     color: $blue-six;
     font-weight: 600;
