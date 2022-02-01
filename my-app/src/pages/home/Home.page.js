@@ -14,7 +14,7 @@ function Home({ notes }) {
           alt="blonde woman"
           className="hero-image"
         />
-        <div className="right-hero-section">
+        <div className="side-hero-section">
           <h1>Where A's turn into cash. And B's and C's turn into A's.</h1>
           <p>
             Do you have great grades and take great notes? Sell your notes and
@@ -82,6 +82,22 @@ function Home({ notes }) {
             <span className="student-school">Student at Duke University</span>
           </div>
         </div>
+      </section>
+      <section className="home-section-four">
+        <div className="side-hero-section">
+          <h2>Save Time Studying by Working Smarter</h2>
+          <p>
+            Students that have previously taken these classes have done most of
+            the work for you. Save time and energy on what is really important
+            by studying what matters.
+          </p>
+          <Searchbar inputStyle="long-search-input" />
+        </div>
+        <img
+          src="https://res.cloudinary.com/asingh/image/upload/v1643732282/Group_160_n50lla.png"
+          alt="student cartoon"
+          className="cartoon-img"
+        />
       </section>
     </div>
   );
