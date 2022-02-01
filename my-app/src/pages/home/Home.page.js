@@ -99,6 +99,35 @@ function Home({ notes }) {
           className="cartoon-img"
         />
       </section>
+
+      <section className="home-section-five">
+        <h2>What Students Have to Say</h2>
+        <div className="testimonials-section">
+          <div className="testimonial">
+            <p>
+              “I Wish I had discovered Better Notes earlier. I have saved so
+              much time and effort using these notes.“
+            </p>
+            <span className="student-author">Peter Vorkin</span>
+            <span className="student-school">High School Student</span>
+          </div>
+          <div className="testimonial">
+            <p>
+              “My grades have improved so much by just studying these notes.”
+            </p>
+            <span className="student-author">Kate Thomson</span>
+            <span className="student-school">UCLA</span>
+          </div>
+          <div className="testimonial">
+            <p>
+              “I am so glad I discovered Better Note. Studying notes from last
+              years students has saved me a lot of time.”
+            </p>
+            <span className="student-author">Ken Jim</span>
+            <span className="student-school">New York University</span>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
