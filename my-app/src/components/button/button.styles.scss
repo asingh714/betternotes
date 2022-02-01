@@ -138,3 +138,10 @@
     box-shadow: 0 1rem 2rem rgba(black, 0.2);
   }
 }
+
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

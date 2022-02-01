@@ -21,7 +21,16 @@ function Home({ notes }) {
             make money. Interested in improving your grades and saving time? Buy
             notes from fellow students who have done the work for you.
           </p>
-          <Searchbar inputStyle="long-search-input" />
+          {/* <form action="submit" onSubmit={(e) => handleSearch(e)}>
+            <Searchbar
+              name="search"
+              handleChange={handleChange}
+              placeholder="&#x1F50D; Search by class subject"
+              type="text"
+              inputStyle="long-search-input"
+              value={search}
+            />
+          </form> */}
         </div>
       </main>
       <section className="home-section-one">
@@ -91,7 +100,6 @@ function Home({ notes }) {
             the work for you. Save time and energy on what is really important
             by studying what matters.
           </p>
-          <Searchbar inputStyle="long-search-input" />
         </div>
         <img
           src="https://res.cloudinary.com/asingh/image/upload/v1643732282/Group_160_n50lla.png"

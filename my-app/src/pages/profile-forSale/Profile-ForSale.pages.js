@@ -44,7 +44,7 @@ function ProfileForSale({
     isFetchingNotes,
     isAddingNote,
     isDeletingNote,
-    noteIdToEdit,
+    noteIdToEdit,  
   ]);
   const username = localStorage.getItem("username");
 

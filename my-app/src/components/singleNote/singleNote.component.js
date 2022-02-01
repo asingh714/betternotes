@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { Document, Page, pdfjs } from "react-pdf";
 import image from "../../new_user.png";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useNavigate } from "react-router-dom";
 
@@ -29,6 +31,16 @@ function SingleNote(props) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const navigate = useNavigate();
+  const notify = () =>
+    toast.success("Added to the cart", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -49,6 +61,7 @@ function SingleNote(props) {
   const addToCart = (event, note) => {
     event.stopPropagation();
     props.addCartItem(note);
+    notify();
   };
 
   const handleRemoveCartItem = (event, id) => {
@@ -58,11 +71,25 @@ function SingleNote(props) {
 
   if (props.noteStyle === "wide") {
     return (
-      <div
-        className="wide-note-info-container"
-        onClick={(event) => navigate(`/notes/${props.id}`)}
-      >
-        {/* <Document
+      <>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+
+        <ToastContainer />
+        <div
+          className="wide-note-info-container"
+          onClick={(event) => navigate(`/notes/${props.id}`)}
+        >
+          {/* <Document
           file={document}
         loading="Loading IMAGE...."
         onLoadSuccess={onDocumentLoadSuccess}
@@ -70,34 +97,34 @@ function SingleNote(props) {
         >
         <Page pageNumber={pageNumber} />
       </Document> */}
-        <div className="img-container">
-          <img src={document} alt="note" className="noteImage" />
-        </div>
-
-        <div className="note-info-container">
-          <div className="note-top-line">
-            <span>{class_name}</span>
-            <span>${price}</span>
+          <div className="img-container">
+            <img src={document} alt="note" className="noteImage" />
           </div>
-
-          <p className="note-desc">{short_description}</p>
-
-          <span className="user-name">{user_name}</span>
-          <div className="note-bottom-line">
-            <div className="note-info-line">
-              <span>{pages} Pages </span> | <span>{year}</span> |{" "}
-              <span>{school}</span>
+          <div className="note-info-container">
+            <div className="note-top-line">
+              <span>{class_name}</span>
+              <span>${price}</span>
             </div>
-            <Button
-              type="submit"
-              buttonStyle="large-ctagreen-button"
-              handleSubmit={(e) => addToCart(e, props.note)}
-            >
-              Add to Cart
-            </Button>
+
+            <p className="note-desc">{short_description}</p>
+
+            <span className="user-name">{user_name}</span>
+            <div className="note-bottom-line">
+              <div className="note-info-line">
+                <span>{pages} Pages </span> | <span>{year}</span> |{" "}
+                <span>{school}</span>
+              </div>
+              <Button
+                type="submit"
+                buttonStyle="large-ctagreen-button"
+                handleSubmit={(e) => addToCart(e, props.note)}
+              >
+                Add to Cart
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      </>
     );
   } else if (props.noteStyle === "narrow") {
     return (
@@ -151,15 +178,15 @@ function SingleNote(props) {
         className="wide-note-info-container-cart"
         onClick={(event) => navigate(`/notes/${props.id}`)}
       >
-        {/* <Document
-          file={document}
-        loading="Loading IMAGE...."
-        onLoadSuccess={onDocumentLoadSuccess}
-        className="noteImage"
-        >
-        <Page pageNumber={pageNumber} />
-      </Document> */}
         <div className="img-container">
+          {/* <Document
+            file={document}
+            loading="Loading IMAGE...."
+            onLoadSuccess={onDocumentLoadSuccess}
+            className="noteImage"
+          >
+            <Page pageNumber={pageNumber} />
+          </Document> */}
           <img src={document} alt="note" className="noteImage" />
         </div>
 

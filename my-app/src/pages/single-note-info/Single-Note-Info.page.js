@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { addCartItem } from "../../redux/actions/cart.actions";
 import { fetchSingleNote } from "../../redux/actions/note.actions";
@@ -15,6 +17,16 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const navigate = useNavigate();
+  const notify = () =>
+    toast.success("Added to the cart", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -26,6 +38,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
 
   const addToCart = (note) => {
     addCartItem(note);
+    notify();
   };
 
   const {
@@ -47,6 +60,19 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
   } = note;
   return (
     <div className="single-note-info-container">
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
+      <ToastContainer />
       <div className="top-note-info-container">
         <div className="general-info-container">
           <h1>{note_name}</h1>

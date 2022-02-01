@@ -14,10 +14,10 @@ export default function ProfileMenu() {
       <NavLink to="/profile/forSale" className="profile-nav-link">
         Items for Sale
       </NavLink>
-      <Line classname="short-line" />
+      {/* <Line classname="short-line" />
       <NavLink to="/profile/purchased" className="profile-nav-link">
         Items Purchased
-      </NavLink>
+      </NavLink> */}
     </nav>
   );
 }

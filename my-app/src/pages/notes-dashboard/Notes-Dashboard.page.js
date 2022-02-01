@@ -121,6 +121,7 @@ class NotesDashboard extends Component {
             >
               &#x2716; Clear Results
             </Button>
+
             <Dropdown
               dropdownContainerStyle="dropdown-container"
               dropdownStyle="dashboard-menu"
@@ -147,9 +148,6 @@ class NotesDashboard extends Component {
             />
           )}
         </div>
-        {/* <Modal modalStyle="modal-container">
-          <span>Added to Cart</span>
-        </Modal> */}
       </div>
     );
   }

@@ -90,10 +90,10 @@ function App({
           <Route path="/profile/edit" element={<EditProfilePageFrom />} />
 
           <Route path="/profile/forSale" element={<ProfileForSale />} />
-          <Route
+          {/* <Route
             path="/profile/purchased"
             element={<ProfilePurchasedItems />}
-          />
+          /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/successful" element={<Successful />} />
