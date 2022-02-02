@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
 import { BsCart3, BsSearch } from "react-icons/bs";
 import { connect } from "react-redux";
+import image from "../../new_user.png";
 
 import { logoutUser } from "../../redux/actions/user.actions";
 import Button from "../button/button.component";
@@ -11,7 +12,7 @@ import SearchBar from "../search-bar/SearchBar.component";
 import "./header.styles.scss";
 
 function Header({
-  isLoggedIn,
+  isUserLoggedIn,
   logoutUser,
   profileData,
   dropdown,
@@ -67,13 +68,13 @@ function Header({
           >
             <BsCart3 onClick={() => navigate("/cart")} />
           </IconContext.Provider>
-          {isLoggedIn ? (
+          {isUserLoggedIn ? (
             // <Button handleSubmit={handleLogout} buttonStyle="small-bluesix-btn">
             //   Logout
             // </Button>
             <>
               <img
-                src={profileData.profile_image}
+                src={profileData.profile_image || image}
                 alt="profile"
                 className="nav-profile-img"
                 onClick={() => setDropdown(!dropdown)}
@@ -121,7 +122,7 @@ function Header({
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.user.isLoggedIn,
+    isUserLoggedIn: state.user.isUserLoggedIn,
     profileData: state.user.profileData,
   };
 };

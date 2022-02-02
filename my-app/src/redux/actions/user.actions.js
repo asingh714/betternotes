@@ -46,7 +46,6 @@ export const verifyUser = (email, token) => (dispatch) => {
   axiosWithAuth()
     .post(`/auth/verify-email?token=${token}&email=${email}`)
     .then((result) => {
-      console.log(result);
       dispatch({ type: USER_VERIFY_SUCCESS });
     })
     .catch((error) => {

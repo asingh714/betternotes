@@ -15,10 +15,9 @@ class ProfileData extends Component {
     showModal: false,
   };
   componentDidMount() {
-    if (Object.entries(this.props.user).length === 0) {
-      this.props.fetchOwnProfileData();
-    }
+    this.props.fetchOwnProfileData();
   }
+
   render() {
     const {
       profile_image,
