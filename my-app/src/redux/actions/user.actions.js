@@ -9,7 +9,7 @@ export const userLoggedIn = () => (dispatch) => {
 
   const token = localStorage.getItem("token");
   const username = localStorage.getItem("username");
-  if (token !== null) {
+  if (token !== null && username !== null) {
     dispatch({
       type: CHECK_USER_LOGGED_IN_SUCCESS,
       payload: { token: token, username: username },

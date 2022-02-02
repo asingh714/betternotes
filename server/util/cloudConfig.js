@@ -7,19 +7,4 @@ cloudinary.config({
   secure: true,
 });
 
-// const storage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: "profiles",
-//     format: async (req, file) => "jpeg",
-//   },
-// });
-
-// const docStorage = new CloudinaryStorage({
-//   cloudinary: cloudinary,
-//   params: {
-//     folder: "notes",
-//     format: async (req, file) => "pdf",
-//   },
-// });
 module.exports = { cloudinary };

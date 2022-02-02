@@ -20,6 +20,7 @@ import ProfilePurchasedItems from "./pages/profile-purchased/Profile-Purchased.p
 import Cart from "./pages/cart/Cart.page";
 import Checkout from "./pages/checkout/Checkout.page";
 import Successful from "./pages/successful/Successful.pages";
+import PageNotFound from "./pages/page-not-found/PageNotFound.page";
 
 import {
   userLoggedIn,
@@ -33,6 +34,8 @@ function App({
   userLoggedIn,
   fetchOwnProfileData,
   fetchNotes,
+  isUserLoggedIn,
+  profileData,
   ...props
 }) {
   const [dropdown, setDropdown] = useState(false);
@@ -40,10 +43,24 @@ function App({
   const [filteredNotes, setFilteredNotes] = useState([]);
 
   useEffect(() => {
-    userLoggedIn();
-    fetchOwnProfileData();
-    fetchNotes();
-  }, [userLoggedIn, fetchOwnProfileData, fetchNotes]);
+    if (isUserLoggedIn === false) {
+      userLoggedIn();
+    }
+    if (isUserLoggedIn && Object.entries(profileData).length === 0) {
+      fetchOwnProfileData();
+    }
+
+    if (notes.length === 0) {
+      fetchNotes();
+    }
+  }, [
+    userLoggedIn,
+    fetchOwnProfileData,
+    fetchNotes,
+    isUserLoggedIn,
+    profileData,
+    notes.length,
+  ]);
 
   function searchBarFilter(event) {
     let filtered = notes.filter((note) => {
@@ -97,6 +114,7 @@ function App({
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/successful" element={<Successful />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
       <Footer />
@@ -107,6 +125,8 @@ function App({
 const mapStateToProps = (state) => {
   return {
     notes: state.notes.notes,
+    isUserLoggedIn: state.user.isUserLoggedIn,
+    profileData: state.user.profileData,
   };
 };
 

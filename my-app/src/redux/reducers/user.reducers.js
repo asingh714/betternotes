@@ -31,6 +31,8 @@ import {
 } from "../actions/user.actions";
 
 const initialState = {
+  isUserLoggedIn: false,
+  userLoggedInError: "",
   isRegistering: false,
   isRegistered: false,
   registrationError: "",
@@ -67,27 +69,22 @@ const userReducer = (state = initialState, action) => {
     case CHECK_USER_LOGGED_IN_START:
       return {
         ...state,
-        isLoggingIn: true,
-        isLoggedIn: false,
-        loggingError: "",
-        token: "",
-        username: "",
+        isUserLoggedIn: false,
+        userLoggedInError: "",
       };
     case CHECK_USER_LOGGED_IN_SUCCESS:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: true,
-        loggingError: "",
+        isUserLoggedIn: true,
+        userLoggedInError: "",
         token: action.payload.token,
         username: action.payload.username,
       };
     case CHECK_USER_LOGGED_IN_FAILURE:
       return {
         ...state,
-        isLoggingIn: false,
-        isLoggedIn: false,
-        loggingError: "",
+        isUserLoggedIn: false,
+        userLoggedInError: "The user is not logged in.",
         token: "",
         username: "",
       };
