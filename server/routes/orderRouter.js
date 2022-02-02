@@ -18,6 +18,6 @@ router.get("/allItems", getAllSingleOrderItems);
 router.get("/allNotes", getAllSingleOrderNotes);
 router.get("/myOrders", authenticateUser, getAllUserOrders);
 
-router.get("/testing", verifyOrderEmail); // testing
+// router.get("/testing", verifyOrderEmail); // testing
 
 module.exports = router;

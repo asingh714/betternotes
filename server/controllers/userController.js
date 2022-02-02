@@ -73,44 +73,69 @@ const showCurrentUser = (req, res) => {
   const profileData = jwt.verify(token, process.env.JWT_SECRET);
   const username = profileData["username"];
 
-  db("users")
-    .where({ username })
-    .first()
-    .then((user) => {
-      if (!user) {
-        res.status(404).json({
-          error: "You cannot access this user",
-        });
-      } else {
-        const {
-          id,
-          unique_user_id,
-          user_name,
-          email,
-          username,
-          profile_image,
-          school_name,
-          user_grade_level,
-          user_description,
-        } = user;
-        res.status(200).json({
-          id,
-          unique_user_id,
-          user_name,
-          email,
-          username,
-          profile_image,
-          school_name,
-          user_grade_level,
-          user_description,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: "The user with this specified ID could not be retrieved.",
-      });
+  let validationErrors = [];
+
+  if (!token) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "token",
+      message: "Please provide a valid token",
     });
+  }
+
+  if (!username) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "username",
+      message: "Please provide a valid username",
+    });
+  }
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("users")
+      .where({ username })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            error: "You cannot access this user",
+          });
+        } else {
+          const {
+            id,
+            unique_user_id,
+            user_name,
+            email,
+            username,
+            profile_image,
+            school_name,
+            user_grade_level,
+            user_description,
+          } = user;
+          res.status(200).json({
+            id,
+            unique_user_id,
+            user_name,
+            email,
+            username,
+            profile_image,
+            school_name,
+            user_grade_level,
+            user_description,
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "The user with this specified ID could not be retrieved.",
+        });
+      });
+  }
 };
 
 const updateUserInfo = async (req, res) => {
@@ -157,7 +182,6 @@ const updateUserInfo = async (req, res) => {
 };
 
 const deleteUserInfo = (req, res) => {
-  // const { unique_user_id } = req.params;
   const subject = req.decodedToken.subject;
 
   db("users")

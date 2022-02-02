@@ -9,7 +9,7 @@ const createOrder = (req, res) => {
 
   let validationErrors = [];
   const { subject, email, user_name } = req.decodedToken; // id
-  console.log("user_name", [subject, email, user_name]);
+
 
   // if (!items || items.length < 1) {
   //   validationErrors.push({
@@ -39,17 +39,16 @@ const createOrder = (req, res) => {
     purchase_date: Date.now(),
     user_id: subject,
   };
-  // console.log(order);
+
 
   db("orders")
     .insert(order)
     .then((result) => {
       let orderId = result[0];
-      // console.log("Result:", result);
-      // console.log("Order ID:", orderId);
+
       for (const item of cart) {
         const singleOrderItemId = uuidv4();
-        // console.log(item);
+
         const singleOrderItem = {
           unique_single_id: singleOrderItemId,
           note_id: item.unique_note_id,

@@ -19,7 +19,7 @@ const createNote = async (req, res) => {
   } = req.body;
   const subject_token = req.decodedToken.subject;
   let validationErrors = [];
-  console.log("createNote", req.file);
+
   if (
     !note_name ||
     !short_description ||
@@ -182,7 +182,7 @@ const getSingleNote = (req, res) => {
     )
     .first()
     .then((singleNote) => {
-      // console.log(singleNote);
+
       if (singleNote.length < 1) {
         res.status(404).json({
           error: "You cannot access the note with this specific key",
@@ -277,7 +277,7 @@ const updateNote = (req, res) => {
               teacher,
             })
             .then((result) => {
-              console.log(result);
+
               res.status(201).json(result);
             })
             .catch((error) => {
