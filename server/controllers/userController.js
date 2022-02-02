@@ -9,50 +9,66 @@ const getAllUsers = (req, res) => {
 
 const getUserInfo = (req, res) => {
   const { unique_user_id } = req.params;
-  // console.log(unique_user_id);
-  db("users")
-    .where({ unique_user_id })
-    .first()
-    .then((user) => {
-      if (!user) {
-        res.status(404).json({
-          error: "You cannot access this user",
-        });
-      } else {
-        const {
-          id,
-          unique_user_id,
-          user_name,
-          email,
-          username,
-          profile_image,
-          school_name,
-          user_grade_level,
-          user_description,
-        } = user;
-        res.status(200).json({
-          id,
-          unique_user_id,
-          user_name,
-          email,
-          username,
-          profile_image,
-          school_name,
-          user_grade_level,
-          user_description,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: "The user with this specified ID could not be retrieved.",
-      });
+  let validationErrors = [];
+
+  if (!unique_user_id) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "unique_user_id",
+      message: "Please provide a valid user id",
     });
+  }
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("users")
+      .where({ unique_user_id })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(404).json({
+            error: "You cannot access this user",
+          });
+        } else {
+          const {
+            id,
+            unique_user_id,
+            user_name,
+            email,
+            username,
+            profile_image,
+            school_name,
+            user_grade_level,
+            user_description,
+          } = user;
+          res.status(200).json({
+            id,
+            unique_user_id,
+            user_name,
+            email,
+            username,
+            profile_image,
+            school_name,
+            user_grade_level,
+            user_description,
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "The user with this specified ID could not be retrieved.",
+        });
+      });
+  }
 };
 
 const showCurrentUser = (req, res) => {
   const token = req.headers.authorization;
-  // console.log(token);
+
   // Since this is a restricted route, we know for sure we can verify this token
   const profileData = jwt.verify(token, process.env.JWT_SECRET);
   const username = profileData["username"];
@@ -61,7 +77,6 @@ const showCurrentUser = (req, res) => {
     .where({ username })
     .first()
     .then((user) => {
-      // console.log(user);
       if (!user) {
         res.status(404).json({
           error: "You cannot access this user",
@@ -144,8 +159,6 @@ const updateUserInfo = async (req, res) => {
 const deleteUserInfo = (req, res) => {
   // const { unique_user_id } = req.params;
   const subject = req.decodedToken.subject;
-  // console.log(unique_user_id);
-  // console.log(subject);
 
   db("users")
     .where({ id: subject })
@@ -169,7 +182,7 @@ const deleteUserInfo = (req, res) => {
 const updatePassword = (req, res) => {
   const { password, new_password, confirm_new_password } = req.body;
   const { unique_user_id } = req.params;
-  const validationErrors = [];
+  let validationErrors = [];
 
   if (!password || !new_password || new_password.length < 7) {
     validationErrors.push({
@@ -211,7 +224,7 @@ const updatePassword = (req, res) => {
           });
         } else {
           const hashed_password = bcrypt.hashSync(new_password, 14);
-          // console.log(hashed_password);
+
           db("users")
             .where({ username })
             .update({
@@ -234,7 +247,6 @@ const updatePassword = (req, res) => {
         }
       })
       .catch((error) => {
-        // console.log(error);
         res.status(500).json({
           error: "Sorry there was an error.",
         });

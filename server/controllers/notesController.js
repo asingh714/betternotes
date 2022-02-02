@@ -18,7 +18,7 @@ const createNote = async (req, res) => {
     teacher,
   } = req.body;
   const subject_token = req.decodedToken.subject;
-  const validationErrors = [];
+  let validationErrors = [];
   console.log("createNote", req.file);
   if (
     !note_name ||
@@ -218,7 +218,7 @@ const updateNote = (req, res) => {
   } = req.body;
 
   // const subject_token = req.decodedToken.subject;
-  const validationErrors = [];
+  let validationErrors = [];
 
   if (
     !note_name ||

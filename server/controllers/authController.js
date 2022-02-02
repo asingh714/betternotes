@@ -18,7 +18,7 @@ const verifyEmail = (req, res) => {
   const { token, email } = req.query;
   const emailIsValid = email && validator.isEmail(email);
 
-  const validationErrors = [];
+  let validationErrors = [];
 
   if (!email || emailIsValid === false) {
     validationErrors.push({
@@ -31,7 +31,7 @@ const verifyEmail = (req, res) => {
   if (!token) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
-      field: "email",
+      field: "token",
       message: "Please provide a valid token",
     });
   }
@@ -83,8 +83,8 @@ const verifyEmail = (req, res) => {
 const register = (req, res) => {
   const { user_name, email, username, password, confirm_password } = req.body;
   const emailIsValid = email && validator.isEmail(email);
-  console.log(req.body);
-  const validationErrors = [];
+  let validationErrors = [];
+
   if (!user_name) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
@@ -191,67 +191,68 @@ const register = (req, res) => {
 
 const login = (req, res) => {
   const { username, password } = req.body;
-  const validationErrors = [];
-  console.log(req.body);
-  // if (!username) {
-  //   validationErrors.push({
-  //     code: "VALIDATION_ERROR",
-  //     field: "username",
-  //     message: "Please provide a username for the user",
-  //   });
-  // }
+  let validationErrors = [];
 
-  // if (!password) {
-  //   validationErrors.push({
-  //     code: "VALIDATION_ERROR",
-  //     field: "password",
-  //     message: "Please provide a password",
-  //   });
-  // }
-
-  // if (validationErrors.length) {
-  //   const errorObject = {
-  //     error: true,
-  //     errors: validationErrors,
-  //   };
-  //   res.status(400).send(errorObject);
-  // } else {
-  db("users")
-    .where({ username })
-    .first()
-    .then((user) => {
-      if (!user) {
-        res.status(401).json({
-          error: "This username does not exist",
-        });
-      } else if (user && !bcrypt.compareSync(password, user.password)) {
-        res.status(401).json({
-          error: "The password is incorrect",
-        });
-      } else if (!user.isVerified) {
-        res.status(401).json({ error: "This user has not yet been verified" });
-      } else {
-        const token = generateToken(user);
-        res.status(200).json({
-          id: user.id,
-          username: user.username,
-          // password: user.password,
-          token,
-        });
-      }
-    })
-    .catch((error) => {
-      res.status(500).json({
-        error: "There was an error while logging in",
-      });
+  if (!username) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "username",
+      message: "Please provide a username for the user",
     });
-  // }
+  }
+
+  if (!password) {
+    validationErrors.push({
+      code: "VALIDATION_ERROR",
+      field: "password",
+      message: "Please provide a password",
+    });
+  }
+
+  if (validationErrors.length) {
+    const errorObject = {
+      error: true,
+      errors: validationErrors,
+    };
+    res.status(400).send(errorObject);
+  } else {
+    db("users")
+      .where({ username })
+      .first()
+      .then((user) => {
+        if (!user) {
+          res.status(401).json({
+            error: "This username does not exist",
+          });
+        } else if (user && !bcrypt.compareSync(password, user.password)) {
+          res.status(401).json({
+            error: "The password is incorrect",
+          });
+        } else if (!user.isVerified) {
+          res
+            .status(401)
+            .json({ error: "This user has not yet been verified" });
+        } else {
+          const token = generateToken(user);
+          res.status(200).json({
+            id: user.id,
+            username: user.username,
+            token,
+          });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: "There was an error while logging in",
+        });
+      });
+  }
 };
 
 const sendResetPasswordLink = (req, res) => {
   const { email } = req.body;
   const emailIsValid = email && validator.isEmail(email);
-  const validationErrors = [];
+  let validationErrors = [];
 
   if (!email || emailIsValid === false) {
     validationErrors.push({
@@ -296,7 +297,7 @@ const resetForgottenPassword = (req, res) => {
 
   const emailIsValid = email && validator.isEmail(email);
 
-  const validationErrors = [];
+  let validationErrors = [];
 
   if (!email || emailIsValid === false) {
     validationErrors.push({
@@ -309,7 +310,7 @@ const resetForgottenPassword = (req, res) => {
   if (!token) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
-      field: "email",
+      field: "token",
       message: "Please provide a valid token",
     });
   }
@@ -369,7 +370,6 @@ const resetForgottenPassword = (req, res) => {
         }
       })
       .catch((error) => {
-        console.log(error);
         res.status(500).json({
           error: "Sorry there was an error.",
         });

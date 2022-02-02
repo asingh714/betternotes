@@ -7,7 +7,7 @@ const sendEmail = require("../util/sendEmail");
 const createOrder = (req, res) => {
   const { cart } = req.body;
 
-  const validationErrors = [];
+  let validationErrors = [];
   const { subject, email, user_name } = req.decodedToken; // id
   console.log("user_name", [subject, email, user_name]);
 
