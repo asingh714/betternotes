@@ -46,10 +46,9 @@ function App({
     if (isUserLoggedIn === false) {
       userLoggedIn();
     }
-    if (isUserLoggedIn && Object.entries(profileData).length === 0) {
-      fetchOwnProfileData();
-    }
-
+    // if (isUserLoggedIn && Object.entries(profileData).length === 0) {
+    //   fetchOwnProfileData();
+    // }
     if (notes.length === 0) {
       fetchNotes();
     }

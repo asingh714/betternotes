@@ -15,7 +15,9 @@ class ProfileData extends Component {
     showModal: false,
   };
   componentDidMount() {
-    this.props.fetchOwnProfileData();
+    if (Object.entries(this.props.user).length === 0) {
+      this.props.fetchOwnProfileData();
+    }
   }
   render() {
     const {

@@ -200,9 +200,12 @@ export const logoutUser = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT_START });
 
   let token = localStorage.getItem("token");
+  let username = localStorage.getItem("username");
 
-  if (token) {
+  if (token && username) {
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
+
     dispatch({ type: USER_LOGOUT_SUCCESS });
   }
 };

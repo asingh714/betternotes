@@ -17,7 +17,7 @@ export default function Dropdown(props) {
           name={props.name}
         >
           {!props.hasLabel && (
-            <option value="" disabled selected>
+            <option value="" disabled>
               {props.label}
             </option>
           )}
@@ -44,7 +44,7 @@ export default function Dropdown(props) {
           name={props.name}
         >
           {!props.hasLabel && (
-            <option value="" disabled selected>
+            <option value="" disabled>
               {props.label}
             </option>
           )}

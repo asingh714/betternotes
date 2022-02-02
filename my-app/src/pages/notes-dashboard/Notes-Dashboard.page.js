@@ -16,7 +16,7 @@ class NotesDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      notes: [],
+      notes: this.props.notes || [],
       filteredNotes: this.props.filteredNotes || [],
       sortBy: "Newest",
       school: "",
@@ -28,7 +28,9 @@ class NotesDashboard extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchNotes();
+    if (this.props.notes.length === 0) {
+      this.props.fetchNotes();
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -58,6 +60,7 @@ class NotesDashboard extends Component {
 
   resetFilteredData = (event) => {
     this.setState({
+      notes: this.props.notes,
       filteredNotes: [],
     });
   };
