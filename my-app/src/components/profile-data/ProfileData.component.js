@@ -18,6 +18,12 @@ class ProfileData extends Component {
     this.props.fetchOwnProfileData();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.hasUpdatedProfileData !== this.props.hasUpdatedProfileData) {
+      this.props.fetchOwnProfileData();
+    }
+  }
+
   render() {
     const {
       profile_image,
@@ -113,6 +119,7 @@ class ProfileData extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user.profileData,
+    hasUpdatedProfileData: state.user.hasUpdatedProfileData,
   };
 };
 

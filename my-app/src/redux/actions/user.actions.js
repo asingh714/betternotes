@@ -184,7 +184,6 @@ export const updateUserProfile = (credentials, id) => (dispatch) => {
   axiosWithAuth()
     .put(`/user/${id}`, credentials)
     .then((result) => {
-      console.log(result);
       dispatch({ type: UPDATE_USER_PROFILE_SUCCESS });
     })
     .catch((error) => {

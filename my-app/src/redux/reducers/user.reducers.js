@@ -28,6 +28,9 @@ import {
   CHECK_USER_LOGGED_IN_FAILURE,
   USER_LOGOUT_START,
   USER_LOGOUT_SUCCESS,
+  UPDATE_USER_PROFILE_START,
+  UPDATE_USER_PROFILE_SUCCESS,
+  UPDATE_USER_PROFILE_FAILURE,
 } from "../actions/user.actions";
 
 const initialState = {
@@ -62,6 +65,8 @@ const initialState = {
   isFetchingProfileData: false,
   hasFetchedProfileData: false,
   fetchingProfileDataError: "",
+  isUpdatingProfileData: false,
+  hasUpdatedProfileData: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -271,6 +276,24 @@ const userReducer = (state = initialState, action) => {
         hasFetchedProfileData: false,
         fetchingProfileDataError:
           "There was an error while fetching your profile.",
+      };
+    case UPDATE_USER_PROFILE_START:
+      return {
+        ...state,
+        isUpdatingProfileData: true,
+        hasUpdatedProfileData: false,
+      };
+    case UPDATE_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        isUpdatingProfileData: false,
+        hasUpdatedProfileData: true,
+      };
+    case UPDATE_USER_PROFILE_FAILURE:
+      return {
+        ...state,
+        isUpdatingProfileData: false,
+        hasUpdatedProfileData: false,
       };
     case USER_LOGOUT_START:
       return {

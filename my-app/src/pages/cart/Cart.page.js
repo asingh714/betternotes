@@ -8,7 +8,7 @@ import { getCartItems } from "../../redux/actions/cart.actions";
 
 import "./Cart.styles.scss";
 
-function Cart({ getCartItems, cart, total, isCheckout, isLoggedIn }) {
+function Cart({ getCartItems, cart, total, isCheckout, isUserLoggedIn }) {
   const intialCount = Number(cart.length) || 0;
   const [count, setCount] = useState(intialCount);
   const [cartTotal, setCartTotal] = useState(total);
@@ -36,9 +36,9 @@ function Cart({ getCartItems, cart, total, isCheckout, isLoggedIn }) {
                 <Button
                   buttonStyle="xlarge-bluefour-btn"
                   handleSubmit={() => navigate("/checkout")}
-                  isDisabled={!isLoggedIn}
+                  isDisabled={!isUserLoggedIn}
                 >
-                  {!isLoggedIn ? "Log in to checkout" : "Checkout"}
+                  {!isUserLoggedIn ? "Log in to checkout" : "Checkout"}
                 </Button>
               )}
             </div>
@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
   return {
     cart: state.cart.cart,
     total: state.cart.total,
-    isLoggedIn: state.user.isLoggedIn,
+    isUserLoggedIn: state.user.isUserLoggedIn,
   };
 };
 

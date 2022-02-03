@@ -12,7 +12,7 @@ import { validateLogin } from "../../utils/validateForm";
 
 import "./login-form.styles.scss";
 
-function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
+function LoginForm({ loginUser, isUserLoggedIn, isLoggingIn, loggingError }) {
   const initialState = {
     username: "",
     password: "",
@@ -22,10 +22,10 @@ function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isUserLoggedIn) {
       navigate("/profile");
     }
-  }, [isLoggedIn, navigate]);
+  }, [isUserLoggedIn, navigate]);
 
   const handleChange = (event) => {
     setUser((prevState) => ({
@@ -102,7 +102,7 @@ function LoginForm({ loginUser, isLoggedIn, isLoggingIn, loggingError }) {
 const mapStateToProps = (state) => {
   return {
     isLoggingIn: state.user.isLoggingIn,
-    isLoggedIn: state.user.isLoggedIn,
+    isUserLoggedIn: state.user.isUserLoggedIn,
     loggingError: state.user.loggingError,
   };
 };

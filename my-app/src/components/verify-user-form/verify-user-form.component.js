@@ -17,7 +17,7 @@ function VerifyUserForm({ verifyUser, ifVerified }) {
 
   useEffect(() => {
     if (ifVerified) {
-      navigate("/profile");
+      navigate("/login");
     }
   }, [ifVerified, navigate]);
 

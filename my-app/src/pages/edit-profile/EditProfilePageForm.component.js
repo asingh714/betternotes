@@ -9,7 +9,10 @@ import Dropdown from "../../components/dropdown/dropdown.component";
 import Button from "../../components/button/button.component";
 import ImpText from "../../components/imp-text/impText.component";
 import { withRouter } from "../../utils/withRouter";
-import { updateUserProfile } from "../../redux/actions/user.actions";
+import {
+  updateUserProfile,
+  fetchOwnProfileData,
+} from "../../redux/actions/user.actions";
 
 import "./EditProfilePageForm.styles.scss";
 
@@ -139,6 +142,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { updateUserProfile })(
-  withRouter(EditProfilePageForm)
-);
+export default connect(mapStateToProps, {
+  updateUserProfile,
+  fetchOwnProfileData,
+})(withRouter(EditProfilePageForm));

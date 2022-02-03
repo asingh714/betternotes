@@ -8,5 +8,12 @@
   .profile-notes-form-container {
     flex: 1;
     padding: 5rem 0;
+
+    h2 {
+      font-size: 3.2rem;
+      color: $blue-three;
+      font-weight: 300;
+      text-align: center;
+    }
   }
 }

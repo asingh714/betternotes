@@ -17,7 +17,6 @@ const sendResetPasswordEmail = require("../util/sendResetPasswordEmail");
 const verifyEmail = (req, res) => {
   const { token, email } = req.query;
   const emailIsValid = email && validator.isEmail(email);
-
   let validationErrors = [];
 
   if (!email || emailIsValid === false) {

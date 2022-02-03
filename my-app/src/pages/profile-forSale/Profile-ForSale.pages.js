@@ -44,7 +44,7 @@ function ProfileForSale({
     isFetchingNotes,
     isAddingNote,
     isDeletingNote,
-    noteIdToEdit,  
+    noteIdToEdit,
   ]);
   const username = localStorage.getItem("username");
 
@@ -83,6 +83,7 @@ function ProfileForSale({
             setNoteIdToEdit={setNoteIdToEdit}
           />
         )}
+        <h2>Add a note</h2>
         <AddNoteForm noteToEdit={noteToEdit} />
         {showDelete && (
           <div className="bg-container" onClick={handleDeleteModal}>
