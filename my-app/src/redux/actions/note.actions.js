@@ -51,6 +51,7 @@ export const fetchUserProfileNotes = () => (dispatch) => {
   axiosWithAuth()
     .get("/notes/myNotes")
     .then((result) => {
+      console.log(result);
       dispatch({
         type: FETCH_USER_PROFILE_NOTES_SUCCESS,
         payload: result.data ? result.data : [],

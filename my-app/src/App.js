@@ -49,16 +49,16 @@ function App({
     // if (isUserLoggedIn && Object.entries(profileData).length === 0) {
     //   fetchOwnProfileData();
     // }
-    if (notes.length === 0) {
-      fetchNotes();
-    }
+
+    fetchNotes();
   }, [
-    userLoggedIn,
-    fetchOwnProfileData,
-    fetchNotes,
     isUserLoggedIn,
-    profileData,
-    notes.length,
+    userLoggedIn,
+    // fetchOwnProfileData,
+    fetchNotes,
+    // profileData,
+    // notes,
+    // notes.length,
   ]);
 
   function searchBarFilter(event) {

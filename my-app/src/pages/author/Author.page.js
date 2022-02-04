@@ -22,7 +22,7 @@ function Author({
   useEffect(() => {
     getAuthorProfile(unique_user_id);
     fetchNotesBySingleUser(unique_user_id, user_id);
-  }, []);
+  }, [fetchNotesBySingleUser, getAuthorProfile, unique_user_id, user_id]);
 
   const {
     user_name,
@@ -45,7 +45,12 @@ function Author({
       </div>
       <p>{user_description}</p>
       <h4>My Work</h4>
-      <Notes notes={userNotes} notesStyle="notes-author" noteStyle="narrow" user_name={user_name} />
+      <Notes
+        notes={userNotes}
+        notesStyle="notes-author"
+        noteStyle="narrow"
+        user_name={user_name}
+      />
     </div>
   );
 }

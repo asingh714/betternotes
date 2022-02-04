@@ -8,7 +8,7 @@ import { verifyUser } from "../../redux/actions/user.actions";
 
 import "./verify-user-form.styles.scss";
 
-function VerifyUserForm({ verifyUser, ifVerified }) {
+function VerifyUserForm({ verifyUser, isVerified }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const email = searchParams.get("email") || "";
@@ -16,10 +16,10 @@ function VerifyUserForm({ verifyUser, ifVerified }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (ifVerified) {
+    if (isVerified) {
       navigate("/login");
     }
-  }, [ifVerified, navigate]);
+  }, [isVerified, navigate]);
 
   const handleSubmit = (event) => {
     verifyUser(email, token);
@@ -41,7 +41,7 @@ function VerifyUserForm({ verifyUser, ifVerified }) {
 
 const mapStateToProps = (state) => {
   return {
-    ifVerified: state.user.ifVerified,
+    isVerified: state.user.isVerified,
   };
 };
 

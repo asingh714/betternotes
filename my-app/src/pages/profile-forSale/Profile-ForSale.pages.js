@@ -16,12 +16,13 @@ import { fetchUserProfileNotes } from "../../redux/actions/note.actions";
 function ProfileForSale({
   fetchUserProfileNotes,
   userProfileNotes,
-  userInfo,
-  hasAddedNote,
+  // userInfo,
+  // hasAddedNote,
   isFetchingNotes,
   isAddingNote,
   isDeletingNote,
   deleteNote,
+  hasFetchedUserProfileNotes,
 }) {
   const [showDelete, setShowDelete] = useState(false);
   const [noteIdToDelete, setNoteIdToDelete] = useState(null);
@@ -36,16 +37,7 @@ function ProfileForSale({
       );
       setNoteToEdit(note);
     }
-    // return () => {
-    //   cleanup
-    // }
-  }, [
-    fetchUserProfileNotes,
-    isFetchingNotes,
-    isAddingNote,
-    isDeletingNote,
-    noteIdToEdit,
-  ]);
+  }, [fetchUserProfileNotes, noteIdToEdit, isAddingNote]);
   const username = localStorage.getItem("username");
 
   const handleDeleteModal = () => {
@@ -56,6 +48,8 @@ function ProfileForSale({
     deleteNote(noteIdToDelete);
     setShowDelete(!showDelete);
   };
+
+  const handleNoteToEdit = (event) => {};
 
   return (
     <div className="profile-forsale-page-container">
@@ -81,6 +75,7 @@ function ProfileForSale({
             handleDeleteModal={handleDeleteModal}
             setNoteIdToDelete={setNoteIdToDelete}
             setNoteIdToEdit={setNoteIdToEdit}
+            // noteIdToEdit={noteIdToEdit}
           />
         )}
         <h2>Add a note</h2>
@@ -121,7 +116,8 @@ const mapStateToProps = (state) => {
     isFetchingNotes: state.notes.isFetchingNotes,
     isAddingNote: state.notes.isAddingNote,
     isDeletingNote: state.notes.isDeletingNote,
-    hasAddedNote: state.notes.hasAddedNote,
+    // hasAddedNote: state.notes.hasAddedNote,
+    hasFetchedUserProfileNotes: state.notes.hasFetchedUserProfileNotes,
   };
 };
 

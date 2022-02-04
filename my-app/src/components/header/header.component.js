@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons";
@@ -6,7 +6,10 @@ import { BsCart3, BsSearch } from "react-icons/bs";
 import { connect } from "react-redux";
 import image from "../../new_user.png";
 
-import { logoutUser } from "../../redux/actions/user.actions";
+import {
+  logoutUser,
+  fetchOwnProfileData,
+} from "../../redux/actions/user.actions";
 import Button from "../button/button.component";
 import SearchBar from "../search-bar/SearchBar.component";
 import "./header.styles.scss";
@@ -21,8 +24,13 @@ function Header({
   handleChange,
   value,
   searchBarFilter,
+  fetchOwnProfileData,
 }) {
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   fetchOwnProfileData();
+  // }, [profileData, fetchOwnProfileData]);
 
   function handleLogout() {
     logoutUser();
@@ -127,4 +135,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { logoutUser })(Header);
+export default connect(mapStateToProps, { logoutUser, fetchOwnProfileData })(
+  Header
+);

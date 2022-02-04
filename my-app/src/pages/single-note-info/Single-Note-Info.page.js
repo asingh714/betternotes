@@ -20,7 +20,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
   const notify = () =>
     toast.success("Added to the cart", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -57,12 +57,13 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
     school_name,
     unique_user_id,
     user_id,
+    subject,
   } = note;
   return (
     <div className="single-note-info-container">
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={2000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
@@ -75,7 +76,9 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
       <ToastContainer />
       <div className="top-note-info-container">
         <div className="general-info-container">
-          <h1>{note_name}</h1>
+          <h1>
+            {note_name} | {subject}
+          </h1>
           <p>{short_description}</p>
           <span className="username-info">
             Created by <span>{user_name}</span>

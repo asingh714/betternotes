@@ -36,17 +36,18 @@ import {
 const initialState = {
   isUserLoggedIn: false,
   userLoggedInError: "",
+  token: "",
+  username: "",
+  isLoggingIn: false,
+  isLoggedIn: false,
+  loggingError: "",
+
   isRegistering: false,
   isRegistered: false,
   registrationError: "",
   isVerifying: false,
-  ifVerified: false,
+  isVerified: false,
   verificationError: "",
-  isLoggingIn: false,
-  isLoggedIn: false,
-  loggingError: "",
-  token: "",
-  username: "",
   isRequestingNewPassword: false,
   hasRequestedNewPassword: false,
   requestedNewPasswordError: "",
@@ -93,6 +94,34 @@ const userReducer = (state = initialState, action) => {
         token: "",
         username: "",
       };
+    case USER_LOGIN_START:
+      return {
+        ...state,
+        isLoggingIn: true,
+        isLoggedIn: false,
+        loggingError: "",
+        token: "",
+        username: "",
+      };
+    case USER_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isLoggedIn: true,
+        isUserLoggedIn: true,
+        loggingError: "",
+        token: action.payload.token,
+        username: action.payload.username,
+      };
+    case USER_LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isLoggedIn: false,
+        loggingError: "There was an error while logging in.",
+        token: "",
+        username: "",
+      };
     case USER_REGISTER_START:
       return {
         ...state,
@@ -114,54 +143,29 @@ const userReducer = (state = initialState, action) => {
         isRegistered: false,
         registrationError: "There was an error while registering",
       };
+
     case USER_VERIFY_START:
       return {
         ...state,
         isVerifying: true,
-        ifVerified: false,
+        isVerified: false,
         verificationError: "",
       };
     case USER_VERIFY_SUCCESS:
       return {
         ...state,
         isVerifying: false,
-        ifVerified: true,
+        isVerified: true,
         verificationError: "",
       };
     case USER_VERIFY_FAILURE:
       return {
         ...state,
         isVerifying: false,
-        ifVerified: false,
+        isVerified: false,
         verificationError: "There was an error while verifying this profile.",
       };
-    case USER_LOGIN_START:
-      return {
-        ...state,
-        isLoggingIn: true,
-        isLoggedIn: false,
-        loggingError: "",
-        token: "",
-        username: "",
-      };
-    case USER_LOGIN_SUCCESS:
-      return {
-        ...state,
-        isLoggingIn: false,
-        isLoggedIn: true,
-        loggingError: "",
-        token: action.payload.token,
-        username: action.payload.username,
-      };
-    case USER_LOGIN_FAILURE:
-      return {
-        ...state,
-        isLoggingIn: false,
-        isLoggedIn: false,
-        loggingError: "There was an error while logging in.",
-        token: "",
-        username: "",
-      };
+
     case FORGOT_PASSWORD_REQUEST_START:
       return {
         ...state,
@@ -183,6 +187,7 @@ const userReducer = (state = initialState, action) => {
         hasRequestedNewPassword: false,
         requestedNewPasswordError: "There was an error.",
       };
+
     case RESET_PASSWORD_REQUEST_START:
       return {
         ...state,
@@ -204,10 +209,10 @@ const userReducer = (state = initialState, action) => {
         hasResetPassword: false,
         resetPasswordError: "There was an error resetting your password.",
       };
+
     case GET_AUTHOR_INFO_START:
       return {
         ...state,
-        userInfo: {},
         isFetchingUser: true,
         hasFetchedUser: false,
         fetchUserError: "",
@@ -228,10 +233,10 @@ const userReducer = (state = initialState, action) => {
         hasFetchedUser: false,
         fetchUserError: "There was an error fetching the author's information.",
       };
+
     case GET_ALL_NOTES_BY_SINGLE_START:
       return {
         ...state,
-        userNotes: [],
         isFetchingNotesBySingleUser: true,
         hasFetchedNotesBySingleUser: false,
         fetchNotesBySingleUser: "",
@@ -252,6 +257,7 @@ const userReducer = (state = initialState, action) => {
         hasFetchedNotesBySingleUser: false,
         fetchNotesBySingleUser: "There was an error while fetching the notes",
       };
+
     case GET_OWN_USER_PROFILE_START:
       return {
         ...state,

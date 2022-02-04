@@ -26,6 +26,7 @@ function SingleNote(props) {
     year,
     school,
     unique_note_id,
+    subject,
   } = props.note;
 
   const [numPages, setNumPages] = useState(null);
@@ -34,7 +35,7 @@ function SingleNote(props) {
   const notify = () =>
     toast.success("Added to the cart", {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -56,6 +57,7 @@ function SingleNote(props) {
     event.stopPropagation();
     event.preventDefault();
     props.setNoteIdToEdit(unique_note_id);
+
   };
 
   const addToCart = (event, note) => {
@@ -74,7 +76,7 @@ function SingleNote(props) {
       <>
         <ToastContainer
           position="top-right"
-          autoClose={5000}
+          autoClose={2000}
           hideProgressBar={false}
           newestOnTop={false}
           closeOnClick
@@ -106,12 +108,13 @@ function SingleNote(props) {
               <span>${price}</span>
             </div>
 
+            <p className="subject-desc">{subject}</p>
             <p className="note-desc">{short_description}</p>
 
             <span className="user-name">{user_name}</span>
             <div className="note-bottom-line">
               <div className="note-info-line">
-                <span>{pages} Pages </span> | <span>{year}</span> |{" "}
+                <span>{pages} Pages </span> | <span>{year}</span> |
                 <span>{school}</span>
               </div>
               <Button

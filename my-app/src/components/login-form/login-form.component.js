@@ -102,8 +102,8 @@ function LoginForm({ loginUser, isUserLoggedIn, isLoggingIn, loggingError }) {
 const mapStateToProps = (state) => {
   return {
     isLoggingIn: state.user.isLoggingIn,
-    isUserLoggedIn: state.user.isUserLoggedIn,
     loggingError: state.user.loggingError,
+    isUserLoggedIn: state.user.isUserLoggedIn,
   };
 };
 

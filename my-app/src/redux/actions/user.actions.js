@@ -19,6 +19,27 @@ export const userLoggedIn = () => (dispatch) => {
   }
 };
 
+export const USER_LOGIN_START = "USER_LOGIN_START";
+export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
+export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE";
+
+export const loginUser = (credentials) => (dispatch) => {
+  dispatch({ type: USER_LOGIN_START });
+
+  axiosWithAuth()
+    .post("/auth/login", credentials)
+    .then((result) => {
+      console.log(result.data);
+      localStorage.setItem("token", result.data.token);
+      localStorage.setItem("username", result.data.username);
+      dispatch({ type: USER_LOGIN_SUCCESS, payload: result.data });
+    })
+    .catch((error) => {
+      console.log(error);
+      dispatch({ type: USER_LOGIN_FAILURE });
+    });
+};
+
 export const USER_REGISTER_START = "USER_REGISTER_START";
 export const USER_REGISTER_SUCCESS = "USER_REGISTER_SUCCESS";
 export const USER_REGISTER_FAILURE = "USER_REGISTER_FAILURE";
@@ -54,28 +75,6 @@ export const verifyUser = (email, token) => (dispatch) => {
     });
 };
 
-export const USER_LOGIN_START = "USER_LOGIN_START";
-export const USER_LOGIN_SUCCESS = "USER_LOGIN_SUCCESS";
-export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE";
-
-export const loginUser = (credentials) => (dispatch) => {
-  dispatch({ type: USER_LOGIN_START });
-
-  axiosWithAuth()
-    .post("/auth/login", credentials)
-    .then((result) => {
-      console.log(result.data);
-      localStorage.setItem("token", result.data.token);
-      localStorage.setItem("username", result.data.username);
-      // localStorage.setItem("profileData);
-      dispatch({ type: USER_LOGIN_SUCCESS, payload: result.data });
-    })
-    .catch((error) => {
-      console.log(error);
-      dispatch({ type: USER_LOGIN_FAILURE });
-    });
-};
-
 export const FORGOT_PASSWORD_REQUEST_START = "FORGOT_PASSWORD_REQUEST_START";
 export const FORGOT_PASSWORD_REQUEST_SUCCESS =
   "FORGOT_PASSWORD_REQUEST_SUCCESS";
@@ -88,7 +87,6 @@ export const forgottenPasswordRequest = (email) => (dispatch) => {
   axiosWithAuth()
     .post("/auth/request-new-password", { email })
     .then((result) => {
-      console.log(result);
       dispatch({ type: FORGOT_PASSWORD_REQUEST_SUCCESS });
     })
     .catch((error) => {
@@ -107,7 +105,6 @@ export const resetForgottenPassword =
     axiosWithAuth()
       .post(`/auth/reset-password?token=${token}&email=${email}`, passwords)
       .then((result) => {
-        console.log(result);
         dispatch({ type: RESET_PASSWORD_REQUEST_SUCCESS });
       })
       .catch((error) => {
