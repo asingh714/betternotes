@@ -8,5 +8,11 @@
   border: 1px solid $grey-seven;
   max-width: 40rem;
   max-height: 60rem; // might need to remove later
+  @media only screen and (max-width: $bp-750) {
+    max-width: 35rem;
+  }
 
+  @media only screen and (max-width: $bp-600) {
+    // flex-direction: row;
+  }
 }
