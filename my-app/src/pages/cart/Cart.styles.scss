@@ -6,6 +6,15 @@
   flex-direction: column;
   padding: 8rem;
 
+  @media only screen and (max-width: $bp-750) {
+    padding: 5rem;
+  }
+
+  @media only screen and (max-width: $bp-650) {
+    padding: 5rem 2rem;
+  }
+
+
   h2 {
     font-size: 3.2rem;
     color: $grey-two;

@@ -151,16 +151,16 @@
   flex-direction: row;
   justify-content: space-between;
   border: 1px solid $grey-five;
-  cursor: pointer;
+  // cursor: pointer;
   max-width: 55rem;
   padding: 4rem 3.2rem;
   transition: all 0.3s;
   margin-bottom: 4rem;
 
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 1rem 2rem rgba(black, 0.2);
-  }
+  // &:hover {
+  //   transform: translateY(-3px);
+  //   box-shadow: 0 1rem 2rem rgba(black, 0.2);
+  // }
 
   .img-container {
     display: flex;

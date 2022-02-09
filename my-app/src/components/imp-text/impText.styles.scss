@@ -45,6 +45,7 @@ a:visited {
   letter-spacing: 1px;
   transition: all 0.3s;
   padding: 0 1rem;
+  cursor: pointer;
   &:hover {
     text-decoration: underline;
   }

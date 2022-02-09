@@ -12,7 +12,7 @@ import Button from "../../components/button/button.component";
 import Line from "../../components/line/line.component";
 import "./Single-Note-Info.styles.scss";
 
-function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
+function SingleNoteInfo({ fetchSingleNote, note, addCartItem, cart }) {
   const { unique_note_id } = useParams();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -60,6 +60,25 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
     user_id,
     subject,
   } = note;
+
+  // const {
+  //   note_name,
+  //   short_description,
+  //   long_description,
+  //   user_name,
+  //   school,
+  //   class_name,
+  //   teacher,
+  //   year,
+  //   price,
+  //   document,
+  //   profile_image,
+  //   user_description,
+  //   school_name,
+  //   unique_user_id,
+  //   user_id,
+  //   subject,
+  // } = cart;
   return (
     <div className="single-note-info-container">
       <ToastContainer
@@ -137,6 +156,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
 const mapStateToProps = (state) => {
   return {
     note: state.notes.singleNote,
+    cart: state.cart.cart,
   };
 };
 export default connect(mapStateToProps, { fetchSingleNote, addCartItem })(

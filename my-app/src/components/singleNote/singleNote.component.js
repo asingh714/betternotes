@@ -57,7 +57,6 @@ function SingleNote(props) {
     event.stopPropagation();
     event.preventDefault();
     props.setNoteIdToEdit(unique_note_id);
-
   };
 
   const addToCart = (event, note) => {
@@ -177,10 +176,7 @@ function SingleNote(props) {
     );
   } else if (props.noteStyle === "wide-cart") {
     return (
-      <div
-        className="wide-note-info-container-cart"
-        onClick={(event) => navigate(`/notes/${props.id}`)}
-      >
+      <div className="wide-note-info-container-cart">
         <div className="img-container">
           {/* <Document
             file={document}
