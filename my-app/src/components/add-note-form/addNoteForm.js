@@ -9,7 +9,13 @@ import Dropdown from "../dropdown/dropdown.component";
 import { createNote, editNote } from "../../redux/actions/note.actions";
 
 import "./addNoteForm.styles.scss";
-function AddNoteForm({ createNote, editNote, noteToEdit }) {
+function AddNoteForm({
+  createNote,
+  editNote,
+  noteToEdit,
+  setNoteToEdit,
+  setNoteIdToEdit,
+}) {
   const initialState = {
     displayDoc: image,
     document: image,
@@ -80,8 +86,10 @@ function AddNoteForm({ createNote, editNote, noteToEdit }) {
     formData.append("pages", note.pages);
     formData.append("short_description", note.short_description);
     formData.append("long_description", note.long_description);
-    if (noteToEdit) {
+    if (noteToEdit && Object.keys(noteToEdit).length > 0) {
       editNote(note.unique_note_id, formData);
+      setNoteToEdit({});
+      setNoteIdToEdit(null);
     } else {
       createNote(formData);
     }
@@ -93,7 +101,7 @@ function AddNoteForm({ createNote, editNote, noteToEdit }) {
       <div className="img-container">
         <label className="file-label">
           <span>Add Note Document</span>
-          {noteToEdit ? (
+          {noteToEdit && Object.keys(noteToEdit).length > 0 ? (
             <img src={note.document} alt="note" className="edit-image" />
           ) : (
             <img

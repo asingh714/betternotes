@@ -33,8 +33,9 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem }) {
   };
 
   useEffect(() => {
+    console.log(unique_note_id);
     fetchSingleNote(unique_note_id);
-  }, []);
+  }, [fetchSingleNote, unique_note_id]);
 
   const addToCart = (note) => {
     addCartItem(note);

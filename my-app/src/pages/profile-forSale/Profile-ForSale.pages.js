@@ -18,11 +18,14 @@ function ProfileForSale({
   userProfileNotes,
   // userInfo,
   // hasAddedNote,
-  isFetchingNotes,
-  isAddingNote,
-  isDeletingNote,
+  isFetchingUserProfileNotes,
+  hasAddedNote,
+  hasDeletedNote,
   deleteNote,
-  hasFetchedUserProfileNotes,
+  hasEditedNote,
+  isAddingNote,
+  isEditingNote,
+  // hasFetchedUserProfileNotes,
 }) {
   const [showDelete, setShowDelete] = useState(false);
   const [noteIdToDelete, setNoteIdToDelete] = useState(null);
@@ -31,13 +34,20 @@ function ProfileForSale({
 
   useEffect(() => {
     fetchUserProfileNotes();
-    if (noteIdToEdit !== "") {
+    console.log("HERE:", noteIdToEdit);
+    if (noteIdToEdit !== null && noteIdToEdit !== undefined) {
       const note = userProfileNotes.find(
         (note) => note.unique_note_id === noteIdToEdit
       );
       setNoteToEdit(note);
     }
-  }, [fetchUserProfileNotes, noteIdToEdit, isAddingNote]);
+  }, [
+    fetchUserProfileNotes,
+    noteIdToEdit,
+    hasAddedNote,
+    hasDeletedNote,
+    hasEditedNote,
+  ]);
   const username = localStorage.getItem("username");
 
   const handleDeleteModal = () => {
@@ -49,16 +59,11 @@ function ProfileForSale({
     setShowDelete(!showDelete);
   };
 
-  const handleNoteToEdit = (event) => {};
-
   return (
     <div className="profile-forsale-page-container">
       <ProfileMenu />
       <div className="profile-notes-form-container">
-        {!userProfileNotes ||
-        isFetchingNotes ||
-        isAddingNote ||
-        isDeletingNote ? (
+        {isFetchingUserProfileNotes || isAddingNote || isEditingNote ? (
           <TailSpin
             height="25"
             width="25"
@@ -79,7 +84,11 @@ function ProfileForSale({
           />
         )}
         <h2>Add a note</h2>
-        <AddNoteForm noteToEdit={noteToEdit} />
+        <AddNoteForm
+          noteToEdit={noteToEdit}
+          setNoteToEdit={setNoteToEdit}
+          setNoteIdToEdit={setNoteIdToEdit}
+        />
         {showDelete && (
           <div className="bg-container" onClick={handleDeleteModal}>
             {showDelete && (
@@ -113,11 +122,14 @@ function ProfileForSale({
 const mapStateToProps = (state) => {
   return {
     userProfileNotes: state.notes.userProfileNotes,
-    isFetchingNotes: state.notes.isFetchingNotes,
+    isFetchingUserProfileNotes: state.notes.isFetchingUserProfileNotes,
+    hasAddedNote: state.notes.hasAddedNote,
+    hasEditedNote: state.notes.hasEditedNote,
+    hasDeletedNote: state.notes.hasDeletedNote,
     isAddingNote: state.notes.isAddingNote,
-    isDeletingNote: state.notes.isDeletingNote,
-    // hasAddedNote: state.notes.hasAddedNote,
-    hasFetchedUserProfileNotes: state.notes.hasFetchedUserProfileNotes,
+    isEditingNote: state.notes.isEditingNote,
+    // hasDeletedNote: state.notes.hasDeletedNote,
+    // hasFetchedUserProfileNotes: state.notes.hasFetchedUserProfileNotes,
   };
 };
 

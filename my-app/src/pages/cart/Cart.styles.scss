@@ -18,6 +18,10 @@
     flex-direction: row;
     gap: 5rem;
 
+    @media only screen and (max-width: $bp-750) {
+      flex-direction: column-reverse;
+    }
+
     .notes-right-container {
       margin-top: 2rem;
       h3 {

@@ -72,7 +72,7 @@ const notesReducer = (state = initialState, action) => {
     case SINGLE_NOTE_FETCH_START:
       return {
         ...state,
-        singleNote: {},
+        // singleNote: {},
         isFetchingSingleNote: true,
         hasFetchedSingleNote: false,
         singleNoteError: "",
@@ -153,6 +153,24 @@ const notesReducer = (state = initialState, action) => {
         isDeletingNote: false,
         hasDeletedNote: false,
         deletingNoteError: "There was an error while adding this note.",
+      };
+    case EDIT_NOTE_START:
+      return {
+        isEditingNote: true,
+        hasEditedNote: false,
+        editingNoteError: "",
+      };
+    case EDIT_NOTE_SUCCESS:
+      return {
+        isEditingNote: false,
+        hasEditedNote: true,
+        editingNoteError: "",
+      };
+    case EDIT_NOTE_FAILURE:
+      return {
+        isEditingNote: false,
+        hasEditedNote: false,
+        editingNoteError: "There was an error while editing this note.",
       };
     default:
       return state;

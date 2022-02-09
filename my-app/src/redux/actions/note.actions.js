@@ -28,10 +28,11 @@ export const SINGLE_NOTE_FETCH_FAILURE = "SINGLE_NOTE_FETCH_FAILURE";
 
 export const fetchSingleNote = (unique_note_id) => (dispatch) => {
   dispatch({ type: SINGLE_NOTE_FETCH_START });
-
+  console.log("fetchSingleNote:", unique_note_id);
   axiosWithAuth()
     .get(`/notes/${unique_note_id}`)
     .then((result) => {
+      console.log("result", result);
       dispatch({ type: SINGLE_NOTE_FETCH_SUCCESS, payload: result.data });
     })
     .catch((error) => {
