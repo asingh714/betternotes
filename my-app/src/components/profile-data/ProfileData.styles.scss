@@ -45,6 +45,11 @@
     justify-content: space-between;
     align-self: stretch;
     // flex: 1;
+
+    @media only screen and (max-width: $bp-700) {
+      flex-direction: column-reverse;
+      gap: 5rem;
+    }
   }
 
   .new-password-container {

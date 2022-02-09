@@ -2,11 +2,16 @@
 
 .profile-nav-container {
   display: flex;
+  // flex: 1;
   flex-direction: column;
   min-width: 20rem;
-  max-width: 25rem;
-  padding: 2rem 1.6rem;
+  // max-width: 25rem;
+  padding: 2rem;
   background-color: $grey-nine;
+
+  @media only screen and (max-width: $bp-700) {
+    min-width: 15rem;
+  }
 
   .profile-nav-link {
     transition: all 0.3s;

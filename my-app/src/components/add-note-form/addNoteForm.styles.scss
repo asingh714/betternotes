@@ -10,6 +10,14 @@
   .form-row {
     display: flex;
     gap: 3.2rem;
+    @media only screen and (max-width: $bp-900) {
+      gap: 2rem;
+    }
+    @media only screen and (max-width: $bp-850) {
+      flex-direction: column;
+      gap: 0rem;
+      width: 100%;
+    }
   }
 
   .img-container {
@@ -41,5 +49,11 @@
 
   textarea {
     width: 63.2rem;
+    @media only screen and (max-width: $bp-900) {
+      max-width: 62rem;
+    }
+    @media only screen and (max-width: $bp-900) {
+      width: 100%;
+    }
   }
 }

@@ -26,10 +26,14 @@ input[type="file"] {
   border: 1px solid $blue-five;
   padding: 1rem;
   margin-bottom: 2.4rem;
-  width: 30rem;
+  // width: 100%;
+  min-width: 30rem;
   font-size: 1.6rem;
   font-weight: 500;
   font-family: "Open Sans", sans-serif;
+  @media only screen and (max-width: $bp-900) {
+    width: 100%;
+  }
 }
 
 .user-edit::placeholder {

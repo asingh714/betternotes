@@ -3,11 +3,11 @@
 .profile-forsale-page-container {
   display: flex;
   flex-direction: row;
-  flex: 1;
+  // flex: 1;
 
   .profile-notes-form-container {
     flex: 1;
-    padding: 5rem 0;
+    padding: 5rem 1rem;
 
     h2 {
       font-size: 3.2rem;
