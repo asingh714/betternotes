@@ -21,7 +21,6 @@ const initialState = {
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_CART_ITEM_SUCCESS:
-      // console.log(action.payload.reduce((sum, item) => item.price + sum, 0));
       return {
         ...state,
         cart: action.payload,

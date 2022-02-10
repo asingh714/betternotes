@@ -91,7 +91,6 @@ export const createOrder = (cart) => (dispatch) => {
   axiosWithAuth()
     .post("/orders", { cart: cart })
     .then((result) => {
-      console.log(result);
       dispatch({ type: CREATE_ORDER_SUCCESS });
     })
     .catch((error) => {

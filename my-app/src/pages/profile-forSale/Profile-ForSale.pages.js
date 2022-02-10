@@ -34,7 +34,6 @@ function ProfileForSale({
 
   useEffect(() => {
     fetchUserProfileNotes();
-    console.log("HERE:", noteIdToEdit);
     if (noteIdToEdit !== null && noteIdToEdit !== undefined) {
       const note = userProfileNotes.find(
         (note) => note.unique_note_id === noteIdToEdit

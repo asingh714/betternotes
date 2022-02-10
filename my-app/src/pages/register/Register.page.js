@@ -14,8 +14,15 @@ function Register({ isRegistered }) {
             Your account has been created!
           </ImpText>
           <ImpText textStyle="large-plain-text">
-            Please check your email for a verification link.
+            Please use the platform below for your verification link.
           </ImpText>
+          <a href="https://ethereal.email/messages" className="large-text">
+            https://ethereal.email/messages
+          </a>
+          <ImpText textStyle="large-text">
+            Username: ewsuppvc6joshbwx@ethereal.email
+          </ImpText>
+          <ImpText textStyle="large-text">Password: XmQQPUKuBQNYm1cGnK</ImpText>
         </Modal>
       ) : (
         <RegisterForm />
