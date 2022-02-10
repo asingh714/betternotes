@@ -1,4 +1,13 @@
-// Update with your config settings.
+require("dotenv").config();
+
+const localPg = {
+  host: "localhost",
+  database: process.env.DB_NAME,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  ssl: true,
+};
+const productionDbConnection = process.env.DATABASE_URL || localPg;
 
 module.exports = {
   development: {
@@ -17,6 +26,25 @@ module.exports = {
       afterCreate: (conn, done) => {
         conn.run("PRAGMA foreign_keys = ON", done);
       },
+    },
+  },
+  production: {
+    client: "pg",
+    connection: productionDbConnection,
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+    migrations: {
+      directory: "./db/migrations",
+    },
+    seeds: {
+      directory: "./db/seeds",
+    },
+    dialect: "postgres",
+    dialectOptions: {
+      ssl: true,
     },
   },
 };
