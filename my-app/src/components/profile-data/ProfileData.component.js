@@ -18,11 +18,11 @@ class ProfileData extends Component {
     this.props.fetchOwnProfileData();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevProps.hasUpdatedProfileData !== this.props.hasUpdatedProfileData) {
-  //     this.props.fetchOwnProfileData();
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.hasUpdatedProfileData !== this.props.hasUpdatedProfileData) {
+      this.props.fetchOwnProfileData();
+    }
+  }
 
   render() {
     const {
