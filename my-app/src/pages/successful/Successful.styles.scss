@@ -1,0 +1,12 @@
+@import "../../globalStyles/variables.scss";
+
+.successful-page-container {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  flex: 1;
+  padding: 5rem;
+  gap: 5rem;
+  color: $grey-three;
+}

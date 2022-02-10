@@ -53,6 +53,8 @@ a:visited {
 
 .small-back-text {
   // margin: 1.6rem auto 0;
+  display: inline-block;
+  margin-bottom: 2rem;
   color: $blue-seven;
   font-size: 1.6rem;
   font-weight: 500;
