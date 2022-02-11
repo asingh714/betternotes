@@ -279,9 +279,9 @@ const updatePassword = (req, res) => {
 };
 
 const getAllNotesByOneUser = (req, res) => {
-  const { user_id } = req.params;
+  const { notes_user_id_foreign } = req.params;
   db("notes")
-    .where({ user_id })
+    .where({ notes_user_id_foreign })
     .then((result) => {
       if (result.length < 1) {
         res.status(404).json({ error: "There are no notes" });

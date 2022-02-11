@@ -19,7 +19,7 @@ const createNote = async (req, res) => {
   } = req.body;
   const subject_token = req.decodedToken.subject;
   let validationErrors = [];
-
+  console.log(subject_token);
   if (
     !note_name ||
     !short_description ||
@@ -68,8 +68,9 @@ const createNote = async (req, res) => {
         grade_level,
         class_name,
         teacher,
-        user_id: subject_token,
+        notes_user_id_foreign: subject_token,
       };
+      console.log(newProduct);
       db("notes")
         .insert(newProduct)
         .then((result) => {
@@ -79,6 +80,7 @@ const createNote = async (req, res) => {
           });
         })
         .catch((error) => {
+          console.log(error);
           res.status(400).json(error);
         });
     } else {
@@ -91,7 +93,7 @@ const createNote = async (req, res) => {
 
 const getAllNotes = (req, res) => {
   db("notes")
-    .join("users", "notes.user_id", "users.id")
+    .join("users", "notes.notes_user_id_foreign", "users.id")
     .select(
       "notes.id",
       "unique_note_id",
@@ -114,7 +116,7 @@ const getAllNotes = (req, res) => {
       "email",
       "username",
       "profile_image",
-      "user_id"
+      "notes_user_id_foreign"
     )
     .then((result) => {
       if (result.length < 1) {
@@ -133,7 +135,7 @@ const getAllNotes = (req, res) => {
 const getAllUserNotes = (req, res) => {
   const subject_token = req.decodedToken.subject;
   db("notes")
-    .where({ user_id: subject_token })
+    .where({ notes_user_id_foreign: subject_token })
     .then((result) => {
       if (result.length < 1) {
         res.status(204).json([]);
@@ -153,7 +155,7 @@ const getSingleNote = (req, res) => {
 
   db("notes")
     .where({ unique_note_id })
-    .join("users", "notes.user_id", "users.id")
+    .join("users", "notes.notes_user_id_foreign", "users.id")
     .select(
       "notes.id",
       "unique_note_id",
@@ -182,7 +184,6 @@ const getSingleNote = (req, res) => {
     )
     .first()
     .then((singleNote) => {
-
       if (singleNote.length < 1) {
         res.status(404).json({
           error: "You cannot access the note with this specific key",
@@ -277,7 +278,6 @@ const updateNote = (req, res) => {
               teacher,
             })
             .then((result) => {
-
               res.status(201).json(result);
             })
             .catch((error) => {

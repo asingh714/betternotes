@@ -22,10 +22,10 @@ exports.up = function (knex) {
     table.string("teacher").notNullable();
 
     table
-      .string("user_id")
+      .string("notes_user_id_foreign")
       .unsigned()
       .notNullable()
-      .references("id") // was id
+      .references("id") 
       .inTable("users")
       .onDelete("CASCADE")
       .onUpdate("CASCADE");
