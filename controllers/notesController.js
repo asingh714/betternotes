@@ -68,7 +68,7 @@ const createNote = async (req, res) => {
         grade_level,
         class_name,
         teacher,
-        notes_user_id_foreign: subject_token,
+        user_id: subject_token,
       };
       console.log(newProduct);
       db("notes")
@@ -93,7 +93,7 @@ const createNote = async (req, res) => {
 
 const getAllNotes = (req, res) => {
   db("notes")
-    .join("users", "notes.notes_user_id_foreign", "users.id")
+    .join("users", "notes.user_id", "users.id")
     .select(
       "notes.id",
       "unique_note_id",
@@ -116,7 +116,7 @@ const getAllNotes = (req, res) => {
       "email",
       "username",
       "profile_image",
-      "notes_user_id_foreign"
+      "user_id"
     )
     .then((result) => {
       if (result.length < 1) {
@@ -135,7 +135,7 @@ const getAllNotes = (req, res) => {
 const getAllUserNotes = (req, res) => {
   const subject_token = req.decodedToken.subject;
   db("notes")
-    .where({ notes_user_id_foreign: subject_token })
+    .where({ user_id: subject_token })
     .then((result) => {
       if (result.length < 1) {
         res.status(204).json([]);
@@ -155,7 +155,7 @@ const getSingleNote = (req, res) => {
 
   db("notes")
     .where({ unique_note_id })
-    .join("users", "notes.notes_user_id_foreign", "users.id")
+    .join("users", "notes.user_id", "users.id")
     .select(
       "notes.id",
       "unique_note_id",
