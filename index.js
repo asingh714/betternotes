@@ -19,7 +19,6 @@ server.use(
 );
 server.use(morgan("tiny"));
 
-const port = process.env.PORT || 8080;
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const notesRouter = require("./routes/notesRouter");
@@ -41,6 +40,6 @@ server.get("/", (req, res) => {
 
 server.use(notFound);
 
-server.listen(port, () => {
+server.listen(process.env.PORT || 3000, () => {
   console.log(`\n\n SERVER IS RUNNING ON PORT:${port} \n\n`);
 });
