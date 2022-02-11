@@ -19,7 +19,7 @@ server.use(
 );
 server.use(morgan("tiny"));
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const notesRouter = require("./routes/notesRouter");
