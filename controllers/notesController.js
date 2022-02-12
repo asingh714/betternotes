@@ -73,6 +73,7 @@ const createNote = async (req, res) => {
       console.log(newProduct);
       db("notes")
         .insert(newProduct)
+        .returning("id")
         .then((result) => {
           res.status(201).json({
             result,

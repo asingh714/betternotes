@@ -10,7 +10,6 @@ const createOrder = (req, res) => {
   let validationErrors = [];
   const { subject, email, user_name } = req.decodedToken; // id
 
-
   // if (!items || items.length < 1) {
   //   validationErrors.push({
   //     code: "VALIDATION_ERROR",
@@ -40,9 +39,9 @@ const createOrder = (req, res) => {
     user_id: subject,
   };
 
-
   db("orders")
     .insert(order)
+    .returning("id")
     .then((result) => {
       let orderId = result[0];
 

@@ -43,6 +43,7 @@ const verifyEmail = (req, res) => {
     res.status(400).send(errorObject);
   } else {
     db("users")
+      .returning("id")
       .where({ email })
       .first()
       .then((user) => {
@@ -271,6 +272,7 @@ const sendResetPasswordLink = (req, res) => {
     res.status(400).send(errorObject);
   } else {
     db("users")
+      .returning("id")
       .where({ email })
       .first()
       .then((user) => {
@@ -340,6 +342,7 @@ const resetForgottenPassword = (req, res) => {
     res.status(400).send(errorObject);
   } else {
     db("users")
+      .returning("id")
       .where({ email, verification_token: token })
       .first()
       .then((user) => {

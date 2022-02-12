@@ -1,7 +1,6 @@
 const stripe = require("stripe")(process.env.STRIPE_KEY);
 
 const stripeController = async (req, res) => {
-
   const calculateOrderAmount = () => {
     return 1099;
   };
