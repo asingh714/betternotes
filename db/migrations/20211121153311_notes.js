@@ -22,7 +22,7 @@ exports.up = function (knex) {
     table.string("teacher").notNullable();
 
     table
-      .string("user_id")
+      .integer("user_id")
       .unsigned()
       .notNullable()
       .references("id") // was id

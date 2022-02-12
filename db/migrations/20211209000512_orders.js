@@ -11,7 +11,7 @@ exports.up = function (knex) {
     table.date("purchase_date");
 
     table
-      .string("user_id")
+      .integer("user_id")
       .unsigned()
       .notNullable()
       .references("id")

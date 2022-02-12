@@ -5,7 +5,7 @@ exports.up = function (knex) {
     table.string("note_id");
 
     table
-      .string("order_id")
+      .integer("order_id")
       .unsigned()
       .notNullable()
       .references("id")
