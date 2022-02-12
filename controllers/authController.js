@@ -152,6 +152,7 @@ const register = (req, res) => {
     };
     db("users")
       .insert(newUser)
+      .returning("id")
       .then((ids) => {
         const id = ids[0];
         db("users")
