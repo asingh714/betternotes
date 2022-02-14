@@ -164,7 +164,7 @@ const register = (req, res) => {
               user_name,
               email,
               verification_token,
-              origin: "https://better--note.herokuapp.com", // we will need to change this eventually
+              origin: "localhost:3000", // we will need to change this eventually
             });
             res.status(201).json({
               id,
@@ -286,7 +286,7 @@ const sendResetPasswordLink = (req, res) => {
             name: user.name,
             email: user.email,
             verification_token: user.verification_token,
-            origin: "https://better--note.herokuapp.com", // we will need to change this eventually
+            origin: "localhost:3000", // we will need to change this eventually
           });
           res.status(200).json({ message: "Reset email has been sent" });
         }

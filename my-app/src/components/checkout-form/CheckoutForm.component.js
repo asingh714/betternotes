@@ -64,7 +64,7 @@ function CheckoutForm({ cart, clearCart, createOrder }) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "https://better--note.herokuapp.com/successful",
+        return_url: "localhost:3000/successful",
       },
     });
 
