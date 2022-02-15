@@ -28,6 +28,11 @@ const stripeRouter = require("./routes/stripeRouter");
 
 const notFound = require("./middleware/notFound");
 
+server.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
 server.use("/api/notes", notesRouter);
