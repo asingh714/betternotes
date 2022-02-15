@@ -29,6 +29,7 @@ const stripeRouter = require("./routes/stripeRouter");
 const notFound = require("./middleware/notFound");
 
 
+
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
 server.use("/api/notes", notesRouter);
