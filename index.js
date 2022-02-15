@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-import { corsOptions } from "./util/corsConfig";
+const { corsOptions } = require("./util/corsConfig");
 
 const server = express();
 server.use(helmet());
