@@ -4,10 +4,11 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
+import { corsOptions } from "./util/corsConfig";
 
 const server = express();
 server.use(helmet());
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.static("public"));
 server.use(express.json());
 server.use(
@@ -27,8 +28,6 @@ const orderRouter = require("./routes/orderRouter");
 const stripeRouter = require("./routes/stripeRouter");
 
 const notFound = require("./middleware/notFound");
-
-
 
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
