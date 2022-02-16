@@ -4,11 +4,17 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-const { corsOptions } = require("./util/corsConfig");
+// const { corsOptions } = require("./util/corsConfig");
 
 const server = express();
+server.use(
+  cors({
+    origin: "https://betternote.netlify.app",
+    credentials: true,
+    // methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+  })
+);
 server.use(helmet());
-server.use(cors(corsOptions));
 server.use(express.static("public"));
 server.use(express.json());
 server.use(
