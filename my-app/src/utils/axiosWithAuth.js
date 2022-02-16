@@ -6,6 +6,10 @@ export const axiosWithAuth = () => {
     baseURL: "https://better--note.herokuapp.com/api",
     headers: {
       authorization: token,
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Headers": "*",
+      Accept: "application/json, text/plain",
     },
   });
 };

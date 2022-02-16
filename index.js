@@ -8,7 +8,7 @@ const { corsOptions } = require("./util/corsConfig");
 
 const server = express();
 server.use(helmet());
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.static("public"));
 server.use(express.json());
 server.use(
@@ -20,12 +20,16 @@ server.use(
 );
 
 server.use(function (req, res, next) {
-  // res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  //   res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  //   res.headers("Content-Type", "application/json");
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PATCH, PUT, DELETE, OPTIONS"
+  );
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization"
+    "Origin, Content-Type, X-Auth-Token, Authorization, Accept,charset,boundary,Content-Length"
   );
   next();
 });

@@ -19,6 +19,8 @@ const verifyEmail = (req, res) => {
   const emailIsValid = email && validator.isEmail(email);
   let validationErrors = [];
 
+  console.log(token, email)
+
   if (!email || emailIsValid === false) {
     validationErrors.push({
       code: "VALIDATION_ERROR",
