@@ -9,8 +9,9 @@ const cors = require("cors");
 const server = express();
 server.use(
   cors({
-    origin: "https://betternote.netlify.app",
+    origin: ["https://betternote.netlify.app", /\.betternote\.netlify\.app$/],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 server.use(helmet());
