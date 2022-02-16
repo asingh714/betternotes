@@ -8,7 +8,7 @@ const { corsOptions } = require("./util/corsConfig");
 
 const server = express();
 server.use(helmet());
-server.use(cors());
+server.use(cors(corsOptions));
 server.use(express.static("public"));
 server.use(express.json());
 server.use(
