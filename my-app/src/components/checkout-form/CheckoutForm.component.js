@@ -64,7 +64,7 @@ function CheckoutForm({ cart, clearCart, createOrder }) {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: "localhost:3000/successful",
+        return_url: "https://betternote.netlify.app/successful",
       },
     });
 
