@@ -1,5 +1,5 @@
 const cors = require("cors");
-const whitelist = ["http://localhost:3000", "https://betternote.netlify.app/"];
+const whitelist = ["http://localhost:3000", "https://betternote.netlify.app"];
 const corsOptions = {
   credentials: true,
   origin: (origin, callback) => {
