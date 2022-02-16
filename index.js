@@ -11,7 +11,6 @@ server.use(
   cors({
     origin: "https://betternote.netlify.app",
     credentials: true,
-    // methods: ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
   })
 );
 server.use(helmet());
