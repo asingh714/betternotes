@@ -4,15 +4,16 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-// const { corsOptions } = require("./util/corsConfig");
+const { corsOptionsDelegate } = require("./util/corsConfig");
 
 const server = express();
 server.use(
-  cors({
-    origin: ["https://betternote.netlify.app", /\.betternote\.netlify\.app$/],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  cors(corsOptionsDelegate)
+  // cors({
+  //   origin: ["https://betternote.netlify.app", /\.betternote\.netlify\.app$/],
+  //   credentials: true,
+  //   allowedHeaders: ["Content-Type", "Authorization"],
+  // })
 );
 server.use(helmet());
 server.use(express.static("public"));
