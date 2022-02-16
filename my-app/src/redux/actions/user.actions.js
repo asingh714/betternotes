@@ -29,13 +29,11 @@ export const loginUser = (credentials) => (dispatch) => {
   axiosWithAuth()
     .post("/auth/login", credentials)
     .then((result) => {
-
       localStorage.setItem("token", result.data.token);
       localStorage.setItem("username", result.data.username);
       dispatch({ type: USER_LOGIN_SUCCESS, payload: result.data });
     })
     .catch((error) => {
-
       dispatch({ type: USER_LOGIN_FAILURE });
     });
 };
@@ -52,7 +50,6 @@ export const registerUser = (credentials) => (dispatch) => {
       dispatch({ type: USER_REGISTER_SUCCESS });
     })
     .catch((error) => {
-
       dispatch({ type: USER_REGISTER_FAILURE });
     });
 };
@@ -65,12 +62,11 @@ export const verifyUser = (email, token) => (dispatch) => {
   dispatch({ type: USER_VERIFY_START });
 
   axiosWithAuth()
-    .post(`/auth/verify-email?token=${token}&email=${email}`)
+    .post(`/auth/verify-email`, { email, token })
     .then((result) => {
       dispatch({ type: USER_VERIFY_SUCCESS });
     })
     .catch((error) => {
-
       dispatch({ type: USER_VERIFY_FAILURE });
     });
 };
@@ -90,7 +86,6 @@ export const forgottenPasswordRequest = (email) => (dispatch) => {
       dispatch({ type: FORGOT_PASSWORD_REQUEST_SUCCESS });
     })
     .catch((error) => {
-
       dispatch({ type: FORGOT_PASSWORD_REQUEST_FAILURE });
     });
 };
@@ -108,7 +103,6 @@ export const resetForgottenPassword =
         dispatch({ type: RESET_PASSWORD_REQUEST_SUCCESS });
       })
       .catch((error) => {
-
         dispatch({ type: RESET_PASSWORD_REQUEST_FAILURE });
       });
   };

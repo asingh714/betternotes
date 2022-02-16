@@ -15,11 +15,11 @@ const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendResetPasswordEmail = require("../util/sendResetPasswordEmail");
 
 const verifyEmail = (req, res) => {
-  const { token, email } = req.query;
+  const { token, email } = req.body;
   const emailIsValid = email && validator.isEmail(email);
   let validationErrors = [];
 
-  console.log(token, email)
+  console.log(token, email);
 
   if (!email || emailIsValid === false) {
     validationErrors.push({
