@@ -155,7 +155,7 @@ const register = (req, res) => {
     };
     db("users")
       .insert(newUser)
-      .returning("id")
+      // .returning("id")
       .then((ids) => {
         const id = ids[0];
         db("users")
@@ -288,7 +288,7 @@ const sendResetPasswordLink = (req, res) => {
             name: user.name,
             email: user.email,
             verification_token: user.verification_token,
-            origin: "https://betternote.netlify.app", // we will need to change this eventually
+            origin: "https://betternote.netlify.app/", // we will need to change this eventually
           });
           res.status(200).json({ message: "Reset email has been sent" });
         }

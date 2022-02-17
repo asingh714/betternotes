@@ -58,3 +58,64 @@ export const validateForgotPassword = (password, confirm_password) => {
   }
   return errors;
 };
+
+export const validateNote = (
+  document,
+  note_name,
+  grade_level,
+  class_name,
+  teacher,
+  subject,
+  school,
+  year,
+  language,
+  price,
+  pages,
+  short_description,
+  long_description
+) => {
+  const errors = {};
+  if (!document) {
+    errors["document"] = "Please provide a document";
+  }
+  if (!note_name) {
+    errors["note_name"] = "Please provide a name for your note";
+  }
+  if (!grade_level) {
+    errors["grade_level"] = "Please provide a grade level";
+  }
+  if (!class_name) {
+    errors["class_name"] = "Please provide a class name";
+  }
+  if (!teacher) {
+    errors["teacher"] = "Please provide a teacher";
+  }
+  if (!subject) {
+    errors["subject"] = "Please provide a subject";
+  }
+  if (!school) {
+    errors["school"] = "Please provide a school";
+  }
+
+  if (!year) {
+    errors["year"] = "Please provide a year";
+  }
+  if (!language) {
+    errors["language"] = "Please provide a language";
+  }
+  if (!price) {
+    errors["price"] = "Please provide a price";
+  }
+
+  if (!pages) {
+    errors["pages"] = "Please provide a pages";
+  }
+  if (!short_description) {
+    errors["short_description"] = "Please provide a short description";
+  }
+  if (!long_description) {
+    errors["long_description"] = "Please provide a long description";
+  }
+
+  return errors;
+};

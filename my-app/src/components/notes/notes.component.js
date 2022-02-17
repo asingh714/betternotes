@@ -6,7 +6,7 @@ import "./notes.styles.scss";
 export default function Notes(props) {
   return (
     <div className={props.notesStyle}>
-      {props.notes &&
+      {props.notes.length > 0 &&
         props.notes.map((note) => (
           <SingleNote
             note={note}
