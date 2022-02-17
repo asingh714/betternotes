@@ -22,7 +22,7 @@ function VerifyUserForm({ verifyUser, isVerified }) {
   }, [isVerified, navigate]);
 
   const handleSubmit = (event) => {
-    console.log("clicked");
+    event.preventDefault();
     verifyUser(email, token);
   };
 
