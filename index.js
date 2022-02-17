@@ -4,32 +4,32 @@ const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const cors = require("cors");
-const { corsOptionsDelegate } = require("./util/corsConfig");
+// const { corsOptionsDelegate } = require("./util/corsConfig");
 
 const server = express();
 server.use(helmet());
 server.use(cors());
-server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", true);
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  next();
-});
+// server.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", true);
+//   res.header("Access-Control-Allow-Credentials", true);
+//   res.header(
+//     "Access-Control-Allow-Methods",
+//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+//   );
+//   next();
+// });
 // server.use(
 // cors(corsOptionsDelegate)
-server.options(
-  "/",
-  cors({
-    origin: "*",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// server.options(
+//   "/",
+//   cors({
+//     origin: "*",
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+// allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 // const allowedOrigins = [
 //   "https://better--note.herokuapp.com",
 //   "https://betternote.netlify.app",
@@ -59,7 +59,7 @@ server.use(
   })
 );
 
-server.use(morgan("tiny"));
+server.use(morgan("short"));
 
 const port = process.env.PORT || "8080";
 const authRouter = require("./routes/authRouter");
