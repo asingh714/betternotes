@@ -4,7 +4,7 @@ var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (whitelist.indexOf(req.header("Origin")) !== -1) {
     corsOptions = {
-      origin: "https://betternote.netlify.app",
+      origin: "https://better--note.herokuapp.com/",
       credentials: true,
     }; // reflect (enable) the requested origin in the CORS response
   } else {

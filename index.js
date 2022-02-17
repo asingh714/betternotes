@@ -8,12 +8,12 @@ const { corsOptionsDelegate } = require("./util/corsConfig");
 
 const server = express();
 server.use(
-  cors(corsOptionsDelegate)
-  // cors({
-  //   origin: ["https://betternote.netlify.app", /\.betternote\.netlify\.app$/],
-  //   credentials: true,
-  //   allowedHeaders: ["Content-Type", "Authorization"],
-  // })
+  // cors(corsOptionsDelegate)
+  cors({
+    origin: "https://better--note.herokuapp.com/",
+    credentials: true,
+    // allowedHeaders: ["Content-Type", "Authorization"],
+  })
 );
 server.use(helmet());
 server.use(express.static("public"));
