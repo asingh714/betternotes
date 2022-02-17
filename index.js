@@ -22,7 +22,7 @@ server.use(helmet());
 // server.use(
 // cors(corsOptionsDelegate)
 const corsOptions = {
-  origin: "*",
+  origin: "https://better--note.herokuapp.com/api/",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
