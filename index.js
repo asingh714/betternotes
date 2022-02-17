@@ -22,9 +22,10 @@ server.use(helmet());
 // server.use(
 // cors(corsOptionsDelegate)
 const corsOptions = {
-  origin: "https://better--note.herokuapp.com/api/",
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+  // optionSuccessStatus: 200,
+  preflightContinue: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
 server.use(cors(corsOptions));
@@ -67,7 +68,7 @@ const orderRouter = require("./routes/orderRouter");
 const stripeRouter = require("./routes/stripeRouter");
 
 const notFound = require("./middleware/notFound");
-
+server.options("*", cors());
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
 server.use("/api/notes", notesRouter);
