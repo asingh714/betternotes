@@ -14,6 +14,7 @@ server.use(
       "https://better--note.herokuapp.com",
       "https://betternote.netlify.app",
       "https://better--note.herokuapp.com/api/notes",
+      "https://better--note.herokuapp.com/api/auth/verify-email",
     ],
     credentials: true,
     // allowedHeaders: ["Content-Type", "Authorization"],
