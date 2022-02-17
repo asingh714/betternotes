@@ -9,24 +9,24 @@ const cors = require("cors");
 const server = express();
 server.use(helmet());
 // server.use(cors());
-// server.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", true);
-//   res.header("Access-Control-Allow-Credentials", true);
-//   res.header(
-//     "Access-Control-Allow-Methods",
-//     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-//   );
-//   next();
-// });
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", true);
+  res.header("Access-Control-Allow-Credentials", true);
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
+  next();
+});
 // server.use(
 // cors(corsOptionsDelegate)
 const corsOptions = {
-  origin: "*",
+  origin: "https://betternote.netlify.app/",
   credentials: true, //access-control-allow-credentials:true
   // optionSuccessStatus: 200,
   // preflightContinue: true,g
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  // methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
 server.use(cors(corsOptions));
 // const allowedOrigins = [
