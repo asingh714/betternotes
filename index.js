@@ -8,21 +8,40 @@ const { corsOptionsDelegate } = require("./util/corsConfig");
 
 const server = express();
 server.use(cors());
-server.options("*", cors());
-server.use(
-  // cors(corsOptionsDelegate)
-  cors({
-    origin: [
-      "https://better--note.herokuapp.com/*",
-      "https://betternote.netlify.app",
-      "https://better--note.herokuapp.com/api/notes",
-      "https://better--note.herokuapp.com/api/auth/verify-email/*",
-    ],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  })
-);
+// server.options("*", cors());
+// server.use(
+//   // cors(corsOptionsDelegate)
+//   cors({
+//     origin: [
+//       "https://better--note.herokuapp.com/*",
+//       "https://betternote.netlify.app",
+//       "https://better--note.herokuapp.com/api/notes",
+//       "https://better--note.herokuapp.com/api/auth/verify-email/*",
+//     ],
+//     credentials: true,
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+//   })
+// );
+const allowedOrigins = [
+  "https://better--note.herokuapp.com",
+  "https://betternote.netlify.app",
+  "https://better--note.herokuapp.com/api/notes",
+  "https://better--note.herokuapp.com/api/auth/verify-email",
+];
+server.use(function (req, res, next) {
+  let origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
+  }
+
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 server.use(helmet());
 server.use(express.static("public"));
 server.use(express.json());
