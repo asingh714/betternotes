@@ -12,7 +12,8 @@ server.use(
   cors({
     origin: [
       "https://better--note.herokuapp.com",
-      /\.better--note\.herokuapp\.com$/,
+      "https://betternote.netlify.app",
+      "https://better--note.herokuapp.com/api/notes",
     ],
     credentials: true,
     // allowedHeaders: ["Content-Type", "Authorization"],
