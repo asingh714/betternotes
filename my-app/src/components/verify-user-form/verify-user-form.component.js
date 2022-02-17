@@ -22,6 +22,7 @@ function VerifyUserForm({ verifyUser, isVerified }) {
   }, [isVerified, navigate]);
 
   const handleSubmit = (event) => {
+    console.log("clicked");
     verifyUser(email, token);
   };
 
