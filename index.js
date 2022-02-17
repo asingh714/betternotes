@@ -8,7 +8,7 @@ const cors = require("cors");
 
 const server = express();
 server.use(helmet());
-server.use(cors());
+// server.use(cors());
 // server.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header("Access-Control-Allow-Headers", true);
@@ -21,15 +21,15 @@ server.use(cors());
 // });
 // server.use(
 // cors(corsOptionsDelegate)
-// server.options(
-//   "/",
-//   cors({
-//     origin: "*",
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-// allowedHeaders: ["Content-Type", "Authorization"],
-//   })
-// );
+server.options(
+  //   "/",
+  cors({
+    origin: "*",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    // allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 // const allowedOrigins = [
 //   "https://better--note.herokuapp.com",
 //   "https://betternote.netlify.app",
