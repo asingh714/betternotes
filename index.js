@@ -10,7 +10,10 @@ const server = express();
 server.use(
   // cors(corsOptionsDelegate)
   cors({
-    origin: "https://better--note.herokuapp.com/",
+    origin: [
+      "https://better--note.herokuapp.com",
+      /\.better--note\.herokuapp\.com$/,
+    ],
     credentials: true,
     // allowedHeaders: ["Content-Type", "Authorization"],
   })
