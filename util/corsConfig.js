@@ -1,5 +1,10 @@
 const cors = require("cors");
-var whitelist = ["http://localhost:3000", "https://betternote.netlify.app"];
+var whitelist = [
+  "https://better--note.herokuapp.com",
+  "https://betternote.netlify.app",
+  "https://better--note.herokuapp.com/api/notes",
+  "https://better--note.herokuapp.com/api/auth/verify-email",
+];
 var corsOptionsDelegate = function (req, callback) {
   var corsOptions;
   if (whitelist.indexOf(req.header("Origin")) !== -1) {
