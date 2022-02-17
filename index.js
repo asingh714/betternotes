@@ -21,15 +21,13 @@ server.use(helmet());
 // });
 // server.use(
 // cors(corsOptionsDelegate)
-server.options(
-  //   "/",
-  cors({
-    origin: "*",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    // allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+};
+server.use(cors(corsOptions));
 // const allowedOrigins = [
 //   "https://better--note.herokuapp.com",
 //   "https://betternote.netlify.app",
