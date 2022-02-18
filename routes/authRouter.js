@@ -16,4 +16,3 @@ router.post("/request-new-password", sendResetPasswordLink);
 router.post("/reset-password", resetForgottenPassword);
 
 module.exports = router;
-// https://betternote.netlify.app
