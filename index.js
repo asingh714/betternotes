@@ -21,6 +21,10 @@ server.use(
     origin: corsUrl,
     credentials: true,
     optionSuccessStatus: 200,
+    cookie: {
+      sameSite: "none",
+      secure: "true",
+    },
   })
 );
 
