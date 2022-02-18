@@ -16,7 +16,13 @@ if (process.env.DB_ENV === "development") {
   corsUrl = process.env.DEPLOY_URL;
 }
 
-server.use(cors({ origin: corsUrl }));
+server.use(
+  cors({
+    origin: corsUrl,
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
 
 server.use(express.static("public"));
 server.use(express.json());
