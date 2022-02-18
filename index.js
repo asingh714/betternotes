@@ -10,9 +10,9 @@ const server = express();
 server.use(helmet());
 
 var corsUrl;
-if (process.env.NODE_ENV === "development") {
+if (process.env.DB_ENV === "development") {
   corsUrl = process.env.LOCAL_URL;
-} else if (process.env.NODE_ENV === "production") {
+} else if (process.env.DB_ENV === "production") {
   corsUrl = process.env.DEPLOY_URL;
 }
 
