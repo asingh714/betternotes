@@ -25,7 +25,7 @@ server.use(
 );
 
 server.all("*", (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", corsUrl);
+  res.header("Access-Control-Allow-Origin", "*");
   next();
 });
 
