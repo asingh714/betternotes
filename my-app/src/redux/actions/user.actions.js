@@ -62,7 +62,7 @@ export const verifyUser = (email) => (dispatch) => {
   dispatch({ type: USER_VERIFY_START });
 
   axiosWithAuth()
-    .post("/auth/verify-email", { email })
+    .post("/auth/verify-email?", { email })
     .then((result) => {
       dispatch({ type: USER_VERIFY_SUCCESS });
     })
