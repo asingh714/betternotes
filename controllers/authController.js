@@ -15,11 +15,12 @@ const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendResetPasswordEmail = require("../util/sendResetPasswordEmail");
 
 const verifyEmail = (req, res) => {
-  const { token, email } = req.body;
+  // token,
+  const { email } = req.body;
   const emailIsValid = email && validator.isEmail(email);
   let validationErrors = [];
 
-  console.log(token, email);
+  console.log(email);
 
   if (!email || emailIsValid === false) {
     validationErrors.push({
@@ -29,13 +30,13 @@ const verifyEmail = (req, res) => {
     });
   }
 
-  if (!token) {
-    validationErrors.push({
-      code: "VALIDATION_ERROR",
-      field: "token",
-      message: "Please provide a valid token",
-    });
-  }
+  // if (!token) {
+  //   validationErrors.push({
+  //     code: "VALIDATION_ERROR",
+  //     field: "token",
+  //     message: "Please provide a valid token",
+  //   });
+  // }
 
   if (validationErrors.length) {
     const errorObject = {
@@ -53,11 +54,13 @@ const verifyEmail = (req, res) => {
           res.status(404).json({
             error: "You cannot access this user",
           });
-        } else if (user.verification_token !== token) {
-          res.status(401).json({
-            error: "Verification failed",
-          });
-        } else {
+        }
+        // else if (user.verification_token !== token) {
+        //   res.status(401).json({
+        //     error: "Verification failed",
+        //   });
+        // }
+        else {
           db("users")
             .where({ email })
             .update({
@@ -165,8 +168,8 @@ const register = (req, res) => {
             sendVerificationEmail({
               user_name,
               email,
-              verification_token,
-              origin: "https://betternote.netlify.app", // we will need to change this eventually
+              // verification_token,
+              origin: "https://betternote.netlify.app",
             });
             res.status(201).json({
               id,

@@ -3,10 +3,11 @@ const sendEmail = require("./sendEmail");
 const sendVerificationEmail = ({
   user_name,
   email,
-  verification_token,
+  // verification_token,
   origin,
 }) => {
-  const verifyEmail = `${origin}/api/auth/verify-email?token=${verification_token}&email=${email}`;
+  // token=${verification_token}&
+  const verifyEmail = `${origin}/api/auth/verify-email?email=${email}`;
 
   const message = `<p>Please confirm your email by clicking on the following link : 
   <a href="${verifyEmail}">Verify Email</a> </p>`;
