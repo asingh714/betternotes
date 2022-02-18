@@ -6,13 +6,14 @@ const {
   login,
   verifyEmail,
   sendResetPasswordLink,
-  resetForgottenPassword
+  resetForgottenPassword,
 } = require("../controllers/authController");
 
 router.post("/verify-email", verifyEmail);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/request-new-password", sendResetPasswordLink);
-router.post("/reset-password", resetForgottenPassword)
+router.post("/reset-password", resetForgottenPassword);
 
 module.exports = router;
+// https://betternote.netlify.app

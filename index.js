@@ -24,6 +24,11 @@ server.use(
   })
 );
 
+server.all("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", corsUrl);
+  next();
+});
+
 server.use(express.static("public"));
 server.use(express.json());
 server.use(
