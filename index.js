@@ -8,45 +8,15 @@ const cors = require("cors");
 
 const server = express();
 server.use(helmet());
-// server.use(cors());
-server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", true);
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header(
-    "Access-Control-Allow-Methods",
-    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
-  );
-  next();
-});
-// server.use(
-// cors(corsOptionsDelegate)
-const corsOptions = {
-  origin: "https://betternote.netlify.app/",
-  credentials: true, //access-control-allow-credentials:true
-  // optionSuccessStatus: 200,
-  // preflightContinue: true,g
-  // methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-};
-server.use(cors(corsOptions));
-// const allowedOrigins = [
-//   "https://better--note.herokuapp.com",
-//   "https://betternote.netlify.app",
-//   "https://better--note.herokuapp.com/api/notes",
-//   "https://better--note.herokuapp.com/api/auth/verify-email",
-// ];
-// server.use(function (req, res, next) {
-//   let origin = req.headers.origin;
-//   if (allowedOrigins.includes(origin)) {
-//     res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
-//   }
 
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
+var corsUrl;
+if (process.env.NODE_ENV === "development") {
+  corsUrl = process.env.LOCAL_URL;
+} else if (process.env.NODE_ENV === "production") {
+  corsUrl = process.env.DEPLOY_URL;
+}
+
+server.use(cors({ origin: corsUrl }));
 
 server.use(express.static("public"));
 server.use(express.json());
@@ -68,7 +38,6 @@ const orderRouter = require("./routes/orderRouter");
 const stripeRouter = require("./routes/stripeRouter");
 
 const notFound = require("./middleware/notFound");
-server.options("*", cors());
 server.use("/api/auth", authRouter);
 server.use("/api/user", userRouter);
 server.use("/api/notes", notesRouter);
