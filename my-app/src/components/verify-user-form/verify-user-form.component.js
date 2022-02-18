@@ -12,7 +12,7 @@ function VerifyUserForm({ verifyUser, isVerified }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const email = searchParams.get("email") || "";
-  const token = searchParams.get("token") || "";
+  // const token = searchParams.get("token") || "";
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +23,8 @@ function VerifyUserForm({ verifyUser, isVerified }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    verifyUser(email, token);
+    // verifyUser(email, token);
+    verifyUser(email);
   };
 
   return (

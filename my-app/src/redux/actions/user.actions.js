@@ -58,11 +58,11 @@ export const USER_VERIFY_START = "USER_VERIFY_START";
 export const USER_VERIFY_SUCCESS = "USER_VERIFY_SUCCESS";
 export const USER_VERIFY_FAILURE = "USER_VERIFY_FAILURE";
 
-export const verifyUser = (email, token) => (dispatch) => {
+export const verifyUser = (email) => (dispatch) => {
   dispatch({ type: USER_VERIFY_START });
 
   axiosWithAuth()
-    .post("/auth/verify-email", { email, token })
+    .post("/auth/verify-email", { email })
     .then((result) => {
       dispatch({ type: USER_VERIFY_SUCCESS });
     })
