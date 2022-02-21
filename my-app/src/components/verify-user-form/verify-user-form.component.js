@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 
 import Button from "../../components/button/button.component";
 import ImpText from "../imp-text/impText.component";
-import { verifyUser } from "../../redux/actions/user.actions";
+// import { verifyUser } from "../../redux/actions/user.actions";
 
 import "./verify-user-form.styles.scss";
 
-function VerifyUserForm({ verifyUser, isVerified }) {
+function VerifyUserForm({ isVerified }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const email = searchParams.get("email") || "";
@@ -24,7 +24,7 @@ function VerifyUserForm({ verifyUser, isVerified }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     // verifyUser(email, token);
-    verifyUser(email);
+    // verifyUser(email);
   };
 
   return (
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { verifyUser })(VerifyUserForm);
+export default connect(mapStateToProps, { })(VerifyUserForm);

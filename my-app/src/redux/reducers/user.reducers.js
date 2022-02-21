@@ -2,9 +2,9 @@ import {
   USER_REGISTER_START,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAILURE,
-  USER_VERIFY_START,
-  USER_VERIFY_SUCCESS,
-  USER_VERIFY_FAILURE,
+  // USER_VERIFY_START,
+  // USER_VERIFY_SUCCESS,
+  // USER_VERIFY_FAILURE,
   USER_LOGIN_START,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
@@ -45,9 +45,9 @@ const initialState = {
   isRegistering: false,
   isRegistered: false,
   registrationError: "",
-  isVerifying: false,
-  isVerified: false,
-  verificationError: "",
+  // isVerifying: false,
+  // isVerified: false,
+  // verificationError: "",
   isRequestingNewPassword: false,
   hasRequestedNewPassword: false,
   requestedNewPasswordError: "",
@@ -144,27 +144,27 @@ const userReducer = (state = initialState, action) => {
         registrationError: "There was an error while registering",
       };
 
-    case USER_VERIFY_START:
-      return {
-        ...state,
-        isVerifying: true,
-        isVerified: false,
-        verificationError: "",
-      };
-    case USER_VERIFY_SUCCESS:
-      return {
-        ...state,
-        isVerifying: false,
-        isVerified: true,
-        verificationError: "",
-      };
-    case USER_VERIFY_FAILURE:
-      return {
-        ...state,
-        isVerifying: false,
-        isVerified: false,
-        verificationError: "There was an error while verifying this profile.",
-      };
+    // case USER_VERIFY_START:
+    //   return {
+    //     ...state,
+    //     isVerifying: true,
+    //     isVerified: false,
+    //     verificationError: "",
+    //   };
+    // case USER_VERIFY_SUCCESS:
+    //   return {
+    //     ...state,
+    //     isVerifying: false,
+    //     isVerified: true,
+    //     verificationError: "",
+    //   };
+    // case USER_VERIFY_FAILURE:
+    //   return {
+    //     ...state,
+    //     isVerifying: false,
+    //     isVerified: false,
+    //     verificationError: "There was an error while verifying this profile.",
+    //   };
 
     case FORGOT_PASSWORD_REQUEST_START:
       return {

@@ -54,22 +54,22 @@ export const registerUser = (credentials) => (dispatch) => {
     });
 };
 
-export const USER_VERIFY_START = "USER_VERIFY_START";
-export const USER_VERIFY_SUCCESS = "USER_VERIFY_SUCCESS";
-export const USER_VERIFY_FAILURE = "USER_VERIFY_FAILURE";
+// export const USER_VERIFY_START = "USER_VERIFY_START";
+// export const USER_VERIFY_SUCCESS = "USER_VERIFY_SUCCESS";
+// export const USER_VERIFY_FAILURE = "USER_VERIFY_FAILURE";
 
-export const verifyUser = (email) => (dispatch) => {
-  dispatch({ type: USER_VERIFY_START });
+// export const verifyUser = (email) => (dispatch) => {
+//   dispatch({ type: USER_VERIFY_START });
 
-  axiosWithAuth()
-    .post("/auth/verify-email", { email }, { withCredentials: true })
-    .then((result) => {
-      dispatch({ type: USER_VERIFY_SUCCESS });
-    })
-    .catch((error) => {
-      dispatch({ type: USER_VERIFY_FAILURE });
-    });
-};
+//   axiosWithAuth()
+//     .post("/auth/verify-email", { email }, { withCredentials: true })
+//     .then((result) => {
+//       dispatch({ type: USER_VERIFY_SUCCESS });
+//     })
+//     .catch((error) => {
+//       dispatch({ type: USER_VERIFY_FAILURE });
+//     });
+// };
 
 export const FORGOT_PASSWORD_REQUEST_START = "FORGOT_PASSWORD_REQUEST_START";
 export const FORGOT_PASSWORD_REQUEST_SUCCESS =

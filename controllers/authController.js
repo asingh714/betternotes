@@ -284,7 +284,7 @@ const sendResetPasswordLink = (req, res) => {
         } else {
           // const verification_token = crypto.randomBytes(40).toString("hex");
           sendResetPasswordEmail({
-            name: user.name,
+            name: user.user_name,
             email: user.email,
             // verification_token,
             verification_token: user.verification_token,
