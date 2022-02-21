@@ -14,77 +14,77 @@ const { cloudinary } = require("../util/cloudConfig");
 const sendVerificationEmail = require("../util/sendVerificationEmail");
 const sendResetPasswordEmail = require("../util/sendResetPasswordEmail");
 
-const verifyEmail = (req, res) => {
-  // token,
-  const { email } = req.body;
-  const emailIsValid = email && validator.isEmail(email);
-  let validationErrors = [];
+// const verifyEmail = (req, res) => {
+//   // token,
+//   const { email } = req.body;
+//   const emailIsValid = email && validator.isEmail(email);
+//   let validationErrors = [];
 
-  console.log(email);
+//   console.log(email);
 
-  if (!email || emailIsValid === false) {
-    validationErrors.push({
-      code: "VALIDATION_ERROR",
-      field: "email",
-      message: "Please provide a valid email address.",
-    });
-  }
+//   if (!email || emailIsValid === false) {
+//     validationErrors.push({
+//       code: "VALIDATION_ERROR",
+//       field: "email",
+//       message: "Please provide a valid email address.",
+//     });
+//   }
 
-  // if (!token) {
-  //   validationErrors.push({
-  //     code: "VALIDATION_ERROR",
-  //     field: "token",
-  //     message: "Please provide a valid token",
-  //   });
-  // }
+//   // if (!token) {
+//   //   validationErrors.push({
+//   //     code: "VALIDATION_ERROR",
+//   //     field: "token",
+//   //     message: "Please provide a valid token",
+//   //   });
+//   // }
 
-  if (validationErrors.length) {
-    const errorObject = {
-      error: true,
-      errors: validationErrors,
-    };
-    res.status(400).send(errorObject);
-  } else {
-    db("users")
-      .returning("id")
-      .where({ email })
-      .first()
-      .then((user) => {
-        if (!user) {
-          res.status(404).json({
-            error: "You cannot access this user",
-          });
-        }
-        // else if (user.verification_token !== token) {
-        //   res.status(401).json({
-        //     error: "Verification failed",
-        //   });
-        // }
-        else {
-          db("users")
-            .where({ email })
-            .update({
-              isVerified: true,
-              verification_date: Date.now(),
-            })
-            .then((count) => {
-              if (count > 0) {
-                res.status(200).json({ message: "Email is verified" });
-              } else {
-                res.status(404).json({
-                  error: "You cannot access this user",
-                });
-              }
-            });
-        }
-      })
-      .catch((error) => {
-        res.status(500).json({
-          error: "Sorry there was an error verifying this email.",
-        });
-      });
-  }
-};
+//   if (validationErrors.length) {
+//     const errorObject = {
+//       error: true,
+//       errors: validationErrors,
+//     };
+//     res.status(400).send(errorObject);
+//   } else {
+//     db("users")
+//       .returning("id")
+//       .where({ email })
+//       .first()
+//       .then((user) => {
+//         if (!user) {
+//           res.status(404).json({
+//             error: "You cannot access this user",
+//           });
+//         }
+//         // else if (user.verification_token !== token) {
+//         //   res.status(401).json({
+//         //     error: "Verification failed",
+//         //   });
+//         // }
+//         else {
+//           db("users")
+//             .where({ email })
+//             .update({
+//               isVerified: true,
+//               verification_date: Date.now(),
+//             })
+//             .then((count) => {
+//               if (count > 0) {
+//                 res.status(200).json({ message: "Email is verified" });
+//               } else {
+//                 res.status(404).json({
+//                   error: "You cannot access this user",
+//                 });
+//               }
+//             });
+//         }
+//       })
+//       .catch((error) => {
+//         res.status(500).json({
+//           error: "Sorry there was an error verifying this email.",
+//         });
+//       });
+//   }
+// };
 const register = (req, res) => {
   const { user_name, email, username, password, confirm_password } = req.body;
   const emailIsValid = email && validator.isEmail(email);
@@ -169,7 +169,7 @@ const register = (req, res) => {
               user_name,
               email,
               // verification_token,
-              origin: "https://betternote.netlify.app",
+              // origin: "https://betternote.netlify.app",
             });
             res.status(201).json({
               id,
@@ -235,10 +235,6 @@ const login = (req, res) => {
           res.status(401).json({
             error: "The password is incorrect",
           });
-        } else if (!user.isVerified) {
-          res
-            .status(401)
-            .json({ error: "This user has not yet been verified" });
         } else {
           const token = generateToken(user);
           res.status(200).json({
@@ -290,8 +286,9 @@ const sendResetPasswordLink = (req, res) => {
           sendResetPasswordEmail({
             name: user.name,
             email: user.email,
+            // verification_token,
             verification_token: user.verification_token,
-            origin: "https://betternote.netlify.app/", // we will need to change this eventually
+            origin: "https://betternote.netlify.app",
           });
           res.status(200).json({ message: "Reset email has been sent" });
         }
@@ -349,6 +346,7 @@ const resetForgottenPassword = (req, res) => {
     db("users")
       .returning("id")
       .where({ email, verification_token: token })
+      // .where({ email })
       .first()
       .then((user) => {
         if (!user) {
@@ -359,6 +357,7 @@ const resetForgottenPassword = (req, res) => {
           const hashed_password = bcrypt.hashSync(new_password, 14);
           db("users")
             .where({ email, verification_token: token })
+            // .where({ email })
             .update({
               password: hashed_password,
             })
@@ -387,7 +386,7 @@ const resetForgottenPassword = (req, res) => {
 };
 
 module.exports = {
-  verifyEmail,
+  // verifyEmail,
   register,
   login,
   sendResetPasswordLink,

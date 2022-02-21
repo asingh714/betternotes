@@ -4,12 +4,12 @@ const router = express.Router();
 const {
   register,
   login,
-  verifyEmail,
+  // verifyEmail,
   sendResetPasswordLink,
   resetForgottenPassword,
 } = require("../controllers/authController");
 
-router.post("/verify-email", verifyEmail);
+// router.post("/verify-email", verifyEmail);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/request-new-password", sendResetPasswordLink);

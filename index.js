@@ -21,17 +21,8 @@ server.use(
     origin: corsUrl,
     credentials: true,
     optionSuccessStatus: 200,
-    cookie: {
-      sameSite: "none",
-      secure: "true",
-    },
   })
 );
-
-server.all("*", (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 server.use(express.static("public"));
 server.use(express.json());
