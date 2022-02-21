@@ -64,8 +64,8 @@ function ProfileForSale({
       <div className="profile-notes-form-container">
         {isFetchingUserProfileNotes || isAddingNote || isEditingNote ? (
           <TailSpin
-            height="25"
-            width="25"
+            height="100"
+            width="100"
             color="#2186eb"
             arialLabel="loading-indicator"
             wrapperClass="loading-bars"

@@ -6,14 +6,21 @@ import Modal from "../modal/modal.component";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-import { fetchOwnProfileData } from "../../redux/actions/user.actions";
+import {
+  fetchOwnProfileData,
+  changePassword,
+} from "../../redux/actions/user.actions";
 
 import "./ProfileData.styles.scss";
 
 class ProfileData extends Component {
   state = {
     showModal: false,
+    password: "",
+    new_password: "",
+    confirm_new_password: "",
   };
+
   componentDidMount() {
     this.props.fetchOwnProfileData();
   }
@@ -23,6 +30,23 @@ class ProfileData extends Component {
       this.props.fetchOwnProfileData();
     }
   }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const { password, new_password, confirm_new_password } = this.state;
+    // console.log(this.user)
+    this.props.changePassword(
+      this.props.user.unique_user_id,
+      password,
+      new_password,
+      confirm_new_password
+    );
+  };
 
   render() {
     const {
@@ -78,24 +102,32 @@ class ProfileData extends Component {
           <div className="new-password-container">
             <Modal modalStyle="modal-container">
               <FormInput
+                name="password"
+                handleChange={this.handleChange}
+                placeholder="Old Password"
+                type="password"
+                value={this.state.password}
+                inputStyle="user-log-reg"
+              />
+              <FormInput
                 name="new_password"
-                // handleChange={handleChange}
+                handleChange={this.handleChange}
                 placeholder="New Password"
                 type="password"
-                // value={passwords.new_password}
+                value={this.state.new_password}
                 inputStyle="user-log-reg"
               />
               <FormInput
                 name="confirm_new_password"
-                // handleChange={handleChange}
+                handleChange={this.handleChange}
                 placeholder="Confirm New Password"
                 type="password"
-                // value={passwords.confirm_new_password}
+                value={this.state.confirm_new_password}
                 inputStyle="user-log-reg"
               />
               <Button
                 type="submit"
-                // handleSubmit={handleSubmit}
+                handleSubmit={this.handleSubmit}
                 buttonStyle="large-bluefour-btn"
               >
                 Submit
@@ -123,4 +155,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchOwnProfileData })(ProfileData);
+export default connect(mapStateToProps, {
+  fetchOwnProfileData,
+  changePassword,
+})(ProfileData);

@@ -198,3 +198,25 @@ export const logoutUser = () => (dispatch) => {
     dispatch({ type: USER_LOGOUT_SUCCESS });
   }
 };
+
+export const CHANGE_USER_PASSWORD_START = "CHANGE_USER_PASSWORD_START";
+export const CHANGE_USER_PASSWORD_SUCCESS = "CHANGE_USER_PASSWORD_SUCCESS";
+export const CHANGE_USER_PASSWORD_FAILURE = "CHANGE_USER_PASSWORD_FAILURE";
+
+export const changePassword =
+  (id, password, new_password, confirm_new_password) => (dispatch) => {
+    dispatch({ type: CHANGE_USER_PASSWORD_START });
+    // console.log(id);
+    axiosWithAuth()
+      .put(`/user/${id}/update_password`, {
+        password,
+        new_password,
+        confirm_new_password,
+      })
+      .then((result) => {
+        dispatch({ type: CHANGE_USER_PASSWORD_SUCCESS });
+      })
+      .catch((error) => {
+        dispatch({ type: CHANGE_USER_PASSWORD_FAILURE });
+      });
+  };
