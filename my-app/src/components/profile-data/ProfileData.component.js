@@ -167,7 +167,6 @@ class ProfileData extends Component {
                 onClick={(event) =>
                   this.setState({
                     showModal: !this.state.showModal,
-
                     password: "",
                     new_password: "",
                     confirm_new_password: "",
