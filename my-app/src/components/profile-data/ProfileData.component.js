@@ -5,6 +5,9 @@ import image from "../../new_user.png";
 import Modal from "../modal/modal.component";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
+import ImpText from "../imp-text/impText.component";
+
+import { validateChangePassword } from "../../utils/validateForm";
 
 import {
   fetchOwnProfileData,
@@ -19,6 +22,7 @@ class ProfileData extends Component {
     password: "",
     new_password: "",
     confirm_new_password: "",
+    errors: {},
   };
 
   componentDidMount() {
@@ -39,13 +43,28 @@ class ProfileData extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const { password, new_password, confirm_new_password } = this.state;
-    // console.log(this.user)
-    this.props.changePassword(
-      this.props.user.unique_user_id,
+    const errors = validateChangePassword(
       password,
       new_password,
       confirm_new_password
     );
+    if (Object.keys(errors).length === 0) {
+      this.props.changePassword(
+        this.props.user.unique_user_id,
+        password,
+        new_password,
+        confirm_new_password
+      );
+      this.setState({
+        password: "",
+        new_password: "",
+        confirm_new_password: "",
+      });
+    } else {
+      this.setState({
+        errors,
+      });
+    }
   };
 
   render() {
@@ -58,6 +77,7 @@ class ProfileData extends Component {
       user_grade_level,
       username,
     } = this.props.user;
+    const { errors } = this.state;
     return (
       <div className="profile-data-container">
         <img
@@ -101,6 +121,9 @@ class ProfileData extends Component {
         {this.state.showModal && (
           <div className="new-password-container">
             <Modal modalStyle="modal-container">
+              {errors.password && (
+                <ImpText textStyle="error-text">{errors.password}</ImpText>
+              )}
               <FormInput
                 name="password"
                 handleChange={this.handleChange}
@@ -109,6 +132,11 @@ class ProfileData extends Component {
                 value={this.state.password}
                 inputStyle="user-log-reg"
               />
+              {errors.new_password && (
+                <ImpText textStyle="error-text">
+                  {errors.new_password}
+                </ImpText>
+              )}
               <FormInput
                 name="new_password"
                 handleChange={this.handleChange}
@@ -117,6 +145,11 @@ class ProfileData extends Component {
                 value={this.state.new_password}
                 inputStyle="user-log-reg"
               />
+              {errors.confirm_new_password && (
+                <ImpText textStyle="error-text">
+                  {errors.confirm_new_password }
+                </ImpText>
+              )}
               <FormInput
                 name="confirm_new_password"
                 handleChange={this.handleChange}

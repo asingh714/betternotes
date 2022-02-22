@@ -12,6 +12,26 @@ export const validateLogin = (username, password) => {
   return errors;
 };
 
+export const validateChangePassword = (
+  password,
+  new_password,
+  confirm_new_password
+) => {
+  const errors = {};
+  if (!password) {
+    errors["password"] = "Please provide a password";
+  }
+  if (!new_password) {
+    errors["new_password"] = "Please provide a new password";
+  }
+
+  if (!confirm_new_password) {
+    errors["confirm_new_password"] = "Please confirm your new password";
+  }
+
+  return errors;
+};
+
 export const validateRegistration = (
   user_name,
   email,
