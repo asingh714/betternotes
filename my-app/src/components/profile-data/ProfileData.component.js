@@ -133,9 +133,7 @@ class ProfileData extends Component {
                 inputStyle="user-log-reg"
               />
               {errors.new_password && (
-                <ImpText textStyle="error-text">
-                  {errors.new_password}
-                </ImpText>
+                <ImpText textStyle="error-text">{errors.new_password}</ImpText>
               )}
               <FormInput
                 name="new_password"
@@ -147,7 +145,7 @@ class ProfileData extends Component {
               />
               {errors.confirm_new_password && (
                 <ImpText textStyle="error-text">
-                  {errors.confirm_new_password }
+                  {errors.confirm_new_password}
                 </ImpText>
               )}
               <FormInput
@@ -167,7 +165,14 @@ class ProfileData extends Component {
               </Button>
               <span
                 onClick={(event) =>
-                  this.setState({ showModal: !this.state.showModal })
+                  this.setState({
+                    showModal: !this.state.showModal,
+
+                    password: "",
+                    new_password: "",
+                    confirm_new_password: "",
+                    errors: {},
+                  })
                 }
                 className="change-pw-link align-text"
               >
