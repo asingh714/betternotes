@@ -28,7 +28,7 @@ class NotesDashboard extends Component {
   }
 
   componentDidMount() {
-    if (this.props.notes.length === 0) {
+    if (this.props.notes && this.props.notes.length === 0) {
       this.props.fetchNotes();
     }
   }

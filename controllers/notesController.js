@@ -58,7 +58,7 @@ const createNote = async (req, res) => {
         short_description,
         long_description,
         document: result.url,
-        created_date: Date.now(),
+        created_date: new Date(),
         price,
         pages,
         year,

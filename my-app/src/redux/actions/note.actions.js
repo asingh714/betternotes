@@ -17,7 +17,6 @@ export const fetchNotes = () => (dispatch) => {
       });
     })
     .catch((error) => {
-
       dispatch({ type: NOTE_FETCH_FAILURE });
     });
 };
@@ -32,11 +31,9 @@ export const fetchSingleNote = (unique_note_id) => (dispatch) => {
   axiosWithAuth()
     .get(`/notes/${unique_note_id}`)
     .then((result) => {
-
       dispatch({ type: SINGLE_NOTE_FETCH_SUCCESS, payload: result.data });
     })
     .catch((error) => {
-
       dispatch({ type: SINGLE_NOTE_FETCH_FAILURE });
     });
 };
@@ -52,7 +49,6 @@ export const fetchUserProfileNotes = () => (dispatch) => {
   axiosWithAuth()
     .get("/notes/myNotes")
     .then((result) => {
-
       dispatch({
         type: FETCH_USER_PROFILE_NOTES_SUCCESS,
         payload: result.data ? result.data : [],
@@ -75,6 +71,7 @@ export const createNote = (note) => (dispatch) => {
       dispatch({ type: ADD_NOTE_SUCCESS });
     })
     .catch((error) => {
+      console.log(error);
       dispatch({ type: ADD_NOTE_FAILURE });
     });
 };
