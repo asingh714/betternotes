@@ -62,7 +62,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem, cart }) {
 
   return (
     <div className="single-note-info-container">
-      <ToastContainer
+      {/* <ToastContainer
         position="top-right"
         autoClose={2000}
         hideProgressBar={false}
@@ -74,7 +74,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem, cart }) {
         pauseOnHover
       />
 
-      <ToastContainer />
+      <ToastContainer /> */}
       <div className="top-note-info-container">
         <div className="general-info-container">
           <h1>

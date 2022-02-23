@@ -59,6 +59,7 @@ class ProfileData extends Component {
         password: "",
         new_password: "",
         confirm_new_password: "",
+        showModal: !this.state.showModal,
       });
     } else {
       this.setState({

@@ -29,7 +29,7 @@ function Cart({ getCartItems, cart, total, isCheckout, isUserLoggedIn }) {
             notesStyle="notes-dashboard"
             noteStyle="wide-cart"
           />
-          {cartTotal > 0 ? (
+          {cartTotal > 0 && (
             <div className="notes-right-container">
               <h3>Subtotal: ${cartTotal}</h3>
               {!isCheckout && (
@@ -42,8 +42,6 @@ function Cart({ getCartItems, cart, total, isCheckout, isUserLoggedIn }) {
                 </Button>
               )}
             </div>
-          ) : (
-            <span>Cart is empty </span>
           )}
         </div>
       )}

@@ -73,7 +73,7 @@ function SingleNote(props) {
   if (props.noteStyle === "wide") {
     return (
       <>
-        <ToastContainer
+        {/* <ToastContainer
           position="top-right"
           autoClose={2000}
           hideProgressBar={false}
@@ -85,7 +85,7 @@ function SingleNote(props) {
           pauseOnHover
         />
 
-        <ToastContainer />
+        <ToastContainer /> */}
         <div
           className="wide-note-info-container"
           onClick={(event) => navigate(`/notes/${props.id}`)}

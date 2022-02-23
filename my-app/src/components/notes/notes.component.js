@@ -1,14 +1,24 @@
-import React from "react";
+import { TailSpin } from "react-loader-spinner";
 
 import SingleNote from "../singleNote/singleNote.component";
 import "./notes.styles.scss";
 
 export default function Notes(props) {
-  return (
-    <div className={props.notesStyle}>
-      {props.notes &&
-        props.notes.length > 0 &&
-        props.notes.map((note) => (
+  if (!props.notes) {
+    return (
+      <TailSpin
+        height="100"
+        width="100"
+        color="#2186eb"
+        arialLabel="loading-indicator"
+        wrapperClass="loading-bars"
+      />
+    );
+  }
+  if (props.notes && props.notes.length > 0) {
+    return (
+      <div className={props.notesStyle}>
+        {props.notes.map((note) => (
           <SingleNote
             note={note}
             key={note.id}
@@ -17,6 +27,11 @@ export default function Notes(props) {
             {...props}
           />
         ))}
-    </div>
-  );
+      </div>
+    );
+  }
+
+  if (props.notes && props.notes.length === 0) {
+    return <h2>There are currently 0 notes</h2>;
+  }
 }
