@@ -35,7 +35,7 @@ const createOrder = (req, res) => {
   const order = {
     unique_order_id: orderId,
     total: totalFromCart,
-    purchase_date: Date.now(),
+    purchase_date: new Date(),
     user_id: subject,
   };
 
