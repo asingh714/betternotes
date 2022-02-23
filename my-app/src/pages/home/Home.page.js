@@ -142,7 +142,7 @@ function Home({ notes }) {
 
 const mapStateToProps = (state) => {
   return {
-    notes: state.notes.notes.slice(0, 4),
+    notes: state.notes.notes && state.notes.notes.slice(0, 4),
   };
 };
 

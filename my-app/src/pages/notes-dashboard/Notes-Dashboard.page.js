@@ -159,12 +159,18 @@ class NotesDashboard extends Component {
 const mapStateToProps = (state) => {
   return {
     notes: state.notes.notes,
-    schools: [...new Set(state.notes.notes.map((note) => note.school))],
-    subjects: [...new Set(state.notes.notes.map((note) => note.subject))],
-    gradeLevels: [
+    schools: state.notes.notes && [
+      ...new Set(state.notes.notes.map((note) => note.school)),
+    ],
+    subjects: state.notes.notes && [
+      ...new Set(state.notes.notes.map((note) => note.subject)),
+    ],
+    gradeLevels: state.notes.notes && [
       ...new Set(state.notes.notes.map((note) => note.grade_level)),
     ],
-    years: [...new Set(state.notes.notes.map((note) => note.year))],
+    years: state.notes.notes && [
+      ...new Set(state.notes.notes.map((note) => note.year)),
+    ],
   };
 };
 
