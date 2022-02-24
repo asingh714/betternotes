@@ -42,7 +42,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem, cart }) {
     notify();
   };
 
-  if (Object.keys(note).length === 0) {
+  if (note == null || Object.keys(note).length === 0) {
     return (
       <TailSpin
         height="100"
@@ -93,7 +93,7 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem, cart }) {
           <h1>
             {note_name} | {subject}
           </h1>
-          <p>{short_description}</p>
+          <p className="short-note-info">{short_description}</p>
           <span className="username-info">
             Created by <span>{user_name}</span>
           </span>
