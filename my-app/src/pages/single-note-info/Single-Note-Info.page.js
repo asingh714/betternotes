@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { TailSpin } from "react-loader-spinner";
 import { connect } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -40,6 +41,18 @@ function SingleNoteInfo({ fetchSingleNote, note, addCartItem, cart }) {
     addCartItem(note);
     notify();
   };
+
+  if (Object.keys(note).length === 0) {
+    return (
+      <TailSpin
+        height="100"
+        width="100"
+        color="#2186eb"
+        arialLabel="loading-indicator"
+        wrapperClass="loading-bars"
+      />
+    );
+  }
 
   const {
     note_name,
