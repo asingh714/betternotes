@@ -4,7 +4,7 @@ import SingleNote from "../singleNote/singleNote.component";
 import "./notes.styles.scss";
 
 export default function Notes(props) {
-  if (props.note == null || Object.keys(props.note).length === 0) {
+  if (props.notes == null || Object.keys(props.notes).length === 0) {
     return (
       <TailSpin
         height="100"
