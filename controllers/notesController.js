@@ -52,13 +52,16 @@ const createNote = async (req, res) => {
       const uniqueId = uuidv4();
 
       const result = await cloudinary.uploader.upload(req.file.path);
+      const date = new Date();
+      const time = date.getTime();
+
       const newProduct = {
         unique_note_id: uniqueId,
         note_name,
         short_description,
         long_description,
         document: result.url,
-        created_date: new Date(),
+        created_date: time,
         price,
         pages,
         year,

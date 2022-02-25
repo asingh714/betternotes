@@ -41,13 +41,13 @@ class NotesDashboard extends Component {
       if (this.state.sortBy === "Newest") {
         this.setState({
           notes: this.props.notes.sort(
-            (a, b) => b["created_date"].getTime() - a["created_date"].getTime()
+            (a, b) => b["created_date"] - a["created_date"]
           ),
         });
       } else if (this.state.sortBy === "Oldest") {
         this.setState({
           notes: this.props.notes.sort(
-            (a, b) => a["created_date"].getTime() - b["created_date"].getTime()
+            (a, b) => a["created_date"] - b["created_date"]
           ),
         });
       }

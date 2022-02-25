@@ -32,10 +32,12 @@ const createOrder = (req, res) => {
     totalFromCart += item.price;
   }
   const orderId = uuidv4();
+  const date = new Date();
+      const time = date.getTime();
   const order = {
     unique_order_id: orderId,
     total: totalFromCart,
-    purchase_date: new Date(),
+    purchase_date: time,
     user_id: subject,
   };
 
