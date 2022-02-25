@@ -10,7 +10,7 @@ exports.up = function (knex) {
     table.string("school_name");
     table.string("user_grade_level");
     table.text("user_description");
-    table.date("user_created_date");
+    table.float("user_created_date");
     table.string("verification_token");
     // table.boolean("isVerified").defaultTo("false");
     // table.date("verification_date");
