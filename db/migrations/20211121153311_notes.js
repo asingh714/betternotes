@@ -6,14 +6,14 @@ exports.up = function (knex) {
     table.text("short_description").notNullable();
     table.text("long_description").notNullable();
     table.text("document").notNullable();
-    table.float("created_date").notNullable();
+    table.string("created_date").notNullable();
     // table.text("note_image").notNullable();
     table.float("price").notNullable();
     table.string("pages").notNullable();
     table.string("year").notNullable();
     table.string("language").notNullable();
     // table.float("rating");
-    // table.string("note_key");
+    // table.string("note_key");33
     // table.string("summary_key");
     table.string("subject").notNullable();
     table.string("school").notNullable();
