@@ -4,6 +4,10 @@ import SingleNote from "../singleNote/singleNote.component";
 import "./notes.styles.scss";
 
 export default function Notes(props) {
+  if (props.notes && props.notes.length === 0) {
+    return <h2>There are currently 0 notes</h2>;
+  }
+
   if (props.notes == null || Object.keys(props.notes).length === 0) {
     return (
       <TailSpin
@@ -29,9 +33,5 @@ export default function Notes(props) {
         ))}
       </div>
     );
-  }
-
-  if (props.notes && props.notes.length === 0) {
-    return <h2>There are currently 0 notes</h2>;
   }
 }
