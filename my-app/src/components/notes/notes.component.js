@@ -30,4 +30,8 @@ export default function Notes(props) {
       </div>
     );
   }
+
+  if (props.notes && props.notes.length === 0) {
+    return <h2>There are currently 0 notes</h2>;
+  }
 }
