@@ -8,7 +8,7 @@ exports.up = function (knex) {
       .enu("status", ["pending", "failed", "paid", "delivered", "cancelled"])
       .defaultTo("pending")
       .notNullable();
-    table.float("purchase_date");
+    table.string("purchase_date");
 
     table
       .integer("user_id")
