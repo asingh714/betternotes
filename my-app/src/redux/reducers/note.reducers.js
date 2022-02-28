@@ -120,54 +120,63 @@ const notesReducer = (state = initialState, action) => {
       };
     case ADD_NOTE_START:
       return {
+        ...state,
         isAddingNote: true,
         hasAddedNote: false,
         addingNoteError: "",
       };
     case ADD_NOTE_SUCCESS:
       return {
+        ...state,
         isAddingNote: false,
         hasAddedNote: true,
         addingNoteError: "",
       };
     case ADD_NOTE_FAILURE:
       return {
+        ...state,
         isAddingNote: false,
         hasAddedNote: false,
         addingNoteError: "There was an error while adding this note.",
       };
     case DELETE_NOTE_START:
       return {
+        ...state,
         isDeletingNote: true,
         hasDeletedNote: false,
         deletingNoteError: "",
       };
     case DELETE_NOTE_SUCCESS:
       return {
+        ...state,
         isDeletingNote: false,
         hasDeletedNote: true,
         deletingNoteError: "",
       };
     case DELETE_NOTE_FAILURE:
       return {
+        ...state,
         isDeletingNote: false,
         hasDeletedNote: false,
         deletingNoteError: "There was an error while adding this note.",
       };
     case EDIT_NOTE_START:
       return {
+        ...state,
         isEditingNote: true,
         hasEditedNote: false,
         editingNoteError: "",
       };
     case EDIT_NOTE_SUCCESS:
       return {
+        ...state,
         isEditingNote: false,
         hasEditedNote: true,
         editingNoteError: "",
       };
     case EDIT_NOTE_FAILURE:
       return {
+        ...state,
         isEditingNote: false,
         hasEditedNote: false,
         editingNoteError: "There was an error while editing this note.",
