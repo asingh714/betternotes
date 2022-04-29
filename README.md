@@ -37,7 +37,7 @@
 #### Important Details
 
 - When registering as a new user or placing an order, **you will not recieve an email to your email address**.
-- I am using a free email service called Ethereal to handle **ALL** emails.
+- I am using a free email service called Ethereal to handle **ALL** emails. To use this service, please go to: https://ethereal.email/. Login details are below.
   - **Email Address:** ewsuppvc6joshbwx@ethereal.email
   - **Password:** XmQQPUKuBQNYm1cGnK
 - **You will receive an email when registering a new user and also with links when an order has been placed**
